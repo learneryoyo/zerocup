@@ -1,0 +1,12 @@
+# 统一换行符，避免 Windows 和 Mac 组员互相产生"整个文件都改了"的假差异
+* text=auto
+
+# 二进制文件不做换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.woff2 binary
+*.ttf binary

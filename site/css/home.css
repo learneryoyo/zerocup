@@ -1,0 +1,83 @@
+/* home.css · 首页样式
+   ⚠️ 只改这个文件。不要动 base.css，也不要新建别的 css 来覆盖它。 */
+
+.head{
+  padding: 8vh 0 4vh;
+  text-align: center;
+}
+.head h1{ margin: 8px 0 4px; }
+
+main{ padding-bottom: 8vh; }
+
+.card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px 30px;
+  margin-bottom: 20px;
+}
+
+.card h2{
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+
+.card code{
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 13px;
+  background: rgba(67,55,42,.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.card pre{
+  background: rgba(67,55,42,.06);
+  padding: 14px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+.card pre code{ background: none; padding: 0; }
+
+/* 色板 */
+.swatches{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 4px 0 18px;
+}
+.swatches li{
+  font-size: 13px;
+  color: var(--fade);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.swatches span{
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: block;
+}
+
+/* 待办清单 */
+.todo{
+  padding-left: 22px;
+  color: var(--ink);
+}
+.todo li{ margin-bottom: 10px; }
+.todo li::marker{ color: var(--red); }
+
+.foot{
+  padding: 0 0 6vh;
+  text-align: center;
+}
+
+/* 手机上收一收留白 */
+@media (max-width: 640px){
+  .head{ padding: 5vh 0 3vh; }
+  .card{ padding: 22px 20px; }
+}

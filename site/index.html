@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>人间烟火 · 零杯海底小纵队</title>
+<meta name="description" content="2026 零杯网页设计大赛（零组）参赛作品">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<header class="wrap head">
+  <p class="muted hand">2026 零杯 · 零组</p>
+  <h1>人间烟火</h1>
+  <p class="muted">零杯海底小纵队</p>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2>这一页现在是什么</h2>
+    <p>
+      这是首页骨架，不是最终成品。它已经接好了全站公共样式
+      <code>css/base.css</code>，颜色、字体、缓动曲线都定好了，
+      照着这里的样子往下做就行，不要再自己配色。
+    </p>
+    <p class="muted">
+      改这一页的人：<b>A</b>（把字母换成你自己的名字）
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>五个颜色，不要加第六个</h2>
+    <ul class="swatches">
+      <li><span style="background:var(--paper)"></span>纸底 --paper</li>
+      <li><span style="background:var(--card)"></span>卡片 --card</li>
+      <li><span style="background:var(--ink)"></span>墨色 --ink</li>
+      <li><span style="background:var(--red)"></span>印章红 --red</li>
+      <li><span style="background:var(--gold)"></span>描金 --gold</li>
+    </ul>
+    <p class="muted">
+      写法一律用变量：<code>color: var(--ink);</code>，
+      不要写 <code>#43372A</code>。以后要整体调色，改一处就行。
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>接下来要做的</h2>
+    <ol class="todo">
+      <li>首页：地图 + 右侧时辰轴 + 左下角「一日 / 一年」切换</li>
+      <li>故事页：点地图上的贴图，进到具体介绍</li>
+      <li>街市页：把五类非遗图标排进去</li>
+      <li>移动端适配：手机上逐条对照 11 个常见毛病</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>怎么在本地看</h2>
+    <p>双击 <code>site/index.html</code> 就能看。但更推荐起一个本地服务器：</p>
+    <pre><code>cd site
+python -m http.server 8000</code></pre>
+    <p class="muted">然后浏览器打开 http://localhost:8000</p>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p class="muted">零杯海底小纵队 · 2026</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

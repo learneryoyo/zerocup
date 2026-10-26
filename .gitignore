@@ -1,0 +1,33 @@
+# 系统垃圾
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 依赖（我们不用，但防止误提交）
+node_modules/
+
+# 临时草稿：以下划线开头的文件不进仓库
+_*.html
+_*.css
+_*.js
+_*.png
+_*.py
+
+# 日志与临时文件
+*.log
+*.tmp
+
+# 比赛提交包（压缩包不进仓库）
+*.zip
+*.rar
+
+# 匿名版单独放，别混进来
+匿名版/
+
+# 待删除：早期用了中文文件名的那份手册（内容已并入 git-manual.md）
+团队协作-Git傻瓜手册.md
