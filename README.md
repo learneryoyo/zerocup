@@ -15,7 +15,7 @@
 | 2-1 | 　器物 | `site/category/objects.html` |
 | 2-2 | 　戏曲 | `site/category/opera.html` |
 | 2-3 | 　舞蹈 | `site/category/dance.html` |
-| 2-4 | 　服饰 | `site/category/costume.html` |
+| 2-4 | 　食物 | `site/category/food.html` |
 | 2-5 | 　节日 | `site/category/festival.html` |
 | 3 | 七艺新生（页面名未定） | `site/revival.html` |
 | 4 | 关于我们 | `site/about.html` |
@@ -44,7 +44,7 @@ zerocup/
 │       ├── objects.html
 │       ├── opera.html
 │       ├── dance.html
-│       ├── costume.html
+│       ├── food.html
 │       └── festival.html
 └── docs/
     └── sources.md         ← 资料出处表，每写一条内容就记一行
@@ -63,7 +63,7 @@ zerocup/
 | 器物 | `site/category/objects.html` | 待填 |
 | 戏曲 | `site/category/opera.html` | 待填 |
 | 舞蹈 | `site/category/dance.html` | 待填 |
-| 服饰 | `site/category/costume.html` | 待填 |
+| 食物 | `site/category/food.html` | 待填 |
 | 节日 | `site/category/festival.html` | 待填 |
 | 七艺新生 | `site/revival.html` | 待填 |
 | 关于我们 | `site/about.html` | 待填 |
