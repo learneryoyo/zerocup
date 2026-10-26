@@ -59,7 +59,8 @@ main{ padding-bottom: 8vh; }
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  border: 1px solid var(--line);
+  /* 纸底和卡片两个色几乎和页面同色，光靠 var(--line) 看不清，加深一圈 */
+  border: 1px solid rgba(67,55,42,.22);
   display: block;
 }
 
