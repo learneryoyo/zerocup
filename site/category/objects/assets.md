@@ -2,6 +2,9 @@
 
 文字内容见同目录 `note.md`（队友整理的项目简介与名录信息）。
 
+> **视频已决定不提交**，本目录只有图片。
+> 视频原文件还在 `D:\work\wb\零杯想法\成品-器物与戏曲素材`，需要时可从那里取。
+
 ## 目录规则
 
 ```
@@ -9,25 +12,23 @@ site/category/objects/
 ├── note.md                  文字资料
 ├── assets.md                本文件
 └── <项目名>/
-    ├── images/              照片
-    └── videos/              短视频
+    └── images/              照片
 ```
 
 页面引用示例（`objects.html` 里写）：
 
 ```html
 <img src="objects/jingdezhen-porcelain/images/porcelain-01-met-01.jpg" alt="景德镇青花瓷">
-<video src="objects/jingdezhen-porcelain/videos/porcelain-painting.mp4" controls muted playsinline></video>
 ```
 
 ## 四个项目
 
-| 目录 | 项目 | 名录 | 图片 | 视频 |
-|---|---|---|---|---|
-| `jingdezhen-porcelain` | 景德镇手工制瓷技艺 | 国家级 Ⅷ-7 · 2006 第一批 · 江西景德镇 | 20 | 1 |
-| `suzhou-embroidery` | 苏绣 | 国家级 Ⅶ-18 · 2006 第一批 · 江苏苏州 | 5 | 1 |
-| `oilpaper-umbrella` | 伞制作技艺（油纸伞） | 国家级 Ⅷ-140 · 2008 第二批 · 四川泸州江阳 | 4 | 1 |
-| `timber-frame` | 中国传统木结构建筑营造技艺 | 人类非遗代表作 · 2009 | 4 | 1 |
+| 目录 | 项目 | 名录 | 图片 |
+|---|---|---|---|
+| `jingdezhen-porcelain` | 景德镇手工制瓷技艺 | 国家级 Ⅷ-7 · 2006 第一批 · 江西景德镇 | 20 |
+| `suzhou-embroidery` | 苏绣 | 国家级 Ⅶ-18 · 2006 第一批 · 江苏苏州 | 5 |
+| `oilpaper-umbrella` | 伞制作技艺（油纸伞） | 国家级 Ⅷ-140 · 2008 第二批 · 四川泸州江阳 | 4 |
+| `timber-frame` | 中国传统木结构建筑营造技艺 | 人类非遗代表作 · 2009 | 4 |
 
 ---
 
@@ -41,7 +42,6 @@ site/category/objects/
 | `porcelain-03-wheel-hands-tuan-nguyen.jpg` | 拉坯双手 |
 | `porcelain-02-painted-plates-wall-kseniia.jpg` | 彩绘瓷盘墙 |
 | `porcelain-process-01` ~ `06.jpg` | 过程分解图（已抠净底，适合做步骤条） |
-| `videos/porcelain-painting.mp4` | 绘制片段，1:32–1:40 |
 
 **成品照**（博物馆藏品，不是制作现场）
 
@@ -55,6 +55,9 @@ site/category/objects/
 > ⚠️ **写内容时务必分清**：MET / CMA 的是**藏品照**，说明"东西长什么样"；
 > `wheel-*` 和 `process-*` 才是**工艺照**，说明"怎么做的"。
 > 用藏品照配"拉坯七十二道工序"的文案，等于图文不符。
+>
+> 这一组是四个项目里**唯一工序照充足**的：拉坯 2 张 + 过程图 6 张，
+> 够撑起"过手七十二"这条线。其余三组没有这个条件。
 
 ---
 
@@ -67,10 +70,10 @@ site/category/objects/
 | `embroidery-03-embroiderer-and-silk.jpg` | 绣娘与丝线（**唯一有人物的工艺照**） |
 | `embroidery-04-bogu-mirror.jpg` | 博古图镜片 |
 | `embroidery-05-immortals-birthday.jpg` | 灵仙祝寿图 |
-| `videos/embroidery-double-sided-goldfish.mp4` | 双面绣金鱼特写，5:16–5:26 |
 
-> 五张里只有 `03` 是人在绣，其余是成品。要讲"一根丝线劈成几十份"，
-> 只有 `03` 和那段双面绣视频能支撑。
+> 五张里只有 `03` 是人在绣，其余是成品。
+> 讲"一根丝线劈成几十份"，只有 `03` 能支撑——**双面绣的视频已不提交**，
+> 所以这段动作现在只能靠这一张图。
 
 ---
 
@@ -82,10 +85,11 @@ site/category/objects/
 | `umbrella-10-two-umbrellas-warm-light-ace-lang.jpg` | 双伞暖光 |
 | `umbrella-11-red-upward-flavio-mori.jpg` | 红伞仰视 |
 | `umbrella-12-white-group-richardmc.jpg` | 白伞成组 |
-| `videos/umbrella-scene.mp4` | 伞韵，1:27–1:38，1280×720 无字幕 |
 
-> 四张全是**成品/氛围照，没有一张在制伞**。
-> 文案写"九十多道工序"时，页面得靠视频和文字撑，不要假装图在讲工序。
+> ⚠️ **四张全是成品/氛围照，没有一张在制伞。**
+> 而且视频也砍了，所以这一组**没有任何动作证据**。
+> 文案写"九十多道工序"时，页面上只有伞、没有工序——这是目前最弱的一组。
+> 要么补图，要么这段文字别强调工序。
 
 ---
 
@@ -97,10 +101,11 @@ site/category/objects/
 | `timber-07-beam-frame-redd-francisco.jpg` | 木构梁架 |
 | `timber-08-bracket-upward-qui-nguyen.jpg` | 斗拱仰视 |
 | `timber-process-04.jpg` | 过程图（已抠净底） |
-| `videos/timber-dovetail-assembly.mp4` | 燕尾榫拼装，46.04–55s |
 
-> 视频是**唯一真正展示榫卯动作**的素材，比三张建筑照有用得多。
-> 讲"不用一钉一胶"，页面必须把这段视频放出来。
+> ⚠️ **燕尾榫拼装的视频不提交了，这一组就没有任何"制作动作"了**：
+> 三张是建成的建筑，一张是静态过程图。
+> "不用一钉一胶"这句话，现在只能靠文字和斗拱特写讲，不能靠画面证明。
+> 如果这一页要重点讲榫卯，建议补一张手部特写。
 
 ---
 
