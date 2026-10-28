@@ -7,6 +7,8 @@
 *.jpeg binary
 *.webp binary
 *.gif binary
+*.mp4 binary
+*.webm binary
 *.ico binary
 *.woff2 binary
 *.ttf binary
