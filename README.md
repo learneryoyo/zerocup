@@ -2,7 +2,8 @@
 
 2026 零杯网页设计大赛（零组）参赛项目。
 
-仓库现在是空的骨架：页面文件建好了，里面只有导航和标题，内容一个字都没写。
+仓库现在是空骨架：页面文件建好了，里面只有导航和标题。
+**只有「节日」一页已经填了内容**（五个项目 + 素材），其余页面还空着。
 
 ---
 
@@ -24,7 +25,10 @@
 每个页面顶部、底部各有一份导航，内容一样。要改导航，所有页面一起改。
 
 `site/category/objects.html` 里先放了三个子项（剪纸、陶瓷、木板年画），
-其他四个分类的子项还没定。
+其他三个分类的子项还没定。
+
+**节日页已经有内容了**：五个项目（送王船 / 苗族姊妹节 / 罗坊走古事 / 水族端节 / 双庙渚蚕花水会），
+文字和素材来源见 `docs/festival.md`，图片在 `site/category/festival/`，还没插进页面。
 
 ---
 
@@ -40,14 +44,21 @@ zerocup/
 │   ├── revival.html
 │   ├── about.html
 │   ├── template.html      ← 新页面从它复制
-│   └── category/
-│       ├── objects.html
-│       ├── opera.html
-│       ├── dance.html
-│       ├── food.html
-│       └── festival.html
+│   ├── category/
+│   │   ├── objects.html
+│   │   ├── opera.html
+│   │   ├── dance.html
+│   │   ├── food.html
+│   │   ├── festival.html
+│   │   └── festival/      ← 节日页的 25 张照片 + 5 段动图（约 28 MB）
+│   │       ├── songwangchuan/
+│   │       ├── miao-zimeijie/
+│   │       ├── luofang-zougushi/
+│   │       ├── shuizu-duanjie/
+│   │       └── canhua-shuihui/
 └── docs/
-    └── sources.md         ← 资料出处表，每写一条内容就记一行
+    ├── sources.md         ← 资料出处表，每写一条内容就记一行
+    └── festival.md        ← 节日页五个项目的完整资料（署名、来源、素材对照）
 ```
 
 ---
