@@ -1,0 +1,20 @@
+/* 子页的默认起点。每项非遗可替换本样式，或在自己的 CSS 中覆盖。 */
+:root {
+  --story-paper: #f4f0e8;
+  --story-serif: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--story-paper); color: #10100f; }
+body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.story-hero { position: relative; height: 68vh; min-height: 340px; margin: 0; overflow: hidden; background: #24211d; }
+.story-hero > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.story-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,.72)); }
+.story-hero__heading { position: absolute; z-index: 1; bottom: 40px; left: 8%; right: 8%; color: #fff; }
+.story-hero__heading p { margin: 0 0 16px; font-size: 11px; letter-spacing: .2em; }
+.story-hero h1 { margin: 0; font: 700 clamp(48px, 9vw, 100px)/1.15 var(--story-serif); letter-spacing: -.04em; }
+.story-credit { position: absolute; z-index: 1; bottom: 14px; right: 18px; color: rgba(255,255,255,.8); font-size: 10px; }
+.story-content { min-height: 85vh; }
+@media (max-width: 700px) {
+  .story-hero { height: 64vh; }
+  .story-hero__heading { bottom: 46px; }
+}

@@ -1,0 +1,272 @@
+/* 首页专用样式：只由 index.html 引用，不影响顶级页面与独立子页。 */
+
+/* ─────────────────────────────────────────────────────────────
+   几何：六色块的唯一数据源
+   ─────────────────────────────────────────────────────────────
+   单位网格：一列宽 10，列间距 1，整体 43 × 33。
+   --x / --y / --w / --h：桌面与平板布局，也是开场标志的形状
+     （home.js 读取这四个值，把同一组色块旋转 --tilt 度、缩小，得到标志）。
+   --mx / --my：手机布局的位置；宽高沿用 --w / --h，比例始终不变。
+     手机两列由标志的四列「折叠」而成：左列 = 器物 + 戏曲/舞蹈，右列 = 食物/节日 + 其他。
+     开场时各块先竖向、再横向移到这里，途中互不重叠；修改时保持这种先上下后左右可达的排列。
+   列顶部按 4 个单位递进：食物 0 → 戏曲 4 → 器物 8 → 其他 12，形成错落。
+   改尺寸只改这里；改颜色只改 --tone（RGB 三元组）。                      */
+.mosaic {
+  --cols: 43;
+  --rows: 33;
+  --mcols: 21;
+  --mrows: 54;
+  --tilt: 30;          /* 开场标志统一倾斜角（度，顺时针） */
+}
+.module--objects  { --x: 0;  --y: 8;  --w: 10; --h: 20; --mx: 0;  --my: 0;  --tone: 47 69 57; }   /* 深林绿 */
+.module--opera    { --x: 11; --y: 4;  --w: 10; --h: 14; --mx: 0;  --my: 21; --tone: 199 181 154; } /* 沙色 */
+.module--dance    { --x: 11; --y: 19; --w: 10; --h: 14; --mx: 0;  --my: 36; --tone: 84 41 41; }    /* 暗酒红 */
+.module--food     { --x: 22; --y: 0;  --w: 10; --h: 14; --mx: 11; --my: 4;  --tone: 94 61 47; }    /* 土褐 */
+.module--festival { --x: 22; --y: 15; --w: 10; --h: 14; --mx: 11; --my: 19; --tone: 46 33 32; }    /* 深棕 */
+.module--other    { --x: 33; --y: 12; --w: 10; --h: 20; --mx: 11; --my: 34; --tone: 37 42 64; }    /* 靛蓝 */
+
+/* 每块的待机漂浮：各自的周期、相位与幅度（2–5px），互不同步。 */
+.module--objects  { --i: 0; --float-x: 2px;  --float-y: -4px; --float-dur: 7.2s; --float-delay: -1.3s; }
+.module--opera    { --i: 1; --float-x: 3px;  --float-y: 3px;  --float-dur: 6.1s; --float-delay: -4s; }
+.module--dance    { --i: 2; --float-x: -2px; --float-y: 4px;  --float-dur: 8.3s; --float-delay: -2.2s; }
+.module--food     { --i: 3; --float-x: -3px; --float-y: -3px; --float-dur: 6.7s; --float-delay: -.6s; }
+.module--festival { --i: 4; --float-x: 2px;  --float-y: -5px; --float-dur: 7.8s; --float-delay: -5.1s; }
+.module--other    { --i: 5; --float-x: -2px; --float-y: 3px;  --float-dur: 5.9s; --float-delay: -3.4s; }
+
+/* 图像在色块中的位置（距四边的百分比），按各自主体的形状调整。 */
+.module--objects  { --media: 6% 13% 31% 13%; }
+.module--opera    { --media: 6% 17% 33% 17%; }
+.module--dance    { --media: 8% 10% 34% 12%; }
+.module--food     { --media: 8% 20% 34% 20%; }
+.module--festival { --media: 8% 11% 34% 11%; }
+.module--other    { --media: 4% 28% 27% 28%; }
+
+/* 浅色块用墨色轮廓与墨色文字，其余用纸色。 */
+.module             { --on: #f4f0e8; --contour: #f4f0e8; --shade: rgb(0 0 0 / .32); }
+.module--opera      { --on: #10100f; --contour: #10100f; --shade: rgb(60 40 20 / .26); }
+
+:root {
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-expo: cubic-bezier(.16, 1, .3, 1);
+  --field-alpha: .93;
+  --module-radius: 4px;
+  --home-pad-y: clamp(24px, 4.5vh, 56px);
+}
+
+/* ── 页面框架 ─────────────────────────────────────────────── */
+.home {
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));
+  padding: var(--home-pad-y) var(--page-gutter);
+  display: grid;
+  grid-template-columns: minmax(260px, .36fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 4.5vw, 80px);
+  overflow-x: clip;
+}
+
+.home-intro { max-width: 25rem; }
+.home-intro h1 {
+  margin: 0;
+  font: 700 clamp(52px, 5.2vw, 84px)/.95 var(--serif);
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.home-lead {
+  margin: 28px 0 0;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+.home-stories { margin-top: clamp(32px, 5vh, 48px); }
+.home-stories h2 { margin: 0 0 12px; font: 700 15px/1.4 var(--sans); letter-spacing: .08em; }
+.story-links { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.story-link {
+  display: grid; grid-template-columns: 1fr auto; align-items: baseline; column-gap: 16px;
+  padding: 14px 18px;
+  text-decoration: none;
+  background: rgb(16 16 15 / .055);
+  transition: background-color 180ms ease;
+}
+.story-link strong { font: 700 22px/1.2 var(--serif); }
+.story-link span { grid-column: 1; margin-top: 4px; font-size: 13px; color: #4f4a42; }
+.story-link::after { content: "↗"; grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: 18px; transition: transform 240ms var(--ease-out); }
+.story-link:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .story-link:hover { background: rgb(16 16 15 / .1); }
+  .story-link:hover::after { transform: translate(2px, -2px); }
+}
+.home-note { margin: 20px 0 0; font-size: 13px; line-height: 1.7; color: #5c564d; }
+
+/* ── 色块组合 ─────────────────────────────────────────────── */
+.mosaic {
+  position: relative;
+  justify-self: end;
+  width: min(100%, calc((100svh - var(--header-height) - 2 * var(--home-pad-y)) * var(--cols) / var(--rows)));
+  aspect-ratio: var(--cols) / var(--rows);
+}
+.mosaic h2 { margin: 0; }
+.mosaic__stage { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+
+/*
+  三层变换，各自只负责一件事，互不覆盖：
+  .module         布局层：绝对定位到网格；开场时由 home.js 写入位移与缩放（FLIP）。
+  .module__float  漂浮层：开场结束后的待机漂移（CSS 动画，仅 translate）。
+  .module__card   交互层：悬停 / 键盘焦点时的轻微放大。
+*/
+.module {
+  position: absolute;
+  left: calc(var(--x) / var(--cols) * 100%);
+  top: calc(var(--y) / var(--rows) * 100%);
+  width: calc(var(--w) / var(--cols) * 100%);
+  height: calc(var(--h) / var(--rows) * 100%);
+}
+.module:hover, .module:focus-within { z-index: 2; }
+.module__float { width: 100%; height: 100%; }
+
+.module__card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--on);
+  text-decoration: none;
+  border-radius: var(--module-radius);
+  container-type: inline-size;
+  transition: transform 520ms var(--ease-out);
+}
+/* 透明度只作用于色底，文字与图像保持清晰。 */
+.module__field {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: rgb(var(--tone) / var(--field-alpha));
+}
+.module__media {
+  position: absolute;
+  inset: var(--media);
+  transition: transform 620ms var(--ease-out);
+}
+.module__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* 四向 2px 投影组成沿主体边缘的描边，再加一层柔和落影，使主体浮在色面之上。 */
+  filter:
+    drop-shadow(2px 0 0 var(--contour)) drop-shadow(-2px 0 0 var(--contour))
+    drop-shadow(0 2px 0 var(--contour)) drop-shadow(0 -2px 0 var(--contour))
+    drop-shadow(0 14px 16px var(--shade));
+}
+.module__text {
+  position: absolute;
+  left: 9cqi; right: 9cqi; bottom: 8cqi;
+  display: flex; flex-direction: column; gap: 3cqi;
+}
+.module__label { font: 700 clamp(26px, 19cqi, 56px)/1 var(--serif); letter-spacing: .06em; }
+.module__examples { font-size: clamp(12px, 6.4cqi, 15px); line-height: 1.45; }
+.module__arrow {
+  position: absolute; top: 6cqi; right: 7cqi;
+  font-size: clamp(15px, 8cqi, 22px); line-height: 1;
+  opacity: 0; transform: translate(-4px, 4px);
+  transition: opacity 240ms ease, transform 320ms var(--ease-out);
+}
+/* 键盘焦点：与悬停同样的放大，并加墨色轮廓。鼠标点击不显示轮廓。 */
+.module__card:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; transform: scale(1.03); }
+.module__card:focus-visible .module__arrow { opacity: 1; transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .module__card:hover { transform: scale(1.03); }
+  .module__card:hover .module__media { transform: translateY(-2%) scale(1.03); }
+  .module__card:hover .module__arrow { opacity: 1; transform: none; }
+}
+@media (hover: none) { .module__arrow { opacity: .75; transform: none; } }
+
+.home-credits {
+  margin: 0;
+  padding: 0 var(--page-gutter) clamp(40px, 6vh, 72px);
+  max-width: 78rem;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #5c564d;
+}
+
+/* ── 待机漂浮：开场结束后才启动（.intro 存在时不运行） ───────── */
+@keyframes module-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33% { transform: translate3d(var(--float-x), calc(var(--float-y) * .4), 0); }
+  66% { transform: translate3d(calc(var(--float-x) * -.5), var(--float-y), 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.intro) .module__float {
+    animation: module-drift var(--float-dur) ease-in-out var(--float-delay) infinite;
+  }
+  html.is-page-hidden .module__float { animation-play-state: paused; }
+}
+
+/* ── 开场状态（类名由 index.html 头部脚本与 home.js 设置在 <html> 上） ─
+   intro          开场进行中：色块由 home.js 驱动，待机漂浮暂停
+   intro-hold     文字、图像与左侧文案暂时隐藏
+   intro-ready    home.js 已把色块放到标志位置，可以显示
+   intro-reveal   色块即将落位：文字与图像依次淡入（结束后约 1.4 秒移除）  */
+.intro-skip {
+  position: fixed; z-index: 60; left: 50%; bottom: 28px;
+  padding: 11px 22px;
+  border: 0; border-radius: 999px;
+  color: var(--paper); background: var(--ink);
+  font-size: 14px; letter-spacing: .08em;
+  cursor: pointer;
+  transform: translateX(-50%);
+  transition: opacity 300ms ease, transform 140ms var(--ease-out);
+}
+.intro-skip:active { transform: translateX(-50%) scale(.97); }
+.intro-skip:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.intro-reveal .intro-skip { opacity: 0; pointer-events: none; }
+
+.intro:not(.intro-ready) .mosaic { opacity: 0; }
+.intro .mosaic__stage { pointer-events: none; }
+.intro .module { will-change: transform; }
+.intro-hold .module__media,
+.intro-hold .module__text,
+.intro-hold .module__arrow { opacity: 0; transform: translateY(14px); }
+.intro-hold .home-intro,
+.intro-hold .home-credits { opacity: 0; visibility: hidden; }
+.intro-reveal .module__media,
+.intro-reveal .module__text {
+  transition: opacity 560ms ease, transform 820ms var(--ease-expo);
+  transition-delay: calc(var(--i) * 70ms);
+}
+.intro-reveal .module__text { transition-delay: calc(var(--i) * 70ms + 120ms); }
+.intro-reveal .home-intro,
+.intro-reveal .home-credits { transition: opacity 700ms ease 200ms, visibility 0s; }
+
+/* ── 响应式 ─────────────────────────────────────────────── */
+@media (max-width: 1099px) {
+  .home { grid-template-columns: 1fr; align-items: start; gap: 40px; }
+  .home-intro { max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 40px; align-items: end; }
+  .home-intro h1, .home-lead { grid-column: 1; }
+  .home-stories { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; align-self: end; }
+  .home-note { grid-column: 1; }
+  .mosaic { justify-self: center; width: min(100%, 980px); }
+}
+
+/* 手机：同样的六块、同样的比例，改为两列错落排列（--mx / --my）。
+   标题与引言之后紧接色块，开场展开的终点就在第一屏；专题篇章与说明移到色块之后。 */
+@media (max-width: 699px) {
+  .home { padding-top: 28px; grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .home-intro { display: contents; }
+  .home-intro > * { grid-column: 1; grid-row: auto; }
+  .home-intro h1 { order: 1; font-size: clamp(48px, 15vw, 64px); }
+  .home-lead { order: 2; margin: 16px 0 28px; }
+  .mosaic { order: 3; grid-column: 1; width: 100%; aspect-ratio: var(--mcols) / var(--mrows); }
+  .home-stories { order: 4; margin-top: 40px; }
+  .home-note { order: 5; }
+  .module {
+    left: calc(var(--mx) / var(--mcols) * 100%);
+    top: calc(var(--my) / var(--mrows) * 100%);
+    width: calc(var(--w) / var(--mcols) * 100%);
+    height: calc(var(--h) / var(--mrows) * 100%);
+  }
+  .intro-skip { bottom: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .module__card, .module__media, .module__arrow { transition: none; }
+}

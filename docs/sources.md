@@ -12,3 +12,35 @@
 
 > 核验日期取自资料整理日期（2026-10-25），**不是**逐条重新打开核对的日期。
 > 每张照片、每段动图的署名与原链接见 `docs/festival.md`。
+
+## 首页框架素材（2026-10-29）
+
+| 用途 | 文件 / 来源 | 状态 |
+|---|---|---|
+| 首页与陶瓷子页封面 | `site/category/objects/jingdezhen-porcelain/images/porcelain-03-wheel-hands-tuan-nguyen.jpg`；署名 Tuan Nguyen，依据仓库 `assets.md` | 复用既有素材，未取得原始链接；来源与许可待素材负责人补全 |
+| 首页与木版年画子页封面 | `site/assets/images/woodblock-new-year.svg` | 本次原创 SVG 示意占位图，非历史实物图片，待替换为正式年画素材 |
+
+首页引言为本项目创作文案；当前两个独立子页正文均留白，未新增非遗史实。
+
+## 首页分类模块图像（2026-11-01）
+
+均从开放获取或开放许可的原图下载，由本项目去除背景并缩小后存为透明 PNG，位于 `site/assets/images/home/`。
+它们是博物馆藏品或旧物照片，用作分类的视觉代表，**不**对应各分类页介绍的具体项目。
+首页底部有简短署名。
+
+| 文件 | 原作 | 来源 | 许可 | 用在 |
+|---|---|---|---|---|
+| `objects-vase.png` | Vase with Golden Pheasants（珐琅彩锦鸡花卉蒜头瓶），景德镇，清乾隆，1971.145 | 克利夫兰艺术博物馆 https://clevelandart.org/art/1971.145 ；仓库原图 `category/objects/jingdezhen-porcelain/images/porcelain-cma-05.jpg` | CC0（CMA Open Access，2026-11-01 经其 API 核对） | 首页「器物」 |
+| `opera-shadow-puppet.png` | Emperor（皮影影偶），中国，19 世纪 | 大都会艺术博物馆 https://www.metmuseum.org/art/collection/search/60991 | CC0 | 首页「戏曲」 |
+| `dance-tang-dancer.png` | Female dancer（陶舞俑），中国，7–8 世纪 | 大都会艺术博物馆 https://www.metmuseum.org/art/collection/search/62930 | CC0 | 首页「舞蹈」 |
+| `food-tea-brick.png` | A Chinese Keemun Tea Brick, obverse side, circa 1930s，Rosser1954 摄 | Wikimedia Commons https://commons.wikimedia.org/wiki/File:A_Chinese_Keemun_Tea_Brick._This,_the_obverse_side._Circa_1930s.jpg | CC BY-SA 4.0：须署名；本站修改版（去背景）按同一许可共享 | 首页「食物」 |
+| `festival-duanwu-plate.png` | Plate with Talismans for Duanwujie（端午五毒纹镂空盘），清乾隆 | 芝加哥艺术博物馆 https://www.artic.edu/artworks/42344 | CC0 | 首页「节日」 |
+| `other-guqin.png` | "Xiangpu's Treasure" Guqin（古琴「湘浦宝」），19 世纪中期 | 大都会艺术博物馆 https://www.metmuseum.org/art/collection/search/670501 | CC0 | 首页「其他」 |
+
+> 文字标签中的示例（如「京剧 · 皮影戏 · 木偶戏」）取自各分类页现有条目；
+> 「舞蹈」「食物」两页目前留白，标签暂用以下已核实的方向性示例，分类负责人定稿后同步修改：
+
+| 分类 | 示例 | 来源机构 | 链接 | 核验日期 | 用在哪一页 |
+|---|---|---|---|---|---|
+| 舞蹈 | 安塞腰鼓（国家级 Ⅲ-13，2006 年第一批，陕西） | 中国非物质文化遗产网 | https://www.ihchina.cn/project_details/12916/ | 2026-11-01 | `index.html` 标签 |
+| 食物 | 中国传统制茶技艺及其相关习俗（2022 年列入人类非遗代表作名录） | 中国政府网（文化和旅游部） | https://www.gov.cn/xinwen/2022-11/30/content_5729563.htm | 2026-11-01 | `index.html` 标签 |
