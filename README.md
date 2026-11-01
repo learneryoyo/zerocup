@@ -2,8 +2,9 @@
 
 2026 零杯网页设计大赛（零组）参赛项目。
 
-仓库现在是空骨架：页面文件建好了，里面只有导航和标题。
-**只有「节日」一页已经填了内容**（五个项目 + 素材），其余页面还空着。
+首页已恢复首版双图排版，入口为 `site/index.html`。
+六色块方案完整保留在 `site/home-mosaic.html`，后续可用于第二页；相关工程说明见 `docs/mosaic-design.md`。
+前端运行与协作方式见 `docs/frontend.md`，既有分类资料均保留。
 
 ---
 
@@ -12,16 +13,16 @@
 | # | 页面 | 文件 |
 |---|---|---|
 | 1 | 首页 | `site/index.html` |
-| 2 | 非遗图鉴 | `site/heritage.html` |
+| 2 | 非遗辑录 | `site/heritage.html` |
 | 2-1 | 　器物 | `site/category/objects.html` |
 | 2-2 | 　戏曲 | `site/category/opera.html` |
 | 2-3 | 　舞蹈 | `site/category/dance.html` |
 | 2-4 | 　食物 | `site/category/food.html` |
 | 2-5 | 　节日 | `site/category/festival.html` |
-| 3 | 七艺新生（页面名未定） | `site/revival.html` |
+| 3 | 古艺新生 | `site/revival.html` |
 | 4 | 关于我们 | `site/about.html` |
 
-导航栏四项：**首页 / 非遗图鉴 / 七艺新生 / 关于我们**。
+导航栏四项：**首页 / 非遗辑录 / 古艺新生 / 关于我们**。
 每个页面顶部、底部各有一份导航，内容一样。要改导航，所有页面一起改。
 
 `site/category/objects.html` 里先放了三个子项（剪纸、陶瓷、木板年画），
@@ -70,13 +71,13 @@ zerocup/
 | 页面 | 文件 | 谁 |
 |---|---|---|
 | 首页 | `site/index.html` | 待填 |
-| 非遗图鉴 | `site/heritage.html` | 待填 |
+| 非遗辑录 | `site/heritage.html` | 待填 |
 | 器物 | `site/category/objects.html` | 待填 |
 | 戏曲 | `site/category/opera.html` | 待填 |
 | 舞蹈 | `site/category/dance.html` | 待填 |
 | 食物 | `site/category/food.html` | 待填 |
 | 节日 | `site/category/festival.html` | 待填 |
-| 七艺新生 | `site/revival.html` | 待填 |
+| 古艺新生 | `site/revival.html` | 待填 |
 | 关于我们 | `site/about.html` | 待填 |
 
 ---
@@ -88,7 +89,9 @@ zerocup/
 3. **复制一份起点**：
    - 做 `site/` 下的页面 → 复制 `site/template.html`
    - 做分类页 → 复制 `site/category/objects.html`（里面的相对路径已经对好了）
-4. **只改 `<main>` 里面的内容**，导航和页脚别动。
+   - 做独立非遗子页 → 复制 `site/heritage/template.html`，详见 `docs/frontend.md`
+4. 顶级页面与分类页**只改 `<main>` 里面的内容**，导航和页脚保持一致。
+   独立非遗子页在 `site/heritage/` 下自由设计；共用 iframe 容器提供全屏与关闭，不要求统一内部布局。
 5. **文件名一律用英文**，中文写在内容里没问题。
 
 ---

@@ -1,34 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>首页 · 非遗</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="非遗辑录：从器物、戏曲、舞蹈、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
+  <title>首页 · 非遗辑录</title>
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/home-classic.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-<header>
-  <nav>
-    <a href="index.html">首页</a>
-    <a href="heritage.html">非遗图鉴</a>
-    <a href="revival.html">七艺新生</a>
-    <a href="about.html">关于我们</a>
-  </nav>
-</header>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="非遗辑录首页">
+      <!-- 页眉标志预留位：正式标志定稿后放在这里（如 <img class="brand-logo" src="assets/images/logo.svg" alt="">）。 -->
+      <span class="brand-name">非遗辑录</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>菜单</span></button>
+    <nav class="primary-nav" id="primary-nav" aria-label="主导航">
+      <a class="is-current" href="index.html" aria-current="page">首页</a>
+      <a href="heritage.html">非遗辑录</a>
+      <a href="revival.html">古艺新生</a>
+      <a href="about.html">关于我们</a>
+    </nav>
+  </header>
 
-<main>
-  <h1>首页</h1>
-  <p>待填充。</p>
-</main>
+  <main id="main-content" tabindex="-1">
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="eyebrow">CHINA · LIVING HERITAGE</p>
+      <h1 id="intro-title">见物，见人，<br>见一门手艺的时间。</h1>
+      <p class="intro-copy">从一抔瓷土到一块木版，沿着手艺人的双手，重新认识那些仍在生长的传统。</p>
+      <a class="scroll-cue" href="#feature-title">向下探索 <span aria-hidden="true">↓</span></a>
+    </section>
 
-<footer>
-  <nav>
-    <a href="index.html">首页</a>
-    <a href="heritage.html">非遗图鉴</a>
-    <a href="revival.html">七艺新生</a>
-    <a href="about.html">关于我们</a>
-  </nav>
-</footer>
+    <section class="feature-section" aria-labelledby="feature-title">
+      <div class="section-heading">
+        <p class="eyebrow">本期辑录 · 01</p>
+        <h2 id="feature-title">手中有万象</h2>
+        <p>点击图片，展开一项非遗的独立篇章。</p>
+      </div>
+      <div class="story-grid">
+        <a class="story-card story-card--hero" href="heritage/ceramics.html" data-story-url="heritage/ceramics.html" data-story-title="陶瓷" aria-haspopup="dialog">
+          <img src="category/objects/jingdezhen-porcelain/images/porcelain-03-wheel-hands-tuan-nguyen.jpg" alt="匠人双手在陶轮上塑造瓷坯" fetchpriority="high">
+          <span class="story-card-shade" aria-hidden="true"></span>
+          <span class="story-card-index">01</span>
+          <span class="image-credit">摄影：Tuan Nguyen</span>
+          <span class="story-card-content">
+            <span class="story-card-kicker">泥与火的相遇</span>
+            <strong>陶瓷</strong>
+            <span class="story-card-action">展开辑录 <span aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+        <a class="story-card story-card--secondary" href="heritage/woodblock-print.html" data-story-url="heritage/woodblock-print.html" data-story-title="木版年画" aria-haspopup="dialog">
+          <img src="assets/images/woodblock-new-year.svg" alt="木版年画主题的花鸟纹样示意插画">
+          <span class="story-card-shade" aria-hidden="true"></span>
+          <span class="story-card-index">02</span>
+          <span class="image-credit">原创示意插画 · 待替换</span>
+          <span class="story-card-content">
+            <span class="story-card-kicker">一版一色，岁岁更新</span>
+            <strong>木版年画</strong>
+            <span class="story-card-action">展开辑录 <span aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
 
+    <section class="manifesto" aria-label="项目理念">
+      <p>传统不是一件被时间封存的旧物。</p>
+      <p>它在人的手里，被一遍遍做成新的今天。</p>
+      <span aria-hidden="true">未完待续</span>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
+    <nav aria-label="页脚导航">
+      <a href="index.html">首页</a><a href="heritage.html">非遗辑录</a><a href="revival.html">古艺新生</a><a href="about.html">关于我们</a>
+    </nav>
+  </footer>
+
+  <div class="story-overlay" role="dialog" aria-modal="true" aria-labelledby="story-dialog-title" aria-hidden="true">
+    <div class="story-backdrop" data-story-close></div>
+    <div class="story-shell">
+      <h2 class="visually-hidden" id="story-dialog-title">非遗子页</h2>
+      <div class="story-controls">
+        <button class="story-control" type="button" data-story-fullscreen aria-label="全屏查看" title="全屏查看" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        </button>
+        <button class="story-control" type="button" data-story-close aria-label="退出子页" title="退出子页">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+        </button>
+      </div>
+      <iframe class="story-frame" title="非遗子页内容"></iframe>
+    </div>
+  </div>
+  <script src="assets/js/site.js"></script>
 </body>
 </html>

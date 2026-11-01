@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="非遗辑录：从器物、戏曲、舞蹈、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
+  <title>首页 · 非遗辑录</title>
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+  <script>
+    /* 开场动画开关：每个会话只播放一次；系统要求减少动态效果时不播放。
+       开发调试：地址后加 ?intro=1 强制重播，?intro=0 跳过。
+       3.5 秒后无论脚本是否运行都移除开场状态，页面不会被卡住。 */
+    (function () {
+      var root = document.documentElement;
+      var key = "heritage-intro-seen";
+      var force = /[?&]intro=(\d)/.exec(location.search);
+      var seen = false;
+      try { seen = sessionStorage.getItem(key) === "1"; } catch (error) { seen = true; }
+      var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var play = !reduced && (force ? force[1] === "1" : !seen);
+      if (!play || !("animate" in root)) return;
+      root.classList.add("intro", "intro-hold");
+      window.__introSafety = setTimeout(function () {
+        root.classList.remove("intro", "intro-hold", "intro-ready");
+      }, 3500);
+    }());
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="非遗辑录首页">
+      <!-- 页眉标志预留位：正式标志定稿后放在这里（如 <img class="brand-logo" src="assets/images/logo.svg" alt="">）。 -->
+      <span class="brand-name">非遗辑录</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>菜单</span></button>
+    <nav class="primary-nav" id="primary-nav" aria-label="主导航">
+      <a class="is-current" href="index.html" aria-current="page">首页</a>
+      <a href="heritage.html">非遗辑录</a>
+      <a href="revival.html">古艺新生</a>
+      <a href="about.html">关于我们</a>
+    </nav>
+  </header>
+
+  <main id="main-content" class="home" tabindex="-1">
+    <section class="home-intro" aria-labelledby="home-title">
+      <p class="home-eyebrow">CHINA · LIVING HERITAGE</p>
+      <h1 id="home-title">见物，见人，<br>见一门手艺的<span class="home-title-ending">时间。</span></h1>
+      <p class="home-lead">从一抔瓷土到一块木版，沿着手艺人的双手，重新认识那些仍在生长的传统。</p>
+      <a class="home-explore" href="#collection">向下探索 <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="home-collection" id="collection" aria-labelledby="collection-title">
+      <header class="collection-heading">
+        <p class="home-eyebrow">非遗辑录 · 六种视角</p>
+        <h2 id="collection-title">手中有万象</h2>
+        <p>一门手艺，一种生活。<br>循着色彩，走近仍在延续的传统。</p>
+      </header>
+    <!--
+      六个分类模块。几何、颜色、图像位置都在 assets/css/home.css 顶部按类名配置；
+      开场标志由同一组元素变换得到（assets/js/home.js），不另存一套比例。
+      每块三层：.module（布局与开场）> .module__float（漂浮）> .module__card（链接与悬停）。
+      图像与文字分层，可分别替换。
+    -->
+    <div class="mosaic" aria-labelledby="mosaic-title">
+      <h3 id="mosaic-title" class="visually-hidden">按分类浏览</h3>
+      <ul class="mosaic__stage">
+        <li class="module module--objects">
+          <div class="module__float">
+            <a class="module__card" href="category/objects.html">
+              <span class="module__field" aria-hidden="true"></span>
+              <span class="module__number" aria-hidden="true">01</span>
+              <span class="module__media"><img src="assets/images/home/objects-outline.svg" alt="花纹瓷瓶的勾边线稿" width="240" height="290"></span>
+              <span class="module__text">
+                <span class="module__label">器物</span>
+                <span class="module__examples">制瓷 · 苏绣 · 油纸伞</span>
+              </span>
+              <span class="module__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+        <li class="module module--opera">
+          <div class="module__float">
+            <a class="module__card" href="category/opera.html">
+              <span class="module__field" aria-hidden="true"></span>
+              <span class="module__number" aria-hidden="true">02</span>
+              <span class="module__media"><img src="assets/images/home/opera-outline.svg" alt="水袖戏曲人物的勾边线稿" width="240" height="290"></span>
+              <span class="module__text">
+                <span class="module__label">戏曲</span>
+                <span class="module__examples">京剧 · 皮影戏 · 木偶戏</span>
+              </span>
+              <span class="module__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+        <li class="module module--dance">
+          <div class="module__float">
+            <a class="module__card" href="category/dance.html">
+              <span class="module__field" aria-hidden="true"></span>
+              <span class="module__number" aria-hidden="true">03</span>
+              <span class="module__media"><img src="assets/images/home/dance-outline.svg" alt="长袖舞者的勾边线稿" width="240" height="290"></span>
+              <span class="module__text">
+                <span class="module__label">舞蹈</span>
+                <span class="module__examples">安塞腰鼓 · 民间舞蹈</span>
+              </span>
+              <span class="module__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+        <li class="module module--food">
+          <div class="module__float">
+            <a class="module__card" href="category/food.html">
+              <span class="module__field" aria-hidden="true"></span>
+              <span class="module__number" aria-hidden="true">04</span>
+              <span class="module__media"><img src="assets/images/home/food-outline.svg" alt="执壶斟茶的勾边线稿" width="240" height="290"></span>
+              <span class="module__text">
+                <span class="module__label">食物</span>
+                <span class="module__examples">传统制茶 · 饮食技艺</span>
+              </span>
+              <span class="module__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+        <li class="module module--festival">
+          <div class="module__float">
+            <a class="module__card" href="category/festival.html">
+              <span class="module__field" aria-hidden="true"></span>
+              <span class="module__number" aria-hidden="true">05</span>
+              <span class="module__media"><img src="assets/images/home/festival-outline.svg" alt="龙舟与桨手的勾边线稿" width="240" height="290"></span>
+              <span class="module__text">
+                <span class="module__label">节日</span>
+                <span class="module__examples">送王船 · 姊妹节 · 端节</span>
+              </span>
+              <span class="module__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+        <li class="module module--other">
+          <div class="module__float">
+            <a class="module__card" href="category/index.html">
+              <span class="module__field" aria-hidden="true"></span>
+              <span class="module__number" aria-hidden="true">06</span>
+              <span class="module__media"><img src="assets/images/home/other-outline.svg" alt="古琴与抚琴双手的勾边线稿" width="240" height="290"></span>
+              <span class="module__text">
+                <span class="module__label">其他</span>
+                <span class="module__examples">全部分类资料</span>
+              </span>
+              <span class="module__arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+      </div>
+      <p class="home-note">本站按内容整理分类浏览入口，并非国家级名录的官方类别。线稿为各类主题的原创示意。</p>
+    </section>
+
+    <section class="home-stories" aria-labelledby="stories-title">
+      <div class="home-stories__heading">
+        <h2 id="stories-title">专题篇章</h2>
+        <p class="home-eyebrow">A CLOSER LOOK</p>
+      </div>
+      <ul class="story-links">
+        <li><a class="story-link" href="heritage/ceramics.html" data-story-url="heritage/ceramics.html" data-story-title="陶瓷" aria-haspopup="dialog"><strong>陶瓷</strong><span>泥与火的相遇</span></a></li>
+        <li><a class="story-link" href="heritage/woodblock-print.html" data-story-url="heritage/woodblock-print.html" data-story-title="木版年画" aria-haspopup="dialog"><strong>木版年画</strong><span>一版一色，岁岁更新</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
+    <nav aria-label="页脚导航">
+      <a href="index.html">首页</a><a href="heritage.html">非遗辑录</a><a href="revival.html">古艺新生</a><a href="about.html">关于我们</a>
+    </nav>
+  </footer>
+
+  <button class="intro-skip" type="button" hidden>跳过动画</button>
+
+  <div class="story-overlay" role="dialog" aria-modal="true" aria-labelledby="story-dialog-title" aria-hidden="true">
+    <div class="story-backdrop" data-story-close></div>
+    <div class="story-shell">
+      <h2 class="visually-hidden" id="story-dialog-title">非遗子页</h2>
+      <div class="story-controls">
+        <button class="story-control" type="button" data-story-fullscreen aria-label="全屏查看" title="全屏查看" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        </button>
+        <button class="story-control" type="button" data-story-close aria-label="退出子页" title="退出子页">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+        </button>
+      </div>
+      <iframe class="story-frame" title="非遗子页内容"></iframe>
+    </div>
+  </div>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>
