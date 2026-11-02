@@ -12,9 +12,14 @@
 | 节日 | 罗坊走古事 | 中国非物质文化遗产网（闽西客家元宵节庆） | https://www.ihchina.cn/art/detail/id/15078.html | 2026-10-25 | `category/festival.html` |
 | 节日 | 水族端节 | 中国非物质文化遗产网 | https://www.ihchina.cn/project_details/14962/ | 2026-10-25 | `category/festival.html` |
 | 节日 | 双庙渚蚕花水会 | 潮新闻／共享联盟·桐乡 | https://tidenews.com.cn/news.html?id=3090707 | 2026-10-25 | `category/festival.html` |
+| 食物 | 蔡林记热干面制作技艺 | 中国非物质文化遗产网／湖北省非物质文化遗产保护中心 | https://www.ihchina.cn/art/detail/id/20947.html | 2026-11-02 | `category/food.html` |
+| 食物 | 荆门矮子馅饼制作技艺 | 湖北省人民政府（第七批省级非遗名录，鄂政发〔2024〕10号） | https://www.ihchina.cn/project_details/29509 | 2026-11-02 | `category/food.html` |
+| 食物 | 荆州鱼糕制作技艺 | 湖北日报客户端（江陵频道／沙市区融媒体） | https://news.hubeidaily.net/pc/c_3515139.html | 2026-11-02 | `category/food.html` |
+| 食物 | 绿茶制作技艺（恩施玉露制作技艺） | 中国非物质文化遗产网 | https://www.ihchina.cn/project_details/28517 | 2026-11-02 | `category/food.html` |
 
-> 核验日期取自资料整理日期（2026-10-25），**不是**逐条重新打开核对的日期。
+> 节日页的核验日期取自资料整理日期（2026-10-25），**不是**逐条重新打开核对的日期。
 > 每张照片、每段动图的署名与原链接见 `docs/festival.md`。
+> 食物页的照片逐张署名与原链接见 `site/category/food/assets.md`；馅饼的 6 张工序图是荆门市政府官网非遗微视频的截帧，授权待确认。
 
 ## 首页框架素材（2026-10-29）
 
