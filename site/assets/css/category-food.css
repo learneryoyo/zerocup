@@ -1,34 +1,30 @@
 /* 食物页：叠在 category.css 之后，只在 food.html 加载。
-   页面底色沿用 site.css 的 --paper；糖画图是绢白底，
-   用 multiply 混合后底色被吃掉，只留琥珀色糖线。 */
+   页面底色沿用 site.css 的 --paper；糖画图是绢白底，先提亮把底色推成纯白，
+   再用 multiply 混合吃掉，只留琥珀色糖线。--s 是整张糖画的显示边长，裁切都按它的比例算。 */
 
 .category-hero { position: relative; overflow: hidden; }
-.food-title { position: relative; }
-.food-title > :not(.tanghua) { position: relative; z-index: 1; }
+.food-h1 { position: relative; display: inline-block; }
+.food-h1 h1 { position: relative; z-index: 1; }
+.food-title > :not(.food-h1) { position: relative; z-index: 1; }
 
-/* ── 首屏糖画：只露莲花和鱼首，垫在「食物」二字下，下半身淡出 ── */
+/* ── 首屏糖画：截取上部莲花 + 鱼首，垫在「食物」二字下，下沿淡出 ── */
 .tanghua {
+  --s: clamp(320px, 40vw, 580px);
   position: absolute;
   z-index: 0;
-  width: 640px;
-  aspect-ratio: 1;
-  left: -150px;
-  top: -150px;
-  background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
+  width: calc(var(--s) * .8);
+  height: calc(var(--s) * .52);
+  left: calc(var(--s) * -.17);
+  top: calc(var(--s) * -.2);
+  background: url("../../category/food/images/tanghua-koi.webp") calc(var(--s) * -.1) 0 / var(--s) var(--s) no-repeat;
   mix-blend-mode: multiply;
-  /* 调淡：降饱和、提亮，再整体降透明度 */
-  filter: saturate(.75) brightness(1.06);
-  opacity: .3;
-  -webkit-mask-image: linear-gradient(#000 30%, transparent 58%), linear-gradient(90deg, transparent 8%, #000 30%, #000 72%, transparent 90%);
-          mask-image: linear-gradient(#000 30%, transparent 58%), linear-gradient(90deg, transparent 8%, #000 30%, #000 72%, transparent 90%);
-  -webkit-mask-composite: source-in;
-          mask-composite: intersect;
+  /* 原图底色约 rgb(250 238 216)，提亮 1.2 倍推成纯白，multiply 后才不留方框；再降饱和、降透明度调淡 */
+  filter: brightness(1.2) saturate(.8);
+  opacity: .4;
+  -webkit-mask-image: linear-gradient(#000 45%, transparent 98%);
+          mask-image: linear-gradient(#000 45%, transparent 98%);
   pointer-events: none;
 }
 
 /* 项目小圆点换成糖珠色 */
-.cat-facts li::before { background: #c79c51; box-shadow: inset -1px -1px 0 rgba(122, 62, 16, .35); }
-
-@media (max-width: 900px) {
-  .tanghua { width: 400px; left: -70px; top: -110px; }
-}
+.cat-facts li::before { background: #c79c51; }
