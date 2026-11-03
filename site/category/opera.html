@@ -1,71 +1,270 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>戏曲 · 非遗</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>戏曲 · 非遗辑录</title>
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/category.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-<header>
-  <nav>
-    <a href="../index.html">首页</a>
-    <a href="../heritage.html">非遗辑录</a>
-    <a href="../revival.html">古艺新生</a>
-    <a href="../about.html">关于我们</a>
-  </nav>
-</header>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="非遗辑录首页">
+      <span class="brand-name">非遗辑录</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>菜单</span></button>
+    <nav class="primary-nav" id="primary-nav" aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="../heritage.html">非遗辑录</a>
+      <a href="../revival.html">古艺新生</a>
+      <a href="../about.html">关于我们</a>
+    </nav>
+  </header>
 
-<main>
-  <h1>戏曲</h1>
+  <main id="main-content" class="category-page" data-accent="opera" tabindex="-1">
+    <section class="category-hero">
+      <div class="category-shell">
+        <div class="category-hero__inner">
+          <div>
+            <p class="cat-eyebrow">贰 · 瓦舍勾栏</p>
+            <h1>戏曲</h1>
+            <p class="cat-sub">场子不大，靠的是一身功夫。台前扮将相，幕后操众生。</p>
+            <ul class="cat-facts" aria-label="本辑代表项目">
+              <li>狮舞</li>
+              <li>京剧</li>
+              <li>皮影戏</li>
+              <li>木偶戏</li>
+            </ul>
+          </div>
+          <figure class="category-hero__media">
+            <img src="opera/lion-dance/images/lion-04-high-pole-leap.jpg" alt="高桩狮在桩阵间腾跃，狮身悬在空中" fetchpriority="high">
+            <figcaption>藤县狮舞 · 高桩腾跃</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
-  <p>
-    瓦舍勾栏是宋代城市里的娱乐场子：瓦舍是片区，勾栏是其中用栏杆围出的演出棚。《东京梦华录》记汴京桑家瓦子一带即有大小勾栏五十余座，其中夜叉棚、象棚最大，可容数千人；说话、杂剧、傀儡、影戏挨着棚子轮着演。这一行的本事都落在"扮"上——京剧演员涂一脸油彩扮将相，皮影艺人拿一张驴皮扮众生，泉州提线木偶用三十六尊木偶演四十二部戏，狮舞两个人披一张狮皮就是一头狮子。场子都不大，靠的全是身上功夫。传承也没有谱可抄，师傅怎么抬手，徒弟就怎么抬手。
-  </p>
+    <section class="category-intro reveal" aria-label="分类介绍">
+      <div class="category-shell">
+        <p>
+          瓦舍勾栏是宋代城市里的娱乐场子：瓦舍是片区，勾栏是其中用栏杆围出的演出棚。《东京梦华录》记汴京桑家瓦子一带即有大小勾栏五十余座，其中夜叉棚、象棚最大，可容数千人；说话、杂剧、傀儡、影戏挨着棚子轮着演。这一行的本事都落在「扮」上——京剧演员涂一脸油彩扮将相，皮影艺人拿一张驴皮扮众生，泉州提线木偶用三十六尊木偶演四十二部戏，狮舞两个人披一张狮皮就是一头狮子。传承没有谱可抄，师傅怎么抬手，徒弟就怎么抬手。
+        </p>
+      </div>
+    </section>
 
-  <!-- 图片还没插进页面。素材在 category/opera/ 下，
-       哪张是动作照、哪张只是成品照，见 category/opera/assets.md。
-       视频已决定不提交，页面不使用 video 标签。
-       来源链接待补：见 docs/sources.md -->
+    <section class="category-shell" aria-label="戏曲项目">
+      <ol class="project-list">
+        <li class="project reveal" id="lion-dance">
+          <div class="project__inner">
+            <article class="project__text">
+              <header class="project__head">
+                <span class="project__no">01</span>
+                <span class="project__level">国家级非遗</span>
+              </header>
+              <h2>狮舞（藤县狮舞）</h2>
+              <p class="project-meta">广西 · 藤县｜Ⅲ-5 · 2011 年第三批扩展项目（母项 2006 年第一批）</p>
+              <div class="project-body">
+                <p>
+                  藤县在广西东南部，素有「舞狮之乡」之称，这一路分侧重地面技艺的采青狮与侧重桩上功夫的高桩狮。狮舞本身分南北两路。北狮以徐水为代表，狮身披毛，两人一前一后披起狮皮，前面那人顶狮头，后面那人弓身作狮尾，另有一名引狮人持绣球逗引，翻扑、跳桩、走板全靠两人腰腿合一。南狮即醒狮，出在佛山、遂溪，狮头用竹篾扎骨、纱纸糊面、彩绘点金，额上一只独角，舞起来讲究「睁眼、洗须、舔身、抖毛」，采青时要腾跃上桩把青取下来。白居易《西凉伎》写「假面胡人假狮子，刻木为头丝作尾」——一千二百年前，假狮子就是这么舞的。
+                </p>
+              </div>
+            </article>
+            <aside class="project__media">
+              <figure class="media-wide">
+                <img src="opera/lion-dance/images/lion-04-high-pole-leap.jpg" alt="高桩狮腾跃瞬间" data-lightbox>
+                <figcaption>高桩腾跃</figcaption>
+              </figure>
+              <div class="media-grid">
+                <figure>
+                  <img src="opera/lion-dance/images/lion-01-south-red-duo.jpg" alt="南狮红色双人配合">
+                  <figcaption>南狮双人</figcaption>
+                </figure>
+                <figure>
+                  <img src="opera/lion-dance/images/lion-03-red-lift.jpg" alt="红狮托举动作">
+                  <figcaption>托举</figcaption>
+                </figure>
+                <figure>
+                  <img src="opera/lion-dance/images/lion-02-south-white-green-red.jpg" alt="白绿红配色南狮">
+                  <figcaption>南狮造型</figcaption>
+                </figure>
+                <figure>
+                  <img src="opera/lion-dance/images/lion-05-high-pole-air.jpg" alt="高桩狮凌空动作">
+                  <figcaption>高桩凌空</figcaption>
+                </figure>
+              </div>
+            </aside>
+          </div>
+        </li>
 
-  <h2>狮舞（藤县狮舞）</h2>
-  <p>广西 · 藤县｜国家级 · Ⅲ-5 · 2011 年第三批扩展项目（母项 2006 年第一批）</p>
-  <p>
-    藤县在广西东南部，素有"舞狮之乡"之称，这一路分侧重地面技艺的采青狮与侧重桩上功夫的高桩狮。狮舞本身分南北两路。北狮以徐水为代表，狮身披毛，两人一前一后披起狮皮，前面那人顶狮头，后面那人弓身作狮尾，另有一名引狮人持绣球逗引，翻扑、跳桩、走板全靠两人腰腿合一。南狮即醒狮，出在佛山、遂溪，狮头用竹篾扎骨、纱纸糊面、彩绘点金，额上一只独角，舞起来讲究"睁眼、洗须、舔身、抖毛"，采青时要腾跃上桩把青取下来。山西襄汾的天塔狮舞在层层叠起的高台上演，台面窄，人和狮要一层一层往上攀；浙江临海的黄沙狮子在八仙桌上翻扑。白居易《西凉伎》写"假面胡人假狮子，刻木为头丝作尾"——一千二百年前，假狮子就是这么舞的。
-  </p>
+        <li class="project reveal" id="peking-opera">
+          <div class="project__inner">
+            <article class="project__text">
+              <header class="project__head">
+                <span class="project__no">02</span>
+                <span class="project__level">人类非遗代表作</span>
+              </header>
+              <h2>京剧</h2>
+              <p class="project-meta">北京 · 天津 · 辽宁 · 山东 · 上海｜Ⅳ-28 · 2010 年入选</p>
+              <div class="project-body">
+                <p>
+                  京剧起于乾隆五十五年（1790）四大徽班陆续进京，徽调与汉调合流，以西皮、二黄为主腔，又吸收昆曲、秦腔的曲调与表演。行当分生、旦、净、丑，功夫落在唱念做打四项。同治、光绪年间有「同光十三绝」，程长庚、谭鑫培把老生艺术推向高峰；梅兰芳 1919 年起多次赴日、赴美演出，京剧由此走向海外。代表剧目为《霸王别姬》《贵妃醉酒》《四郎探母》《定军山》。
+                </p>
+              </div>
+            </article>
+            <aside class="project__media">
+              <figure class="media-wide">
+                <img src="opera/peking-opera/images/opera-01-painted-face-entrance.jpg" alt="武净勾脸亮相" data-lightbox>
+                <figcaption>武净勾脸亮相</figcaption>
+              </figure>
+              <div class="media-grid">
+                <figure>
+                  <img src="opera/peking-opera/images/opera-02-dan-with-spear.jpg" alt="旦角持枪亮式">
+                  <figcaption>旦角持枪</figcaption>
+                </figure>
+                <figure>
+                  <img src="opera/peking-opera/images/opera-03-mask-wall-nanluoguxiang.jpg" alt="南锣鼓巷脸谱墙">
+                  <figcaption>脸谱墙 · 当代衍生</figcaption>
+                </figure>
+              </div>
+            </aside>
+          </div>
+        </li>
 
-  <h2>京剧</h2>
-  <p>北京 · 天津 · 辽宁 · 山东 · 上海｜人类非物质文化遗产代表作名录 · 2010 年 · Ⅳ-28</p>
-  <p>
-    京剧起于乾隆五十五年（1790）四大徽班陆续进京，徽调与汉调合流，以西皮、二黄为主腔，又吸收昆曲、秦腔的曲调与表演。行当分生、旦、净、丑，功夫落在唱念做打四项。同治、光绪年间有"同光十三绝"，程长庚、谭鑫培把老生艺术推向高峰；梅兰芳 1919 年起多次赴日、赴美演出，京剧由此走向海外。2010 年 11 月列入联合国教科文组织人类非物质文化遗产代表作名录。代表剧目为《霸王别姬》《贵妃醉酒》《四郎探母》《定军山》。
-  </p>
+        <li class="project reveal" id="shadow-puppet">
+          <div class="project__inner">
+            <article class="project__text">
+              <header class="project__head">
+                <span class="project__no">03</span>
+                <span class="project__level">人类非遗代表作</span>
+              </header>
+              <h2>皮影戏</h2>
+              <p class="project-meta">河北 · 山西 · 辽宁 · 浙江 · 湖北 · 广东 · 陕西 · 甘肃等｜Ⅳ-91 · 2011 年入选</p>
+              <div class="project-body">
+                <p>
+                  皮影戏又称灯影戏，南宋《东京梦华录》已有记载，最晚在宋代成熟，至今一千多年。取驴皮或牛皮泡软、刮薄至透明，雕出人物走兽，染色后刷桐油，四肢与头部能活动；艺人用细竹杆在幕后操纵，将影偶贴在半透明纱幕上，光从背后打过来成像。一人可同时操纵几个影偶，还兼唱兼奏。因各地唱腔不同，分出唐山皮影、孝义皮影、华县皮影、华阴老腔、环县道情皮影等十几路。
+                </p>
+              </div>
+            </article>
+            <aside class="project__media">
+              <figure class="media-wide">
+                <img src="opera/shadow-puppet/images/shadow-01-screen-three-performers.jpg" alt="纱幕后三位皮影艺人正在演出" data-lightbox>
+                <figcaption>纱幕演出</figcaption>
+              </figure>
+              <div class="media-grid">
+                <figure>
+                  <img src="opera/shadow-puppet/images/shadow-04-backstage-rods.jpg" alt="幕后艺人手握竹杆操纵皮影">
+                  <figcaption>幕后操杆</figcaption>
+                </figure>
+                <figure>
+                  <img src="opera/shadow-puppet/images/shadow-02-warrior-figure.jpg" alt="武将影偶单件">
+                  <figcaption>武将影偶</figcaption>
+                </figure>
+                <figure>
+                  <img src="opera/shadow-puppet/images/shadow-03-dan-figure.jpg" alt="旦角影偶单件">
+                  <figcaption>旦角影偶</figcaption>
+                </figure>
+              </div>
+            </aside>
+          </div>
+        </li>
 
-  <h2>皮影戏</h2>
-  <p>河北 · 山西 · 辽宁 · 浙江 · 湖北 · 广东 · 陕西 · 甘肃等｜人类非物质文化遗产代表作名录 · 2011 年 · Ⅳ-91</p>
-  <p>
-    皮影戏又称灯影戏，南宋孟元老《东京梦华录》已有记载，最晚在宋代成熟，至今一千多年。取驴皮或牛皮泡软、刮薄至透明，雕出人物走兽，染色后刷桐油，四肢与头部能活动；艺人用细竹杆在幕后操纵，将影偶贴在半透明纱幕上，光从背后打过来成像。一人可同时操纵几个影偶，还兼唱兼奏。因各地唱腔不同，分出唐山皮影、孝义皮影、华县皮影、华阴老腔、环县道情皮影等十几路。2011 年 11 月 27 日，教科文组织在印尼巴厘岛召开的第六届政府间委员会会议将中国皮影戏列入代表作名录。
-  </p>
+        <li class="project reveal" id="puppetry">
+          <div class="project__inner">
+            <article class="project__text">
+              <header class="project__head">
+                <span class="project__no">04</span>
+                <span class="project__level">国家级非遗</span>
+              </header>
+              <h2>木偶戏（潮州铁枝木偶戏）</h2>
+              <p class="project-meta">广东 · 潮州｜Ⅳ-92 · 2006 年第一批</p>
+              <div class="project-body">
+                <p>
+                  潮州铁枝是母项 Ⅳ-92 下的子项之一。木偶戏按操纵方式分家，提线、布袋、铁枝、杖头各一路，2006 年整体列入第一批国家级名录，旗下十二个子项分落各地。泉州提线木偶古称悬丝傀儡，闽南人叫「嘉礼」，「四美班」四人、三十六尊木偶演四十二部「落笼簿」，一尊最少系十六条提线，线规十九套，单是「走」就要练一年半载；1990 年春晚黄奕缺的《驯猴》、2008 年奥运会开幕式的《四将开台》都出自这里。潮汕一路是铁枝，俗称纸影戏，从南宋皮影演变而来：三根四十到六十厘米的铁筷套在偶背正中与两腕，艺人盘腿坐幕后，推、拉、提、拨、抖五下手，就能演飞天、射箭、骑马、划船；脸谱是大吴泥塑，戏服是潮绣，唱腔是潮剧，一门戏串起三项非遗。
+                </p>
+                <p>当前图像展示的是同一母项下的杖头木偶一路，不是潮州铁枝本体。</p>
+              </div>
+            </article>
+            <aside class="project__media">
+              <figure class="media-wide">
+                <img src="opera/puppetry/images/puppetry-01-stage-group.jpg" alt="舞台上的杖头木偶群" data-lightbox>
+                <figcaption>杖头木偶舞台群像</figcaption>
+              </figure>
+              <figure class="media-wide">
+                <img src="opera/puppetry/images/puppetry-02-rod-puppets.jpg" alt="杖头木偶群像">
+                <figcaption>杖头木偶细部</figcaption>
+              </figure>
+            </aside>
+          </div>
+        </li>
+      </ol>
 
-  <h2>木偶戏（潮州铁枝木偶戏）</h2>
-  <p>广东 · 潮州｜国家级 · Ⅳ-92 · 2006 年第一批</p>
-  <p>
-    潮州铁枝是母项 Ⅳ-92 下的子项之一。木偶戏按操纵方式分家，提线、布袋、铁枝、杖头各一路，2006 年整体列入第一批国家级名录，旗下十二个子项分落各地。泉州提线木偶古称悬丝傀儡，闽南人叫"嘉礼"，"四美班"四人、三十六尊木偶演四十二部"落笼簿"，一尊最少系十六条提线，线规十九套，单是"走"就要练一年半载；1990 年春晚黄奕缺的《驯猴》、2008 年奥运会开幕式的《四将开台》都出自这里。潮汕一路是铁枝，俗称纸影戏，从南宋皮影演变而来：三根四十到六十厘米的铁筷套在偶背正中与两腕，艺人盘腿坐幕后，推、拉、提、拨、抖五下手，就能演飞天、射箭、骑马、划船；脸谱是大吴泥塑，戏服是潮绣，唱腔是潮剧，一门戏串起三项非遗。
-  </p>
-  <p>
-    "木偶戏"（Ⅳ-92）是母项，提线、布袋、铁枝、杖头是并列的子项。本页按潮州铁枝介绍，
-    提到泉州提线时是在讲同一母项下的另一路，不是同一个项目。
-  </p>
+      <nav class="category-nav" aria-label="分类切换">
+        <a href="objects.html">
+          <span>上一辑</span>
+          <strong>天工开物 · 器物</strong>
+        </a>
+        <a href="festival.html">
+          <span>下一辑</span>
+          <strong>四时有节 · 节日</strong>
+        </a>
+      </nav>
 
-</main>
+      <details class="category-credits">
+        <summary>图片与署名</summary>
+        <p>文件名中包含摄影师姓名的照片保留署名；来源不明的京剧时间戳图片未使用。完整来源与许可记录见 <a href="../../docs/sources.md">docs/sources.md</a>。</p>
+      </details>
+    </section>
+  </main>
 
-<footer>
-  <nav>
-    <a href="../index.html">首页</a>
-    <a href="../heritage.html">非遗辑录</a>
-    <a href="../revival.html">古艺新生</a>
-    <a href="../about.html">关于我们</a>
-  </nav>
-</footer>
+  <dialog class="cat-lightbox" aria-labelledby="cat-lightbox-title">
+    <img id="cat-lightbox-image" src="" alt="">
+    <p id="cat-lightbox-title"></p>
+    <button type="button">关闭</button>
+  </dialog>
 
+  <footer class="site-footer">
+    <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
+    <nav aria-label="页脚导航">
+      <a href="../index.html">首页</a><a href="../heritage.html">非遗辑录</a><a href="../revival.html">古艺新生</a><a href="../about.html">关于我们</a>
+    </nav>
+  </footer>
+
+  <script src="../assets/js/site.js"></script>
+  <script>
+    (() => {
+      const dialog = document.querySelector(".cat-lightbox");
+      const image = document.getElementById("cat-lightbox-image");
+      const title = document.getElementById("cat-lightbox-title");
+      const close = dialog.querySelector("button");
+      document.querySelectorAll("img[data-lightbox]").forEach((img) => {
+        img.addEventListener("click", () => {
+          image.src = img.currentSrc || img.src;
+          image.alt = img.alt;
+          title.textContent = img.closest("figure")?.querySelector("figcaption")?.textContent || img.alt;
+          dialog.showModal();
+        });
+      });
+      close.addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+
+      const items = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        items.forEach((item) => item.classList.add("is-visible"));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: "0px 0px -12% 0px" });
+      items.forEach((item) => observer.observe(item));
+    })();
+  </script>
 </body>
 </html>

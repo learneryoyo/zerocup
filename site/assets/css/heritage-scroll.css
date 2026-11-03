@@ -1,0 +1,465 @@
+/* 「非遗辑录」长卷版：整幅画是页面主体，分类信息压在山脚留白里。 */
+
+.heritage-scroll {
+  --hs-paper: #f6efe4;
+  --hs-ink: #2b1d16;
+  --hs-muted: #6e5b4c;
+  --hs-line: rgba(43, 29, 22, 0.14);
+  --hs-blue: #24478c;
+  --hs-red: #a8352a;
+  --hs-green: #2f7a68;
+  --hs-yellow: #8c6421;
+
+  position: relative;
+  overflow: clip;
+  min-height: calc(100vh - var(--header-height));
+  padding: clamp(26px, 4vw, 56px) var(--page-gutter) clamp(48px, 6vw, 90px);
+  background: radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.82), transparent 30%), var(--hs-paper);
+  color: var(--hs-ink);
+}
+
+.heritage-scroll__heading {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: clamp(18px, 3vw, 34px);
+}
+
+.heritage-scroll__eyebrow {
+  margin: 0 0 16px;
+  color: var(--hs-muted);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+}
+
+.heritage-scroll__heading h1 {
+  margin: 0;
+  font: 700 clamp(48px, 5.6vw, 84px) / 1.08 var(--serif);
+  letter-spacing: 0.06em;
+}
+
+.heritage-scroll__intro {
+  margin: 0 0 4px;
+  max-width: 28em;
+  text-align: right;
+  color: var(--hs-muted);
+  font: 15px / 2 var(--serif);
+}
+
+.heritage-scroll__intro span {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+}
+
+.heritage-scroll__scroll {
+  position: relative;
+  z-index: 1;
+  padding-bottom: clamp(86px, 12vw, 130px);
+}
+
+.heritage-scroll__scene {
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.heritage-scroll__parallax {
+  position: relative;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+.heritage-scroll__picture {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1619 / 971;
+  border-radius: 8px;
+  border: 1px solid rgba(43, 29, 22, 0.08);
+  background: var(--hs-paper);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 28px 80px rgba(43, 29, 22, 0.08);
+}
+
+.heritage-scroll__scroll .scroll-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform-origin: center bottom;
+  filter: saturate(0.84) contrast(0.96) sepia(0.06);
+}
+
+.heritage-scroll__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transform-origin: center bottom;
+}
+
+.heritage-scroll__copy {
+  position: absolute;
+  top: 9%;
+  left: clamp(18px, 3vw, 44px);
+  z-index: 3;
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+
+.heritage-scroll__copy::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -18px;
+  width: 5px;
+  height: min(56%, 460px);
+  background: linear-gradient(var(--hs-line), transparent);
+}
+
+.heritage-scroll__copyTitle {
+  position: relative;
+  margin: 0;
+  color: var(--hs-ink);
+  font: 700 clamp(20px, 1.9vw, 30px) / 1.25 var(--serif);
+  letter-spacing: 0.14em;
+}
+
+.heritage-scroll__copyKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--hs-muted);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+
+.heritage-scroll__copyKicker::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hs-blue);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hs-blue) 18%, transparent);
+}
+
+.heritage-scroll__copyText {
+  margin: 0;
+  max-width: 20em;
+  color: var(--hs-muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  line-height: 2;
+}
+
+.heritage-scroll__hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transform-origin: center bottom;
+}
+
+.heritage-scroll__hotspot {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%);
+  height: calc(var(--h) * 1%);
+  z-index: 2;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  pointer-events: auto;
+  animation: hs-rise 780ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/*
+ * 抠像图与原画同尺寸（1619×971），热点框只截取其中一块。
+ * 先把图片放大到整幅画的尺寸，再反向偏移回热点框在整幅画中的位置，
+ * 这样抠像图与底图逐像素重合。
+ */
+.heritage-scroll__hotspot img {
+  position: absolute;
+  left: calc(var(--x) / var(--w) * -100%);
+  top: calc(var(--y) / var(--h) * -100%);
+  max-width: none;
+  width: calc(100% * 100 / var(--w));
+  height: calc(100% * 100 / var(--h));
+  object-fit: fill;
+  pointer-events: none;
+  filter: drop-shadow(0 0 0 transparent) drop-shadow(0 0 0 transparent);
+}
+
+.heritage-scroll__hotspot::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 1px;
+  height: clamp(28px, 4.5vw, 54px);
+  background: linear-gradient(var(--c), color-mix(in srgb, var(--c) 18%, transparent));
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 240ms ease, transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.heritage-scroll__hotspot:hover,
+.heritage-scroll__hotspot:focus-visible {
+  z-index: 3;
+}
+
+.heritage-scroll__hotspot:hover img {
+  filter: drop-shadow(0 0 2px color-mix(in srgb, var(--c) 78%, transparent));
+}
+
+.heritage-scroll__hotspot:hover::after,
+.heritage-scroll__hotspot:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heritage-scroll__card {
+  position: absolute;
+  top: calc(100% + clamp(30px, 5vw, 60px));
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  min-width: clamp(108px, 12vw, 150px);
+  padding: 10px 12px 11px;
+  border: 1px solid color-mix(in srgb, var(--c) 42%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--hs-paper) 88%, white);
+  box-shadow: 0 18px 30px rgba(43, 29, 22, 0.12);
+  text-decoration: none;
+  opacity: 0;
+  transform: translate(-50%, -10px) scale(0.96);
+  transition: opacity 240ms ease, transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.heritage-scroll__hotspot:hover .heritage-scroll__card,
+.heritage-scroll__hotspot:focus-visible .heritage-scroll__card {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.heritage-scroll__figurePlate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  min-width: clamp(96px, 12vw, 150px);
+  padding: 10px 12px 11px;
+  border: 1px solid color-mix(in srgb, var(--c) 42%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--hs-paper) 82%, white);
+  box-shadow: 0 18px 30px rgba(43, 29, 22, 0.12);
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.heritage-scroll__figurePlate::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 22%, transparent);
+}
+
+.heritage-scroll__figureSeal {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 2px;
+  background: var(--c);
+  color: var(--hs-paper);
+  font: 18px / 1 var(--serif);
+}
+
+.heritage-scroll__figureTitle {
+  margin: 2px 0 0;
+  color: var(--hs-ink);
+  font: 700 18px / 1.15 var(--serif);
+  letter-spacing: 0.08em;
+}
+
+.heritage-scroll__figureKind {
+  margin: 0;
+  color: var(--hs-muted);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.heritage-scroll__figureLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  color: var(--c);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+}
+
+.heritage-scroll__figureLink::after {
+  content: "→";
+  transform: translateY(-1px);
+}
+
+.heritage-scroll__figurePlate:focus-visible,
+.heritage-scroll__figurePlate:hover {
+  border-color: var(--c);
+  background: color-mix(in srgb, var(--hs-paper) 74%, white);
+}
+
+.heritage-scroll__palette {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  margin-top: clamp(22px, 3vw, 36px);
+  color: var(--hs-muted);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.heritage-scroll__paletteLine {
+  flex: 1;
+  min-width: 40px;
+  height: 1px;
+  background: color-mix(in srgb, var(--hs-ink) 16%, transparent);
+}
+
+.heritage-scroll__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+}
+
+.heritage-scroll__swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.heritage-scroll__swatch i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 24%, transparent);
+}
+
+.heritage-scroll__credits {
+  position: relative;
+  z-index: 2;
+  max-width: 920px;
+  margin-top: 18px;
+  color: var(--hs-muted);
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.heritage-scroll__credits summary {
+  width: fit-content;
+  cursor: pointer;
+}
+
+[data-category="objects"],
+[data-scroll-color="objects"] { --c: var(--hs-blue); }
+[data-category="opera"],
+[data-scroll-color="opera"] { --c: var(--hs-red); }
+[data-category="festival"],
+[data-scroll-color="festival"] { --c: var(--hs-green); }
+[data-category="food"],
+[data-scroll-color="food"] { --c: var(--hs-yellow); }
+
+@keyframes hs-rise {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 1180px) {
+  .heritage-scroll__scene { min-height: 640px; }
+  .heritage-scroll__copy { top: 8%; }
+}
+
+@media (max-width: 900px) {
+  .heritage-scroll__scene {
+    min-height: 720px;
+    padding-top: 0;
+    padding-top: 0;
+  }
+  .heritage-scroll__copy {
+    top: 24px;
+    left: 20px;
+    right: 20px;
+    gap: 10px;
+  }
+  .heritage-scroll__card {
+    min-width: clamp(110px, 24vw, 150px);
+  }
+}
+
+@media (max-width: 640px) {
+  .heritage-scroll {
+    padding-inline: 18px;
+  }
+  .heritage-scroll__heading {
+    display: grid;
+    align-items: start;
+    gap: 18px;
+  }
+  .heritage-scroll__intro {
+    text-align: left;
+    font-size: 13px;
+  }
+  .heritage-scroll__scene {
+    min-height: 760px;
+  }
+  .heritage-scroll__copy {
+    top: 20px;
+    left: 18px;
+    right: 18px;
+  }
+  .heritage-scroll__copyTitle {
+    font-size: clamp(24px, 7vw, 34px);
+  }
+  .heritage-scroll__copyText {
+    font-size: 11px;
+  }
+  .heritage-scroll__card {
+    min-width: clamp(104px, 30vw, 150px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heritage-scroll__hotspot,
+  .heritage-scroll__hotspot::after,
+  .heritage-scroll__card,
+  .heritage-scroll__scroll .scroll-scene {
+    animation: none !important;
+    transition: none !important;
+  }
+}
