@@ -1,29 +1,36 @@
 /* 食物页：叠在 category.css 之后，只在 food.html 加载。
    页面底色沿用 site.css 的 --paper；糖画图是绢白底，先提亮把底色推成纯白，
-   再用 multiply 混合吃掉，只留琥珀色糖线。--s 是整张糖画的显示边长，裁切都按它的比例算。 */
+   再用 multiply 混合吃掉，只留琥珀色糖线。 */
 
 .category-hero { position: relative; overflow: hidden; }
-.food-h1 { position: relative; display: inline-block; }
-.food-h1 h1 { position: relative; z-index: 1; }
-.food-title > :not(.food-h1) { position: relative; z-index: 1; }
+.food-title { position: relative; }
+.food-title > :not(.tanghua) { position: relative; z-index: 1; }
 
-/* ── 首屏糖画：截取上部莲花 + 鱼首，垫在「食物」二字下，下沿淡出 ── */
+/* ── 首屏糖画：整幅完整显示，不裁不遮；偏左下，垫在整栏文字之后。
+   左边只探出半个页边距，底边比项目列表略低，上部莲花落在眉题上方的留白里 ── */
 .tanghua {
-  --s: clamp(320px, 40vw, 580px);
+  --s: clamp(300px, 40vw, 540px);
   position: absolute;
   z-index: 0;
-  width: calc(var(--s) * .8);
-  height: calc(var(--s) * .52);
-  left: calc(var(--s) * -.17);
-  top: calc(var(--s) * -.2);
-  background: url("../../category/food/images/tanghua-koi.webp") calc(var(--s) * -.1) 0 / var(--s) var(--s) no-repeat;
+  width: var(--s);
+  aspect-ratio: 1;
+  left: calc(var(--page-gutter) * -.5);
+  bottom: calc(clamp(8px, 2vw, 24px) * -1);
+  background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
   mix-blend-mode: multiply;
   /* 原图底色约 rgb(250 238 216)，提亮 1.2 倍推成纯白，multiply 后才不留方框；再降饱和、降透明度调淡 */
   filter: brightness(1.2) saturate(.8);
-  opacity: .4;
-  -webkit-mask-image: linear-gradient(#000 45%, transparent 98%);
-          mask-image: linear-gradient(#000 45%, transparent 98%);
+  opacity: .36;
   pointer-events: none;
+}
+
+/* 窄屏首屏改为上下排，文字栏上方只有一段内边距：改为顶边对齐，图案上沿停在内边距里，不被首屏上沿裁掉 */
+@media (max-width: 900px) {
+  .tanghua {
+    --s: min(74vw, 400px);
+    top: calc(clamp(48px, 7vw, 92px) * -.75);
+    bottom: auto;
+  }
 }
 
 /* 项目小圆点换成糖珠色 */
