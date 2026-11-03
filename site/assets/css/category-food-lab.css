@@ -1,0 +1,98 @@
+/* 食物页 · 糖画纹样预览：叠在 category.css 之后，只在 food-lab.html 加载。
+   页面底色沿用 site.css 的 --paper，不改；糖画图本身是绢白底，
+   用 multiply 混合后底色被吃掉，只留琥珀色糖线。 */
+
+.category-hero { position: relative; overflow: hidden; }
+.food-title {
+  position: relative;
+  /* 与 category.css 的 h1 字号一致，纹样位置跟着字号走 */
+  --h1: clamp(52px, 8vw, 118px);
+}
+.food-title > :not(.tanghua) { position: relative; z-index: 1; }
+
+/* ── 糖画：只露一部分，垫在「食物」二字下 ── */
+.tanghua {
+  position: absolute;
+  z-index: 0;
+  width: 640px;
+  aspect-ratio: 1;
+  background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  /* 调淡：降饱和、提亮，再整体降透明度 */
+  filter: saturate(.75) brightness(1.06);
+  opacity: .3;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+/* A 莲花鱼首：莲花压在字后，鱼头刚探到字底，下半身淡出 */
+[data-crop="lotus"] .tanghua {
+  left: -150px;
+  top: -150px;
+  -webkit-mask-image: linear-gradient(#000 30%, transparent 58%), linear-gradient(90deg, transparent 8%, #000 30%, #000 72%, transparent 90%);
+          mask-image: linear-gradient(#000 30%, transparent 58%), linear-gradient(90deg, transparent 8%, #000 30%, #000 72%, transparent 90%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+}
+
+/* B 鱼尾卷波：只取底部的卷波带，横在「食物」二字下面像一道托底 */
+[data-crop="wave"] .tanghua {
+  width: 720px;
+  left: -90px;
+  /* 卷波带（图高约 81% 处）对准「食物」二字的下沿 */
+  top: calc(30px + .95 * var(--h1) - 583px);
+  opacity: .38;
+  -webkit-mask-image: linear-gradient(transparent 70%, #000 76%, #000 86%, transparent 91%), linear-gradient(90deg, transparent 4%, #000 22%, #000 70%, transparent 92%);
+          mask-image: linear-gradient(transparent 70%, #000 76%, #000 86%, transparent 91%), linear-gradient(90deg, transparent 4%, #000 22%, #000 70%, transparent 92%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+}
+
+/* C 莲蓬斜角：图转一个角度，只露左上的莲蓬和半朵莲，从字的右上角伸出 */
+[data-crop="pod"] .tanghua {
+  width: 560px;
+  /* 莲蓬落在「物」字右上方 */
+  left: calc(2.2 * var(--h1) - 47px);
+  top: calc(.3 * var(--h1) - 203px);
+  transform: rotate(-14deg);
+  opacity: .36;
+  -webkit-mask-image: radial-gradient(ellipse 26% 22% at 18% 31%, #000 50%, transparent 100%);
+          mask-image: radial-gradient(ellipse 26% 22% at 18% 31%, #000 50%, transparent 100%);
+}
+
+/* 糖色点缀：项目小圆点换成糖珠色 */
+.cat-facts li::before { background: #c79c51; box-shadow: inset -1px -1px 0 rgba(122, 62, 16, .35); }
+
+/* 预览开关，正式版不需要 */
+.lab-switch {
+  position: fixed;
+  z-index: 50;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--cat-line, rgba(16,16,15,.16));
+  border-radius: 999px;
+  background: rgba(244, 240, 232, .92);
+  backdrop-filter: blur(8px);
+}
+.lab-switch button {
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  font: 12px/1.4 var(--serif, serif);
+  letter-spacing: .06em;
+  color: #6b665d;
+  background: transparent;
+  cursor: pointer;
+}
+.lab-switch button[aria-pressed="true"] { color: #fff; background: #8c6421; }
+
+@media (max-width: 900px) {
+  .food-title { --h1: clamp(44px, 13vw, 84px); }
+  .tanghua { width: 400px; }
+  [data-crop="lotus"] .tanghua { left: -70px; top: -110px; }
+  [data-crop="wave"] .tanghua { width: 460px; left: -60px; top: calc(30px + .95 * var(--h1) - 373px); }
+  [data-crop="pod"] .tanghua { width: 360px; left: calc(2.2 * var(--h1) - 20px); top: calc(.3 * var(--h1) - 120px); }
+}

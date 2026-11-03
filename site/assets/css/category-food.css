@@ -1,0 +1,34 @@
+/* 食物页：叠在 category.css 之后，只在 food.html 加载。
+   页面底色沿用 site.css 的 --paper；糖画图是绢白底，
+   用 multiply 混合后底色被吃掉，只留琥珀色糖线。 */
+
+.category-hero { position: relative; overflow: hidden; }
+.food-title { position: relative; }
+.food-title > :not(.tanghua) { position: relative; z-index: 1; }
+
+/* ── 首屏糖画：只露莲花和鱼首，垫在「食物」二字下，下半身淡出 ── */
+.tanghua {
+  position: absolute;
+  z-index: 0;
+  width: 640px;
+  aspect-ratio: 1;
+  left: -150px;
+  top: -150px;
+  background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  /* 调淡：降饱和、提亮，再整体降透明度 */
+  filter: saturate(.75) brightness(1.06);
+  opacity: .3;
+  -webkit-mask-image: linear-gradient(#000 30%, transparent 58%), linear-gradient(90deg, transparent 8%, #000 30%, #000 72%, transparent 90%);
+          mask-image: linear-gradient(#000 30%, transparent 58%), linear-gradient(90deg, transparent 8%, #000 30%, #000 72%, transparent 90%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+  pointer-events: none;
+}
+
+/* 项目小圆点换成糖珠色 */
+.cat-facts li::before { background: #c79c51; box-shadow: inset -1px -1px 0 rgba(122, 62, 16, .35); }
+
+@media (max-width: 900px) {
+  .tanghua { width: 400px; left: -70px; top: -110px; }
+}
