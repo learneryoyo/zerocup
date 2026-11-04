@@ -1,0 +1,97 @@
+/* 器物页专属纹样：叠在 category.css 之后，只在 category/objects.html 加载。
+   页面底色与文字沿用分类页原样。纹样是 category/objects/images/*-qd.svg 成品图：形状、暖青渐变、细颗粒纹理、
+   右上高光与左下灰色投影都已画在 SVG 里（CSS 投影会被蒙版裁掉，所以不在这里做），这里只管位置、透明度和晃动。
+   *-src.webp / luodian-medallion.webp 是生成这些 SVG 的原图。 */
+
+/* ── 首屏纹样：底边停在眉题上方，上部超出首屏的部分被裁掉，下半始终完整 ── */
+.category-hero {
+  position: relative;
+  overflow: hidden;
+  --qd-size: 560px;
+}
+.category-hero__inner > div { position: relative; }
+.category-hero__inner > div > * { position: relative; z-index: 1; }
+
+.category-hero__inner > div::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: min(var(--qd-size), 100%);
+  aspect-ratio: 1;
+  right: 0;
+  bottom: calc(100% + 32px);
+  pointer-events: none;
+  background: url("../../category/objects/images/luodian-medallion-qd.svg") center / 100% 100% no-repeat;
+  opacity: .62;
+  /* 轻微晃动：以顶端为轴，像挂着的饰片 */
+  transform-origin: 50% 0;
+  animation: qd-sway 7s ease-in-out infinite alternate;
+}
+@keyframes qd-sway {
+  from { transform: rotate(-1.2deg); }
+  to   { transform: rotate(1.2deg); }
+}
+
+/* ── 项目区：每个小项一枚代表纹样，落在文字栏下方的留白角落 ── */
+.project__text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+/* 正文与纹样之间至少留这么多 */
+.project-body { margin-bottom: clamp(40px, 5vw, 72px); }
+/* 纹样框 = 文字栏下方整条留白，框外一律裁掉，所以既碰不到正文也伸不到图片栏。
+   纹样放大到 --ms，圆心推向外侧角落，只露出约七成：外侧与下沿被裁，靠正文一侧保留圆弧。 */
+.project {
+  --ms: clamp(440px, 44vw, 640px);
+  --ms-shift: calc(var(--ms) * -.3);
+}
+.project__text::after {
+  content: "";
+  flex: none;
+  width: 100%;
+  height: calc(var(--ms) * .7);
+  margin-top: auto;
+  background: var(--motif) left var(--ms-shift) bottom var(--ms-shift) / var(--ms) var(--ms) no-repeat;
+  opacity: .58;
+  animation: qd-drift-left 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+/* 偶数项文字栏在右，纹样贴右下角 */
+.project:nth-child(even) .project__text::after {
+  background-position: right var(--ms-shift) bottom var(--ms-shift);
+  animation-name: qd-drift-right;
+}
+/* 轻微晃动：在框内来回漂移几像素，框本身不动，不会碰到文字和图片 */
+@keyframes qd-drift-left {
+  from { background-position: left calc(var(--ms-shift) - 5px) bottom calc(var(--ms-shift) + 3px); }
+  to   { background-position: left calc(var(--ms-shift) + 5px) bottom calc(var(--ms-shift) - 3px); }
+}
+@keyframes qd-drift-right {
+  from { background-position: right calc(var(--ms-shift) - 5px) bottom calc(var(--ms-shift) - 3px); }
+  to   { background-position: right calc(var(--ms-shift) + 5px) bottom calc(var(--ms-shift) + 3px); }
+}
+
+#porcelain  { --motif: url("../../category/objects/images/motif-porcelain-qd.svg"); }
+#embroidery { --motif: url("../../category/objects/images/motif-embroidery-qd.svg"); }
+#umbrella   { --motif: url("../../category/objects/images/motif-umbrella-qd.svg"); }
+#timber     { --motif: url("../../category/objects/images/motif-timber-qd.svg"); }
+
+@media (max-width: 1240px) {
+  .category-hero { --qd-size: 440px; }
+}
+@media (max-width: 1060px) {
+  .category-hero { --qd-size: 340px; }
+}
+
+@media (max-width: 900px) {
+  /* 单栏：靠右放在「器物」旁，底边停在副标题之上 */
+  .category-hero { --qd-size: 220px; }
+  .category-hero__inner > div::before { bottom: auto; top: -130px; }
+  .project { --ms: 300px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-hero__inner > div::before,
+  .project__text::after { animation: none; }
+}

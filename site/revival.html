@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>古艺新生 · 非遗辑录</title>
   <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/revival.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -20,20 +21,20 @@
       <a href="about.html">关于我们</a>
     </nav>
   </header>
-  <main id="main-content" class="blank-page">
-    <h1 class="visually-hidden">古艺新生</h1>
-
-    <section class="game-entry">
-      <h2>开酥 · 荆门酥饼制作体验</h2>
-      <p>
-        一块面皮，一根擀面杖，一炉饼铛。擀、抹酥、折、包馅、收口、粘芝麻、上铛、翻面，最后切开看层。
-        鼠标和触屏都能拖。
-      </p>
-      <p>
-        <a href="game/aizi-suxing/index.html">进入小游戏 →</a>
-      </p>
+  <main id="main-content" class="revival">
+    <header class="rv-head">
+      <div class="rv-title"><h1 class="rv-plate">古艺新生</h1></div>
+      <p class="rv-line" id="rv-line" aria-live="polite"></p>
+    </header>
+    <div class="rv-tabs" id="rv-tabs" role="tablist" aria-label="创新路径" aria-orientation="vertical"></div>
+    <section class="rv-panel" id="rv-panel" role="tabpanel">
+      <div class="rv-grid" id="rv-grid"></div>
     </section>
   </main>
+  <dialog class="rv-dialog" id="rv-dialog" aria-labelledby="rv-dialog-title">
+    <button class="rv-close" type="button" aria-label="关闭档案">×</button>
+    <div class="rv-dialog-body" id="rv-dialog-body"></div>
+  </dialog>
   <footer class="site-footer">
     <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
     <nav aria-label="页脚导航">
@@ -44,5 +45,7 @@
     </nav>
   </footer>
   <script src="assets/js/site.js"></script>
+  <script src="assets/js/revival-data.js"></script>
+  <script src="assets/js/revival.js"></script>
 </body>
 </html>

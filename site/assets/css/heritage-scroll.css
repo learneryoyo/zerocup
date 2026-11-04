@@ -5,10 +5,10 @@
   --hs-ink: #2b1d16;
   --hs-muted: #6e5b4c;
   --hs-line: rgba(43, 29, 22, 0.14);
-  --hs-blue: #24478c;
-  --hs-red: #a8352a;
-  --hs-green: #2f7a68;
-  --hs-yellow: #8c6421;
+  --hs-blue: #304b5a;
+  --hs-red: #a84e49;
+  --hs-green: #89967d;
+  --hs-yellow: #c79c51;
 
   position: relative;
   overflow: clip;
@@ -221,7 +221,7 @@
 }
 
 .heritage-scroll__hotspot:hover img {
-  filter: drop-shadow(0 0 2px color-mix(in srgb, var(--c) 78%, transparent));
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--c) 92%, transparent)) drop-shadow(0 5px 8px color-mix(in srgb, var(--c) 55%, transparent));
 }
 
 .heritage-scroll__hotspot:hover::after,

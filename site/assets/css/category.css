@@ -282,3 +282,25 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* 皮影人物并排展示，保留完整轮廓。 */
+#shadow-puppet .media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#shadow-puppet .media-grid img[src*="shadow-02-"],
+#shadow-puppet .media-grid img[src*="shadow-03-"] { object-fit: contain; background: #f2e9e0; }
+#shadow-puppet .puppet-figure-frame {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f2e9e0;
+}
+#shadow-puppet .puppet-figure-frame img {
+  height: auto;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: #f2e9e0;
+}
+#shadow-puppet .puppet-figure-frame img[src*="shadow-02-"] {
+  clip-path: inset(0 0 2px 0);
+}

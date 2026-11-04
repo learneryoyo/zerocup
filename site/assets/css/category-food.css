@@ -6,28 +6,28 @@
 .food-title { position: relative; }
 .food-title > :not(.tanghua) { position: relative; z-index: 1; }
 
-/* ── 首屏糖画：整幅完整显示，不裁不遮；偏左下，垫在整栏文字之后。
-   左边只探出半个页边距，底边比项目列表略低，上部莲花落在眉题上方的留白里 ── */
+/* ── 首屏糖画：整幅完整显示，放在标题右上方的留白里，不碰任何文字。
+   右边与文字栏右沿对齐，底边停在眉题上方 ── */
 .tanghua {
-  --s: clamp(300px, 40vw, 540px);
+  --s: min(28vw, 420px);
   position: absolute;
   z-index: 0;
   width: var(--s);
   aspect-ratio: 1;
-  left: calc(var(--page-gutter) * -.5);
-  bottom: calc(clamp(8px, 2vw, 24px) * -1);
+  right: 0;
+  bottom: calc(100% + 12px);
   background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
   mix-blend-mode: multiply;
   /* 原图底色约 rgb(250 238 216)，提亮 1.2 倍推成纯白，multiply 后才不留方框；再降饱和、降透明度调淡 */
   filter: brightness(1.2) saturate(.8);
-  opacity: .36;
+  opacity: .4;
   pointer-events: none;
 }
 
-/* 窄屏首屏改为上下排，文字栏上方只有一段内边距：改为顶边对齐，图案上沿停在内边距里，不被首屏上沿裁掉 */
+/* 窄屏首屏改为上下排，文字栏上方只有一段内边距：缩小后挪到眉题、标题右侧的空白里，底边停在副标题之上 */
 @media (max-width: 900px) {
   .tanghua {
-    --s: min(74vw, 400px);
+    --s: min(34vw, 150px);
     top: calc(clamp(48px, 7vw, 92px) * -.75);
     bottom: auto;
   }
