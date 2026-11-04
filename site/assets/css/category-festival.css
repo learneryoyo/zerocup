@@ -1,0 +1,55 @@
+/* 节日页专属纹样：叠在 category.css 之后，只在 category/festival.html 加载。
+   每个小项一枚代表纹样，落在文字栏下方的留白里，都完整显示、不裁切。纹样是 category/festival/images/*-qd.svg 成品图，
+   艾草绿渐变、细颗粒纹理与投影都已画在 SVG 里，这里只管位置、透明度和晃动。*-src.webp 是生成这些 SVG 的原图。 */
+
+.project {
+  --ms: min(100%, 460px);
+  --ms-ratio: 1;
+}
+#miao-zimeijie { --ms: min(100%, 400px); --ms-ratio: 1024 / 1536; }
+#shuizu-duanjie { --ms: min(100%, 500px); --ms-ratio: 1125 / 852; }
+
+.project__text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+/* 正文与纹样之间至少留这么多 */
+.project-body { margin-bottom: clamp(40px, 5vw, 72px); }
+
+/* 晃动走 transform，纹样不会被框边切到 */
+.project__text::after {
+  content: "";
+  flex: none;
+  width: var(--ms);
+  aspect-ratio: var(--ms-ratio);
+  margin-top: auto;
+  background: var(--motif) center / contain no-repeat;
+  opacity: .88;
+  animation: qd-float 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+/* 偶数项文字栏在右，纹样靠右 */
+.project:nth-child(even) .project__text::after { margin-left: auto; }
+
+@keyframes qd-float {
+  from { transform: translate(-4px, 3px); }
+  to   { transform: translate(4px, -3px); }
+}
+
+#songwangchuan     { --motif: url("../../category/festival/images/motif-wangchuan-qd.svg"); }
+#miao-zimeijie     { --motif: url("../../category/festival/images/motif-silver-qd.svg"); }
+#luofang-zougushi  { --motif: url("../../category/festival/images/motif-puppet-qd.svg"); }
+#shuizu-duanjie    { --motif: url("../../category/festival/images/motif-shuishu-qd.svg"); }
+#canhua-shuihui    { --motif: url("../../category/festival/images/motif-gaogan-qd.svg"); }
+
+@media (max-width: 900px) {
+  .project { --ms: min(100%, 300px); }
+  #miao-zimeijie { --ms: min(100%, 240px); }
+  #shuizu-duanjie { --ms: 100%; }
+  .project:nth-child(even) .project__text::after { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project__text::after { animation: none; }
+}
