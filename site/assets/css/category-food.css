@@ -7,6 +7,34 @@ body { background: var(--paper); }
 .project__media figcaption a { color: inherit; text-underline-offset: 3px; }
 .project__media .media-grid > figure:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
+/* ── 首屏糖画：整幅放在标题与照片之间的留白里，偏下，左缘略压「物」字 ──
+   --fs 同 category.css 的 h1 字号：左缘按字号定位，底边与标题下沿对齐（图片下方自带约 9% 空白），不碰副标题。
+   31px = 眉题高度 + h1 上外边距。 */
+.food-title { position: relative; }
+.food-title > :not(.tanghua) { position: relative; z-index: 1; }
+.tanghua {
+  --fs: clamp(52px, 8vw, 118px);
+  --s: min(34vw, 460px);
+  position: absolute;
+  z-index: 0;
+  width: var(--s);
+  aspect-ratio: 1;
+  left: calc(var(--fs) * 1.55);
+  top: calc(31px + var(--fs) * 1.04 - var(--s) * .91);
+  background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  /* 原图底色约 rgb(250 238 216)，提亮 1.2 倍推成纯白，multiply 后才不留方框；再降饱和、降透明度调淡 */
+  filter: brightness(1.2) saturate(.8);
+  opacity: .45;
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  .tanghua {
+    --fs: clamp(44px, 13vw, 84px);
+    --s: min(36vw, 160px);
+  }
+}
+
 /* ── 项目区：每个小项一幅手绘食物插图，摆法同器物页：落在文字栏下方的留白角落 ──
    插图是绢白底，先提亮把底色推成纯白，再用 multiply 吃掉；降饱和、降透明度调淡。 */
 .project__text {

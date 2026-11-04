@@ -134,24 +134,52 @@
   @keyframes rv-sheet { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 }
 
-/* 第六个标签：沿用全站纸色、赭色与金色，嵌入原生展柜互动。 */
-.rv-grid[hidden], #rv-museum[hidden] { display: none !important; }
-#rv-museum { max-width: 960px; margin-inline: auto; color: var(--rv-ink); }
-#rv-museum #museum { max-width: none; margin: 0; padding: 4px 6px 24px; }
-#rv-museum .museum-intro { margin-bottom: 28px; }
-#rv-museum .eyebrow { font-size: 11px; letter-spacing: .2em; color: var(--rv-brown); }
-#rv-museum .museum-intro h1 { font-size: clamp(26px, 3vw, 42px); color: var(--rv-ink); }
-#rv-museum .museum-intro em { color: var(--rv-brown); }
-#rv-museum .museum-intro > p, #rv-museum .cabinet-number, #rv-museum .cabinet-hint { color: var(--rv-muted); }
-#rv-museum .cabinet-grid { gap: 30px 20px; }
-#rv-museum .cabinet-window { height: clamp(190px, 20vw, 270px); border-color: #8a7055; outline-color: var(--rv-gold); }
-#rv-museum .old-object { background: #e8dfcf; }
-#rv-museum .old-object::after { background: #c8b799; border-color: #ded1b9; }
-#rv-museum .image-placeholder { color: var(--rv-muted); }
-#rv-museum .cabinet-caption { color: var(--rv-ink); font-size: 17px; }
-#rv-museum .museum-bottom { color: var(--rv-muted); }
-#rv-museum #reset-museum { border: 1px solid var(--rv-gold); background: var(--paper); color: var(--rv-brown); }
-.reward-dialog { background: var(--paper); color: var(--rv-ink); border-color: var(--rv-gold); }
-.reward-dialog .reward-done { background: var(--rv-brown); }
-@media(max-width:900px) { #rv-museum .cabinet-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media(max-width:420px) { #rv-museum .cabinet-grid { grid-template-columns: 1fr; } #rv-museum .cabinet-window { height: 270px; } }
+/* 第六个标签「叩启新生」：后三前二五座玻璃橱窗。 */
+.rv-grid[hidden], #rv-museum[hidden], .rv-holder[hidden], .vitrine-reset[hidden] { display: none !important; }
+#rv-museum { max-width: 860px; margin-inline: auto; }
+.vitrines { position: relative; aspect-ratio: 1 / .62; }
+.vt-defs { position: absolute; }
+.vt-cab { position: absolute; left: var(--x); top: var(--y); width: var(--w); transform-origin: 50% 100%; }
+.vt-cab::after { content: ""; position: absolute; z-index: -1; left: -6%; right: -6%; bottom: -1.5%; height: 3%; border-radius: 50%; background: radial-gradient(closest-side, rgba(62, 42, 32, .22), transparent); }
+.vt-cab.is-back { --w: 17%; --y: 0%; filter: saturate(.9) brightness(.97); }
+.vt-cab.is-front { --w: 21.5%; --y: 18%; z-index: 2; }
+.vt-cab:nth-of-type(1) { --x: 9.5%; }
+.vt-cab:nth-of-type(2) { --x: 41.5%; }
+.vt-cab:nth-of-type(3) { --x: 73.5%; }
+.vt-cab:nth-of-type(4) { --x: 23.25%; }
+.vt-cab:nth-of-type(5) { --x: 55.25%; }
+.vt-cab.is-shattering { z-index: 4; }
+.vt-window { position: relative; display: block; width: 100%; aspect-ratio: 330 / 800; padding: 0; border: 0; background: none; cursor: pointer; }
+.vt-window:focus-visible { outline: 2px solid var(--rv-brown); outline-offset: 5px; }
+.vt-cab.is-open .vt-window { cursor: default; }
+.vt-case, .vt-glass { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.vt-glass { pointer-events: none; }
+/* 展品位：压在小台座上方，内容以后放这里。 */
+.vt-slot { position: absolute; left: 20%; right: 20%; top: 28%; height: 32%; }
+.vt-ink { fill: none; stroke: #47525c; stroke-width: 1.2; }
+.vt-ink-thin { stroke: rgba(71, 82, 92, .45); stroke-width: 1; }
+.vt-dots rect { fill: none; stroke: #a58a63; stroke-width: 1.4; transform-box: fill-box; transform-origin: center; transform: rotate(45deg); transition: fill 160ms ease; }
+.vt-dots rect.is-lit { fill: var(--rv-brown); stroke: var(--rv-brown); }
+.vt-light { transition: opacity 500ms ease; opacity: .8; }
+.vt-cab.is-open .vt-light { opacity: 1; }
+.vt-pane { transition: opacity 180ms ease; }
+.vt-window:hover .vt-pane { opacity: .82; }
+.vt-cracks { filter: drop-shadow(.6px .6px .4px rgba(41, 58, 59, .55)); }
+.vt-cracks path { fill: none; stroke: #fff; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: vt-draw 150ms ease-out forwards; }
+.vt-shards polygon, .vt-debris .is-stuck { fill: url(#vt-shard); stroke: #fff; stroke-width: .9; stroke-opacity: .85; transform-box: fill-box; transform-origin: center; }
+.vt-crumb { fill: #fff; fill-opacity: .72; stroke: #9db5c0; stroke-width: .5; opacity: 0; animation: rv-fade 260ms ease forwards; }
+.vt-flash { fill: #fff6dc; transform-box: fill-box; transform-origin: center; pointer-events: none; }
+.vitrine-reset { display: block; margin: 26px auto 0; padding: 8px 20px; border: 1px solid var(--rv-gold); color: var(--rv-brown); background: transparent; font-size: 13px; letter-spacing: .12em; cursor: pointer; }
+.vitrine-reset:hover, .vitrine-reset:focus-visible { color: var(--rv-cream); background: var(--rv-brown); outline: none; }
+@keyframes vt-draw { to { stroke-dashoffset: 0; } }
+
+@media (max-width: 720px) {
+  .vitrines { aspect-ratio: 1 / 1.37; }
+  .vt-cab.is-back { --w: 30%; }
+  .vt-cab.is-front { --w: 36%; --y: 36.5%; }
+  .vt-cab:nth-of-type(1) { --x: 2%; }
+  .vt-cab:nth-of-type(2) { --x: 35%; }
+  .vt-cab:nth-of-type(3) { --x: 68%; }
+  .vt-cab:nth-of-type(4) { --x: 13%; }
+  .vt-cab:nth-of-type(5) { --x: 51%; }
+}
