@@ -134,9 +134,20 @@
   @keyframes rv-sheet { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 }
 
-/* 第六个标签「叩启新生」：后三前二五座玻璃橱窗。 */
-.rv-grid[hidden], #rv-museum[hidden], .rv-holder[hidden], .vitrine-reset[hidden] { display: none !important; }
-#rv-museum { max-width: 860px; margin-inline: auto; }
+/* 左上角滑动开关：柜台 / 分类两页。 */
+.revival { position: relative; }
+.revival[data-view="counter"] { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "counter"; padding-left: var(--page-gutter); }
+.rv-switch { --thumb-x: 0px; position: absolute; z-index: 3; top: clamp(28px, 4vw, 52px); left: var(--page-gutter); display: grid; grid-template-columns: 1fr 1fr; width: 156px; padding: 3px; border-radius: 999px; background: rgba(62, 42, 32, .11); box-shadow: inset 0 1px 2px rgba(62, 42, 32, .12); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.revival[data-view="paths"] .rv-switch { --thumb-x: calc(100%); }
+.rv-switch-thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px; background: #fffdf8; box-shadow: 0 1px 2px rgba(62, 42, 32, .16), 0 3px 8px rgba(62, 42, 32, .14); transform: translateX(var(--thumb-x)); transition: transform 320ms cubic-bezier(.3, 1.25, .5, 1), scale 160ms ease; }
+.rv-switch.is-dragging .rv-switch-thumb { transition: scale 160ms ease; scale: 1.05; }
+.rv-switch button { position: relative; min-height: 34px; padding: 0; border: 0; border-radius: 999px; color: var(--rv-muted); background: none; font: 14px/1 var(--serif); letter-spacing: .16em; text-indent: .16em; cursor: pointer; transition: color 200ms ease; }
+.rv-switch button[aria-checked="true"] { color: var(--rv-brown-deep); font-weight: 700; }
+.rv-switch button:focus-visible { outline: 2px solid var(--rv-brown); outline-offset: 2px; }
+
+/* 柜台页：后三前二五座玻璃橱窗。 */
+.rv-grid[hidden], .rv-tabs[hidden], .rv-panel[hidden], .rv-counter[hidden], .rv-holder[hidden], .vitrine-reset[hidden] { display: none !important; }
+.rv-counter { grid-area: counter; width: 100%; max-width: 860px; margin-inline: auto; animation: rv-fade 300ms ease both; }
 .vitrines { position: relative; aspect-ratio: 1 / .62; }
 .vt-defs { position: absolute; }
 .vt-cab { position: absolute; left: var(--x); top: var(--y); width: var(--w); transform-origin: 50% 100%; }
@@ -174,6 +185,11 @@
 @keyframes vt-draw { to { stroke-dashoffset: 0; } }
 
 @media (max-width: 720px) {
+  .revival, .revival[data-view="counter"] { padding-left: 0; }
+  .revival[data-view="paths"] { grid-template-areas: "switch" "head" "tabs" "panel"; }
+  .revival[data-view="counter"] { grid-template-areas: "switch" "head" "counter"; }
+  .rv-switch { grid-area: switch; position: relative; top: 0; left: 0; margin: 0 0 16px 16px; }
+  .rv-counter { padding-inline: 16px; }
   .vitrines { aspect-ratio: 1 / 1.37; }
   .vt-cab.is-back { --w: 30%; }
   .vt-cab.is-front { --w: 36%; --y: 36.5%; }

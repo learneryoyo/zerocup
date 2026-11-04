@@ -37,11 +37,13 @@
     '28': '华县皮影 · 多媒体小哪吒', '29': '杨柳青年画 · 玉成号体验坊', '30': '铜官陶瓷 · 亲子研学'
   };
 
-  ICONS.push('<path d="M5 4h18v20H5zM5 9h18M14 9v15M9 14h1M18 14h1"/>');
-  PATHS.push({ name: '叩启新生', line: '轻叩三次橱窗，遇见一件非遗新作。' });
+  const COUNTER_LINE = '轻叩三次橱窗，遇见一件非遗新作。';
   const cases = window.CASES || [];
   const tabList = document.getElementById('rv-tabs');
   const panel = document.getElementById('rv-panel');
+  const counter = document.getElementById('rv-museum');
+  const page = document.getElementById('main-content');
+  const viewSwitch = document.getElementById('rv-switch');
   const grid = document.getElementById('rv-grid');
   const lineEl = document.getElementById('rv-line');
   const dialog = document.getElementById('rv-dialog');
@@ -102,6 +104,13 @@
     return button;
   }
 
+  function setLine(text) {
+    lineEl.classList.remove('is-in');
+    void lineEl.offsetWidth;
+    lineEl.textContent = text;
+    lineEl.classList.add('is-in');
+  }
+
   function select(index, focus) {
     current = index;
     [...tabList.children].forEach((tab, i) => {
@@ -112,14 +121,8 @@
       if (on && focus) tab.focus();
     });
     panel.setAttribute('aria-labelledby', `rv-tab-${index}`);
-    lineEl.classList.remove('is-in');
-    void lineEl.offsetWidth;
-    lineEl.textContent = PATHS[index].line;
-    lineEl.classList.add('is-in');
-    const isMuseum = index === 5;
-    grid.hidden = isMuseum;
-    document.getElementById('rv-museum').hidden = !isMuseum;
-    if (!isMuseum) grid.replaceChildren(...inPath(index).map(card));
+    setLine(PATHS[index].line);
+    grid.replaceChildren(...inPath(index).map(card));
     if (window.matchMedia('(max-width: 720px)').matches) {
       tabList.children[index].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
     }
@@ -241,5 +244,70 @@
     (match || trigger)?.focus();
   });
 
+  // 左上角滑动开关：柜台 / 分类两页。
+  const segments = [...viewSwitch.querySelectorAll('button')];
+
+  function setView(view, focus) {
+    const onPaths = view === 'paths';
+    page.dataset.view = view;
+    counter.hidden = onPaths;
+    tabList.hidden = !onPaths;
+    panel.hidden = !onPaths;
+    setLine(onPaths ? PATHS[current].line : COUNTER_LINE);
+    segments.forEach(segment => {
+      const on = segment.dataset.view === view;
+      segment.setAttribute('aria-checked', String(on));
+      segment.tabIndex = on ? 0 : -1;
+      if (on && focus) segment.focus();
+    });
+    if (onPaths) select(current);
+  }
+
+  segments.forEach(segment => {
+    segment.addEventListener('click', () => {
+      if (segment.getAttribute('aria-checked') !== 'true') setView(segment.dataset.view);
+    });
+  });
+
+  viewSwitch.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return;
+    event.preventDefault();
+    setView(page.dataset.view === 'counter' ? 'paths' : 'counter', true);
+  });
+
+  // 按住滑块拖动，松手吸附到近的一边；只是点一下时走上面的 click。
+  let drag = null;
+  viewSwitch.addEventListener('pointerdown', event => {
+    if (event.button !== 0) return;
+    const onPaths = page.dataset.view === 'paths';
+    const range = viewSwitch.querySelector('.rv-switch-thumb').offsetWidth;
+    drag = { id: event.pointerId, startX: event.clientX, origin: onPaths ? range : 0, range, moved: false };
+  });
+  // 手指或鼠标滑出开关时仍要跟随，所以移动和松手都挂在 window 上。
+  window.addEventListener('pointermove', event => {
+    if (!drag || event.pointerId !== drag.id) return;
+    const delta = event.clientX - drag.startX;
+    if (!drag.moved && Math.abs(delta) < 4) return;
+    if (!drag.moved) {
+      drag.moved = true;
+      viewSwitch.classList.add('is-dragging');
+    }
+    drag.x = Math.min(drag.range, Math.max(0, drag.origin + delta));
+    viewSwitch.style.setProperty('--thumb-x', `${drag.x}px`);
+  });
+  const endDrag = event => {
+    if (!drag || event.pointerId !== drag.id) return;
+    const { moved, x, range } = drag;
+    drag = null;
+    if (!moved) return;
+    viewSwitch.classList.remove('is-dragging');
+    viewSwitch.style.removeProperty('--thumb-x');
+    const view = x > range / 2 ? 'paths' : 'counter';
+    if (view !== page.dataset.view) setView(view);
+  };
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
   select(0);
+  setView('counter');
 })();
