@@ -1,37 +1,8 @@
-/* 食物页：叠在 category.css 之后，只在 food.html 加载。
-   页面底色沿用 site.css 的 --paper；糖画图是绢白底，先提亮把底色推成纯白，
-   再用 multiply 混合吃掉，只留琥珀色糖线。 */
-
-.category-hero { position: relative; overflow: hidden; }
-.food-title { position: relative; }
-.food-title > :not(.tanghua) { position: relative; z-index: 1; }
-
-/* ── 首屏糖画：整幅完整显示，放在标题右上方的留白里，不碰任何文字。
-   右边与文字栏右沿对齐，底边停在眉题上方 ── */
-.tanghua {
-  --s: min(28vw, 420px);
-  position: absolute;
-  z-index: 0;
-  width: var(--s);
-  aspect-ratio: 1;
-  right: 0;
-  bottom: calc(100% + 12px);
-  background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
-  mix-blend-mode: multiply;
-  /* 原图底色约 rgb(250 238 216)，提亮 1.2 倍推成纯白，multiply 后才不留方框；再降饱和、降透明度调淡 */
-  filter: brightness(1.2) saturate(.8);
-  opacity: .4;
-  pointer-events: none;
-}
-
-/* 窄屏首屏改为上下排，文字栏上方只有一段内边距：缩小后挪到眉题、标题右侧的空白里，底边停在副标题之上 */
-@media (max-width: 900px) {
-  .tanghua {
-    --s: min(34vw, 150px);
-    top: calc(clamp(48px, 7vw, 92px) * -.75);
-    bottom: auto;
-  }
-}
-
-/* 项目小圆点换成糖珠色 */
+/* 食物页沿用其他分类的项目布局，背景保持纯色。 */
+body { background: var(--paper); }
+.category-page[data-accent="food"] { --accent: #c79c51; }
 .cat-facts li::before { background: #c79c51; }
+.food-image-open { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.food-image-open:focus-visible { outline: 2px solid #c79c51; outline-offset: 4px; }
+.project__media figcaption a { color: inherit; text-underline-offset: 3px; }
+.project__media .media-grid > figure:last-child:nth-child(odd) { grid-column: 1 / -1; }

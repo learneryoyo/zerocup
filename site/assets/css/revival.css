@@ -133,3 +133,25 @@
   .rv-compare-arrow { justify-self: center; transform: rotate(90deg); }
   @keyframes rv-sheet { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 }
+
+/* 第六个标签：沿用全站纸色、赭色与金色，嵌入原生展柜互动。 */
+.rv-grid[hidden], #rv-museum[hidden] { display: none !important; }
+#rv-museum { max-width: 960px; margin-inline: auto; color: var(--rv-ink); }
+#rv-museum #museum { max-width: none; margin: 0; padding: 4px 6px 24px; }
+#rv-museum .museum-intro { margin-bottom: 28px; }
+#rv-museum .eyebrow { font-size: 11px; letter-spacing: .2em; color: var(--rv-brown); }
+#rv-museum .museum-intro h1 { font-size: clamp(26px, 3vw, 42px); color: var(--rv-ink); }
+#rv-museum .museum-intro em { color: var(--rv-brown); }
+#rv-museum .museum-intro > p, #rv-museum .cabinet-number, #rv-museum .cabinet-hint { color: var(--rv-muted); }
+#rv-museum .cabinet-grid { gap: 30px 20px; }
+#rv-museum .cabinet-window { height: clamp(190px, 20vw, 270px); border-color: #8a7055; outline-color: var(--rv-gold); }
+#rv-museum .old-object { background: #e8dfcf; }
+#rv-museum .old-object::after { background: #c8b799; border-color: #ded1b9; }
+#rv-museum .image-placeholder { color: var(--rv-muted); }
+#rv-museum .cabinet-caption { color: var(--rv-ink); font-size: 17px; }
+#rv-museum .museum-bottom { color: var(--rv-muted); }
+#rv-museum #reset-museum { border: 1px solid var(--rv-gold); background: var(--paper); color: var(--rv-brown); }
+.reward-dialog { background: var(--paper); color: var(--rv-ink); border-color: var(--rv-gold); }
+.reward-dialog .reward-done { background: var(--rv-brown); }
+@media(max-width:900px) { #rv-museum .cabinet-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media(max-width:420px) { #rv-museum .cabinet-grid { grid-template-columns: 1fr; } #rv-museum .cabinet-window { height: 270px; } }

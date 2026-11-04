@@ -37,6 +37,8 @@
     '28': '华县皮影 · 多媒体小哪吒', '29': '杨柳青年画 · 玉成号体验坊', '30': '铜官陶瓷 · 亲子研学'
   };
 
+  ICONS.push('<path d="M5 4h18v20H5zM5 9h18M14 9v15M9 14h1M18 14h1"/>');
+  PATHS.push({ name: '叩启新生', line: '轻叩三次橱窗，遇见一件非遗新作。' });
   const cases = window.CASES || [];
   const tabList = document.getElementById('rv-tabs');
   const panel = document.getElementById('rv-panel');
@@ -114,7 +116,10 @@
     void lineEl.offsetWidth;
     lineEl.textContent = PATHS[index].line;
     lineEl.classList.add('is-in');
-    grid.replaceChildren(...inPath(index).map(card));
+    const isMuseum = index === 5;
+    grid.hidden = isMuseum;
+    document.getElementById('rv-museum').hidden = !isMuseum;
+    if (!isMuseum) grid.replaceChildren(...inPath(index).map(card));
     if (window.matchMedia('(max-width: 720px)').matches) {
       tabList.children[index].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
     }

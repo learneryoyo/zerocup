@@ -14,7 +14,7 @@
   overflow: clip;
   min-height: calc(100vh - var(--header-height));
   padding: clamp(26px, 4vw, 56px) var(--page-gutter) clamp(48px, 6vw, 90px);
-  background: radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.82), transparent 30%), var(--hs-paper);
+  background: var(--hs-paper);
   color: var(--hs-ink);
 }
 
@@ -463,3 +463,8 @@
     transition: none !important;
   }
 }
+
+/* 纯色画布：移除背景装饰，保留五个人物入口。 */
+body { background: #f6efe4; }
+.heritage-scroll__picture { border: 0; box-shadow: none; }
+.heritage-scroll__copy::after { content: none; }

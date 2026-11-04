@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>古艺新生 · 非遗辑录</title>
   <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/revival-v2/museum.css">
   <link rel="stylesheet" href="assets/css/revival.css">
 </head>
 <body>
@@ -29,12 +30,14 @@
     <div class="rv-tabs" id="rv-tabs" role="tablist" aria-label="创新路径" aria-orientation="vertical"></div>
     <section class="rv-panel" id="rv-panel" role="tabpanel">
       <div class="rv-grid" id="rv-grid"></div>
+<div id="rv-museum" hidden><section id="museum" aria-label="叩启新生互动展柜"><header class="museum-intro"><p class="eyebrow">六扇橱窗 · 六次新生</p><h1>叩开旧时光，<br><em>遇见新模样。</em></h1><p>每扇橱窗轻叩三次，揭晓一件非遗新作。</p><p class="collection-progress" id="museum-progress" role="status" aria-live="polite">已收集 0 / 6</p></header><div id="cabinet-grid" class="cabinet-grid"></div><footer class="museum-bottom"><p>这是一次数字展览互动。橱窗为虚拟视觉效果，收集卡不对应实物奖品。</p><button type="button" id="reset-museum">重新体验六扇橱窗</button></footer></section></div>
     </section>
   </main>
   <dialog class="rv-dialog" id="rv-dialog" aria-labelledby="rv-dialog-title">
     <button class="rv-close" type="button" aria-label="关闭档案">×</button>
     <div class="rv-dialog-body" id="rv-dialog-body"></div>
   </dialog>
+<dialog id="reward-dialog" class="reward-dialog" aria-labelledby="reward-title"><button type="button" class="reward-close" aria-label="关闭新作揭晓">×</button><div id="reward-content"></div></dialog>
   <footer class="site-footer">
     <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
     <nav aria-label="页脚导航">
@@ -47,5 +50,6 @@
   <script src="assets/js/site.js"></script>
   <script src="assets/js/revival-data.js"></script>
   <script src="assets/js/revival.js"></script>
+  <script src="assets/revival-v2/museum-integrated.js"></script>
 </body>
 </html>
