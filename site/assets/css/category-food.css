@@ -6,3 +6,62 @@ body { background: var(--paper); }
 .food-image-open:focus-visible { outline: 2px solid #c79c51; outline-offset: 4px; }
 .project__media figcaption a { color: inherit; text-underline-offset: 3px; }
 .project__media .media-grid > figure:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* ── 项目区：每个小项一幅手绘食物插图，摆法同器物页：落在文字栏下方的留白角落 ──
+   插图是绢白底，先提亮把底色推成纯白，再用 multiply 吃掉；降饱和、降透明度调淡。 */
+.project__text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+/* 正文与插图之间至少留这么多 */
+.project-body { margin-bottom: clamp(40px, 5vw, 72px); }
+/* 插图框 = 文字栏下方整条留白，向外伸到屏幕边缘，所以既碰不到正文也伸不到图片栏。
+   插图放大到 --ms：外侧由屏幕边缘略裁，像出血；下沿只去掉图片自带的空白，主体不裁。 */
+.project {
+  --ms: clamp(420px, 40vw, 600px);
+  --ms-x: calc(var(--ms) * -.2);
+  --ms-y: calc(var(--ms) * -.08);
+}
+.project__text::after {
+  content: "";
+  flex: none;
+  width: calc(100% + var(--page-gutter));
+  height: calc(var(--ms) * .84);
+  margin-top: auto;
+  margin-left: calc(var(--page-gutter) * -1);
+  background: var(--motif) left var(--ms-x) bottom var(--ms-y) / var(--ms) var(--ms) no-repeat;
+  mix-blend-mode: multiply;
+  filter: brightness(1.18) saturate(.72);
+  opacity: .5;
+  animation: food-drift-left 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+/* 偶数项文字栏在右，插图贴右下角 */
+.project:nth-child(even) .project__text::after {
+  margin-left: 0;
+  background-position: right var(--ms-x) bottom var(--ms-y);
+  animation-name: food-drift-right;
+}
+/* 轻微晃动：在框内来回漂移几像素，框本身不动，不会碰到文字和图片 */
+@keyframes food-drift-left {
+  from { background-position: left calc(var(--ms-x) - 5px) bottom calc(var(--ms-y) + 3px); }
+  to   { background-position: left calc(var(--ms-x) + 5px) bottom calc(var(--ms-y) - 3px); }
+}
+@keyframes food-drift-right {
+  from { background-position: right calc(var(--ms-x) - 5px) bottom calc(var(--ms-y) - 3px); }
+  to   { background-position: right calc(var(--ms-x) + 5px) bottom calc(var(--ms-y) + 3px); }
+}
+
+#hotdry-noodles { --motif: url("../../category/food/images/motif-noodles.webp"); }
+#aizi-pastry    { --motif: url("../../category/food/images/motif-pastry.webp"); }
+#fish-cake      { --motif: url("../../category/food/images/motif-fishcake.webp"); }
+#enshi-yulu     { --motif: url("../../category/food/images/motif-tea.webp"); }
+
+@media (max-width: 900px) {
+  .project { --ms: 300px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project__text::after { animation: none; }
+}
