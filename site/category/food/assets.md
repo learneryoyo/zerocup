@@ -132,3 +132,31 @@ site/category/food/
 2. **补署名**：新华网和湖北日报客户端的几张图没有逐张摄影署名，上线前要确认；确认不了就用机构名，不要编人名。
 3. **确认授权**：尤其是馅饼视频截帧和带品牌 logo 的店铺/包装图，公开发布前要问一句。
 4. **插页**：下一步才是把这些图放进 `food.html` 的 `<main>`，并按页面布局做 `<figure>` + `<figcaption>`；`docs/sources.md` 已登记项目级出处。
+
+## 2026-11-04 换图（当前 food.html 使用）
+
+来自 `非遗饮食摄影_20261104`，已缩放压缩；`aizi-11` 从原图裁出下层托盘，去掉了价签。标注"需核实"的图片未发现开放许可，公开发布前需取得授权。
+
+| 文件 | 画面 | 作者／来源 | 原页面 | 许可 |
+|---|---|---|---|---|
+| `images/hero-huamo-wenxi.jpg` | 首屏总括图 | 新华网山西频道（作者未查明） | https://www.sx.news.cn/20250110/d6160a3492e7485e9ff4c31b51f5318e/c.html | 需核实 |
+| `cailinji-hotdry-noodles/images/hotdry-16-tossing-zhihu.jpg` | 师傅抖散出锅的面条，一旁蒸汽升腾 | 知乎专栏文章（作者未查明） | https://zhuanlan.zhihu.com/p/42522913 | 需核实 |
+| `cailinji-hotdry-noodles/images/hotdry-12-bowl-nature42.jpg` | 热干面配萝卜丁与牛肉 | Nature42 | https://commons.wikimedia.org/wiki/File:%E7%83%AD%E5%B9%B2%E9%9D%A2.jpg | CC0 1.0 |
+| `cailinji-hotdry-noodles/images/hotdry-13-stirred-zhengzhou.jpg` | 拌匀后挂满芝麻酱的面条 | ZhengZhou | https://commons.wikimedia.org/wiki/File:Hot_Dry_Noodles_stirred.jpg | CC BY-SA 4.0 |
+| `cailinji-hotdry-noodles/images/hotdry-14-closeup-hans.jpg` | 浇上酱料、撒好葱花的一碗 | 宽子／HANS汉声 | https://www.thepaper.cn/newsDetail_forward_25128597 | 需核实 |
+| `cailinji-hotdry-noodles/images/hotdry-15-eggwine-hans.jpg` | 拌好的热干面配一碗蛋酒 | 宽子／HANS汉声 | https://www.thepaper.cn/newsDetail_forward_25128597 | 需核实 |
+| `jingmen-aizi-pastry/images/aizi-11-tray-sohu.jpg` | 门店托盘里的矮子馅饼 | 搜狐文章（作者未查明） | https://www.sohu.com/a/814074901_333962 | 需核实 |
+| `jingmen-aizi-pastry/images/aizi-12-kitchen-sohu.jpg` | 师傅们围桌包馅，身后是饼铛 | 搜狐文章（作者未查明） | https://www.sohu.com/a/814074901_333962 | 需核实 |
+| `jingmen-aizi-pastry/images/aizi-13-section-sohu.jpg` | 掰开的馅饼，酥皮层层可见 | 搜狐文章（作者未查明） | https://www.sohu.com/a/220994499_669362 | 需核实 |
+| `jingmen-aizi-pastry/images/aizi-14-filling-sohu.jpg` | 切开的馅饼露出深色馅心 | 搜狐文章（作者未查明） | https://www.sohu.com/a/220994499_669362 | 需核实 |
+| `jingmen-aizi-pastry/images/aizi-15-queue-sohu.jpg` | 门店柜台前排队的顾客 | 搜狐文章（作者未查明） | https://www.sohu.com/a/814074901_333962 | 需核实 |
+| `jingzhou-fish-cake/images/fishcake-11-fan-thepaper.jpg` | 切片围成一圈的鱼糕 | 澎湃号媒体发布（作者未查明） | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实 |
+| `jingzhou-fish-cake/images/fishcake-12-dish-thepaper.jpg` | 青花大盘里的鱼糕 | 荆州发布转载（作者未查明） | https://www.thepaper.cn/newsDetail_forward_21685735 | 需核实 |
+| `jingzhou-fish-cake/images/fishcake-13-pot-thepaper.jpg` | 铜锅里的鱼糕与鱼丸 | 澎湃号媒体发布（作者未查明） | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实 |
+| `jingzhou-fish-cake/images/fishcake-14-slices-thepaper.jpg` | 切片的鱼糕，黄白分明 | 澎湃号媒体发布（作者未查明） | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实 |
+| `jingzhou-fish-cake/images/fishcake-15-section-jimu.jpg` | 筷子夹起鱼糕片，看得见切面 | 黄志刚／极目新闻 | https://news.cnhubei.com/content/2023-01/16/content_15388578.html | 需核实 |
+| `enshi-yulu/images/yulu-11-dry-leaves-cnhubei.jpg` | 白瓷盘里的恩施玉露干茶 | 荆楚网／湖北省知识产权局专题 | http://www.cnhubei.com/xwzt/2022/hbdlbzxszg/cy/202207/t4440905.shtml | 需核实 |
+| `enshi-yulu/images/yulu-12-garden-cnhubei.jpg` | 恩施茶园，茶农在采茶 | 荆楚网／湖北省知识产权局专题 | http://www.cnhubei.com/xwzt/2022/hbdlbzxszg/cy/202207/t4440905.shtml | 需核实 |
+| `enshi-yulu/images/yulu-13-steam-xinhua.jpg` | 蒸汽杀青 | 伍功勋／新华网 | https://www.xinhuanet.com/2021-04/16/c_1127334425.htm | 需核实 |
+| `enshi-yulu/images/yulu-14-shaping-xinhua.jpg` | 手工整形 | 伍功勋／新华网 | https://www.xinhuanet.com/2021-04/16/c_1127334425.htm | 需核实 |
+| `enshi-yulu/images/yulu-15-sorting-xinhua.jpg` | 用竹夹拣选干茶 | 伍功勋／新华网 | https://www.xinhuanet.com/2021-04/16/c_1127334425.htm | 需核实 |
