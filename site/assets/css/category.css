@@ -73,6 +73,11 @@
   object-fit: cover;
   border-radius: 8px;
 }
+/* 戏曲页总括图是横图：改方形并左移取景，前排两位人物才完整 */
+.category-hero__media--opera img {
+  aspect-ratio: 1;
+  object-position: 20.5% 50%;
+}
 .category-hero__media figcaption {
   margin-top: 9px;
   font-size: 11px;
@@ -172,6 +177,9 @@
   gap: 20px;
 }
 .project__media .media-grid img { aspect-ratio: 1 / 1; object-fit: cover; }
+/* 戏曲页两张竖图：改方形并上移取景，主体才完整（窄屏也保持方形） */
+#peking-opera .media-wide img { aspect-ratio: 1; object-position: 50% 17%; }
+#lion-dance img[src*="lion-04"] { aspect-ratio: 1; object-position: 50% 17%; }
 
 /* ── 分类底部导航 ─────────────────────────────────────────── */
 .category-nav {
