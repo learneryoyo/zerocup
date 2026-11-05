@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>身边的非遗 · 按日期与省份找节俗</title>
+<style>
+  :root{
+    --paper:#f6f1e7;
+    --paper-2:#fffdf8;
+    --ink:#2b2622;
+    --ink-2:#5d544c;
+    --ink-3:#8c8279;
+    --line:rgba(43,38,34,.10);
+    --line-2:rgba(43,38,34,.06);
+    --red:#b03a2e;
+    --red-soft:#f3e3dd;
+    --gold:#a8823f;
+    --teal:#3d6b63;
+    --blue:#3f5c74;
+    --shadow:0 1px 2px rgba(43,38,34,.04), 0 8px 24px -12px rgba(43,38,34,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(176,58,46,.045), transparent 42%),
+      radial-gradient(circle at 88% 4%, rgba(168,130,63,.05), transparent 38%),
+      radial-gradient(circle at 50% 100%, rgba(61,107,99,.04), transparent 45%);
+    background-attachment:fixed;
+  }
+  .serif{font-family:"Songti SC","STSong","Source Han Serif SC","Noto Serif SC",SimSun,serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px 80px}
+
+  /* ---------- 头部 ---------- */
+  header{padding:56px 0 26px;text-align:center;position:relative}
+  .stamp{
+    display:inline-block;font-size:12px;letter-spacing:.28em;color:var(--red);
+    border:1px solid rgba(176,58,46,.35);border-radius:2px;
+    padding:4px 12px 4px 14px;margin-bottom:20px;background:rgba(176,58,46,.04);
+  }
+  h1{
+    font-family:"Songti SC","STSong","Source Han Serif SC",serif;
+    font-size:44px;font-weight:700;letter-spacing:.14em;
+    color:var(--ink);line-height:1.3;
+  }
+  h1 em{font-style:normal;color:var(--red)}
+  .sub{margin-top:14px;color:var(--ink-2);font-size:15px;letter-spacing:.04em}
+  .sub b{color:var(--ink);font-weight:600}
+
+  /* ---------- 查询区 ---------- */
+  .panel{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:20px 22px;
+    box-shadow:var(--shadow);
+    margin-top:34px;
+    position:sticky;top:14px;z-index:30;
+    backdrop-filter:saturate(1.2) blur(6px);
+  }
+  .fields{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+  .field{display:flex;flex-direction:column;gap:6px;flex:1 1 180px;min-width:150px}
+  .field label{font-size:12px;letter-spacing:.16em;color:var(--ink-3);padding-left:2px}
+  .field input,.field select{
+    appearance:none;-webkit-appearance:none;min-width:0;
+    font:inherit;font-size:15px;color:var(--ink);
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;width:100%;outline:none;
+    transition:border-color .18s, box-shadow .18s;
+    font-variant-numeric:tabular-nums;
+  }
+  .field select{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' fill='none' stroke='%238c8279' stroke-width='1.6'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;
+  }
+  .field input:focus,.field select:focus{border-color:rgba(176,58,46,.45);box-shadow:0 0 0 3px rgba(176,58,46,.08)}
+  .go{
+    flex:0 0 auto;font:inherit;font-size:15px;letter-spacing:.1em;
+    color:#fff;background:var(--red);border:none;border-radius:10px;
+    padding:11px 26px;cursor:pointer;transition:background .18s, transform .12s;
+    box-shadow:0 6px 16px -8px rgba(176,58,46,.8);
+  }
+  .go:hover{background:#9c3227}
+  .go:active{transform:translateY(1px)}
+  .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+  .chip{
+    font:inherit;font-size:13px;color:var(--ink-2);background:rgba(43,38,34,.04);
+    border:1px solid transparent;border-radius:999px;padding:5px 14px;cursor:pointer;
+    transition:all .16s;
+  }
+  .chip:hover{background:var(--red-soft);color:var(--red);border-color:rgba(176,58,46,.2)}
+  .chip.on{background:var(--red);color:#fff}
+  .lunar-hint{margin-left:auto;font-size:13px;color:var(--ink-3);align-self:center;letter-spacing:.04em}
+  .lunar-hint b{color:var(--ink-2);font-weight:600}
+
+  /* ---------- 状态条 ---------- */
+  .status{
+    margin-top:26px;display:flex;gap:14px;align-items:flex-start;
+    padding:16px 18px;border-radius:14px;
+    background:rgba(176,58,46,.045);
+    border:1px solid rgba(176,58,46,.14);
+  }
+  .status .badge{
+    flex:0 0 auto;font-size:12px;letter-spacing:.1em;color:#fff;background:var(--red);
+    border-radius:6px;padding:4px 10px;margin-top:2px;white-space:nowrap;
+  }
+  .status.mode-time{background:rgba(168,130,63,.06);border-color:rgba(168,130,63,.2)}
+  .status.mode-time .badge{background:var(--gold)}
+  .status.mode-region{background:rgba(61,107,99,.06);border-color:rgba(61,107,99,.2)}
+  .status.mode-region .badge{background:var(--teal)}
+  .status.mode-none{background:rgba(43,38,34,.035);border-color:var(--line)}
+  .status.mode-none .badge{background:var(--ink-3)}
+  .status p{font-size:14.5px;color:var(--ink-2);line-height:1.75}
+  .status p b{color:var(--ink);font-weight:600}
+  .status p em{font-style:normal;color:var(--red);font-weight:600}
+  .status.mode-time p em{color:var(--gold)}
+  .status.mode-region p em{color:var(--teal)}
+
+  /* ---------- 卡片 ---------- */
+  .grid{
+    display:grid;gap:18px;margin-top:22px;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  }
+  .card{
+    position:relative;background:var(--paper-2);
+    border:1px solid var(--line);border-radius:16px;
+    padding:20px 20px 18px 22px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    animation:rise .42s cubic-bezier(.2,.7,.3,1) both;
+    transition:transform .2s cubic-bezier(.2,.7,.3,1), box-shadow .2s, border-color .2s;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .card::before{
+    content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;
+    background:linear-gradient(180deg,var(--red),#d98e5f);
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(43,38,34,.05), 0 18px 36px -18px rgba(43,38,34,.28);border-color:rgba(176,58,46,.22)}
+  .card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .seal{
+    width:38px;height:38px;flex:0 0 auto;border-radius:50%;
+    display:grid;place-items:center;font-size:19px;
+    background:radial-gradient(circle at 32% 28%, #fff, var(--red-soft));
+    border:1px solid rgba(176,58,46,.22);
+  }
+  .lvl{
+    font-size:11px;letter-spacing:.08em;padding:3px 9px;border-radius:4px;
+    background:rgba(176,58,46,.08);color:var(--red);border:1px solid rgba(176,58,46,.18);
+    white-space:nowrap;
+  }
+  .lvl.gold{background:rgba(168,130,63,.1);color:var(--gold);border-color:rgba(168,130,63,.25)}
+  .lvl.teal{background:rgba(61,107,99,.09);color:var(--teal);border-color:rgba(61,107,99,.22)}
+  .lvl.gray{background:rgba(43,38,34,.05);color:var(--ink-2);border-color:var(--line)}
+  .when{
+    margin-left:auto;font-size:12px;letter-spacing:.02em;color:var(--ink-3);
+    white-space:nowrap;font-variant-numeric:tabular-nums;
+  }
+  .when.hot{color:var(--red);font-weight:600}
+  .when.soon{color:var(--gold);font-weight:600}
+  .card h3{
+    font-family:"Songti SC","STSong","Source Han Serif SC",serif;
+    font-size:21px;font-weight:700;letter-spacing:.03em;line-height:1.4;margin-bottom:12px;
+  }
+  .meta{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:13.5px;color:var(--ink-2)}
+  .meta dt{color:var(--ink-3);letter-spacing:.06em;font-size:12.5px;padding-top:1px}
+  .meta dd{font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+  .meta dd .big{color:var(--ink);font-weight:600}
+  .desc{margin-top:13px;padding-top:13px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink-2);line-height:1.78}
+  .float-tag{display:inline-block;margin-top:10px;font-size:11.5px;color:var(--ink-3);background:rgba(43,38,34,.04);border-radius:4px;padding:2px 8px}
+
+  /* ---------- 次级区 ---------- */
+  .aside{margin-top:38px}
+  .aside h4{
+    font-size:13px;letter-spacing:.18em;color:var(--ink-3);font-weight:600;
+    display:flex;align-items:center;gap:12px;margin-bottom:14px;
+  }
+  .aside h4::after{content:"";flex:1;height:1px;background:var(--line)}
+  .minilist{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+  .mini{
+    display:flex;gap:12px;align-items:baseline;
+    background:rgba(255,253,248,.7);border:1px solid var(--line-2);border-radius:11px;
+    padding:12px 14px;font-size:13.5px;transition:border-color .18s,background .18s;
+  }
+  .mini:hover{border-color:rgba(176,58,46,.2);background:#fffdf8}
+  .mini .d{color:var(--red);font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;font-size:13px}
+  .mini .n{color:var(--ink);font-weight:600}
+  .mini .p{color:var(--ink-3);font-size:12.5px}
+
+  .empty{
+    text-align:center;padding:54px 20px;color:var(--ink-3);
+    border:1px dashed var(--line);border-radius:16px;margin-top:22px;
+  }
+  .empty .ico{font-size:34px;opacity:.5;margin-bottom:10px}
+
+  footer{
+    margin-top:60px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--ink-3);line-height:1.9;
+  }
+  footer b{color:var(--ink-2);font-weight:600}
+
+  @media (max-width:640px){
+    h1{font-size:30px;letter-spacing:.1em}
+    header{padding:38px 0 14px}
+    .wrap{padding:0 16px 60px}
+    .panel{position:static;padding:16px}
+    .fields{gap:10px}
+    .field{flex:1 1 100%;min-width:0}
+    .go{width:100%;margin-top:2px}
+    .lunar-hint{margin-left:0;width:100%;text-align:left}
+    .card h3{font-size:19px}
+    .grid{grid-template-columns:1fr}
+    .status{flex-direction:column;gap:8px}
+    .status .badge{align-self:flex-start;margin-top:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="stamp">非 遗 日 历</div>
+    <h1>身边<em>的</em>非遗</h1>
+    <p class="sub">选一个日子、一个省份，看看那天中国大地上正在发生的节俗</p>
+  </header>
+
+  <section class="panel">
+    <div class="fields">
+      <div class="field" style="flex:1 1 200px">
+        <label for="date">日期</label>
+        <input type="date" id="date">
+      </div>
+      <div class="field" style="flex:1 1 200px">
+        <label for="prov">省份</label>
+        <select id="prov"></select>
+      </div>
+      <button class="go" id="go">查 找</button>
+    </div>
+    <div class="quick" id="quick">
+      <button class="chip" data-off="0">今天</button>
+      <button class="chip" data-off="7">一周后</button>
+      <button class="chip" data-off="30">一个月后</button>
+      <button class="chip" data-off="-15">半个月前</button>
+      <span class="lunar-hint" id="lunarHint"></span>
+    </div>
+  </section>
+
+  <div id="out"></div>
+
+  <footer>
+    <b>关于数据</b>　农历日期按紫金历换算，节气（清明、夏至）按天文公式推算，覆盖 <span id="yr"></span> 年。
+    雪顿节依藏历六月三十、开斋节与古尔邦节依伊斯兰历推算，公历日期每年浮动，卡片上已标注「约」。<br>
+    <b>关于匹配</b>　先按「日期 + 省份」精确查找；找不到则保留日期、放宽地域（时间优先）；仍找不到则保留省份、放宽到未来三个月（地域优先）。
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+
+/* ---------- 省份 ---------- */
+const PROVS = ["北京市","天津市","河北省","山西省","内蒙古自治区","辽宁省","吉林省","黑龙江省",
+"上海市","江苏省","浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省",
+"广东省","广西壮族自治区","海南省","重庆市","四川省","贵州省","云南省","西藏自治区",
+"陕西省","甘肃省","青海省","宁夏回族自治区","新疆维吾尔自治区","香港特别行政区","澳门特别行政区","台湾省"];
+
+/* ---------- 工具 ---------- */
+const DAY = 86400000;
+const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const diff = (a,b) => Math.round((a - b) / DAY);
+const MON = ["正","二","三","四","五","六","七","八","九","十","冬","腊"];
+const DAYN = ["初一","初二","初三","初四","初五","初六","初七","初八","初九","初十",
+              "十一","十二","十三","十四","十五","十六","十七","十八","十九","二十",
+              "廿一","廿二","廿三","廿四","廿五","廿六","廿七","廿八","廿九","三十"];
+const WK = ["日","一","二","三","四","五","六"];
+
+function lunarOf(date){
+  const t = ymd(date);
+  const ms = DATA.lunarMonths;
+  let idx = -1;
+  for (let i=0;i<ms.length;i++){ if (ms[i].d <= t) idx = i; else break; }
+  if (idx < 0) return null;
+  const m = ms[idx];
+  const start = parse(m.d);
+  const day = diff(date, start) + 1;
+  if (day < 1 || day > 30) return null;
+  return (m.l ? "闰" : "") + MON[m.m-1] + "月" + (DAYN[day-1] || "");
+}
+
+function fmtRange(s, e){
+  const a = parse(s), b = parse(e);
+  const sameY = a.getFullYear() === b.getFullYear();
+  const f = d => `${d.getMonth()+1}月${d.getDate()}日`;
+  if (s === e) return `${a.getFullYear()}年${f(a)}`;
+  if (!sameY) return `${a.getFullYear()}年${f(a)} — ${b.getFullYear()}年${f(b)}`;
+  return `${a.getFullYear()}年${f(a)} — ${f(b)}`;
+}
+
+function relText(dist, s, e, D){
+  if (dist === 0){
+    const total = diff(parse(e), parse(s)) + 1;
+    if (total === 1) return { t:"就是今天", cls:"hot" };
+    const n = diff(D, parse(s)) + 1;
+    return { t:`进行中 · 第 ${n}/${total} 天`, cls:"hot" };
+  }
+  if (dist > 0) return { t: dist === 1 ? "明天开始" : `${dist} 天后开始`, cls: dist <= 14 ? "soon" : "" };
+  return { t: dist === -1 ? "昨天结束" : `已结束 ${-dist} 天`, cls:"" };
+}
+
+function lvlClass(l){
+  if (l.indexOf("人类") >= 0) return "gold";
+  if (l.indexOf("国家级") >= 0) return "";
+  if (l.indexOf("省级") >= 0) return "teal";
+  return "gray";
+}
+
+/* ---------- 匹配 ---------- */
+function nearest(ev, D){
+  let best = null;
+  for (const r of ev.dates){
+    const s = parse(r.s), e = parse(r.e);
+    let dist = 0;
+    if (D < s) dist = diff(s, D);
+    else if (D > e) dist = -diff(D, e);
+    if (!best || Math.abs(dist) < Math.abs(best.dist)) best = { s:r.s, e:r.e, dist };
+  }
+  return best;
+}
+
+function search(dateStr, prov){
+  const D = parse(dateStr);
+  const all = DATA.events.map(ev => {
+    const nb = nearest(ev, D);
+    return Object.assign({}, ev, nb, {
+      inProv: !prov || ev.provs.length === 0 || ev.provs.includes(prov)
+    });
+  }).filter(x => x.s);
+
+  const rank = x => x.dist === 0 ? 0 : (x.dist > 0 ? 1 : 2);
+  const byDist = (a,b) => rank(a) - rank(b)
+    || (a.dist > 0 && b.dist > 0 ? a.dist - b.dist : 0)
+    || (a.dist < 0 && b.dist < 0 ? b.dist - a.dist : 0);
+
+  // 1. 日期 + 省份
+  const exact = all.filter(x => x.inProv && x.dist >= -7 && x.dist <= 21).sort(byDist);
+  if (exact.length) return { mode:"exact", items:exact.slice(0,9), all, prov, D };
+
+  // 2. 时间优先：放宽地域
+  const byTime = all.filter(x => x.dist >= -14 && x.dist <= 30).sort(byDist);
+  if (byTime.length) return { mode:"time", items:byTime.slice(0,9), all, prov, D };
+
+  // 3. 地域优先：本地未来三个月
+  const byRegion = all.filter(x => x.inProv && x.dist >= 0 && x.dist <= 92).sort((a,b)=>a.dist-b.dist);
+  if (byRegion.length) return { mode:"region", items:byRegion.slice(0,9), all, prov, D };
+
+  // 4. 兜底：全国未来半年
+  const far = all.filter(x => x.dist >= 0 && x.dist <= 180).sort((a,b)=>a.dist-b.dist);
+  return { mode:"far", items:far.slice(0,9), all, prov, D };
+}
+
+/* ---------- 渲染 ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function card(x, i){
+  const rel = relText(x.dist, x.s, x.e, parse(curDate));
+  const provName = x.provs.length === 1 ? x.provs[0] : "";
+  return `
+  <article class="card" style="animation-delay:${i*55}ms">
+    <div class="card-top">
+      <span class="seal">${x.icon}</span>
+      <span class="lvl ${lvlClass(x.level)}">${esc(x.level)}</span>
+      <span class="when ${rel.cls}">${rel.t}</span>
+    </div>
+    <h3>${esc(x.name)}</h3>
+    <dl class="meta">
+      <dt>农历</dt><dd>${esc(x.lunar)}</dd>
+      <dt>公历</dt><dd><span class="big">${fmtRange(x.s, x.e)}</span></dd>
+      <dt>地点</dt><dd>${provName ? esc(provName) + " · " : ""}${esc(x.place)}</dd>
+      <dt>类别</dt><dd>${esc(x.cat)}</dd>
+    </dl>
+    <p class="desc">${esc(x.desc)}</p>
+    ${x.floating ? `<span class="float-tag">日期浮动 · ${esc(x.floatNote||"按历法推算")}</span>` : ""}
+  </article>`;
+}
+
+function mini(x){
+  const rel = relText(x.dist, x.s, x.e, parse(curDate));
+  const d = parse(x.s);
+  return `<div class="mini">
+    <span class="d">${d.getMonth()+1}/${d.getDate()}</span>
+    <span><span class="n">${esc(x.name)}</span><br><span class="p">${esc(x.place)} · ${rel.t}</span></span>
+  </div>`;
+}
+
+function render(res){
+  const out = $("#out");
+  const provLabel = res.prov || "全国";
+  const D = res.D;
+  const ds = `${D.getMonth()+1}月${D.getDate()}日`;
+  let status = "", aside = "";
+
+  if (res.mode === "exact"){
+    status = `<div class="status"><span class="badge">精确匹配</span>
+      <p>以 <b>${esc(ds)}</b> 为中心（前 7 天至后 3 周内），${esc(provLabel)}有 <em>${res.items.length}</em> 项非遗活动正在进行、即将开始或刚刚结束。</p></div>`;
+    if (res.prov){
+      const seen = new Set(res.items.map(x => x.id));
+      const more = res.all.filter(x => x.inProv && x.dist > 21 && x.dist <= 92 && !seen.has(x.id))
+                          .sort((a,b)=>a.dist-b.dist);
+      if (more.length){
+        aside = `<div class="aside"><h4>再往后看看 · ${esc(provLabel)}未来三个月</h4>
+          <div class="minilist">${more.slice(0,6).map(mini).join("")}</div></div>`;
+      }
+    }
+  } else if (res.mode === "time"){
+    const top = res.items[0];
+    const tp = top.provs.length ? top.provs[0] : "全国";
+    const head = res.prov
+      ? `虽然 <b>${esc(provLabel)}</b> 近期没有非遗活动，但可以看看`
+      : `这段时间前后，全国没有正在进行的活动。最近的一场是`;
+    status = `<div class="status mode-time"><span class="badge">时间优先</span>
+      <p>${head} <em>${esc(tp)}</em> 的 <em>${esc(top.name)}</em>——${esc(relText(top.dist, top.s, top.e, D).t)}，${esc(top.lunar)}。</p></div>`;
+    const local = res.all.filter(x => x.inProv && x.dist >= 0 && x.dist <= 92).sort((a,b)=>a.dist-b.dist);
+    if (local.length){
+      aside = `<div class="aside"><h4>顺带看看 · ${esc(provLabel)}未来三个月</h4>
+        <div class="minilist">${local.slice(0,6).map(mini).join("")}</div></div>`;
+    }
+  } else if (res.mode === "region"){
+    const top = res.items[0];
+    const tail = `<em>${esc(top.name)}</em>（${esc(fmtRange(top.s, top.e))}，${esc(top.lunar)}），还有 <em>${top.dist}</em> 天`;
+    status = `<div class="status mode-region"><span class="badge">地域优先</span>
+      <p>近期各地都没有非遗活动举办。${res.prov ? esc(provLabel) + "的下一场是" : "最近的一场是"} ${tail}。</p></div>`;
+  } else if (res.mode === "far"){
+    const top = res.items[0];
+    status = `<div class="status mode-none"><span class="badge">暂无近期活动</span>
+      <p>这个时间段前后，全国都没有正在进行的非遗活动。最接近的是 <em>${esc(top.name)}</em>
+      （${esc(top.place)}，${esc(relText(top.dist, top.s, top.e, D).t)}）。换个日期试试？</p></div>`;
+  } else {
+    out.innerHTML = `<div class="empty"><div class="ico">🍃</div>
+      这个日期不在数据覆盖范围内（${DATA.range[0]}–${DATA.range[1]}），换一年试试。</div>`;
+    return;
+  }
+
+  const cards = res.items.map(card).join("");
+  out.innerHTML = status + `<div class="grid">${cards}</div>` + aside;
+}
+
+/* ---------- 交互 ---------- */
+let curDate = ymd(new Date());
+
+function run(){
+  if ($("#date").value) curDate = $("#date").value;
+  const res = search(curDate, $("#prov").value);
+  render(res);
+  const lu = lunarOf(parse(curDate));
+  const d = parse(curDate);
+  $("#lunarHint").innerHTML = `农历 <b>${lu || "—"}</b> · 星期${WK[d.getDay()]}`;
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+  try{
+    const u = new URL(location.href);
+    u.searchParams.set("date", curDate);
+    if ($("#prov").value) u.searchParams.set("prov", $("#prov").value);
+    else u.searchParams.delete("prov");
+    history.replaceState(null, "", u);
+  }catch(e){}
+}
+
+function init(){
+  const sel = $("#prov");
+  sel.innerHTML = `<option value="">全部地区</option>` + PROVS.map(p=>`<option value="${p}">${p}</option>`).join("");
+  $("#date").value = curDate;
+  $("#date").min = `${DATA.range[0]}-01-01`;
+  $("#date").max = `${DATA.range[1]}-12-31`;
+  $("#yr").textContent = `${DATA.range[0]}–${DATA.range[1]}`;
+
+  // 支持 ?date=2026-10-25&prov=广东省 直接定位
+  try{
+    const qs = new URLSearchParams(location.search);
+    if (qs.get("date")) { curDate = qs.get("date"); $("#date").value = curDate; }
+    if (qs.get("prov")) { sel.value = qs.get("prov"); }
+  }catch(e){}
+
+  $("#go").addEventListener("click", run);
+  $("#date").addEventListener("change", e => { if(e.target.value){ curDate = e.target.value; run(); }});
+  sel.addEventListener("change", run);
+  $("#quick").addEventListener("click", e => {
+    const b = e.target.closest(".chip");
+    if (!b) return;
+    const off = parseInt(b.dataset.off, 10);
+    const d = new Date(); d.setDate(d.getDate() + off);
+    curDate = ymd(d);
+    $("#date").value = curDate;
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+    b.classList.add("on");
+    run();
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+    b.classList.add("on");
+  });
+  run();
+}
+init();
+</script>
+</body>
+</html>

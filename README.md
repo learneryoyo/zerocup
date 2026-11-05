@@ -6,6 +6,8 @@
 六色块方案完整保留在 `site/home-mosaic.html`，后续可用于第二页；相关工程说明见 `docs/mosaic-design.md`。
 前端运行与协作方式见 `docs/frontend.md`，既有分类资料均保留。
 
+**非遗日历**（按日期 + 省份查全国节俗）的成品、源码与数据在 `heritage-calendar/`，说明见该目录的 `README.md`，可直接取用。
+
 ---
 
 ## 参赛信息
