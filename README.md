@@ -8,6 +8,54 @@
 
 ---
 
+## 参赛信息
+
+### 组内成员
+
+<!-- BEGIN-MEMBERS -->
+
+| 姓名 | 学院 | 负责页面 |
+|---|---|---|
+| 待填 | 待填 | 首页、非遗辑录 |
+| 待填 | 待填 | 器物、戏曲 |
+| 待填 | 待填 | 舞蹈、食物 |
+| 待填 | 待填 | 节日、古艺新生、关于我们 |
+
+<!-- END-MEMBERS -->
+
+### 非自己编写的库与用途
+
+| 库 | 版本 | 用途 | 引入方式 |
+|---|---|---|---|
+| 无 | — | 全站 HTML / CSS / JavaScript 均为手写，未引入任何第三方库、框架、字体或 CDN 资源 | — |
+
+全站无 `package.json`、无 `node_modules`、无外部 `<script src>`、无 `@import`。
+开发阶段用于截图核对与图片压缩的工具（Playwright / Sharp）不进入提交网站，也不作为运行依赖。
+
+### 界面规格
+
+- 基准分辨率：**1440px**
+- 自适应：**是**（另适配 1920px、720px 两档；移动端 390px 另做响应式）
+- 目标运行环境：**Chrome 129**
+- 无需构建，双击 HTML 即可打开；未使用 `fetch`、ES Module，不受 `file://` 跨域限制
+
+### 项目说明
+
+参赛主题：**主题二「匠心传承，非遗焕新」**。
+
+站点是一个非遗数字展馆，四层结构：
+
+| 页 | 内容 |
+|---|---|
+| 首页 | 双图首屏 + 四分类入口 + 非遗子页容器 |
+| 非遗辑录 | 天工开物 / 瓦舍勾栏 / 四时有节 / 寻味山河四组，卡片与轮播联动 |
+| 分类页 | 器物、戏曲、舞蹈、食物、节日，按「工艺—工序—人」三层组织，逐图标注摄影者与来源机构 |
+| 古艺新生 | 30 个非遗创新案例，柜台 / 分类两种视图，五条路径筛选，六座可叩启的玻璃展柜 |
+
+所有图片均标注摄影者与来源机构，汇总表见 `docs/sources.md`。
+
+---
+
 ## 一、页面结构
 
 | # | 页面 | 文件 |
@@ -29,7 +77,7 @@
 其他三个分类的子项还没定。
 
 **节日页已经有内容了**：五个项目（送王船 / 苗族姊妹节 / 罗坊走古事 / 水族端节 / 双庙渚蚕花水会），
-文字和素材来源见 `docs/festival.md`，图片在 `site/category/festival/`，还没插进页面。
+文字和素材来源见 `docs/festival.md`，图片在 `site/category/festival/`，已插入页面。
 
 ---
 
@@ -39,28 +87,34 @@
 zerocup/
 ├── README.md              ← 你正在看的
 ├── git-manual.md          ← Git 傻瓜手册，没碰过 Git 的先看这个
+├── package.py             ← 打包成比赛要的两个 zip
 ├── site/                  ← 网站本体，最后交的就是这个文件夹
-│   ├── index.html
-│   ├── heritage.html
-│   ├── revival.html
-│   ├── about.html
-│   ├── template.html      ← 新页面从它复制
+│   ├── index.html         ← 首页
+│   ├── home-mosaic.html   ← 六色块备选首页（无入链，不进提交包）
+│   ├── heritage.html      ← 非遗辑录
+│   ├── revival.html       ← 古艺新生
+│   ├── about.html         ← 关于我们
+│   ├── template.html      ← 新页面从它复制（不进提交包）
+│   ├── assets/
+│   │   ├── css/           ← 全站手写样式，无第三方
+│   │   ├── js/            ← 全站手写脚本，无第三方
+│   │   └── images/        ← 首页、非遗辑录、古艺新生的图
 │   ├── category/
-│   │   ├── objects.html
-│   │   ├── opera.html
-│   │   ├── dance.html
-│   │   ├── food.html
-│   │   ├── festival.html
-│   │   └── festival/      ← 节日页的 25 张照片 + 5 段动图（约 28 MB）
-│   │       ├── songwangchuan/
-│   │       ├── miao-zimeijie/
-│   │       ├── luofang-zougushi/
-│   │       ├── shuizu-duanjie/
-│   │       └── canhua-shuihui/
-└── docs/
-    ├── sources.md         ← 资料出处表，每写一条内容就记一行
-    └── festival.md        ← 节日页五个项目的完整资料（署名、来源、素材对照）
+│   │   ├── index.html     ← 分类资料入口
+│   │   ├── objects.html   + objects/    ← 器物
+│   │   ├── opera.html     + opera/      ← 戏曲
+│   │   ├── dance.html                   ← 舞蹈
+│   │   ├── food.html      + food/       ← 食物
+│   │   └── festival.html  + festival/   ← 节日
+│   └── heritage/          ← 非遗子页（iframe 内容页，无独立导航）
+│       ├── ceramics.html
+│       ├── woodblock-print.html
+│       └── template.html
+├── docs/                  ← 设计文档与出处表
+└── prototypes/            ← 小游戏原型（无入链，不进提交包）
 ```
+
+> 素材约定：分类页的图放在 `site/category/<页面名>/`，和对应的 `.html` 同级。
 
 ---
 
@@ -79,6 +133,9 @@ zerocup/
 | 节日 | `site/category/festival.html` | 待填 |
 | 古艺新生 | `site/revival.html` | 待填 |
 | 关于我们 | `site/about.html` | 待填 |
+
+> 这张表是**对内**用的，填 GitHub 账号名或昵称都行。
+> 比赛要交的「组内成员」表在上方「参赛信息」里，那一份要填**真实姓名和学院**，别漏。
 
 ---
 
@@ -134,19 +191,41 @@ git push          # 3. 推上去
 - 禁止使用预设样式的组件库（Bootstrap、Element UI 等）；功能性库允许，但要注明用途
 - 评分：标准分 + 加分项；所供规则说明未列明具体分值。
 
-## 八、第二页实现与界面规格
+## 八、第二页实现说明
 
 `site/heritage.html` 已接入四分类与联动轮播：天工开物、瓦舍勾栏、四时有节、寻味山河。
 以 Claude Cowork 最新四分类对话为准，原五分类设计文档保留。交接与检查记录见 `docs/heritage-implementation.md`。
 
-- 基准分辨率：1440px；自适应：是。
-- 目标运行环境：Chrome 129；无需构建，可直接打开 HTML。
-- 第二页使用四组共 21 张轮播照片，WebP 优化，后续图片按需加载。
+第二页使用四组共 21 张轮播照片，WebP 优化，非首屏图片按需加载。
+图片来源、署名与许可见 `site/assets/images/heritage/README.md`。
 
-### 非自己编写的库与用途（第二页）
+界面规格与库清单统一见上方「参赛信息」，此处不再重复。
 
-| 库 | 版本 | 用途 | 引入方式 |
-|---|---|---|---|
-| 无 | — | 页面使用原生 HTML/CSS/JS | — |
+---
 
-开发检查与图片优化使用 Playwright / Sharp，不进入提交网站、不作为运行依赖。图片来源、署名与许可见 `site/assets/images/heritage/README.md`。全站其他页面如有新增依赖，由相应负责人补充。
+## 九、打包提交
+
+仓库根目录的 `package.py` 一键生成手册要求的两个压缩包：
+
+```bash
+python package.py --team 海底小纵队 --captain 队长姓名 --names 姓名1,姓名2,姓名3
+```
+
+产出在 `dist/`（已被 `.gitignore` 排除，不会进仓库）：
+
+```
+dist/零杯零组-队伍名-队长姓名.zip
+├── 2026-零杯零组-队伍名-队长姓名-完整版本.zip
+└── 2026-零杯零组-队伍名-队长姓名-匿名版本.zip
+```
+
+脚本自动做四件事：
+
+| 步骤 | 说明 |
+|---|---|
+| 排除 | `.git`、`git-manual.md`、`prototypes/`、模板页、`home-mosaic.html` 不进包 |
+| 剥 EXIF | 所有图片去掉相机型号 / GPS / 作者字段 |
+| 匿名化 | 删掉 README 里的 `<!-- BEGIN-MEMBERS -->` 到 `<!-- END-MEMBERS -->` 整段 |
+| 回扫 | 打包后在包内搜成员姓名、邮箱、手机号，命中姓名就报错中止 |
+
+**提交前务必**把「参赛信息」里的成员表填成真实姓名和学院——匿名版靠那两个注释标记来删，标记别删掉。

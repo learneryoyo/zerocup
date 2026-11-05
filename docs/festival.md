@@ -1,7 +1,7 @@
 # 民俗节庆 · 五个项目的文字与素材
 
 > 对应页面：`site/category/festival.html`
-> 素材位置：`site/category/festival/<项目>/`（`photo-01.jpg` … `photo-05.jpg`、`clip.gif`、`clip.mp4`）
+> 素材位置：`site/category/festival/<项目>/`（`photo-01.jpg` … `photo-05.jpg`、`clip.mp4`）
 > 原始资料：`D:\work\chatgpt\零杯\民俗节庆\民俗节庆\00_民俗节庆_文字介绍与素材来源.txt`（2026-10-25 整理）
 >
 > **版权**：素材版权归原作者及发布机构所有。公开发布或商业使用前请确认授权。
@@ -36,7 +36,7 @@
 | `photo-04.jpg` | 开斧仪式：造船筹备的开端 | 2025-10-02 | 林铭鸿／厦门日报（东南网转载） | https://xm.fjsen.com/wap/2025-10/03/content_32052393.htm |
 | `photo-05.jpg` | 王船化吉，火焰中的送行 | 2025-12-14 | 林铭鸿／厦门日报 | https://xm.cnr.cn/jdt/20251216/t20251216_527461080.shtml |
 
-**动态素材**　`clip.gif` / `clip.mp4`：巡境队伍与王船风帆，约 4 秒。
+**动态素材**　`clip.mp4`：巡境队伍与王船风帆，约 4 秒。
 2024-08-16（报道；含资料画面）｜署名：中国新闻网｜原片截取 00:23—00:27
 https://www.chinanews.com/cul/shipin/cns/2024/08-16/news997423.shtml
 
@@ -68,7 +68,7 @@ https://www.chinanews.com/cul/shipin/cns/2024/08-16/news997423.shtml
 | `photo-04.jpg` | 庆祝活动中的击鼓场面 | 2025-04-12 | 刘续／新华社 | 同上 |
 | `photo-05.jpg` | 万人相聚的节庆空间（航拍） | 2025-04-12 | 陶亮／新华社 | 同上 |
 
-**动态素材**　`clip.gif` / `clip.mp4`：盛装巡游中的银饰与步伐，约 4 秒。
+**动态素材**　`clip.mp4`：盛装巡游中的银饰与步伐，约 4 秒。
 2026-05-03（报道）｜署名：央视新闻｜原片截取 00:29—00:33
 https://tv.cctv.com/2026/05/03/VIDE2iiBY9Va4MTcBzQyaDOZ260503.shtml
 
@@ -100,7 +100,7 @@ https://tv.cctv.com/2026/05/03/VIDE2iiBY9Va4MTcBzQyaDOZ260503.shtml
 | `photo-04.jpg` | 古事棚穿行屋瓦之间 | 2026-03-02 | 中新社记者 张斌 | 同上 |
 | `photo-05.jpg` | 古事棚在罗氏始祖祠前集中 | 2026-03-02 | 中新社记者 张斌 | 同上 |
 
-**动态素材**　`clip.gif` / `clip.mp4`：抬棚涉水，4 秒循环。
+**动态素材**　`clip.mp4`：抬棚涉水，4 秒循环。
 2026-09-30（发布；画面拍摄年份未注明）｜署名：福建省住房和城乡建设厅／《村庄里的中国》｜原片截取 03:41—03:45
 https://zjt.fujian.gov.cn/gzcy/spjj/fjctcl/202609/t20260930_7220459.htm
 
@@ -131,7 +131,7 @@ https://zjt.fujian.gov.cn/gzcy/spjj/fjctcl/202609/t20260930_7220459.htm
 | `photo-04.jpg` | 开端大典：水书先生祭祀 | 2025-10-01 | 同上 | 同上 |
 | `photo-05.jpg` | 端节全国赛马邀请赛开赛 | 2025-10-01 | 同上 | 同上 |
 
-**动态素材**　`clip.gif` / `clip.mp4`：骑手策马绕弯、奔向端坡，4 秒循环。
+**动态素材**　`clip.mp4`：骑手策马绕弯、奔向端坡，4 秒循环。
 2026-10-19（发布）／2026-10-17（活动）｜署名：中国新闻网／罗朝兵｜原片截取 00:14—00:18，安塘村端节赛马
 https://www.chinanews.com/sh/shipin/2026/10-19/news1072247.shtml
 
@@ -163,7 +163,7 @@ https://www.chinanews.com/sh/shipin/2026/10-19/news1072247.shtml
 | `photo-04.jpg` | 龙舟与岸边观众 | 2025-04-04 | 同上 | 同上 |
 | `photo-05.jpg` | 蚕乡主题的陆上巡游 | 2025-04-04 | 同上 | 同上 |
 
-**动态素材**　`clip.gif` / `clip.mp4`：龙舟竞渡，划桨与浪花，4 秒循环。
+**动态素材**　`clip.mp4`：龙舟竞渡，划桨与浪花，4 秒循环。
 2025-04-04｜署名：潮新闻／共享联盟·桐乡｜原片截取 00:35—00:39
 https://tidenews.com.cn/news.html?id=3090707
 
