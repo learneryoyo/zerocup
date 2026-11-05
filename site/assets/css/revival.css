@@ -198,3 +198,67 @@
 /* 用户截图的显示裁切：完整保留产品比例，隐藏黑边和界面按钮。 */
 .rv-cropped-image { position: absolute; z-index: 1; inset: 12px; width: calc(100% - 24px); height: calc(100% - 24px); overflow: hidden; }
 .rv-detail-media > .rv-cropped-image { inset: 18px; width: calc(100% - 36px); height: calc(100% - 36px); }
+
+/* 苗绣来信：绣片在玻璃之后，碎窗后旧艺进入日常。 */
+.vt-miao .vt-slot { left: 18%; right: 18%; top: 17%; height: 57%; pointer-events: none; }
+.vt-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 650ms ease, transform 900ms cubic-bezier(.2,.7,.2,1), filter 800ms ease; }
+.vt-old-art { filter: saturate(.63) contrast(.92) brightness(.92) drop-shadow(0 7px 5px #422e3945); }
+.vt-new-art { opacity: 0; transform: translateY(12px) scale(.76) rotate(-8deg); filter: saturate(.8) drop-shadow(0 8px 5px #422e3940); }
+.vt-featured.is-open .vt-old-art { opacity: 0; transform: scale(.82) rotate(9deg); }
+.vt-featured.is-open .vt-new-art { opacity: 1; transform: none; transition-delay: 250ms; }
+.vt-reflection { position: absolute; left: 10.3%; right: 10.3%; top: 8.2%; bottom: 14.3%; pointer-events: none; background: linear-gradient(115deg, #c8e2e50d 5%, #ffffff30 24%, #ffffff08 25%, transparent 42%, #ffffff38 43%, #ffffff16 47%, transparent 48%), linear-gradient(160deg, #b6cedc18, #69859912); box-shadow: inset 1px 1px 1px #ffffff55, inset -1px -1px 2px #74909430; transition: opacity 200ms ease; }
+.vt-featured.is-open .vt-reflection { opacity: 0; }
+.vt-featured.is-open .vt-window { cursor: pointer; }
+.vt-caption { display: block; text-align: center; color: var(--rv-muted); font: 11px/1.6 var(--serif); letter-spacing: .08em; }
+.miao-postcard { width: min(880px, calc(100vw - 32px)); max-width: none; max-height: 90dvh; padding: 12px; overflow: auto; border: 1px solid #b5a48b; color: #524337; background: #f1e9da; box-shadow: 0 24px 100px #21150e66; }
+.miao-postcard::backdrop { background: #30271f88; backdrop-filter: blur(5px); }
+.miao-postcard[open] { animation: miao-arrive 500ms ease both; }
+.miao-postcard-layout { display: grid; grid-template-columns: .92fr 1.08fr; border: 1px solid #ac94744d; background-image: repeating-linear-gradient(0deg, transparent 0 3px, #9a754103 3px 4px); }
+.miao-postcard-art { display: flex; flex-direction: column; justify-content: center; padding: 28px 20px; background: radial-gradient(ellipse, #e4d9bd88, transparent 70%), #e4dfcf; text-align: center; }
+.miao-edition { font-size: 10px; letter-spacing: .16em; color: #776e59; }
+.miao-postcard-art > img { width: 100%; height: 310px; object-fit: contain; margin: 22px 0 10px; filter: saturate(.78) drop-shadow(4px 12px 8px #66573924); }
+.miao-postcard-art > p { font: 20px/1.7 var(--serif); margin: 10px 0; }
+.miao-art-caption { font-size: 11px; letter-spacing: .25em; color: #81735e; }
+.miao-postcard-letter { position: relative; margin: 24px 0; padding: 72px 30px 6px; border-left: 1px solid #ac947455; font: 13px/1.9 var(--serif); }
+.miao-postcard-letter h2 { margin: 4px 0 12px; font-size: 30px; font-weight: 500; letter-spacing: .12em; color: #694136; }
+.miao-postcard-kicker { margin: 0; font: 10px/1.4 sans-serif; letter-spacing: .16em; color: #92775d; }
+.miao-address { padding-bottom: 12px; border-bottom: 1px solid #ac94744d; font-size: 12px; }
+.miao-stamp { position: absolute; top: 0; right: 24px; width: 58px; padding: 4px; border: 2px dotted #a68e70; text-align: center; background: #f8f2e7; transform: rotate(7deg); }
+.miao-stamp img { width: 42px; height: 42px; object-fit: contain; filter: saturate(.6); }
+.miao-stamp span { display: block; font-size: 9px; line-height: 1.2; }
+.miao-postmark { position: absolute; top: 0; right: 82px; z-index: 1; padding: 10px 5px; border: 2px solid #90403877; border-radius: 50%; color: #904038aa; font-size: 12px; line-height: 1.5; text-align: center; transform: rotate(-15deg); }
+.miao-postmark small { font-size: 9px; }
+.miao-facts { margin: 16px 0; }
+.miao-facts > div { display: grid; grid-template-columns: 34px 1fr; gap: 10px; margin: 10px 0; }
+.miao-facts dt { color: #904038; }
+.miao-facts dd { margin: 0; font-size: 12px; }
+.miao-signature { color: #805143; text-align: right; }
+.miao-signature span { font-size: 11px; }
+.miao-sources { margin-top: 22px; font: 10px/1.7 sans-serif; color: #827666; }
+.miao-sources summary { cursor: pointer; }
+.miao-sources a { color: #805143; text-underline-offset: 3px; }
+.miao-close { position: absolute; z-index: 3; top: 5px; right: 5px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: #f8f2e7; color: #805143; font-size: 23px; cursor: pointer; }
+.miao-close:focus-visible { outline: 2px solid #904038; outline-offset: 2px; }
+@keyframes miao-arrive { from { opacity: 0; transform: translateY(30px) rotate(-2deg); } to { opacity: 1; transform: none; } }
+@media (max-width: 600px) { .miao-postcard { padding: 8px; } .miao-postcard-layout { grid-template-columns: 1fr; } .miao-postcard-art { padding: 20px 16px; } .miao-postcard-art > img { height: 190px; margin: 10px 0; } .miao-postcard-art > p { font-size: 18px; } .miao-postcard-letter { margin: 0 16px; padding: 100px 4px 20px; border-left: 0; border-top: 1px solid #ac947455; } .miao-stamp, .miao-postmark { top: 18px; } }
+@media (prefers-reduced-motion: reduce) { .vt-slot img, .vt-reflection { transition: none; } .miao-postcard[open] { animation: none; } }
+
+/* 芜湖铁画：镂空铁线、玻璃反光与焕新后的暖光。 */
+.vt-iron .vt-slot { left: 19%; right: 19%; top: 16%; height: 58%; pointer-events: none; }
+.vt-iron .vt-old-art { filter: saturate(.58) contrast(.9) drop-shadow(2px 4px 2px #43342638); }
+.vt-iron .vt-new-art { filter: saturate(.83) brightness(1.03) drop-shadow(0 4px 3px #6e482b44); }
+.vt-lamp-glow { display: none; }
+.vt-iron .vt-lamp-glow { display: block; position: absolute; inset: 9% -11% -8%; opacity: 0; background: radial-gradient(ellipse, #ffedb77d 0%, #ffc76838 39%, transparent 69%); filter: blur(7px); transform: scale(.7); transition: opacity 1.2s ease .35s, transform 1.2s ease .35s; }
+.vt-iron.is-open .vt-lamp-glow { opacity: 1; transform: scale(1); }
+.iron-postcard .miao-postcard-art { background: radial-gradient(ellipse at 50% 45%, #ffe2a1aa 0%, #e7d9bd55 60%, transparent 80%), #e4dfcf; }
+.iron-postcard .miao-postcard-art > img { filter: saturate(.83) drop-shadow(0 0 18px #ffc96c66) drop-shadow(4px 12px 8px #66573924); }
+@media (prefers-reduced-motion: reduce) { .vt-iron .vt-lamp-glow { transition: none; } }
+
+/* 纳西七星羊皮：柔和皮革色与靛蓝色调的第三封来信。 */
+.vt-naxi .vt-slot { left: 17%; right: 17%; top: 16%; height: 59%; pointer-events: none; }
+.vt-naxi .vt-old-art { filter: saturate(.65) contrast(.94) brightness(.94) drop-shadow(0 5px 3px #493b303d); }
+.vt-naxi .vt-new-art { filter: saturate(.82) drop-shadow(0 6px 4px #493b303d); }
+.naxi-postcard .miao-postcard-art { background: radial-gradient(ellipse at 50% 42%, #f3e8d7bb, transparent 75%), #dedfd7; }
+.naxi-postcard .miao-postcard-letter h2 { font-size: clamp(23px, 3vw, 29px); letter-spacing: .06em; }
+.naxi-postcard .miao-postcard-art > p { font-size: 18px; }
+.naxi-postcard .miao-postcard-art > img { filter: saturate(.82) drop-shadow(4px 12px 8px #66573924); }

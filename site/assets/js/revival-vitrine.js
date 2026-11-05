@@ -1,4 +1,4 @@
-/* 叩启新生：六座玻璃展柜排成 2×3，叩三次碎开。展品暂留空，以后放进 .vt-slot。 */
+/* 叩启新生：六座玻璃展柜排成 2×3，叩三次碎开。前三座展柜展示苗绣、芜湖铁画与纳西七星羊皮的旧艺新用。 */
 (() => {
   'use strict';
 
@@ -7,6 +7,56 @@
   if (!stage || !reset) return;
 
   const COUNT = 6;
+  let postcardTimer;
+  const exhibits = [
+    { kind: 'miao', oldName: '苗绣', newName: '苗绣艾草锤', oldImage: 'miao-embroidery.png', newImage: 'miao-mugwort-mallet.png' },
+    { kind: 'iron', oldName: '芜湖铁画', newName: '铁画小夜灯', oldImage: 'wuhu-iron-painting.png', newImage: 'wuhu-iron-nightlight.png' },
+    { kind: 'naxi', oldName: '纳西七星羊皮披肩', newName: '纳西七星羊皮小包', oldImage: 'naxi-seven-star-cape.png', newImage: 'naxi-seven-star-bag.png' }
+  ];
+  let postcardOpener;
+  const postcard = document.createElement('dialog');
+  postcard.className = 'miao-postcard';
+  postcard.setAttribute('aria-labelledby', 'miao-postcard-title');
+  postcard.innerHTML = `
+    <button class="miao-close" type="button" aria-label="收起明信片" autofocus>×</button>
+    <article class="miao-postcard-layout">
+      <div class="miao-postcard-art">
+        <span class="miao-edition">古艺新生 · 藏品来信 / 01</span>
+        <img src="assets/images/revival/miao-mugwort-mallet.png" alt="靛蓝绣面、花卉纹样与缠线手柄组成的两支苗绣艾草锤">
+        <p>把一针一线，寄给日常。</p>
+        <span class="miao-art-caption">苗绣纹样 × 艾草锤</span>
+      </div>
+      <div class="miao-postcard-letter">
+        <div class="miao-postmark" aria-hidden="true">古艺新生<br><small>湘西 · 花垣</small></div>
+        <div class="miao-stamp" aria-hidden="true"><img src="assets/images/revival/miao-embroidery.png" alt=""><span>苗绣 · 01</span></div>
+        <p class="miao-postcard-kicker">POSTCARD / 一封非遗来信</p>
+        <h2 id="miao-postcard-title">苗绣艾草锤</h2>
+        <p class="miao-address">寄往：每一个需要慢下来的日常</p>
+        <p>你好，见字如晤。</p>
+        <p>曾装点衣裳、背被与荷包的苗绣，如今有了握在手心的新模样。花鸟与几何纹样走出展柜，包裹一团艾草，也留住针线里的生活记忆。</p>
+        <dl class="miao-facts">
+          <div><dt>旧艺</dt><dd>湘西苗绣于 2021 年列入国家级非遗代表性项目名录扩展项目，兼具装饰与实用之美。</dd></div>
+          <div><dt>新用</dt><dd>绣面、艾草、手柄与缠绳组合成日用小锤。花垣已有将手推绣与手工组装结合的生产实践。</dd></div>
+        </dl>
+        <p class="miao-signature">纹样留下来，生活焕个新。<br><span>—— 来自古艺新生的一份问候</span></p>
+        <details class="miao-sources"><summary>来信出处与图像说明</summary><p><a href="https://www.ihchina.cn/art/detail/id/23718.html" target="_blank" rel="noopener noreferrer">中国非遗网 · 湘西苗绣</a><br><a href="https://xianf.jsu.edu.cn/shsj/sxx/6275c8977eb24d59adb8bf268297ea87.htm" target="_blank" rel="noopener noreferrer">吉首大学 · 花垣苗绣实地调研（2024）</a></p><p>配图为用户提供的设计示意，未据此认定具体产地、品牌或针法；“以旧换新”表现传统纹样的当代转化，并非将旧绣实物拆改。</p></details>
+      </div>
+    </article>`;
+  const postcardTemplates = [postcard.innerHTML, "    <button class=\"miao-close\" type=\"button\" aria-label=\"收起明信片\" autofocus>×</button>\n    <article class=\"miao-postcard-layout\">\n      <div class=\"miao-postcard-art\">\n        <span class=\"miao-edition\">古艺新生 · 藏品来信 / 02</span>\n        <img src=\"assets/images/revival/wuhu-iron-nightlight.png\" alt=\"木框内绘有徽派街巷的小夜灯，暖光映亮铁画线条\">\n        <p>把一幅铁画，点成一盏晚安。</p>\n        <span class=\"miao-art-caption\">芜湖铁画 × 桌边微光</span>\n      </div>\n      <div class=\"miao-postcard-letter\">\n        <div class=\"miao-postmark\" aria-hidden=\"true\">古艺新生<br><small>安徽 · 芜湖</small></div>\n        <div class=\"miao-stamp\" aria-hidden=\"true\"><img src=\"assets/images/revival/wuhu-iron-painting.png\" alt=\"\"><span>铁画 · 02</span></div>\n        <p class=\"miao-postcard-kicker\">POSTCARD / 一封非遗来信</p>\n        <h2 id=\"miao-postcard-title\">铁画小夜灯</h2>\n        <p class=\"miao-address\">寄往：晚归时，为你亮着灯的窗</p>\n        <p>你好，见字如晤。</p>\n        <p>一枝梅、一只鸟，曾在锤与火之间化作铁的笔墨。如今，画里的线条遇见柔和灯光，徽派街巷也有了夜色中的温度。把它放在桌边，让看得见的手艺，陪伴每一个平常的夜晚。</p>\n        <dl class=\"miao-facts\">\n          <div><dt>旧艺</dt><dd>芜湖铁画锻制技艺于 2006 年入选首批国家级非遗名录。匠人以熟铁为材，经锻打、焊接等工序，让国画意境拥有立体的线条。</dd></div>\n          <div><dt>新用</dt><dd>铁画原有画灯等传统形式。这次焕新将铁画意趣与木框、暖光结合，转化为适合桌边摆放的小夜灯，让赏画融入日常照明。</dd></div>\n        </dl>\n        <p class=\"miao-signature\">铁骨藏诗意，微光照日常。<br><span>—— 来自古艺新生的一份问候</span></p>\n        <details class=\"miao-sources\"><summary>来信出处与图像说明</summary><p><a href=\"https://www.ihchina.cn/ccr_detail/14329/\" target=\"_blank\" rel=\"noopener noreferrer\">中国非遗网 · 芜湖铁画锻制技艺</a><br><a href=\"https://paper.people.com.cn/rmrbhwb/pad/content/202506/12/content_30078568.html\" target=\"_blank\" rel=\"noopener noreferrer\">人民日报海外版 · 芜湖铁画（2025）</a></p><p>配图为用户提供的焕新设计示意，未据此认定具体品牌、材质工艺或灯具参数。</p></details>\n      </div>\n    </article>\n"];
+  postcardTemplates.push("    <button class=\"miao-close\" type=\"button\" aria-label=\"收起明信片\" autofocus>×</button>\n    <article class=\"miao-postcard-layout\">\n      <div class=\"miao-postcard-art\">\n        <span class=\"miao-edition\">古艺新生 · 藏品来信 / 03</span>\n        <img src=\"assets/images/revival/naxi-seven-star-bag.png\" alt=\"以纳西七星羊皮披肩为灵感的小包与装框文创组合，保留圆饰、垂穗和黑白层次\">\n        <p>把披在肩上的星月，带在身边。</p>\n        <span class=\"miao-art-caption\">纳西七星羊皮 × 随身小包</span>\n      </div>\n      <div class=\"miao-postcard-letter\">\n        <div class=\"miao-postmark\" aria-hidden=\"true\">古艺新生<br><small>云南 · 丽江</small></div>\n        <div class=\"miao-stamp\" aria-hidden=\"true\"><img src=\"assets/images/revival/naxi-seven-star-cape.png\" alt=\"\"><span>七星 · 03</span></div>\n        <p class=\"miao-postcard-kicker\">POSTCARD / 一封非遗来信</p>\n        <h2 id=\"miao-postcard-title\">纳西七星羊皮小包</h2>\n        <p class=\"miao-address\">寄往：带着星月，走向生活的你</p>\n        <p>你好，见字如晤。</p>\n        <p>在丽江，七星羊皮披肩把星月缝进衣裳，也把勤劳与祝福留在肩上。如今，圆饰、垂穗与黑白相间的层次，化作一只随身小包。装下日常的小物，也带上一段纳西族的服饰记忆。</p>\n        <dl class=\"miao-facts\">\n          <div><dt>旧艺</dt><dd>七星羊皮披肩是纳西族传统服饰的特色部分。七个圆饰与日月装饰构成“披星戴月”的文化意象，常被赋予勤劳的寓意。</dd></div>\n          <div><dt>新用</dt><dd>将披肩的形制与装饰缩小，转为可携带、可收纳的小包。丽江已有传承人开发七星羊皮包，让传统服饰技艺走进当代生活。</dd></div>\n        </dl>\n        <p class=\"miao-signature\">星月常相伴，步履向日常。<br><span>—— 来自古艺新生的一份问候</span></p>\n        <details class=\"miao-sources\"><summary>来信出处与图像说明</summary><p><a href=\"https://www.ccdi.gov.cn/special/jtsj/jt_jtsj/201709/t20170914_107118.html\" target=\"_blank\" rel=\"noopener noreferrer\">中央纪委国家监委网站 · 纳西族服饰介绍</a><br><a href=\"https://www.lijiang.cn/news/travel/article/150926.html\" target=\"_blank\" rel=\"noopener noreferrer\">丽江网 · 七星不落：“披星戴月”的传承之旅</a></p><p>配图为用户提供的设计示意；不同款式对传统装饰有所简化，不据图认定具体品牌、皮料或制作工艺。</p></details>\n      </div>\n    </article>\n");
+  document.body.append(postcard);
+  function openPostcard(cab) {
+    window.clearTimeout(postcardTimer);
+    if (!cab.root.isConnected || !cab.root.classList.contains('is-open') || document.getElementById('rv-museum').hidden) return;
+    if (!cab.exhibit || postcard.open) return;
+    postcard.innerHTML = postcardTemplates[cab.index];
+    postcard.classList.toggle('iron-postcard', cab.exhibit.kind === 'iron');
+    postcard.classList.toggle('naxi-postcard', cab.exhibit.kind === 'naxi');
+    postcardOpener = cab.button;
+    if (!postcard.open) postcard.showModal();
+  }
+  postcard.addEventListener('click', event => { if (event.target === postcard || event.target.closest('.miao-close')) postcard.close(); });
+  postcard.addEventListener('close', () => { if (postcardOpener?.isConnected) postcardOpener.focus({ preventScroll: true }); });
   // 叠层画布 330×392 与 vitrine.png 同比例；PANE 是展柜正面玻璃的范围。
   const PANE = { l: 34, t: 32, r: 296, b: 336 };
   const GROUND = 372;
@@ -160,6 +210,12 @@
     cab.pane.remove();
     cab.cracks.replaceChildren();
     cab.button.setAttribute('aria-label', `第 ${cab.index + 1} 座展柜已打开，展品待补`);
+    if (cab.exhibit) {
+      cab.button.setAttribute('aria-label', cab.exhibit.oldName + '已焕新为' + cab.exhibit.newName + '，查看明信片');
+      cab.root.querySelector('.vt-caption').textContent = cab.exhibit.newName + ' · 点击读信';
+      window.clearTimeout(postcardTimer);
+      postcardTimer = window.setTimeout(() => openPostcard(cab), reduced.matches ? 0 : 1500);
+    }
     updateReset();
     addDebris(cab);
     if (reduced.matches) return;
@@ -281,6 +337,7 @@
   const updateReset = () => { reset.hidden = !cabinets.some(cab => cab.hits > 0); };
 
   function build(index) {
+    const exhibit = exhibits[index];
     const root = document.createElement('div');
     root.className = 'vt-cab';
     const button = document.createElement('button');
@@ -288,9 +345,25 @@
     button.className = 'vt-window';
     button.setAttribute('aria-label', `第 ${index + 1} 座展柜，叩三次打开`);
     button.innerHTML = `${CASE_IMG}<span class="vt-slot"></span>${GLASS_SVG}`;
+    if (exhibit) {
+      root.classList.add('vt-featured', 'vt-' + exhibit.kind);
+      button.setAttribute('aria-label', exhibit.oldName + '展柜，叩三次让旧艺焕新');
+      button.querySelector('.vt-slot').innerHTML = '<span class="vt-lamp-glow" aria-hidden="true"></span><img class="vt-old-art" src="assets/images/revival/' + exhibit.oldImage + '" alt="" draggable="false"><img class="vt-new-art" src="assets/images/revival/' + exhibit.newImage + '" alt="" draggable="false">';
+      const reflection = document.createElement('span');
+      reflection.className = 'vt-reflection';
+      reflection.setAttribute('aria-hidden', 'true');
+      button.insertBefore(reflection, button.querySelector('.vt-glass'));
+    }
     root.append(button);
+    if (exhibit) {
+      const caption = document.createElement('span');
+      caption.className = 'vt-caption';
+      caption.setAttribute('aria-live', 'polite');
+      caption.textContent = exhibit.oldName + ' · 叩三次，见新生';
+      root.append(caption);
+    }
     const cab = {
-      index, root, button, hits: 0, busy: false, tips: [],
+      index, exhibit, root, button, hits: 0, busy: false, tips: [],
       glass: button.querySelector('.vt-glass'),
       pane: button.querySelector('.vt-pane'),
       cracks: button.querySelector('.vt-cracks'),
@@ -300,18 +373,21 @@
       dots: [...button.querySelectorAll('.vt-dots rect')]
     };
     button.addEventListener('click', event => {
-      if (cab.busy || cab.hits >= 3) return;
+      if (cab.hits >= 3) { if (exhibit) openPostcard(cab); return; }
+      if (cab.busy) return;
       const point = impactPoint(cab, event);
       if (reduced.matches) { strike(cab, point); return; }
       cab.busy = true;
       mallet(cab, point);
       // 槌子落到玻璃的那一刻才裂。
-      window.setTimeout(() => { strike(cab, point); cab.busy = false; }, 128);
+      window.setTimeout(() => { if (cab.root.isConnected) strike(cab, point); cab.busy = false; }, 128);
     });
     return cab;
   }
 
   function render() {
+    window.clearTimeout(postcardTimer);
+    if (postcard.open) postcard.close();
     cabinets.length = 0;
     for (let i = 0; i < COUNT; i++) cabinets.push(build(i));
     stage.innerHTML = DEFS;
