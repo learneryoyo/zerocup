@@ -1,13 +1,13 @@
 /* 节日页专属纹样：叠在 category.css 之后，只在 category/festival.html 加载。
    每个小项一枚代表纹样，落在文字栏下方的留白里，都完整显示、不裁切。纹样是 category/festival/images/*-qd.svg 成品图，
-   艾草绿渐变、细颗粒纹理与投影都已画在 SVG 里，这里只管位置、透明度和晃动。*-src.webp 是生成这些 SVG 的原图。 */
+   艾草绿渐变、细颗粒纹理与投影都已画在 SVG 里，这里只管位置、透明度和晃动。*-src.* 是生成这些 SVG 的原图。 */
 
 .project {
   --ms: min(100%, 460px);
   --ms-ratio: 1;
 }
 #miao-zimeijie { --ms: min(100%, 400px); --ms-ratio: 1024 / 1536; }
-#shuizu-duanjie { --ms: min(100%, 500px); --ms-ratio: 1125 / 852; }
+#shuizu-duanjie { --ms: min(100%, 500px); --ms-ratio: 1125 / 881; }
 
 .project__text {
   align-self: stretch;
@@ -46,8 +46,7 @@
 @media (max-width: 900px) {
   .project { --ms: min(100%, 300px); }
   #miao-zimeijie { --ms: min(100%, 240px); }
-  #shuizu-duanjie { --ms: 100%; }
-  .project:nth-child(even) .project__text::after { margin-left: 0; }
+  #shuizu-duanjie { --ms: min(100%, 300px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
