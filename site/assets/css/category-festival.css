@@ -1,6 +1,31 @@
 /* 节日页专属纹样：叠在 category.css 之后，只在 category/festival.html 加载。
-   每个小项一枚代表纹样，落在文字栏下方的留白里，都完整显示、不裁切。纹样是 category/festival/images/*-qd.svg 成品图，
-   艾草绿渐变、细颗粒纹理与投影都已画在 SVG 里，这里只管位置、透明度和晃动。*-src.* 是生成这些 SVG 的原图。 */
+   每个小项一枚代表纹样，落在文字栏下方的留白里，都完整显示、不裁切。
+   纹样是 category/festival/images/motif-*.webp 艾草绿水彩图，白底用 multiply 吃掉；
+   只有水族端节仍用 motif-shuishu-qd.svg，它的渐变与投影已画在 SVG 里，不叠混合和滤镜。 */
+
+/* 首屏火龙是横图，放进 4:5 竖框：取景略左移，主龙从龙须到龙身才完整 */
+.category-hero__media img { object-position: 43% 50%; }
+
+/* ── 首屏鱼灯：完整放在「节日」右上的留白里，不碰标题、副标题和照片 ──
+   --fs 同 category.css 的 h1 字号：左缘按字号让开标题，提杆底端停在标题中上部（图片下方自带约 15% 空白）。
+   31px = 眉题高度 + h1 上外边距。原图白底，用 multiply 吃掉；降饱和后才贴近其他纹样的艾草绿。 */
+.category-hero__inner > div { position: relative; }
+.category-hero__inner > div::before {
+  --fs: clamp(52px, 8vw, 118px);
+  --s: min(27vw, 460px);
+  content: "";
+  position: absolute;
+  width: var(--s);
+  aspect-ratio: 1;
+  left: calc(var(--fs) * 2.15);
+  top: calc(31px + var(--fs) * .6 - var(--s) * .86);
+  background: url("../../category/festival/images/fish-lantern.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  filter: brightness(1.04) saturate(.76);
+  opacity: .82;
+  animation: qd-float 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
 
 .project {
   --ms: min(100%, 460px);
@@ -31,24 +56,37 @@
 }
 /* 偶数项文字栏在右，纹样靠右 */
 .project:nth-child(even) .project__text::after { margin-left: auto; }
+/* 水彩纹样：提亮把近白底推成纯白，与首屏鱼灯同一套调淡方式 */
+.project:not(#shuizu-duanjie) .project__text::after {
+  mix-blend-mode: multiply;
+  filter: brightness(1.04) saturate(.8);
+  opacity: .82;
+}
 
 @keyframes qd-float {
   from { transform: translate(-4px, 3px); }
   to   { transform: translate(4px, -3px); }
 }
 
-#songwangchuan     { --motif: url("../../category/festival/images/motif-wangchuan-qd.svg"); }
-#miao-zimeijie     { --motif: url("../../category/festival/images/motif-silver-qd.svg"); }
-#luofang-zougushi  { --motif: url("../../category/festival/images/motif-puppet-qd.svg"); }
+#songwangchuan     { --motif: url("../../category/festival/images/motif-wangchuan.webp"); }
+#miao-zimeijie     { --motif: url("../../category/festival/images/motif-silver.webp"); }
+#luofang-zougushi  { --motif: url("../../category/festival/images/motif-zougushi.webp"); }
 #shuizu-duanjie    { --motif: url("../../category/festival/images/motif-shuishu-qd.svg"); }
-#canhua-shuihui    { --motif: url("../../category/festival/images/motif-gaogan-qd.svg"); }
+#canhua-shuihui    { --motif: url("../../category/festival/images/motif-gaogan.webp"); }
 
 @media (max-width: 900px) {
+  .category-hero__inner > div::before {
+    --fs: clamp(44px, 13vw, 84px);
+    --s: min(40vw, 190px);
+    /* 比桌面下移 10px，背鳍不贴页头 */
+    top: calc(41px + var(--fs) * .6 - var(--s) * .86);
+  }
   .project { --ms: min(100%, 300px); }
   #miao-zimeijie { --ms: min(100%, 240px); }
   #shuizu-duanjie { --ms: min(100%, 300px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .category-hero__inner > div::before,
   .project__text::after { animation: none; }
 }

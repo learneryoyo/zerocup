@@ -1,4 +1,4 @@
-/* 叩启新生：后三前二五座玻璃橱窗，叩三次碎开。展品暂留空，以后放进 .vt-slot。 */
+/* 叩启新生：六座玻璃展柜排成 2×3，叩三次碎开。展品暂留空，以后放进 .vt-slot。 */
 (() => {
   'use strict';
 
@@ -6,46 +6,22 @@
   const reset = document.getElementById('vitrine-reset');
   if (!stage || !reset) return;
 
-  const COUNT = 5;
-  const BACK_ROW = 3;
-  const PANE = { l: 14, t: 14, r: 316, b: 528 };  // 玻璃在 330×800 画布里的范围
+  const COUNT = 6;
+  // 叠层画布 330×392 与 vitrine.png 同比例；PANE 是展柜正面玻璃的范围。
+  const PANE = { l: 34, t: 32, r: 296, b: 336 };
+  const GROUND = 372;
   const NS = 'http://www.w3.org/2000/svg';
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const rand = (min, max) => min + Math.random() * (max - min);
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const round = value => Math.round(value * 10) / 10;
 
-  const CASE_SVG = `
-    <svg class="vt-case" viewBox="0 0 330 800" aria-hidden="true">
-      <rect x="3" y="536" width="324" height="246" fill="url(#vt-plinth)"/>
-      <rect x="9" y="782" width="312" height="16" fill="#cdb78f"/>
-      <path class="vt-ink" d="M3 536v246h324V536M9 782v16h312v-16"/>
-      <g class="vt-dots"><rect x="143" y="655" width="9" height="9"/><rect x="161" y="655" width="9" height="9"/><rect x="179" y="655" width="9" height="9"/></g>
-      <rect x="6" y="6" width="318" height="530" fill="#d9d6d0"/>
-      <rect x="44" y="66" width="242" height="442" fill="url(#vt-wall)"/>
-      <path d="M12 12h306l-32 54H44z" fill="#a3a6aa"/>
-      <path d="M12 12l32 54v442l-32 20z" fill="#cfccc6"/>
-      <path d="M318 12l-32 54v442l32 20z" fill="#c5c3bf"/>
-      <path d="M44 508h242l32 20H12z" fill="#efe6d6"/>
-      <path class="vt-ink vt-ink-thin" d="M44 66h242v442H44zM12 12l32 54M318 12l-32 54M12 528l32-20M318 528l-32-20"/>
-      <path class="vt-light" d="M146 76h38l70 400H76z" fill="url(#vt-cone)"/>
-      <path d="M146 40h38v20a19 6 0 0 1-38 0z" fill="#6f7478"/>
-      <ellipse cx="165" cy="40" rx="19" ry="5" fill="#8d9296"/>
-      <ellipse class="vt-lamp" cx="165" cy="60" rx="15" ry="4" fill="#fff0c4"/>
-      <path d="M106 452h118l-12 16h-94z" fill="#fbf6ec" transform="translate(0 30)"/>
-      <path d="M94 498h142v24H94z" fill="#efe5d4"/>
-      <path d="M106 482h118l12 16H94z" fill="#fbf6ec"/>
-      <path class="vt-ink vt-ink-thin" d="M106 482h118l12 16v24H94v-24zM94 498h142"/>
-      <path fill="url(#vt-steel)" fill-rule="evenodd" d="M0 0h330v540H0zM12 12v516h306V12z"/>
-      <path class="vt-ink" d="M.5.5h329v539H.5zM12 12h306v516H12z"/>
-    </svg>`;
+  const CASE_IMG = '<img class="vt-case" src="assets/images/revival/vitrine.png" alt="" draggable="false">';
 
   const GLASS_SVG = `
-    <svg class="vt-glass" viewBox="0 0 330 800" aria-hidden="true">
-      <g class="vt-pane">
-        <rect x="${PANE.l}" y="${PANE.t}" width="${PANE.r - PANE.l}" height="${PANE.b - PANE.t}" fill="url(#vt-tint)"/>
-        <path d="M268 142l36-40v18l-36 40zM244 208l58-66v8l-58 66z" fill="#fff" opacity=".62"/>
-      </g>
+    <svg class="vt-glass" viewBox="0 0 330 392" aria-hidden="true">
+      <g class="vt-dots"><rect x="210" y="350" width="6" height="6"/><rect x="222" y="350" width="6" height="6"/><rect x="234" y="350" width="6" height="6"/></g>
+      <rect class="vt-pane" x="${PANE.l}" y="${PANE.t}" width="${PANE.r - PANE.l}" height="${PANE.b - PANE.t}" fill="url(#vt-tint)"/>
       <g class="vt-cracks"></g>
       <g class="vt-debris"></g>
       <g class="vt-shards"></g>
@@ -54,12 +30,8 @@
 
   const DEFS = `
     <svg class="vt-defs" width="0" height="0" aria-hidden="true"><defs>
-      <linearGradient id="vt-plinth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1e4cb"/><stop offset="1" stop-color="#e6d4b2"/></linearGradient>
-      <linearGradient id="vt-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4d3d0"/><stop offset=".6" stop-color="#e6e2da"/><stop offset="1" stop-color="#ebe6dc"/></linearGradient>
-      <linearGradient id="vt-steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7f90a0"/><stop offset=".5" stop-color="#5a6c7c"/><stop offset="1" stop-color="#6d7f8f"/></linearGradient>
-      <linearGradient id="vt-tint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfeaf0" stop-opacity=".3"/><stop offset=".5" stop-color="#cfdde6" stop-opacity=".12"/><stop offset="1" stop-color="#e6eff3" stop-opacity=".26"/></linearGradient>
-      <linearGradient id="vt-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe2a0" stop-opacity=".78"/><stop offset=".7" stop-color="#ffe9bd" stop-opacity=".2"/><stop offset="1" stop-color="#ffe9bd" stop-opacity="0"/></linearGradient>
-      <linearGradient id="vt-shard" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".82"/><stop offset="1" stop-color="#c6dbe4" stop-opacity=".42"/></linearGradient>
+      <linearGradient id="vt-tint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".03"/></linearGradient>
+      <linearGradient id="vt-shard" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#f3e3c8" stop-opacity=".5"/></linearGradient>
     </defs></svg>`;
 
   const svgEl = (name, attrs = {}) => {
@@ -187,7 +159,7 @@
     cab.root.classList.add('is-open');
     cab.pane.remove();
     cab.cracks.replaceChildren();
-    cab.button.setAttribute('aria-label', `第 ${cab.index + 1} 座橱窗已打开，展品待补`);
+    cab.button.setAttribute('aria-label', `第 ${cab.index + 1} 座展柜已打开，展品待补`);
     updateReset();
     addDebris(cab);
     if (reduced.matches) return;
@@ -210,7 +182,7 @@
       const dist = Math.hypot(dx, dy) || 1;
       const burst = rand(10, 36);
       const fallX = dx / dist * rand(24, 84);
-      const fallY = 790 - center.y + rand(-16, 10);
+      const fallY = GROUND - center.y + rand(-8, 8);
       const spin = rand(-260, 260);
       const delay = dist * 0.55;
       const duration = rand(640, 920) + fallY * 0.2;
@@ -228,8 +200,8 @@
   // 橱窗底板上留一点碎玻璃。
   function addDebris(cab) {
     for (let i = 0; i < 16; i++) {
-      const x = rand(26, 304);
-      const y = rand(509, 526);
+      const x = rand(44, 286);
+      const y = rand(322, 333);
       const size = rand(4, 12);
       const shard = svgEl('polygon', {
         class: 'vt-crumb',
@@ -251,7 +223,7 @@
         }
       }
     }
-    return { x: rand(120, 210), y: rand(190, 320) };
+    return { x: rand(120, 210), y: rand(110, 240) };
   }
 
   function flash(cab, point, size) {
@@ -266,7 +238,7 @@
   function mallet(cab, point) {
     const group = svgEl('g', { transform: `translate(${round(point.x)} ${round(point.y)})` });
     const body = svgEl('g', { class: 'vt-mallet' });
-    body.innerHTML = '<path d="M34-33 118-134l11 9L44-24z" fill="#a9754a" stroke="#5e3b24" stroke-width="2"/><path d="M-3-44 31-73l42 49-34 29z" fill="#8a4b3a" stroke="#4b2a1e" stroke-width="2.4"/><path d="M12-56 52-11" stroke="#b48a5a" stroke-width="3" fill="none"/>';
+    body.innerHTML = '<path d="M34-33 118-134l11 9L44-24z" fill="#a9754a" stroke="#5e3b24" stroke-width="2"/><path d="M-3-44 31-73l42 49-34 29z" fill="#904038" stroke="#4b2a1e" stroke-width="2.4"/><path d="M12-56 52-11" stroke="#b28750" stroke-width="3" fill="none"/>';
     group.append(body);
     cab.fx.append(group);
     body.style.transformOrigin = '124px -130px';
@@ -300,7 +272,7 @@
     else if (cab.hits === 2) secondHit(cab, point);
     else shatter(cab, point);
     if (cab.hits < 3) {
-      cab.button.setAttribute('aria-label', `第 ${cab.index + 1} 座橱窗，已叩 ${cab.hits} 次，再叩 ${3 - cab.hits} 次打开`);
+      cab.button.setAttribute('aria-label', `第 ${cab.index + 1} 座展柜，已叩 ${cab.hits} 次，再叩 ${3 - cab.hits} 次打开`);
     }
     updateReset();
   }
@@ -310,12 +282,12 @@
 
   function build(index) {
     const root = document.createElement('div');
-    root.className = `vt-cab ${index < BACK_ROW ? 'is-back' : 'is-front'}`;
+    root.className = 'vt-cab';
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'vt-window';
-    button.setAttribute('aria-label', `第 ${index + 1} 座橱窗，叩三次打开`);
-    button.innerHTML = `${CASE_SVG}<span class="vt-slot"></span>${GLASS_SVG}`;
+    button.setAttribute('aria-label', `第 ${index + 1} 座展柜，叩三次打开`);
+    button.innerHTML = `${CASE_IMG}<span class="vt-slot"></span>${GLASS_SVG}`;
     root.append(button);
     const cab = {
       index, root, button, hits: 0, busy: false, tips: [],

@@ -16,6 +16,10 @@
 | 食物 | 荆门矮子馅饼制作技艺 | 湖北省人民政府（第七批省级非遗名录，鄂政发〔2024〕10号） | https://www.ihchina.cn/project_details/29509 | 2026-11-02 | `category/food.html` |
 | 食物 | 荆州鱼糕制作技艺 | 湖北日报客户端（江陵频道／沙市区融媒体） | https://news.hubeidaily.net/pc/c_3515139.html | 2026-11-02 | `category/food.html` |
 | 食物 | 绿茶制作技艺（恩施玉露制作技艺） | 中国非物质文化遗产网 | https://www.ihchina.cn/project_details/28517 | 2026-11-02 | `category/food.html` |
+| 古艺新生 | 周大生 × 国家宝藏云锦系列 | 中华网商业快讯（企业发布） | https://m.tech.china.com/redian/2025/0522/052025_1675757.html | 2026-11-05 | `revival.html` |
+| 古艺新生 | 王星记 IP 联名白纸扇 | 王星记官网 | http://wangxingji.com/works.aspx?id=18 | 2026-11-05 | `revival.html` |
+| 古艺新生 | 万象更新 DIY 木刻年画套装 | 扬子晚报、苏州博物馆艺术品商店 | https://www.yzwb.net/news/yysp/202506/t20250621_225241.html | 2026-11-05 | `revival.html` |
+| 古艺新生 | 30 个案例的购买与体验渠道、价格 | 《第三页_官方渠道与价格核实_2026-11-05》 | 团队内部资料，逐条来源见该文档 | 2026-11-05 | `revival.html` |
 
 > 节日页的核验日期取自资料整理日期（2026-10-25），**不是**逐条重新打开核对的日期。
 > 每张照片、每段动图的署名与原链接见 `docs/festival.md`。

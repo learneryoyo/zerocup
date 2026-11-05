@@ -2,18 +2,8 @@
 (() => {
   'use strict';
 
-  const ICONS = [
-    // 日用新生：茶盏
-    '<path d="M6 11h14v3a7 7 0 0 1-14 0z"/><path d="M20 12.5h1.5a2.5 2.5 0 0 1 0 5H19"/><path d="M4 23h18"/><path d="M11 4c-1 1.5 1 2.5 0 4M15 4c-1 1.5 1 2.5 0 4"/>',
-    // 跨界相逢：两环相扣
-    '<circle cx="11" cy="14" r="6.5"/><circle cx="17" cy="14" r="6.5"/>',
-    // 形态新造：编织网格
-    '<path d="M5 9c3-3 6 3 9 0s6 3 9 0M5 14c3-3 6 3 9 0s6 3 9 0M5 19c3-3 6 3 9 0s6 3 9 0"/><path d="M9 5v18M14 5v18M19 5v18"/>',
-    // 数字焕新：扇面加信号
-    '<path d="M14 23 5 12a12 12 0 0 1 18 0z"/><path d="M14 23v-9M10 15l4 8 4-8"/><path d="M19 5a6 6 0 0 1 4 3M20.5 2.5a9 9 0 0 1 5.5 4.5"/>',
-    // 体验共创：执笔
-    '<path d="M19 4 9 18l-1.5 4.5L12 21 22 7z"/><path d="M17 7l3 2"/><path d="M5 25c4-1 7 0 10-1"/>'
-  ];
+  // 五类标签的手绘图标，顺序与 PATHS 一致；配色固定，徽章裁成圆形。
+  const ICONS = ['daily', 'crossover', 'form', 'digital', 'cocreate'];
 
   const PATHS = [
     { name: '日用新生', line: '从展柜珍藏，到朝夕相伴。' },
@@ -27,17 +17,18 @@
   const SHORT = {
     '01': '三门石窗 · 微型石窗与夜灯', '02': '会理绿陶 · 耳饰与冰箱贴', '03': '费县手绣 · 虎头挂件',
     '04': '查干湖鱼皮 · 书签首饰', '05': '桃花坞年画 · 丝巾杯垫', '06': '永春香 · 车载便携香',
-    '07': '豆瓣×银花丝 · 豆瓣红口红', '08': '孝感米酿 · 荔枝冰酿', '09': '紫砂×蓝印花布 · 紫韵蓝雅',
-    '10': '蓝印花布 · 布老虎盲盒', '11': '苗绣×世界杯 · 冲浪板', '12': '京绣·景泰蓝 × WAKUKU',
+    '07': '豆瓣×银花丝 · 豆瓣红口红', '08': '孝感米酿 · 荔枝冰酿', '09': '云锦×周大生 · 云锦黄金',
+    '10': '王星记 · IP 联名白纸扇', '11': '苗绣×世界杯 · 冲浪板', '12': '京绣·景泰蓝 × WAKUKU',
     '13': '汉中藤编 · 悬浮藤椅', '14': '唐氏竹编 · 竹包与落地灯', '15': '泥金彩漆 · 冠军奖杯',
-    '16': '王星记 · NFC智能扇', '17': '高淳陶瓷 · 窑变釉炻器', '18': '蜀锦 · 智能织造套装',
+    '16': '王星记 · NFC智能扇', '17': '高淳陶瓷 · 成套餐具', '18': '蜀锦 · 智能织造套装',
     '19': '赫哲文化 · 「希特」IP', '20': '绵竹年画 · 福缘绘梦', '21': '南京云锦 · 非遗智能体',
     '22': '孟连神鸟舞 · 逆水寒', '23': '佛山狮头 · 醒狮之旅H5', '24': '马头琴 · 桃源深处有人家',
-    '25': '镇江香醋 · 坛中酿山河', '26': '查干湖鱼皮 · DIY材料包', '27': '上海绒绣 · 自噶绣体验课',
+    '25': '桃花坞年画 · 万象更新套装', '26': '查干湖鱼皮 · DIY材料包', '27': '上海绒绣 · 自噶绣体验课',
     '28': '华县皮影 · 多媒体小哪吒', '29': '杨柳青年画 · 玉成号体验坊', '30': '铜官陶瓷 · 亲子研学'
   };
 
-  const COUNTER_LINE = '轻叩三次橱窗，遇见一件非遗新作。';
+  const COUNTER_LINE = '轻叩三次展柜，遇见一件非遗新作。';
+  const ACCESS_CHECKED = '2026-11-05';
   const cases = window.CASES || [];
   const tabList = document.getElementById('rv-tabs');
   const panel = document.getElementById('rv-panel');
@@ -60,7 +51,7 @@
     if (text !== undefined) node.textContent = text;
     return node;
   };
-  const icon = index => `<svg viewBox="0 0 28 28" aria-hidden="true">${ICONS[index]}</svg>`;
+  const icon = index => `<span class="rv-badge"><img src="assets/images/revival/icons/${ICONS[index]}.webp" alt="" width="92" height="92"></span>`;
   const inPath = index => cases.filter(item => item.category === index);
 
   function cover(item, cls) {
@@ -77,7 +68,33 @@
       img.addEventListener('load', () => { holder.hidden = true; });
       img.addEventListener('error', () => { holder.hidden = false; img.remove(); });
       img.src = item.image;
-      box.append(img);
+      // 用内联 SVG 的视口裁去截图边框，原始照片保持完整。
+      const crop = item.imageMeta?.crop;
+      if (crop) {
+        const ns = 'http://www.w3.org/2000/svg';
+        const viewport = document.createElementNS(ns, 'svg');
+        viewport.classList.add('rv-cropped-image');
+        viewport.setAttribute('viewBox', crop.join(' '));
+        viewport.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        viewport.setAttribute('role', 'img');
+        viewport.setAttribute('aria-label', img.alt);
+        const photo = document.createElementNS(ns, 'image');
+        photo.setAttribute('width', item.imageMeta.width);
+        photo.setAttribute('height', item.imageMeta.height);
+        photo.setAttribute('href', item.image);
+        const clip = document.createElementNS(ns, 'clipPath');
+        clip.id = 'rv-crop-' + cls + '-' + item.id;
+        const rect = document.createElementNS(ns, 'rect');
+        ['x', 'y', 'width', 'height'].forEach((key, index) => rect.setAttribute(key, crop[index]));
+        clip.append(rect);
+        photo.setAttribute('clip-path', 'url(#' + clip.id + ')');
+        viewport.append(clip, photo);
+        // 独立图片元素负责加载检测；SVG 负责统一卡片和详情的裁切。
+        img.addEventListener('error', () => viewport.remove());
+        box.append(viewport);
+      } else {
+        box.append(img);
+      }
       if (item.imageMeta?.reference && cls === 'rv-card-media') {
         box.append(el('span', 'rv-image-kind', '工艺 / 系列参考'));
       }
@@ -134,7 +151,7 @@
     tab.id = `rv-tab-${index}`;
     tab.setAttribute('role', 'tab');
     tab.setAttribute('aria-controls', 'rv-panel');
-    tab.innerHTML = `<span class="rv-badge">${icon(index)}</span>`;
+    tab.innerHTML = icon(index);
     tab.append(el('span', 'rv-tab-name', path.name));
     tab.addEventListener('click', () => select(index));
     tabList.append(tab);
@@ -173,6 +190,26 @@
     return box;
   }
 
+  // 渠道与价格只写核实到的内容；没有公开价格或入口的条目不出按钮。
+  function access(info) {
+    const box = el('div', 'rv-access');
+    box.append(el('span', 'rv-access-kind', info.label), el('p', '', info.where));
+    if (info.price) box.append(el('p', 'rv-access-price', `价格：${info.price}`));
+    if (info.links) {
+      const links = el('div', 'rv-access-links');
+      info.links.forEach(link => {
+        const a = el('a', '', `${link.label} ↗`);
+        a.href = link.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        links.append(a);
+      });
+      box.append(links);
+    }
+    box.append(el('p', 'rv-access-date', `渠道与价格核实于 ${ACCESS_CHECKED}，以官方当期信息为准。`));
+    return box;
+  }
+
   function fill(item) {
     open = item;
     const group = inPath(item.category);
@@ -189,16 +226,19 @@
       const meta = item.imageMeta;
       const caption = el('div', 'rv-image-caption');
       caption.append(el('p', '', meta.alt));
-      const source = el('a', '', `图片来源：${meta.credit}`);
-      source.href = meta.source;
-      source.target = '_blank';
-      source.rel = 'noopener noreferrer';
+      const source = el(meta.source ? 'a' : 'p', '', `图片来源：${meta.credit}`);
+      if (meta.source) {
+        source.href = meta.source;
+        source.target = '_blank';
+        source.rel = 'noopener noreferrer';
+      }
       caption.append(source, el('p', '', `来源日期：${meta.date}`));
       text.append(caption);
     }
     text.append(row('古今对照', compare(item.compare)));
     text.append(row('案例总述', item.summary));
     text.append(row('产品档案', item.archive));
+    if (item.access) text.append(row('去哪里遇见它', access(item.access)));
     const tags = el('ul', 'rv-tags');
     item.tags.forEach(tag => tags.append(el('li', '', tag)));
     text.append(row('创新标签', tags));
