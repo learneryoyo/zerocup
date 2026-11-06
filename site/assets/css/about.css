@@ -238,3 +238,15 @@
 @media (prefers-reduced-motion: reduce) {
   .about-route a::after { transition: none; }
 }
+
+/* 辑录 / 图片出处：标题行在上，正文占满整行，给四栏名录留出宽度 */
+.about-section--full { display: block; }
+.about-section--full .about-section__head {
+  position: static;
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: clamp(18px, 2vw, 28px);
+}
+.about-section--full .about-section__head h2 { margin: 0; }
+.about-section--full .about-section__body { max-width: none; }

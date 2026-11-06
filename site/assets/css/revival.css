@@ -262,3 +262,30 @@
 .naxi-postcard .miao-postcard-letter h2 { font-size: clamp(23px, 3vw, 29px); letter-spacing: .06em; }
 .naxi-postcard .miao-postcard-art > p { font-size: 18px; }
 .naxi-postcard .miao-postcard-art > img { filter: saturate(.82) drop-shadow(4px 12px 8px #66573924); }
+
+/* 羌绣与羊角花甜品：旧绣的柔和色彩、花瓣般轻盈的焕新。 */
+.vt-qiang .vt-slot { left: 16%; right: 16%; top: 16%; height: 59%; pointer-events: none; }
+.vt-qiang .vt-old-art { filter: saturate(.62) contrast(.93) brightness(.94) drop-shadow(0 5px 3px #49352d3d); }
+.vt-qiang .vt-new-art { filter: saturate(.8) drop-shadow(0 6px 4px #704e4136); transform: translateY(12px) scale(.78) rotate(-5deg); }
+.vt-qiang.is-open .vt-new-art { transform: none; }
+.qiang-postcard .miao-postcard-art { background: radial-gradient(ellipse at 50% 42%, #f8e5d9cc, transparent 75%), #e8dcd2; }
+.qiang-postcard .miao-postcard-art > img { filter: saturate(.8) drop-shadow(4px 12px 8px #80533b24); }
+.qiang-postcard .miao-postcard-art > p { font-size: 19px; }
+
+/* 大漆：采漆的自然肌理，转为青绿金色漆面的日用音响。 */
+.vt-lacquer .vt-slot { left: 16%; right: 16%; top: 15%; height: 60%; pointer-events: none; }
+.vt-lacquer .vt-old-art { filter: saturate(.64) contrast(.94) brightness(.95) drop-shadow(0 5px 3px #49352d35); }
+.vt-lacquer .vt-new-art { filter: saturate(.8) contrast(.97) drop-shadow(0 7px 4px #5b292e3d); transform: translateY(12px) scale(.8) rotate(-4deg); }
+.vt-lacquer.is-open .vt-new-art { transform: none; }
+.lacquer-postcard .miao-postcard-art { background: radial-gradient(ellipse at 50% 42%, #e7e8d5cc, transparent 75%), #d5ded5; }
+.lacquer-postcard .miao-postcard-art > img { filter: saturate(.8) drop-shadow(4px 12px 8px #682a2929); }
+.lacquer-postcard .miao-postcard-art > p { font-size: 17px; }
+
+/* 善琏湖笔：制笔手艺走向美妆日常的第六封来信。 */
+.vt-hubi .vt-slot { left: 15%; right: 15%; top: 16%; height: 59%; pointer-events: none; }
+.vt-hubi .vt-old-art { filter: saturate(.63) contrast(.94) brightness(.95) drop-shadow(0 5px 3px #49352d35); }
+.vt-hubi .vt-new-art { filter: saturate(.77) drop-shadow(0 6px 4px #68533636); transform: translateY(12px) scale(.8) rotate(-4deg); }
+.vt-hubi.is-open .vt-new-art { transform: none; }
+.hubi-postcard .miao-postcard-art { background: radial-gradient(ellipse at 50% 42%, #f7e9dfcc, transparent 75%), #e4d8d2; }
+.hubi-postcard .miao-postcard-art > img { filter: saturate(.77) drop-shadow(4px 12px 8px #68533624); }
+.hubi-postcard .miao-postcard-art > p { font-size: 17px; }

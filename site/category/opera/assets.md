@@ -110,3 +110,15 @@ site/category/opera/
 | 文件 | 内容 | 来源 |
 |---|---|---|
 | `images/hero-yingge.webp` | 英歌舞街头巡演，用作戏曲页首屏图 | 待补 |
+
+## 手绘纹样
+
+由 GPT 依据下列画面生成，石榴红色系，样式见 `assets/css/category-opera.css`。
+
+| 文件 | 内容 | 位置 |
+|---|---|---|
+| `images/motif-yingge-drummer.webp` | 英歌鼓手 | 首屏标题右上 |
+| `images/motif-lion.webp` | 高桩白狮 | 狮舞 |
+| `images/motif-peking.webp` | 京剧刀马旦 | 京剧 |
+| `images/motif-shadow.webp` | 皮影老艺人 | 皮影戏 |
+| `images/motif-puppet.webp` | 提线木偶 | 木偶戏 |

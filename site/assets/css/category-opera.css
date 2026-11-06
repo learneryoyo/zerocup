@@ -1,0 +1,82 @@
+/* 曲艺页专属纹样：叠在 category.css 之后，只在 category/opera.html 加载。
+   每个小项一幅石榴红手绘插图，落在文字栏下方的留白里，都完整显示、不裁切。
+   插图是绢白底，提亮把底色推成纯白，再用 multiply 吃掉；降饱和、降透明度调淡。 */
+
+/* ── 首屏英歌鼓手：完整放在「曲艺」右上的留白里，不碰标题、副标题和照片 ──
+   --fs 同 category.css 的 h1 字号：左缘按字号让开标题，底边停在标题下沿。
+   31px = 眉题高度 + h1 上外边距。 */
+.category-hero__inner > div { position: relative; }
+.category-hero__inner > div > * { position: relative; z-index: 1; }
+.category-hero__inner > div::before {
+  --fs: clamp(52px, 8vw, 118px);
+  --s: min(23vw, 340px);
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: var(--s);
+  aspect-ratio: 3 / 4;
+  left: calc(var(--fs) * 2.3);
+  top: calc(31px + var(--fs) * 1.04 - var(--s) * 4 / 3);
+  background: url("../../category/opera/images/motif-yingge-drummer.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  filter: brightness(1.2) saturate(.82);
+  opacity: .6;
+  animation: qd-float 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.project {
+  --ms: min(100%, 460px);
+  --ms-ratio: 1;
+}
+#peking-opera { --ms: min(100%, 400px); --ms-ratio: 3 / 4; }
+
+.project__text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+/* 正文与插图之间至少留这么多 */
+.project-body { margin-bottom: clamp(40px, 5vw, 72px); }
+
+/* 晃动走 transform，插图不会被框边切到 */
+.project__text::after {
+  content: "";
+  flex: none;
+  width: var(--ms);
+  aspect-ratio: var(--ms-ratio);
+  margin-top: auto;
+  background: var(--motif) center / contain no-repeat;
+  mix-blend-mode: multiply;
+  filter: brightness(1.2) saturate(.82);
+  opacity: .6;
+  animation: qd-float 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+/* 偶数项文字栏在右，插图靠右 */
+.project:nth-child(even) .project__text::after { margin-left: auto; }
+
+@keyframes qd-float {
+  from { transform: translate(-4px, 3px); }
+  to   { transform: translate(4px, -3px); }
+}
+
+#lion-dance    { --motif: url("../../category/opera/images/motif-lion.webp"); }
+#peking-opera  { --motif: url("../../category/opera/images/motif-peking.webp"); }
+#shadow-puppet { --motif: url("../../category/opera/images/motif-shadow.webp"); }
+#puppetry      { --motif: url("../../category/opera/images/motif-puppet.webp"); }
+
+@media (max-width: 900px) {
+  .category-hero__inner > div::before {
+    --fs: clamp(44px, 13vw, 84px);
+    --s: min(25vw, 110px);
+    top: -40px;
+  }
+  .project { --ms: min(100%, 300px); }
+  #peking-opera { --ms: min(100%, 240px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-hero__inner > div::before,
+  .project__text::after { animation: none; }
+}
