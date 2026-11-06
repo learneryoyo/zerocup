@@ -18,6 +18,8 @@
 
   var track = layer.querySelector(".tl-layer__track");
   var railBar = layer.querySelector(".tl-layer__railBar");
+  var art = layer.querySelector(".tl-layer__art");
+  var artImg = layer.querySelector(".tl-layer__art-img");
   if (!track) return;
 
   var items = Array.prototype.slice.call(track.children);
@@ -26,6 +28,7 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var centers = [];
   var travel = 0;
+  var artWidth = 0;
   var viewWidth = 0;
   var active = -1;
   var scrollFrame = 0;
@@ -43,14 +46,28 @@
     var box = layer.getBoundingClientRect();
     layerTop = box.top;
     layerBottom = box.bottom;
-    var widths = items.map(function (item) { return item.offsetWidth; });
-    var x = 0;
-    centers = widths.map(function (width) {
-      var center = x + width / 2;
-      x += width;
-      return center;
+    // 长卷模式：图的宽度决定总行程，图和轨道共用同一个位移量。
+    // 图没加载成功就退回原来的环带与文字，不会露出破图。
+    if (art && artImg && artImg.complete && artImg.naturalWidth > 0) {
+      art.removeAttribute("hidden");
+      layer.classList.add("is-art");
+      artWidth = art.getBoundingClientRect().width;
+      track.style.width = artWidth + "px";
+    } else {
+      artWidth = 0;
+      if (art) art.setAttribute("hidden", "");
+      layer.classList.remove("is-art");
+      track.style.removeProperty("width");
+    }
+
+    // 先定模式再量位置：长卷模式下节点是绝对定位的
+    centers = items.map(function (item) {
+      return item.offsetLeft + item.offsetWidth / 2;
     });
-    travel = Math.max(0, x - viewWidth);
+    var last = items[items.length - 1];
+    var x = last.offsetLeft + last.offsetWidth;
+
+    travel = Math.max(0, (artWidth || x) - viewWidth);
     update();
   }
 
@@ -65,6 +82,9 @@
     var p = progress();
     var shift = -p * travel;
     track.style.transform = "translate3d(" + shift.toFixed(2) + "px,0,0)";
+    if (art && artWidth) {
+      art.style.transform = "translate3d(" + shift.toFixed(2) + "px,0,0)";
+    }
     if (railBar) railBar.style.width = (p * 100).toFixed(2) + "%";
 
     var middle = viewWidth / 2;
@@ -76,6 +96,12 @@
       if (distance < bestDistance) {
         bestDistance = distance;
         best = i;
+      }
+      // 长卷模式下文字跟着画走，不做远近淡出
+      if (artWidth) {
+        items[i].style.removeProperty("opacity");
+        items[i].style.removeProperty("transform");
+        continue;
       }
       var closeness = Math.min(1, distance / (viewWidth * 0.5));
       items[i].style.opacity = Math.max(0.05, (1 - closeness) * 1.2).toFixed(3);
@@ -216,6 +242,13 @@
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(measure).catch(function () {});
   }
+
+  // 设计图可能比脚本晚到：加载完成或失败都重测一次，决定是否切到 is-art
+  if (artImg) {
+    artImg.addEventListener("load", measure);
+    artImg.addEventListener("error", measure);
+  }
+
   window.addEventListener("load", measure);
 
   measure();

@@ -269,6 +269,103 @@
 
 .tl-layer__stage { position: absolute; inset: 0; }
 
+/* ── 设计图模式 ─────────────────────────────────────────────
+   整条时间轴交给一张长图：图挂在图层里，JS 给它和轨道同一个位移量，
+   所以滚动联动、悬停抬起、点击固定这些行为全部照旧。
+   图存在且加载成功才启用 .is-art，否则退回环带 + 竖排文字，不会露破图。 */
+.tl-layer__art {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  will-change: transform;
+}
+/* 纸色底原本压在内容之上，设计图会被蒙掉；仅在设计图模式下把它垫到最底层。
+   文字版的观感保持原样，不动。 */
+.tl-layer.is-art.is-raised::before { z-index: -1; }
+.tl-layer__art-img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+}
+.tl-layer.is-art .tl-layer__axis { visibility: hidden; }
+
+/* 长卷模式下取消内容的上下渐隐：图本身已留白，时间轴文字贴着底部，需要看得清 */
+.tl-layer.is-art.is-raised .tl-layer__stage,
+.tl-layer.is-art.is-raised .tl-layer__foot {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* 底部是时间轴文字，纸底要实，压在深色照片上也看得清 */
+.tl-layer.is-art.is-raised::before {
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, .5) 0%, #000 22%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, .5) 0%, #000 22%);
+  background: rgba(244, 240, 232, .985);
+}
+
+/* 轨道与长卷同宽（宽度由 JS 写入），节点按 --x 定位到各自的画下方 */
+.tl-layer.is-art .tl-layer__track { right: auto; display: block; }
+.tl-layer.is-art .tl-layer__track::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 85.5%;
+  height: 1px;
+  background: rgba(16, 16, 15, .32);
+}
+.tl-layer.is-art .tl-layer__item {
+  position: absolute;
+  left: var(--x);
+  top: 0;
+  width: 148px;
+  margin-left: -74px;
+}
+.tl-layer.is-art .tl-layer__item::before,
+.tl-layer.is-art .tl-layer__item::after,
+.tl-layer.is-art .tl-layer__tag { display: none; }
+.tl-layer.is-art .tl-layer__dot { top: 85.5%; }
+.tl-layer.is-art .tl-layer__year,
+.tl-layer.is-art .tl-layer__name {
+  left: 0;
+  right: 0;
+  bottom: auto;
+  max-height: none;
+  writing-mode: horizontal-tb;
+  text-align: center;
+  white-space: nowrap;
+}
+.tl-layer.is-art .tl-layer__year { top: calc(85.5% + 8px); font-size: 12px; letter-spacing: .08em; }
+.tl-layer.is-art .tl-layer__name { top: calc(85.5% + 23px); font-size: 14.5px; letter-spacing: .04em; }
+/* 简介只留给读屏；还没有画的节点才把它显示在轴线上方 */
+.tl-layer.is-art .tl-layer__intro {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  opacity: 1;
+}
+.tl-layer.is-art .tl-layer__item--plain .tl-layer__intro {
+  left: 14px;
+  right: 14px;
+  top: auto;
+  bottom: calc(14.5% + 22px);
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  writing-mode: horizontal-tb;
+  font: 400 15px/1.75 var(--serif);
+  letter-spacing: .04em;
+  text-align: center;
+  color: #6c675f;
+}
+
 /* 右上角：赭红大矩形（小方块的 2 倍高、3 倍宽），同时是退出键 */
 .tl-layer__exit {
   position: absolute;
@@ -509,6 +606,11 @@
   .tl-layer__item--blank { width: 88px; }
   .tl-layer__name { font-size: 16px; max-height: 240px; }
   .tl-layer__intro { font-size: 11.5px; right: calc(50% + 26px); padding-right: 10px; height: calc(50% - 40px); }
+  .tl-layer.is-art .tl-layer__item { width: 124px; margin-left: -62px; }
+  .tl-layer.is-art .tl-layer__year { font-size: 11px; top: calc(85.5% + 5px); }
+  .tl-layer.is-art .tl-layer__name { font-size: 13px; top: calc(85.5% + 16px); }
+  .tl-layer.is-art .tl-layer__item--plain .tl-layer__intro { font-size: 13px; }
+  .tl-layer.is-art .tl-layer__foot { bottom: 3px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tl-layer,

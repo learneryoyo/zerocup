@@ -89,175 +89,128 @@
           <path class="tl-layer__line" d="M-160 110 Q720 146 1600 110"></path>
         </svg>
 
+        <!--
+          水墨长卷：透明底，和轨道共用同一个位移量，所以滚动联动照旧。
+          图存在且加载成功才会启用（is-art），否则自动退回上面的环带与文字。
+          下面每个节点的 --x 是它在长卷上的横向位置，由 docs/timeline-guide/build-art.js 算出，
+          换图后要同步改 --x。--plain 表示该节点暂时没有画，只显示文字。
+        -->
+        <div class="tl-layer__art" hidden aria-hidden="true">
+          <img class="tl-layer__art-img" src="assets/images/timeline/timeline-design.webp" alt="" decoding="async">
+        </div>
+
         <ol class="tl-layer__track">
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:2.22%">
             <span class="tl-layer__year">约前 5000</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">河姆渡榫卯</span>
             <span class="tl-layer__intro">七千年前的榫接，今天还在用。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:8.47%">
             <span class="tl-layer__year">1056</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">应县木塔</span>
             <span class="tl-layer__intro">五十四种斗拱，不用一钉一胶。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:13.87%">
             <span class="tl-layer__year">宋</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">皮影戏</span>
             <span class="tl-layer__intro">最晚在宋代成熟的灯影戏。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:20.38%">
             <span class="tl-layer__year">南宋</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">黄龙溪火龙灯舞</span>
             <span class="tl-layer__intro">龙、灯、舞、火，一起烧。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:25.78%">
             <span class="tl-layer__year">南宋</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">潮州铁枝木偶戏</span>
             <span class="tl-layer__intro">从南宋皮影演变而来。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:30.76%">
             <span class="tl-layer__year">元</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">景德镇二元配方</span>
             <span class="tl-layer__intro">瓷石加高岭土，青花成形。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:37.17%">
             <span class="tl-layer__year">明末清初</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">泸州油纸伞</span>
             <span class="tl-layer__intro">九十多道工序撑起一把伞。</span>
           </li>
-          <li class="tl-layer__item">
-            <span class="tl-layer__year">清</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">普宁英歌</span>
-            <span class="tl-layer__intro">北有安塞腰鼓，南有普宁英歌。</span>
-          </li>
-          <li class="tl-layer__item">
-            <span class="tl-layer__year">清</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">青田鱼灯舞</span>
-            <span class="tl-layer__intro">以彩灯走阵，清代有载。</span>
-          </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:42.05%">
             <span class="tl-layer__year">清康熙</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">恩施玉露</span>
             <span class="tl-layer__intro">康熙年间定型的蒸青绿茶。</span>
           </li>
-          <li class="tl-layer__item">
-            <span class="tl-layer__year">清末</span>
+          <li class="tl-layer__item" style="--x:45.86%">
+            <span class="tl-layer__year">清</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">荆门矮子馅饼</span>
-            <span class="tl-layer__intro">酥饼手艺，可追到清末。</span>
+            <span class="tl-layer__name">普宁英歌</span>
+            <span class="tl-layer__intro">北有安塞腰鼓，南有普宁英歌。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:52.49%">
+            <span class="tl-layer__year">清</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">青田鱼灯舞</span>
+            <span class="tl-layer__intro">以彩灯走阵，清代有载。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:59.85%">
             <span class="tl-layer__year">1790</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">京剧</span>
             <span class="tl-layer__intro">四大徽班进京，徽汉合流。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:62.5%">
+            <span class="tl-layer__year">清末</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">荆门矮子馅饼</span>
+            <span class="tl-layer__intro">酥饼手艺，可追到清末。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:69.73%">
             <span class="tl-layer__year">1915</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">苏绣与沈寿</span>
             <span class="tl-layer__intro">沈寿仿真绣，1915 年获金奖。</span>
           </li>
-          <li class="tl-layer__item">
+          <li class="tl-layer__item" style="--x:75.03%">
             <span class="tl-layer__year">1928</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">蔡林记热干面</span>
             <span class="tl-layer__intro">1928 年，汉口开「蔡林记」。</span>
           </li>
-          <li class="tl-layer__item tl-layer__item--pending">
-            <span class="tl-layer__year">待考</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">狮舞（藤县）</span>
-            <span class="tl-layer__intro">年代待考。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--pending">
-            <span class="tl-layer__year">待考</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">送王船</span>
-            <span class="tl-layer__intro">年代待考。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--pending">
-            <span class="tl-layer__year">待考</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">苗族姊妹节</span>
-            <span class="tl-layer__intro">年代待考。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--pending">
-            <span class="tl-layer__year">待考</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">罗坊走古事</span>
-            <span class="tl-layer__intro">年代待考。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--pending">
-            <span class="tl-layer__year">待考</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">水族端节</span>
-            <span class="tl-layer__intro">年代待考。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--pending">
-            <span class="tl-layer__year">待考</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">蚕花水会</span>
-            <span class="tl-layer__intro">年代待考。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--pending">
-            <span class="tl-layer__year">待考</span>
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">荆州鱼糕</span>
-            <span class="tl-layer__intro">年代待考。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--record">
+          <li class="tl-layer__item tl-layer__item--record" style="--x:78.12%">
             <span class="tl-layer__tag">名录</span>
             <span class="tl-layer__year">2006</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">首批国家级名录</span>
             <span class="tl-layer__intro">第一批名录，共 518 项。</span>
           </li>
-          <li class="tl-layer__item tl-layer__item--record">
+          <li class="tl-layer__item tl-layer__item--record tl-layer__item--plain" style="--x:85.28%">
             <span class="tl-layer__tag">名录</span>
             <span class="tl-layer__year">2009</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">木结构营造入遗</span>
             <span class="tl-layer__intro">香山帮等四项打包入选。</span>
           </li>
-          <li class="tl-layer__item tl-layer__item--law">
+          <li class="tl-layer__item tl-layer__item--law" style="--x:91.21%">
             <span class="tl-layer__tag">法规</span>
             <span class="tl-layer__year">2011</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">《非遗法》施行</span>
             <span class="tl-layer__intro">《非遗法》6 月 1 日施行。</span>
           </li>
-          <li class="tl-layer__item tl-layer__item--record">
+          <li class="tl-layer__item tl-layer__item--record tl-layer__item--plain" style="--x:97.14%">
             <span class="tl-layer__tag">名录</span>
             <span class="tl-layer__year">2022</span>
             <span class="tl-layer__dot" aria-hidden="true"></span>
             <span class="tl-layer__name">制茶技艺入遗</span>
             <span class="tl-layer__intro">制茶技艺列入代表作名录。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--blank">
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">待增补</span>
-            <span class="tl-layer__intro">留给后续增补。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--blank">
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">待增补</span>
-            <span class="tl-layer__intro">留给后续增补。</span>
-          </li>
-          <li class="tl-layer__item tl-layer__item--blank">
-            <span class="tl-layer__dot" aria-hidden="true"></span>
-            <span class="tl-layer__name">待增补</span>
-            <span class="tl-layer__intro">留给后续增补。</span>
           </li>
         </ol>
       </div>
