@@ -22,6 +22,28 @@
     });
   }
 
+  /* 导航「更多」：点击开合，点外部或 Esc 收起；桌面悬停交给 CSS */
+  var more = document.querySelector(".nav-more");
+  var moreBtn = more && more.querySelector(".nav-more-btn");
+  if (moreBtn && more.querySelector(".nav-more-panel")) {
+    var setMore = function (open) {
+      more.classList.toggle("is-open", open);
+      moreBtn.setAttribute("aria-expanded", String(open));
+    };
+    moreBtn.addEventListener("click", function (event) {
+      event.stopPropagation();
+      setMore(!more.classList.contains("is-open"));
+    });
+    document.addEventListener("click", function (event) {
+      if (!more.contains(event.target)) setMore(false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && more.classList.contains("is-open")) {
+        setMore(false);
+        moreBtn.focus();
+      }
+    });
+  }
   var overlay = document.querySelector(".story-overlay");
   if (!overlay) return;
 

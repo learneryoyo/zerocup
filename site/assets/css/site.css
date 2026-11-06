@@ -43,10 +43,11 @@ img { display: block; max-width: 100%; }
 /* 页眉标志预留：正式标志以 <img class="brand-logo"> 放入 .brand，位于站名之前。 */
 .brand-logo { display: block; height: 34px; width: auto; }
 .brand-name { font: 700 18px/1 var(--serif); letter-spacing: .14em; }
-.primary-nav { display: flex; align-items: center; gap: clamp(24px,3vw,48px); }
-.primary-nav a { position: relative; padding: 27px 0 23px; font-size: 14px; text-decoration: none; letter-spacing: .1em; }
-.primary-nav a::after { content: ""; position: absolute; right: 0; bottom: 18px; left: 0; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
-.primary-nav a:hover::after, .primary-nav a:focus-visible::after, .primary-nav a.is-current::after { transform: scaleX(1); transform-origin: left; }
+.primary-nav { display: flex; align-items: center; align-self: stretch; gap: clamp(24px,3vw,48px); }
+.primary-nav a, .nav-more-btn { position: relative; padding: 27px 0 23px; font-size: 14px; text-decoration: none; letter-spacing: .1em; }
+.primary-nav a::after, .nav-more-btn::before { content: ""; position: absolute; right: 0; bottom: 18px; left: 0; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
+.primary-nav a:hover::after, .primary-nav a:focus-visible::after, .primary-nav a.is-current::after,
+.nav-more-btn:hover::before, .nav-more-btn:focus-visible::before, .nav-more.is-open .nav-more-btn::before, .nav-more-btn.is-current::before { transform: scaleX(1); transform-origin: left; }
 .nav-toggle { display: none; border: 0; background: transparent; cursor: pointer; }
 
 /* 首页专属样式见 home.css。 */
@@ -117,11 +118,39 @@ img { display: block; max-width: 100%; }
   .nav-toggle { display: block; padding: 12px 0 12px 16px; }
   .primary-nav { position: absolute; top: 100%; right: 0; left: 0; padding: 12px 20px 24px; display: grid; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); transform: scaleY(0); transform-origin: top; opacity: 0; visibility: hidden; transition: transform 180ms ease,opacity 180ms ease,visibility 180ms; }
   .primary-nav.is-open { transform: scaleY(1); opacity: 1; visibility: visible; }
-  .primary-nav a { padding: 14px 0; font-size: 15px; }
-  .primary-nav a::after { bottom: 8px; }
+  .primary-nav a, .nav-more-btn { padding: 14px 0; font-size: 15px; }
+  .primary-nav a::after, .nav-more-btn::before { content: none; }
+  .primary-nav a.is-current, .nav-more.is-open .nav-more-btn, .nav-more-btn.is-current { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
   .site-footer { align-items: flex-start; flex-direction: column; }
   .story-shell { width: 100vw; height: 100vh; height: 100dvh; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* ---------- 导航：更多（下拉） ---------- */
+.nav-more { position: relative; display: flex; align-items: center; align-self: stretch; }
+.nav-more-btn { border: 0; background: transparent; cursor: pointer; }
+.nav-more-btn::after { content: ""; display: inline-block; width: 5px; height: 5px; margin-left: 7px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; vertical-align: 3px; transform: rotate(45deg); transition: transform 180ms ease; }
+.nav-more-panel { position: absolute; top: 100%; right: 0; z-index: 60; min-width: 208px; padding: 12px 16px 14px; background: var(--paper); border: 1px solid var(--line); opacity: 0; visibility: hidden; transition: opacity 150ms ease, visibility 150ms; }
+.nav-more-panel a { display: block; padding: 7px 0; font-size: 13.5px; letter-spacing: .02em; color: var(--ink); white-space: nowrap; }
+.nav-more-panel a::after { content: none; }
+.nav-more-panel a:hover, .nav-more-panel a:focus-visible { color: var(--red); }
+.nav-more-group { margin: 0 0 4px; font-size: 11px; letter-spacing: .22em; color: #6c675f; }
+.nav-more-panel a.nav-more-about { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--line); }
+.nav-more-panel a.is-current { color: var(--red); }
+.nav-more.is-open .nav-more-panel, .nav-more:focus-within .nav-more-panel { opacity: 1; visibility: visible; }
+.nav-more.is-open .nav-more-btn::after { transform: rotate(225deg); }
+
+@media (hover: hover) {
+  .nav-more:hover .nav-more-panel { opacity: 1; visibility: visible; }
+  .nav-more:hover .nav-more-btn::after { transform: rotate(225deg); }
+}
+@media (max-width: 700px) {
+  .nav-more { display: block; align-self: auto; }
+  .nav-more-btn { display: block; width: 100%; text-align: left; }
+  .nav-more-btn::after { margin-left: 6px; vertical-align: 2px; }
+  .nav-more-panel { position: static; display: none; min-width: 0; padding: 0 0 6px 14px; background: none; border: 0; opacity: 1; visibility: visible; transition: none; }
+  .nav-more.is-open .nav-more-panel { display: block; }
+  .nav-more-panel a { padding: 9px 0; font-size: 14px; }
 }
