@@ -69,8 +69,10 @@
 | 分段水墨图 | 团队用 AI 生成，非历史实物或实景图 |
 | 沈寿肖像、《耶稣像》绣品 | 已贴入长卷，团队收集，原始出处和授权待补 |
 | 生成时参考的河姆渡构件、干栏式建筑、应县木塔、铁枝木偶、元青花瓶 | 团队收集，原始出处和授权待补 |
-| 《非遗法》线装书、首批名录挂轴 | AI 生成的示意画，不是法律文本或名录实物；题签上的书名为后期写入 |
-| 2009、2022 两个节点 | 尚无水墨图，时间轴上暂时只显示文字 |
+| 《非遗法》线装书、首批名录挂轴 | AI 生成的示意画，不是法律文本或名录实物；题签文字为后期写入，线装书题签用简称「非遗法」 |
+| 第 6 段（2009 香山帮、2011 线装书、2022 制茶） | 合成为一张 AI 示意画，不是具体项目的现场记录 |
+| 2009 生成参考 `docs/timeline-guide/seg6/4-suzhou-eaves.jpg` | 拙政园廊檐，Wikimedia Commons，CC BY-SA 3.0：https://commons.wikimedia.org/wiki/File:07.%E6%8B%99%E6%94%BF%E5%9B%AD%E5%BB%8A%E6%AA%90.jpg ；只作生成参考，不直接上站 |
+| 2022 生成参考 `docs/timeline-guide/seg6/5-tea-wok-firing.jpg` | Workers heat tea leaves in tourist area of Chinese plantation，Wikimedia Commons，CC BY-SA 3.0：https://commons.wikimedia.org/wiki/File:Workers_heat_tea_leaves_in_tourist_area_of_Chinese_plantation.jpg ；只作生成参考，不直接上站 |
 
 ## 舞蹈页（2026-11-06）
 
