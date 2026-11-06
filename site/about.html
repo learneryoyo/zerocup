@@ -3,16 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="关于「非遗辑录」：一个由学生团队手工编写的非遗数字展馆，说明它的缘起、走法、取材与做法。">
+  <meta name="theme-color" content="#10100f">
   <title>关于我们 · 非遗辑录</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/about.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到主要内容</a>
+
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="非遗辑录首页">
       <span class="brand-name">非遗辑录</span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">菜单</button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>菜单</span></button>
     <nav class="primary-nav" id="primary-nav" aria-label="主导航">
       <a href="index.html">首页</a>
       <a href="heritage.html">非遗辑录</a>
@@ -20,19 +25,156 @@
       <a href="about.html" aria-current="page" class="is-current">关于我们</a>
     </nav>
   </header>
-  <main id="main-content" class="blank-page">
-    <h1 class="visually-hidden">关于我们</h1>
-    <!-- 此页按需求留空，后续内容请添加在 main 内。 -->
+
+  <main id="main-content" class="about" tabindex="-1">
+    <section class="about-hero" aria-labelledby="about-title">
+      <p class="about-eyebrow">ABOUT · 关于本站</p>
+      <h1 id="about-title">关于这座<br><span>纸上展馆。</span></h1>
+      <div class="about-hero__foot">
+        <p class="about-lead">
+          我们没有把非遗做成一份资料汇编。
+          这里更像一间可以走进去的展馆：先看见物，再看见人，最后看见一门手艺在时间里留下的手印。
+        </p>
+        <ul class="about-facts" aria-label="站点概况">
+          <li><strong>五</strong><span>个分类页</span></li>
+          <li><strong>廿一</strong><span>项代表项目</span></li>
+          <li><strong>三十</strong><span>个焕新案例</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="about-body">
+      <ol class="about-sections">
+        <li class="about-section" id="why">
+          <div class="about-section__head">
+            <span class="about-no" aria-hidden="true">01</span>
+            <h2>为什么做它</h2>
+          </div>
+          <div class="about-section__body">
+            <p>
+              比赛给的主题是「匠心传承，非遗焕新」。真正难的从来不是找到资料——
+              非遗名录、保护单位、传承人档案都在网上；难的是让人愿意多看两分钟。
+            </p>
+            <p>
+              所以我们把「知识」拆成「看见的顺序」：先用一件器物、一张脸、一道工序把人留住，
+              再把它的来历、工序、名录信息放在下面，等读者自己走近。展陈的思路来自博物馆：
+              展签写得再准，也要先有一件让人停下来的展品。
+            </p>
+            <p class="about-quote">
+              「传统不是一件被时间封存的旧物。它在人的手里，被一遍遍做成新的今天。」
+            </p>
+          </div>
+        </li>
+
+        <li class="about-section" id="walk">
+          <div class="about-section__head">
+            <span class="about-no" aria-hidden="true">02</span>
+            <h2>怎么走一遍</h2>
+          </div>
+          <div class="about-section__body">
+            <p>全站四层，建议按这个顺序走。每一层都可以单独打开，不需要从头开始。</p>
+            <ul class="about-route">
+              <li>
+                <a href="index.html"><span class="about-route__no">壹</span><strong>首页</strong><em>见物</em></a>
+                <p>双图首屏与本期辑录，两张专题图可以直接展开成独立篇章。</p>
+              </li>
+              <li>
+                <a href="heritage.html"><span class="about-route__no">贰</span><strong>非遗辑录</strong><em>见类</em></a>
+                <p>一幅长卷，山脚的每一组剪影都是一个入口，按四色分四类。</p>
+              </li>
+              <li>
+                <a href="category/objects.html"><span class="about-route__no">叁</span><strong>分类页</strong><em>见工</em></a>
+                <p>器物、戏曲、舞蹈、食物、节日五页，按「工艺—工序—人」逐项展开。</p>
+              </li>
+              <li>
+                <a href="revival.html"><span class="about-route__no">肆</span><strong>古艺新生</strong><em>见今</em></a>
+                <p>三十个焕新案例，可按柜台或分类浏览，玻璃展柜里的展品可以叩开。</p>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="about-section" id="sources">
+          <div class="about-section__head">
+            <span class="about-no" aria-hidden="true">03</span>
+            <h2>材料从哪里来</h2>
+          </div>
+          <div class="about-section__body">
+            <p>
+              文字以中国非物质文化遗产网公布的项目档案为骨架，涉及地方节俗的部分，另核了新华社、
+              地方政府与地方媒体的报道。名录编号、批次、申报地区照官方页面抄录，不用回忆补全。
+            </p>
+            <p>
+              图片有三路来源：博物馆开放获取的高清馆藏（克利夫兰艺术博物馆、大都会艺术博物馆、
+              芝加哥艺术博物馆等，多为 CC0），开放许可的摄影（如 Wikimedia Commons 上的 CC BY-SA 作品），
+              以及团队自摄、自绘与生成的素材。凡是馆藏与摄影作品，图注里写摄影者或收藏机构；
+              逐条的来源、许可与核验日期记在 <a href="../docs/sources.md">docs/sources.md</a>，
+              不把「找不到出处」的照片说成已授权。
+            </p>
+            <p class="about-note">
+              站内的分类是编辑分组，不是国家级名录的官方十大类；某一项属于人类非遗代表作还是国家级项目，
+              页面分别标注，不混称。
+            </p>
+          </div>
+        </li>
+
+        <li class="about-section" id="build">
+          <div class="about-section__head">
+            <span class="about-no" aria-hidden="true">04</span>
+            <h2>怎么搭起来</h2>
+          </div>
+          <div class="about-section__body">
+            <p>
+              全站是手写的 HTML、CSS 与 JavaScript：没有框架、没有组件库、没有外部字体，也没有任何
+              运行时 CDN 请求。把文件夹拷到任何一台电脑，双击 HTML 就能看，断网也一样。
+            </p>
+            <ul class="about-spec">
+              <li><span>基准分辨率</span><strong>1440px</strong><em>另适配 1920 / 720 / 390</em></li>
+              <li><span>运行环境</span><strong>Chrome 129</strong><em>无需构建或安装依赖</em></li>
+              <li><span>动效</span><strong>全部可选</strong><em>系统开启「减少动态效果」后静止呈现</em></li>
+              <li><span>图片</span><strong>按需加载</strong><em>非首屏图 lazy，长图不阻塞首屏</em></li>
+            </ul>
+            <p>
+              交互都留了退路：关掉 JavaScript，导航、分类与全部正文仍然可读；
+              阅读容器里的子页也可以直接用新标签页打开。
+            </p>
+          </div>
+        </li>
+
+        <li class="about-section" id="team">
+          <div class="about-section__head">
+            <span class="about-no" aria-hidden="true">05</span>
+            <h2>谁做的</h2>
+          </div>
+          <div class="about-section__body">
+            <p>
+              这是 2026 零杯网页设计大赛（零组）的参赛作品，由一支学生小队分工完成：
+              有人跑资料与实拍，有人负责分类页的图文，有人做古艺新生的案例，有人把整站串起来。
+              页面上的每一张图、每一段话，都有人对它负责。
+            </p>
+            <p>
+              比赛要求另外提交一份不含个人信息的匿名版，所以这一页只写「谁做了哪件事」，
+              不写姓名、学院与联系方式。若你手上有一张照片、一段工序或一处写错的细节，
+              欢迎直接告诉队里任何一个人。
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="about-end">
+        <p class="about-end__mark" aria-hidden="true">非</p>
+        <p class="about-end__text">见物，见人，见一门手艺的时间。</p>
+      </div>
+    </div>
   </main>
+
   <footer class="site-footer">
     <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
     <nav aria-label="页脚导航">
-      <a href="index.html">首页</a>
-      <a href="heritage.html">非遗辑录</a>
-      <a href="revival.html">古艺新生</a>
-      <a href="about.html">关于我们</a>
+      <a href="index.html">首页</a><a href="heritage.html">非遗辑录</a><a href="revival.html">古艺新生</a><a href="about.html">关于我们</a>
     </nav>
   </footer>
+
   <script src="assets/js/site.js"></script>
 </body>
 </html>

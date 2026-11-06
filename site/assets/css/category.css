@@ -69,6 +69,7 @@
 .category-hero__media { position: relative; }
 .category-hero__media img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 8px;
@@ -159,6 +160,7 @@
 .project__media figure { margin: 0; }
 .project__media img {
   width: 100%;
+  height: auto;
   display: block;
   border-radius: 6px;
   cursor: zoom-in;
@@ -182,6 +184,28 @@
 #lion-dance img[src*="lion-04"] { aspect-ratio: 1; object-position: 50% 17%; }
 
 /* ── 分类底部导航 ─────────────────────────────────────────── */
+/* 次入口：同一大类下的另一页（例如瓦舍勾栏里的舞蹈） */
+.cat-also {
+  margin: 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--cat-line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 20px;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: var(--cat-muted);
+}
+.cat-also a {
+  font: 700 clamp(17px, 1.5vw, 21px)/1.4 var(--serif);
+  letter-spacing: .04em;
+  text-decoration: none;
+}
+.cat-also a::after { content: " ↗"; font-size: .8em; color: var(--cat-muted); }
+.cat-also a:hover, .cat-also a:focus-visible { color: var(--cat-accent); }
+.cat-also a:focus-visible { outline: 2px solid var(--cat-accent); outline-offset: 5px; }
+
 .category-nav {
   border-top: 1px solid var(--cat-line);
   padding: 34px 0 56px;
@@ -237,16 +261,7 @@
   border-radius: 6px;
 }
 .cat-lightbox p { margin: 12px 0 0; font-size: 12px; letter-spacing: .06em; color: var(--cat-muted); }
-.cat-lightbox button {
-  margin-top: 12px;
-  padding: 7px 16px;
-  border: 1px solid var(--cat-line);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--cat-muted);
-  cursor: pointer;
-}
-.cat-lightbox button:hover { color: var(--cat-accent); border-color: var(--cat-accent); }
+.cat-lightbox button { margin-top: 12px; float: right; }
 
 /* ── 内容整理中 ───────────────────────────────────────────── */
 .category-empty {

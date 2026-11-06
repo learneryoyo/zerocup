@@ -8,6 +8,11 @@
   --page-gutter: clamp(20px, 4vw, 64px);
   --serif: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
   --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+  /* 角标与键：赭红 / 墨绿，30×20 的键带不规则纹样 */
+  --mark-red: #9e3b26;
+  --mark-green: #24422f;
+  --mark-pattern-red: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='20' viewBox='0 0 30 20'%3E%3Cg fill='none' stroke='%23dda490' stroke-opacity='.40' stroke-width='.85' stroke-linecap='round'%3E%3Cpath d='M-3 16c4.6-3.9 7.3 1.5 11.7-2.5 3.4-3.1 6.7-.4 10.3-3.3 2.4-1.9 4.7-1.2 6.9.5'/%3E%3Cpath d='M-3 11.3c4.9-3.5 7.1 1 11.3-2.9 3.2-2.8 6.5.2 9.9-2.5 2.7-1.9 5.3-1.4 7.8.3'/%3E%3Cpath d='M1.6 6.9c2.9-2.3 5.3.2 8.2-1.9 2.4-1.7 4.7.6 7.1-1.1'/%3E%3C/g%3E%3Cg fill='none' stroke='%23dda490' stroke-opacity='.30' stroke-width='.85'%3E%3Cpath d='M6.2 17.8c-2-1.2-1.4-4 1.3-4.5 2.5-.5 4.4 1.5 3.6 3.3-.6 1.7-3.3 2.1-4.9 1.2z'/%3E%3Cpath d='M8.6 16.6c-.9-.6-.5-2 .6-2.2 1.2-.2 2 .7 1.6 1.6-.3.7-1.5.9-2.2.6z'/%3E%3C/g%3E%3C/svg%3E");
+  --mark-pattern-green: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='20' viewBox='0 0 30 20'%3E%3Cg fill='none' stroke='%2393b29d' stroke-opacity='.42' stroke-width='.85'%3E%3Cpath d='M3.6 16.6c-3.5-2.3-2.7-7.6 1.7-9.4 5.5-2.4 11.3-.4 12.1 3.9.8 4.5-3.3 7.8-8.2 8-2.3.1-4.2-.9-5.6-2.5z'/%3E%3Cpath d='M6.4 15c-2.5-1.8-1.9-5.5 1.2-6.8 4-1.6 8.1-.2 8.6 2.8.5 3.1-2.5 5.4-5.9 5.5-1.6.1-2.8-.5-3.9-1.5z'/%3E%3Cpath d='M9.1 13.3c-1.5-1.1-1.1-3.3.7-4.1 2.4-1 4.7-.1 5 1.7.3 1.8-1.5 3.3-3.5 3.4-1 0-1.7-.3-2.2-1z'/%3E%3Cpath d='M11.8 11.8c-.8-.7-.5-1.9.5-2.3 1.3-.5 2.6 0 2.8 1 .2 1-.9 1.8-2 1.9-.6 0-1-.2-1.3-.6z'/%3E%3Cpath d='M22 5.2c1.6-1.2 3.6-.6 4.1 1.1.5 1.7-.6 3.2-2.2 3.4-1.6.2-3-1-3-2.5 0-.8.4-1.5 1.1-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -63,9 +68,42 @@ img { display: block; max-width: 100%; }
 .story-overlay.is-open .story-shell { transform: translate(0,0) scale(1); opacity: 1; }
 .story-overlay.is-fullscreen .story-shell { width: 100vw; height: 100vh; height: 100dvh; }
 .story-controls { position: absolute; z-index: 3; top: 14px; right: 14px; display: flex; gap: 8px; }
-.story-control { width: 42px; height: 42px; padding: 11px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; color: #fff; background: rgba(15,15,14,.58); cursor: pointer; backdrop-filter: blur(8px); transition: color 160ms ease,background 160ms ease,transform 160ms ease; }
-.story-control:hover, .story-control:focus-visible { color: var(--ink); background: var(--accent); transform: scale(1.06); outline: none; }
-.story-control svg { width: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+/* 退出键 / 全屏键：赭红、墨绿小矩形，带不规则纹样 */
+.story-control,
+.cat-lightbox button,
+.rv-close,
+.tl-layer__exit {
+  width: 30px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--mark-red);
+  background-image: var(--mark-pattern-red);
+  background-size: 30px 20px;
+  background-repeat: no-repeat;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: filter .2s ease;
+}
+.story-control:hover,
+.cat-lightbox button:hover,
+.rv-close:hover,
+.tl-layer__exit:hover { filter: brightness(1.16); }
+.story-control:focus-visible,
+.cat-lightbox button:focus-visible,
+.rv-close:focus-visible { outline: 2px solid rgba(255,255,255,.8); outline-offset: 2px; }
+.story-control[data-story-fullscreen] {
+  background-color: var(--mark-green);
+  background-image: var(--mark-pattern-green);
+}
+.story-control svg { display: none; }
 .story-frame { width: 100%; height: 100%; display: block; border: 0; background: var(--paper); }
 
 .blank-page { min-height: calc(100vh - var(--header-height)); padding: clamp(72px,10vw,140px) var(--page-gutter); display: grid; place-items: center; text-align: center; }

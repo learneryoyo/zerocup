@@ -80,7 +80,7 @@
 .rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: min(86vh, 760px); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--paper); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
 .rv-dialog::backdrop { background: rgba(58, 18, 18, .55); backdrop-filter: blur(3px); }
 .rv-dialog[open] { animation: rv-pop 280ms cubic-bezier(.22, 1, .36, 1); }
-.rv-close { position: absolute; z-index: 3; top: 12px; right: 12px; width: 38px; height: 38px; border: 1px solid var(--rv-gold); border-radius: 50%; color: var(--rv-cream); background: var(--rv-brown); font-size: 20px; line-height: 1; cursor: pointer; }
+.rv-close { position: absolute; z-index: 3; top: 12px; right: 12px; }
 .rv-close:focus-visible { outline: 2px solid var(--rv-gold); outline-offset: 3px; }
 .rv-dialog-body { max-height: inherit; overflow-y: auto; }
 .rv-detail { display: grid; grid-template-columns: 38% 1fr; }
