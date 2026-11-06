@@ -123,11 +123,12 @@
 }
 
 @media (max-width: 720px) {
-  .revival { padding: 22px 0 40px; grid-template-columns: 1fr; grid-template-areas: "head" "tabs" "panel"; }
+  .revival { padding: 22px 0 40px; grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "tabs" "panel"; }
   .rv-head { padding-inline: 16px; margin-bottom: 18px; }
   .rv-plate { font-size: 24px; }
   .rv-line { font-size: 14px; text-align: center; }
-  .rv-tabs { flex-direction: row; gap: 8px; margin-bottom: 18px; padding: 2px 16px 6px; overflow-x: auto; scrollbar-width: none; }
+  .rv-tabs { flex-direction: row; flex-wrap: nowrap; min-width: 0; width: 100%; gap: 8px; margin-bottom: 18px; padding: 4px 16px 8px; overflow-x: auto; overscroll-behavior-x: contain; touch-action: pan-x pan-y pinch-zoom; scroll-snap-type: x proximity; scroll-padding-inline: 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .rv-tabs .rv-tab { flex-shrink: 0; white-space: nowrap; scroll-snap-align: start; }
   .rv-tabs::-webkit-scrollbar { display: none; }
   .rv-tab, .rv-tab.is-active { flex: none; width: auto; min-height: 50px; padding: 4px 14px 4px 10px; border-radius: 3px; font-size: 15px; }
   .rv-tab.is-active { font-weight: 700; filter: drop-shadow(0 3px 0 var(--rv-brown-deep)); }
