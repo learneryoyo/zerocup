@@ -1,0 +1,114 @@
+/* 舞蹈页：沿用分类页版式，只补这一页需要的构图与「观看要点」。 */
+
+body.dance-body { background: var(--paper); }
+
+.dance-page[data-accent="dance"] {
+  --cat-accent: #6a4a7c;
+  --dance-rule: rgba(106, 74, 124, .22);
+}
+
+/* ── 首屏：给照片留一圈淡淡的「展台」边 ─────────────────── */
+.dance-hero__media { padding: 0; }
+.dance-hero__media::before {
+  content: "";
+  position: absolute;
+  inset: 18px -18px -18px 18px;
+  border: 1px solid var(--dance-rule);
+  border-radius: 8px;
+  pointer-events: none;
+}
+.dance-hero__media img { object-position: 50% 26%; }
+.dance-hero__media figcaption { position: relative; }
+
+/* ── 分类介绍：文字 + 一件安静的实物 ─────────────────────── */
+.dance-intro { padding-bottom: clamp(52px, 7vw, 96px); }
+.dance-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+.dance-intro p {
+  margin: 0 0 1.1em;
+  max-width: 40em;
+  font-size: clamp(15px, 1.35vw, 19px);
+  line-height: 2;
+  color: #403b33;
+}
+.dance-intro p:last-child { margin-bottom: 0; }
+
+.dance-artifact {
+  margin: 0;
+  justify-self: center;
+  width: min(100%, 300px);
+}
+.dance-artifact img {
+  width: 100%;
+  height: auto;
+  /* 灰底扫描件放在米白纸上：multiply 吃掉白底，再压一点对比，像一页图录 */
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.04) brightness(1.02);
+}
+.dance-artifact figcaption {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--dance-rule);
+  font-size: 11px;
+  letter-spacing: .04em;
+  line-height: 1.9;
+  color: #6c675f;
+}
+
+/* ── 项目：单幅大图，四面裁切 ────────────────────────────── */
+/* 名录全称放在括号里作副题，避免长名字把标题挤成两行 */
+.dance-page .project__alias {
+  display: block;
+  margin-top: 10px;
+  font: 400 clamp(16px, 1.35vw, 21px)/1.5 var(--serif);
+  letter-spacing: .06em;
+  color: #5a544b;
+}
+.dance-page .project__media .media-wide img {
+  aspect-ratio: 4 / 3;
+  object-position: 50% 42%;
+}
+/* 火龙是竖图，取中段，避开画面顶部的水印 */
+#fire-dragon .media-wide img { object-position: 50% 58%; }
+
+/* 「观看要点」：三项小注，用来替代没有第二张图时容易空掉的版面 */
+.dance-cues {
+  margin: 26px 0 0;
+  padding: 18px 0 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  border-top: 1px solid var(--dance-rule);
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: #6c675f;
+}
+.dance-cues li { display: inline-flex; align-items: center; gap: 9px; }
+.dance-cues li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cat-accent);
+  opacity: .75;
+}
+
+/* ── 断点 ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .dance-hero__media::before { inset: 12px -12px -12px 12px; }
+  .dance-intro__grid { grid-template-columns: 1fr; gap: 40px; }
+  .dance-artifact { justify-self: start; width: min(72vw, 260px); }
+}
+@media (max-width: 699px) {
+  .dance-page .project__media .media-wide img { aspect-ratio: 3 / 2; }
+  .dance-cues { font-size: 11px; gap: 8px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dance-page .project__media .media-wide img { transition: none; }
+}
