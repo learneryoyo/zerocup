@@ -66,7 +66,8 @@
 
   const randomButton = document.querySelector("[data-random-explore]");
   if (randomButton) {
-    randomButton.addEventListener("click", () => {
+    randomButton.addEventListener("click", (event) => {
+      event.preventDefault();
       const targets = figures.map((figure) => figure.getAttribute("href"));
       const next = targets[Math.floor(Math.random() * targets.length)];
       window.location.href = next;

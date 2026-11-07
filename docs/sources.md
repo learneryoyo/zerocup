@@ -138,3 +138,31 @@
 | `other-outline.svg` | 古琴与抚琴双手 | 其他色块右侧 |
 
 以上均为本项目编写的 SVG 源码，可人工编辑、替换，无额外外部字体或图片依赖。
+
+
+## 匠人故事拼贴素材
+
+`site/assets/images/diary/collage/` 由团队素材库（`素材-非遗照片`）裁切、抠图或撕边制成，用来代替弹窗里的矢量几何纹样；页面“图注与来源”按页列出署名。其中 CC BY-SA 素材的处理稿沿用原许可。木板、绉缎、金织物三张底纹的素材库记录没有原页链接，公开前需补齐。
+
+| 文件 | 内容 | 作者与许可 | 出处 |
+| --- | --- | --- | --- |
+| `dish-blue.webp` | 元代景德镇青花大盘 | Gary Lee Todd · CC0 | [原页](https://commons.wikimedia.org/wiki/File%3AYuan_Underglaze_Blue_Jingdezhen_Porcelain.jpg) |
+| `jar.webp` | 元代景德镇瓷罐 | Gary Lee Todd · CC0 | [原页](https://commons.wikimedia.org/wiki/File%3AYuan_Jingdezhen_Porcelain_Jar.jpg) |
+| `bowl.webp` | 清康熙景德镇瓷盘 | Gary Lee Todd · CC0 | [原页](https://commons.wikimedia.org/wiki/File%3AQing_Jingdezhen_Porcelain%2C_Kangxi_Reign_09.jpg) |
+| `umbrella.webp` | 泸州油纸伞 | 三猎 · CC BY-SA 4.0 | [原页](https://commons.wikimedia.org/wiki/File%3A%E5%9B%9B%E5%B7%9D%E6%B3%B8%E5%B7%9E%E6%B2%B9%E7%BA%B8%E4%BC%9E.jpg) |
+| `basket.webp` | 傣族竹编鱼箩 | Cangminzho · CC BY-SA 4.0 | [原页](https://commons.wikimedia.org/wiki/File%3A%E5%82%A3%E6%97%8F%E7%AB%B9%E7%BC%963179.jpg) |
+| `box.webp` | 傣族竹编圆盒 | Cangminzho · CC BY-SA 4.0 | [原页](https://commons.wikimedia.org/wiki/File%3A%E5%82%A3%E6%97%8F%E7%AB%B9%E7%BC%96_3178.jpg) |
+| `tray.webp` | 傣族竹编圆桌 | Cangminzho · CC BY-SA 4.0 | [原页](https://commons.wikimedia.org/wiki/File%3A%E5%82%A3%E6%97%8F%E7%AB%B9%E7%BC%96_3178.jpg) |
+| `indigo-ring.webp` | 蓝印花布双喜纹包袱布 | 三猎 · CC BY-SA 4.0 | [原页](https://commons.wikimedia.org/wiki/File%3A%E8%93%9D%E5%8D%B0%E8%8A%B1%E5%B8%83%E5%8F%8C%E5%96%9C%E7%BA%B9%E5%8C%85%E8%A2%B1%E5%B8%83.jpg) |
+| `indigo-sea.webp` | 苏州金鱼荷花蓝印花布被面 | Wikimedia Commons · Public domain | [原页](https://commons.wikimedia.org/wiki/File%3A%E8%8B%8F%E5%B7%9E%E9%87%91%E9%B1%BC%E8%8D%B7%E8%8A%B1%E8%93%9D%E5%8D%B0%E8%8A%B1%E5%B8%83%E8%A2%AB%E9%9D%A2.jpg) |
+| `indigo-bird.webp` | 蓝印花布花鸟纹布料 | 三猎 · CC BY-SA 4.0 | [原页](https://commons.wikimedia.org/wiki/File%3A%E8%93%9D%E5%8D%B0%E8%8A%B1%E5%B8%83%E8%8A%B1%E9%B8%9F%E7%BA%B9%E5%B8%83%E6%96%99.jpg) |
+| `indigo-jiaxing.webp` | 嘉兴花卉蝶鸟蓝印花布 | Wikimedia Commons · Public domain | [原页](https://commons.wikimedia.org/wiki/File%3A%E5%98%89%E5%85%B4%E8%8A%B1%E5%8D%89%E8%9D%B6%E9%B8%9F%E8%93%9D%E5%8D%B0%E8%8A%B1%E5%B8%83_1.jpg) |
+| `strip-dragon.webp` | 馆藏云龙纹椅帔（19 世纪） | The Metropolitan Museum of Art · CC0 | [原页](https://www.metmuseum.org/art/collection/search/52472) |
+| `robe-band.webp` | 馆藏凤穿花纹戏衣（19 世纪） | The Metropolitan Museum of Art · CC0 | [原页](https://www.metmuseum.org/art/collection/search/68994) |
+| `nianhua.webp` | 清晚期桃花坞木版年画《武松血溅鸳鸯楼》 | Wikimedia Commons · Public domain | [原页](https://commons.wikimedia.org/wiki/File%3A%E6%B8%85%E6%99%9A%E6%9C%9F%E6%A1%83%E8%8A%B1%E5%9D%9E%E6%9C%A8%E7%89%88%E5%B9%B4%E7%94%BB_%E6%AD%A6%E6%9D%BE%E8%A1%80%E6%BA%85%E9%B8%B3%E9%B8%AF%E6%A5%BC.jpg) |
+| `shadow.webp` | 馆藏皮影人物 | The Metropolitan Museum of Art · 同原图 | 待补原页 |
+| `wood-band.webp` | 木板肌理（Wood planks） | Poly Haven · CC0 | 待补原页 |
+| `wood-table.webp` | 木板肌理（Wood planks） | Poly Haven · CC0 | 待补原页 |
+| `brocade.webp` | 金色中式织物肌理 | Wikimedia Commons · CC0 | 待补原页 |
+| `satin.webp` | 绉缎肌理（Crepe satin） | Poly Haven · CC0 | 待补原页 |
+| `tex-plaster.webp` | 粉刷墙面肌理（全页底纹） | Amal Kumar / Poly Haven · CC0 | [原页](https://commons.wikimedia.org/wiki/File%3APainted_plaster_wall_diff_16k_%28Amal_Kumar_via_Poly_Haven%29.png) |

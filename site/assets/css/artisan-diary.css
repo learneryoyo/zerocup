@@ -1,2 +1,156 @@
-.artisan-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.artisan-title-row h2{margin-right:0!important}.artisan-story-tag{display:inline-flex;align-items:center;gap:7px;flex:none;border:1px solid #a38159!important;border-radius:3px!important;background:#faf1df!important;color:#76502b!important;padding:5px 10px!important;font:12px/1.6 "Microsoft YaHei",sans-serif!important;letter-spacing:.08em;cursor:pointer;vertical-align:middle;white-space:nowrap;box-shadow:2px 2px 0 #94704a15}.artisan-story-tag::before{content:'▤';font-size:16px}.artisan-story-tag:hover{background:#e9dac0!important;transform:translateY(-1px)}.artisan-story-tag:focus-visible{outline:3px solid #9c4c36;outline-offset:4px}
-.artisan-diary{--diary-accent:#24478c;border:0;padding:0;width:min(1160px,96vw);max-width:1160px;max-height:94dvh;background:transparent;color:#3c3228;overflow:visible;font-family:"Microsoft YaHei",sans-serif}.artisan-diary::backdrop{background:#171a18d9;backdrop-filter:blur(8px)}.diary-shell{position:relative;padding:22px 22px 16px;background:linear-gradient(120deg,#5b493c,#352b25);border-radius:9px;box-shadow:0 30px 100px #0009}.diary-top{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 4px 16px;color:#eee0ca;font-size:12px;letter-spacing:.12em}.diary-close{border:1px solid #b6a58a80;background:transparent;color:#f4ead8;padding:7px 13px;border-radius:3px;font:13px/1.5 sans-serif;cursor:pointer}.diary-book{display:grid;grid-template-columns:1fr 1fr;position:relative;min-height:min(65vh,640px);max-height:calc(94dvh - 128px);overflow:auto;background:#f5ecd8;border-radius:3px;box-shadow:0 3px 0 #c0ae8d,0 6px 0 #e1d2b3,0 9px 0 #9a8769}.diary-book::after{content:'';position:absolute;pointer-events:none;left:calc(50% - 20px);top:0;bottom:0;width:40px;background:linear-gradient(90deg,transparent,#5e49252b 45%,#3d301a36 49%,#fff6dd88 53%,transparent)}.diary-page{padding:38px 42px 34px;position:relative;min-width:0;background:linear-gradient(105deg,#ffffff13,#b0955c09),repeating-linear-gradient(0deg,transparent,transparent 31px,#9f8c6a12 32px);display:flex;flex-direction:column;min-height:560px}.diary-page:nth-child(2){background-color:#f8f0df}.diary-eyebrow{font:11px/1.6 sans-serif;letter-spacing:.18em;color:var(--diary-accent);margin:0 0 23px}.diary-name{font-family:"KaiTi","STKaiti","SimSun",serif;font-size:clamp(28px,3vw,43px);font-weight:400;line-height:1.35;margin:5px 0 20px;letter-spacing:.08em}.diary-subtitle{font:15px/1.7 "SimSun",serif;color:#6c5a43;margin:0 0 22px}.diary-stamp{display:inline-block;align-self:start;border:1px solid var(--diary-accent);color:var(--diary-accent);padding:4px 9px;font:12px/1.6 serif;transform:rotate(-4deg);margin:4px 0 27px}.diary-prose{font:17px/2 "KaiTi","STKaiti","SimSun",serif;letter-spacing:.035em;text-align:justify;margin:10px 0 20px}.diary-date{font:11px/1.7 sans-serif;color:#8b7457;border-bottom:1px solid #b3a08277;padding-bottom:10px;margin-bottom:12px}.diary-heading{font:24px/1.6 "KaiTi","SimSun",serif;margin:7px 0 16px;color:var(--diary-accent)}.diary-footnote{font:11px/1.9 sans-serif;color:#8b7962;margin-top:auto;padding-top:20px}.diary-photo{margin:12px 0 22px;padding:10px 10px 15px;background:#fffdf4;box-shadow:1px 5px 13px #51452c29;transform:rotate(1.5deg);position:relative}.diary-photo::before{content:'';position:absolute;top:-10px;left:38%;height:24px;width:80px;background:#c9b98a77;transform:rotate(-5deg);z-index:1}.diary-photo img{width:100%;height:270px;object-fit:contain;display:block;background:#e8decb;filter:saturate(.8);border:0}.diary-photo figcaption{font:11px/1.75 sans-serif;color:#74644f;padding:10px 3px 0}.diary-photo figcaption a{color:inherit;text-underline-offset:3px}.diary-mini{font:14px/1.9 "SimSun",serif;color:#75644c;margin:8px 0 16px}.diary-source-list{padding-left:18px;margin:12px 0}.diary-source-list li{font:12px/1.8 sans-serif;margin-bottom:15px;overflow-wrap:anywhere}.diary-source-list a{color:var(--diary-accent)}.diary-source-list span{display:block;color:#8a795e;font-size:10px}.diary-page-number{font:italic 12px Georgia;color:#a28f70;text-align:center;padding-top:18px;margin-top:auto}.diary-controls{display:flex;align-items:center;justify-content:center;gap:20px;padding-top:22px;color:#e7d7bd;font:12px sans-serif}.diary-controls button{border:1px solid #c1ac8480;border-radius:3px;color:#f0e4cd;background:#ffffff08;padding:8px 17px;cursor:pointer;font:12px sans-serif}.diary-controls button:disabled{opacity:.3;cursor:default}.diary-controls button:hover:not(:disabled){background:#ffffff18}.diary-book.is-turning{animation:diary-turn .28s ease-out}.diary-reading-note{border-left:2px solid var(--diary-accent);padding-left:15px;margin-top:14px;font:13px/1.9 "SimSun",serif;color:#7b6850}.diary-cover-rule{height:1px;background:#b7a17a88;margin:10px 0 24px;width:70%}.diary-placeholder{border:1px solid #b8a17c;padding:26px 20px;font:16px/2 serif;color:#756345;background:#e9ddc5}.diary-no-scroll{overflow:hidden!important}@keyframes diary-turn{from{opacity:.5;transform:perspective(1200px) rotateY(-3deg)}to{opacity:1;transform:none}}@media(max-width:700px){.artisan-diary{width:96vw;max-height:96dvh}.diary-shell{padding:12px 10px}.diary-top{font-size:10px;padding-bottom:10px}.diary-book{grid-template-columns:1fr;max-height:calc(96dvh - 115px)}.diary-book::after{display:none}.diary-page{padding:27px 24px;min-height:0}.diary-page+ .diary-page{border-top:1px solid #ccb997}.diary-photo img{height:250px}.diary-prose{font-size:17px}.diary-controls{padding-top:18px;gap:12px}.diary-name{font-size:34px}}@media(prefers-reduced-motion:reduce){.diary-book.is-turning{animation:none}.artisan-story-tag:hover{transform:none}}@media print{.artisan-story-tag,.artisan-diary{display:none!important}}
+/* 界面控件用 Radix Colors 的 bronze 12 阶（MIT，radix-ui/colors 3.0.0）：
+   1-2 底、3-5 控件底与悬停、6-8 边框、9-10 实色、11-12 文字。壁面矿物色不走这套，见下。 */
+.artisan-story-tag,.artisan-diary{--bronze-3:#f6edea;--bronze-4:#efe4df;--bronze-6:#dfcdc5;--bronze-8:#c2a499;--bronze-9:#a18072;--bronze-11:#7d5e54;--bronze-12:#43302b;
+ --bronze-d2:#1c1917;--bronze-d4:#302a27;--bronze-d7:#5a4c47;--bronze-d8:#6f5f58;--bronze-d9:#a18072;--bronze-d11:#d4b3a5;--bronze-d12:#ede0d9}
+.artisan-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.artisan-title-row h2{margin-right:0!important}.artisan-story-tag{display:inline-flex;align-items:center;gap:7px;flex:none;border:1px solid var(--bronze-8)!important;border-radius:3px!important;background:var(--bronze-3)!important;color:var(--bronze-12)!important;padding:5px 10px!important;font:12px/1.6 "Microsoft YaHei",sans-serif!important;letter-spacing:.08em;cursor:pointer;vertical-align:middle;white-space:nowrap}.artisan-story-tag::before{content:'▤';font-size:16px}.artisan-story-tag:hover{background:var(--bronze-4)!important;transform:translateY(-1px)}.artisan-story-tag:focus-visible{outline:3px solid var(--bronze-9);outline-offset:4px}
+
+/* 匠人故事：单页。画布 1120×700，字号和位置都随宽度等比缩放，整页留在一屏内。
+   视觉取自敦煌壁画：--paper 壁面、--ink 墨、--accent 主矿物色、--soft 衬色，由 JS 按页写入。 */
+@property --lamp{syntax:'<length>';inherits:false;initial-value:0px}
+.artisan-diary{--foot:44px;--title:"STZhongsong","Songti SC","STSong","Noto Serif SC","SimSun",serif;--text:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;--ui:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
+ border:0;padding:0;background:transparent;overflow:visible;color:var(--ink);
+ width:min(96vw,1200px,calc((96dvh - var(--foot))*1.6));max-width:none;max-height:none;font-family:var(--ui)}
+.artisan-diary::backdrop{background:radial-gradient(ellipse at 50% 42%,#3a2318e8,#120c09f5 72%);backdrop-filter:blur(5px)}
+.artisan-diary ::selection{background:var(--accent);color:var(--paper)}
+.diary-no-scroll{overflow:hidden!important}
+.dp-sheet{position:relative;overflow:hidden;box-shadow:0 18px 70px #0000008c}
+.dp-page{container-type:inline-size;background:var(--paper);color:var(--ink)}
+/* 壁面：几团深浅不匀的土色，像抹过的泥层；只用渐变，不做噪点 */
+.dp-canvas{position:relative;aspect-ratio:1120/700;overflow:hidden;font-size:calc(100cqw/1120*15);background-color:var(--paper);
+ background-image:radial-gradient(60% 50% at 14% 86%,#6b43200f,transparent),radial-gradient(50% 44% at 88% 12%,#6b432012,transparent),radial-gradient(38% 30% at 62% 58%,#fff3d80f,transparent)}
+.dp-canvas::after{content:'';position:absolute;inset:.55em;border:1px solid var(--accent);opacity:.32;pointer-events:none}
+.dp-decor{position:absolute;inset:0;width:100%;height:100%}
+.dp-tex{position:absolute;inset:0;background:url(../images/diary/collage/tex-plaster.webp) center/cover;mix-blend-mode:multiply;opacity:.46;pointer-events:none}
+.dp-clip{position:absolute;height:auto;max-width:none;pointer-events:none;filter:drop-shadow(0 .16em .3em #2a160a55)}
+
+.dp-slot{position:absolute;margin:0}
+/* 榜题：全页最醒目的一处。竖排人名落在一块矿物色牌子上 */
+.dp-head{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:1.15em;align-items:start}
+.dp-name{--plaque:var(--accent);display:flex;flex-direction:row-reverse;justify-content:center;gap:.14em;box-sizing:border-box;margin:0;padding:.5em .42em;background:var(--plaque);color:var(--paper);box-shadow:0 0 0 .14em var(--paper),0 0 0 calc(.14em + 1px) var(--accent);
+ font:700 2.05em/1.1 var(--title);letter-spacing:.06em;writing-mode:vertical-rl;text-orientation:upright;transform-origin:50% 0}
+.dp-name span{display:block;white-space:nowrap}
+.dp-name.many{font-size:1.5em;min-height:0;flex-direction:column;gap:.1em;padding:.6em .5em;letter-spacing:.1em}
+.dp-lead{padding-top:.1em}
+.dp-lead>*{margin:0}
+.dp-title{font:700 1.68em/1.34 var(--title);color:var(--accent);letter-spacing:.03em;text-wrap:balance}
+.dp-project{margin-top:.75em!important;font-size:.84em;line-height:1.5;letter-spacing:.04em}
+.dp-project span{display:block;opacity:.76}
+.dp-identity{margin-top:.2em!important;font-size:.8em;line-height:1.5;opacity:.76}
+.dp-block time{display:flex;align-items:baseline;gap:.7em;font:700 .86em/1.4 var(--title);letter-spacing:.06em;color:var(--ink)}
+.dp-block time i{font:400 .9em/1.4 var(--ui);opacity:.72}
+.dp-block h3{margin:.3em 0 .4em;font:700 1.34em/1.35 var(--title);letter-spacing:.03em;color:var(--accent)}
+.dp-block p{margin:0;font:1.03em/1.74 var(--text);text-align:justify;letter-spacing:.02em;text-wrap:pretty}
+.dp-note{font:1em/1.6 var(--text);letter-spacing:.06em;color:var(--accent);text-wrap:balance}
+.is-dark .dp-block p,.is-dark .dp-note{letter-spacing:.035em}
+.dp-slot.inv,.dp-slot.inv :is(.dp-title,.dp-project,.dp-identity,h3){color:#f7ecd6}
+.dp-slot.inv .dp-name{--plaque:#e6c177;color:#163f4c;box-shadow:0 0 0 .14em #163f4c,0 0 0 calc(.14em + 1px) #e6c177}
+.dp-l2 .dp-note.inv{color:var(--paper)}
+.dp-l3 .dp-note.inv{color:var(--soft)}
+.dp-slot.mid{text-align:center}
+.dp-head.mid{grid-template-columns:auto auto;justify-content:center;text-align:left}
+.dp-l11 .dp-title,.dp-l13 .dp-title,.dp-l16 .dp-title{text-wrap:wrap}
+
+/* 照片：去掉白边和歪斜，改成壁画分栏的框——一道壁面色留白，外加一线矿物色 */
+.dp-photo{position:absolute;margin:0;outline:0}
+.dp-frame{display:block;width:100%;height:100%;overflow:hidden;background:var(--soft);box-shadow:0 0 0 .2em var(--paper),0 0 0 calc(.2em + 1px) var(--accent)}
+.dp-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.dp-photo.w .dp-frame{box-shadow:0 0 0 .2em var(--paper),0 0 0 calc(.2em + 1px) var(--accent),0 .5em 1.1em #2a160a38}
+.dp-photo.c .dp-frame{border-radius:50%}
+.dp-photo.o .dp-frame{border-radius:50%/48%}
+/* 头光：一圈衬色，一圈主色，取自佛像背后的同心光环 */
+.dp-photo.ring .dp-frame{box-shadow:0 0 0 .34em var(--soft),0 0 0 .46em var(--accent),0 0 0 .62em var(--paper),0 0 0 calc(.62em + 1px) var(--accent)}
+.dp-photo figcaption{position:absolute;left:.5em;right:.5em;bottom:.5em;padding:.3em .55em;font:.74em/1.45 var(--ui);color:var(--paper);background:var(--ink);opacity:0;transform:translateY(.3em);transition:opacity .14s,transform .2s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.is-dark .dp-photo figcaption{color:var(--ink);background:var(--paper)}
+.dp-photo.c figcaption,.dp-photo.o figcaption{left:14%;right:14%;bottom:10%;text-align:center}
+.dp-photo:hover img,.dp-photo:focus-visible img{transform:scale(1.03)}
+.dp-photo:hover figcaption,.dp-photo:focus-visible figcaption{opacity:1;transform:none}
+.dp-photo:focus-visible .dp-frame{outline:2px solid var(--accent);outline-offset:.34em}
+.dp-photo.is-missing{visibility:hidden}
+
+/* 起稿线：Rough.js 画好后接管线框和榜题底，规整的 CSS 版本只在脚本缺失时出现 */
+.dp-rough{position:absolute;left:0;top:0;width:100%;aspect-ratio:var(--ar);height:auto;overflow:visible;pointer-events:none}
+.dp-name .dp-rough{height:100%;aspect-ratio:auto;z-index:-1}
+.dp-name{position:relative;isolation:isolate}
+.dp-photo figcaption{z-index:1}
+.has-rough .dp-canvas::after{display:none}
+.has-rough .dp-frame{box-shadow:0 0 0 .2em var(--paper)}
+.has-rough .dp-photo.w .dp-frame{box-shadow:0 0 0 .2em var(--paper),0 .5em 1.1em #2a160a30}
+.has-rough .dp-photo.ring .dp-frame{box-shadow:none}
+.has-rough .dp-name,.has-rough .dp-slot.inv .dp-name{background:none;box-shadow:none}
+
+.dp-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;box-sizing:border-box;height:var(--foot);padding:0 14px 0 18px;background:var(--bronze-d2);color:var(--bronze-d12);font-size:12px}
+.dp-disclaimer{margin:0;line-height:1.5}
+.dp-kind{margin-right:1em;font:700 13px/1.5 var(--title);letter-spacing:.14em;color:var(--bronze-d11)}
+.dp-actions{display:flex;flex:none;gap:8px}
+.dp-info-toggle,.dp-close{display:inline-flex;align-items:center;gap:6px;flex:none;border:1px solid var(--bronze-d7);border-radius:2px;background:transparent;color:inherit;padding:0 12px;min-height:30px;font:12px/1 var(--ui);cursor:pointer;transition:background-color .14s,color .14s,border-color .14s}
+.dp-close{border-color:var(--bronze-d12);background:var(--bronze-d12);color:var(--bronze-d2)}
+.dp-close svg{width:11px;height:11px}
+.dp-info-toggle:hover{background:var(--bronze-d4);border-color:var(--bronze-d8)}.dp-close:hover{background:var(--bronze-d11);border-color:var(--bronze-d11)}
+.dp-info-toggle:focus-visible,.dp-close:focus-visible{outline:2px solid var(--bronze-d9);outline-offset:2px}
+.dp-info{position:absolute;z-index:4;top:0;right:0;bottom:var(--foot);width:min(44%,460px);box-sizing:border-box;overflow:auto;padding:22px 24px;background:var(--bronze-3);color:var(--bronze-12);font-size:13px;line-height:1.7;box-shadow:-10px 0 28px #1c0f0840;scrollbar-width:thin;scrollbar-color:var(--bronze-8) transparent;animation:dp-info-in .24s cubic-bezier(.16,1,.3,1)}
+.dp-info[hidden]{display:none}
+.dp-info h3{margin:0 0 8px;font:700 16px/1.4 var(--title);color:var(--bronze-12)}
+.dp-info ol{margin:0 0 18px;padding-left:18px}
+.dp-info li{margin-bottom:6px;overflow-wrap:anywhere}
+.dp-info li span{display:block;font-size:11px;color:var(--bronze-11)}
+.dp-info a{color:var(--bronze-11);text-underline-offset:2px}
+.dp-info p{margin:0;font-size:11px;color:var(--bronze-11)}
+@keyframes dp-info-in{from{opacity:0;transform:translateX(1.2em)}}
+
+/* 持灯入窟：一个时刻，三个层次。光圈由按钮处散开 → 颜料由暗转明 → 榜题垂落 */
+.dp-sheet{--lx:50%;--ly:50%;--lamp-end:1800px}
+.is-opening .dp-sheet,.is-closing .dp-sheet{-webkit-mask-image:radial-gradient(circle at var(--lx) var(--ly),#000 calc(var(--lamp)*.68),#0000 var(--lamp));mask-image:radial-gradient(circle at var(--lx) var(--ly),#000 calc(var(--lamp)*.68),#0000 var(--lamp))}
+.is-opening .dp-sheet{animation:dp-lamp .9s cubic-bezier(.3,.55,.15,1) both}
+.is-opening::backdrop{animation:dp-dim .3s ease-out both}
+.is-opening .dp-photo img{animation:dp-pigment .95s cubic-bezier(.16,1,.3,1) .1s backwards}
+.is-opening .dp-name{animation:dp-hang .56s cubic-bezier(.16,1,.3,1) .24s backwards}
+.is-closing .dp-sheet{animation:dp-lamp-out .24s cubic-bezier(.5,0,.8,.4) both}
+.is-closing::backdrop{animation:dp-dim .24s ease-in reverse both}
+@keyframes dp-lamp{from{--lamp:0px;transform:scale(.985)}to{--lamp:var(--lamp-end);transform:none}}
+@keyframes dp-lamp-out{from{--lamp:var(--lamp-end);opacity:1}to{--lamp:0px;opacity:.4}}
+@keyframes dp-dim{from{opacity:0}}
+@keyframes dp-pigment{from{filter:sepia(.75) brightness(.55) saturate(.7)}}
+@keyframes dp-hang{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(-.4em)}}
+
+/* 窄屏：放弃坐标，按 DOM 顺序竖排，图片两列 */
+@media(max-width:820px){
+ .artisan-diary{width:100vw;max-height:100dvh;height:100dvh;margin:0;overflow:auto;background:var(--paper,#efe3cb)}
+ .dp-sheet{min-height:100%;overflow:visible;display:flex;flex-direction:column;box-shadow:none}
+ .dp-page{container-type:normal;flex:1}
+ .dp-canvas{aspect-ratio:auto;min-height:100%;box-sizing:border-box;font-size:15px;padding:30px 18px 26px;align-items:start;display:grid;grid-template-columns:1fr 1fr;gap:16px;overflow:visible}
+ .dp-canvas::before{content:'';position:absolute;left:0;right:0;top:8px;height:8px;background:radial-gradient(circle,var(--accent) 3px,transparent 3.5px) 0 0/14px 8px repeat-x}
+ .dp-canvas::after,.dp-decor,.dp-clip{display:none}
+ .dp-slot{position:static;grid-column:1/-1;width:auto!important}
+ .dp-photo{position:relative;left:auto!important;top:auto!important;width:auto!important;height:auto!important}
+ .dp-photo .dp-frame{height:auto;aspect-ratio:var(--ar)}
+ .dp-head+.dp-photo,.dp-photo:nth-of-type(even):last-of-type{grid-column:1/-1}
+ .dp-head.mid{grid-template-columns:auto minmax(0,1fr);justify-content:stretch}
+ .dp-slot.mid{text-align:left}
+ .dp-name{font-size:32px}
+ .dp-name.many{font-size:20px;min-height:0}
+ .dp-title{font-size:22px}
+ .dp-block p{font-size:16px;line-height:1.85}
+ .dp-photo figcaption{position:static;padding:.5em 0 0;opacity:1;transform:none;font-size:12px;color:inherit;background:none;text-align:left}
+ .is-dark .dp-photo figcaption{color:inherit;background:none}
+ .dp-photo.c figcaption,.dp-photo.o figcaption{text-align:center}
+ .dp-photo:hover img,.dp-photo:focus-visible img{transform:none}
+ /* 色块不再铺在文字下面，反白文字退回常规配色 */
+ .dp-slot.inv,.dp-slot.inv :is(.dp-project,.dp-identity){color:var(--ink)}
+ .dp-slot.inv :is(.dp-title,h3),.dp-note.inv{color:var(--accent)!important}
+ .dp-slot.inv .dp-name{--plaque:var(--accent);color:var(--paper);box-shadow:0 0 0 .14em var(--paper),0 0 0 calc(.14em + 1px) var(--accent)}
+ .dp-foot{position:sticky;bottom:0;z-index:5;flex-wrap:wrap;height:auto;padding:8px 14px;line-height:1.5}
+ .dp-disclaimer{flex:1 1 100%}
+ .dp-actions{margin-left:auto}
+ .dp-info-toggle,.dp-close{min-height:40px}
+ .dp-info{position:static;width:auto;overflow:visible;box-shadow:none;animation:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .artisan-story-tag:hover{transform:none}
+ .dp-photo img,.dp-photo figcaption{transition:none}
+ .dp-photo:hover img,.dp-photo:focus-visible img{transform:none}
+ .is-opening .dp-photo img,.is-opening .dp-name,.dp-info{animation:none}
+ .is-opening .dp-sheet,.is-closing .dp-sheet{-webkit-mask-image:none;mask-image:none}
+ .is-opening .dp-sheet{animation:dp-dim .2s ease-out both}
+ .is-closing .dp-sheet{animation:dp-dim .16s ease-in reverse both}
+}
+@media print{.artisan-story-tag,.artisan-diary{display:none!important}}

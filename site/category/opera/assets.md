@@ -59,11 +59,8 @@ site/category/opera/
 
 > 只有两张图，素材最薄的一组，而且视频也不交了。
 >
-> ⚠️ **图文不符**：图里是**杖头木偶**（有木杆那种），而 `note.md` 写的是
-> **潮州铁枝**（三根铁筷操纵），两者是同一母项下的不同子项。
-> 三个办法：① 换图；② 把这一节的标题和正文改成"杖头"；
-> ③ 正文明确写"这里展示的是杖头一路，潮州铁枝另见文字介绍"。
-> 现在这样直接放上去，懂行的评委一眼能看出来。
+> 这两张是**杖头木偶**，不是铁枝。`opera.html` 已改用 `assets/images/diary/iron-rod-puppet.jpg` 作主图（来源待补），
+> 杖头图只留 `02`，图注写明"同属木偶戏，非铁枝"。`01` 现在只用在匠人故事页。
 
 ---
 
@@ -122,3 +119,17 @@ site/category/opera/
 | `images/motif-peking.webp` | 京剧刀马旦 | 京剧 |
 | `images/motif-shadow.webp` | 皮影老艺人 | 皮影戏 |
 | `images/motif-puppet.webp` | 提线木偶 | 木偶戏 |
+
+## 匠人故事用图（`site/assets/images/diary/`）
+
+匠人故事单页版式用到的新增文件，其余图片直接引用各项目目录，不再内嵌进 `artisan-diary-data.js`。
+
+| 文件 | 内容 | 作者／来源 | 许可 |
+|---|---|---|---|
+| `wang-peiyu-zhaoshi.jpg` | 王珮瑜演出《赵氏孤儿》 | 阿登不是拉登 / Wikimedia Commons | CC BY 2.5 |
+| `wang-peiyu-zhaoshi-stage.jpg` | 《赵氏孤儿》舞台全景 | 阿登不是拉登 / Wikimedia Commons | CC BY 2.5 |
+| `iron-rod-puppet.jpg` | 铁枝木偶表演 | 团队提供，来源待补 | 需核实 |
+| `bi-liufu.jpg` | 毕六福展示油纸伞 | 毕原绅 摄 / 人民日报 | 需核实 |
+| `zhang-jianming.jpg` | 张建明 | 今日桐乡 / 桐乡新闻网 | 需核实 |
+
+> `iron-rod-puppet.jpg` 是团队提供的铁枝木偶照片（已裁去手机截图黑边），来源待补；同页另两张仍是杖头木偶，图注已写明。

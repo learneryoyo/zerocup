@@ -327,3 +327,5 @@
 #shadow-puppet .puppet-figure-frame img[src*="shadow-02-"] {
   clip-path: inset(0 0 2px 0);
 }
+/* 铁枝木偶图为竖幅，按原比例显示，木偶和操偶师的手都不被裁切 */
+#puppetry .media-wide img[src*="iron-rod-puppet"] { aspect-ratio: auto; height: auto; }
