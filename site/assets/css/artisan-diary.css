@@ -94,9 +94,6 @@
 .dp-pearls{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .dp-label{position:absolute;z-index:4;display:flex;align-items:center;justify-content:center;font:400 1.75em/1 Georgia,"Times New Roman",serif;color:var(--accent);letter-spacing:.06em;transform:rotate(-2deg)}
 .dp-label span{position:relative}
-.dp-label.sm{font-size:1.05em;transform:rotate(-3deg)} /* 连环格首尾编号 */
-.dp-head-split{display:flex;justify-content:center} /* 母版 D：榜题独占一列 */
-.dp-bigtext{position:absolute;z-index:1;display:flex;align-items:center;justify-content:center;margin:0;font:400 9.5em/1 Georgia,"Times New Roman",serif;color:var(--ink);opacity:.18;letter-spacing:-.02em;white-space:nowrap;pointer-events:none} /* 满幅色地的超大数字底纹 */
 /* 深色壁面：胶带用墨色调出来（壁面本身是深色，按“壁面 +12% 墨”会看不见）；反白字改用壁面色，压在浅色主色纸上才读得清 */
 .is-dark .dp-tape{background:color-mix(in srgb,var(--ink) 58%,var(--paper));opacity:.5}
 .dp-paper.inv .dp-paper-txt{color:var(--paper)}
@@ -175,7 +172,7 @@
  .dp-canvas::before{content:'';position:absolute;left:0;right:0;top:8px;height:8px;background:radial-gradient(circle,var(--accent) 3px,transparent 3.5px) 0 0/14px 8px repeat-x}
  .dp-canvas::after,.dp-decor,.dp-clip{display:none}
  /* 手账元件：叠压在竖排里没有意义。撕边背景、胶带、印章、标签、小景隐去，纸片退化成普通底色块 */
- .dp-paper-bg,.dp-ring,.dp-records,.dp-bigtext,.dp-pearls,.dp-label,.dp-tape,.dp-seal,.dp-strip,.dp-year,.dp-vnote,.dp-paper.is-decor,.dp-scene-card,.dp-defs{display:none}
+ .dp-paper-bg,.dp-ring,.dp-records,.dp-pearls,.dp-label,.dp-tape,.dp-seal,.dp-strip,.dp-year,.dp-vnote,.dp-paper.is-decor,.dp-scene-card,.dp-defs{display:none}
  .dp-paper{position:static;grid-column:1/-1;width:auto!important;height:auto!important;transform:none!important}
  .dp-paper-txt{height:auto;padding:16px!important;background:color-mix(in srgb,var(--soft) 30%,transparent)}
  .dp-head-paper .dp-paper-txt{padding:0!important;background:none}
