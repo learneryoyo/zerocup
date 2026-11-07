@@ -131,8 +131,342 @@ const LAYOUTS={
  p:[[0,352,40,430,'o ring'],[1,800,24,180,'o'],[2,990,24,100,''],[3,372,330,170,'w'],[4,556,340,220,'w']]},
 };
 
+// ── 手账槽位系统（逐页迁移中）────────────────────────────────────────────
+// 画布 1120×700 切成 8 列 × 6 行：列宽 116、行高 90、槽 16、边距 40。所有色块边界落在网格线或半格（列 +58 / 行 +45）上。
+// PAGES 里登记过的页走这套；没登记的仍用上面的 LAYOUTS（LAYOUTS 是回退路径，也是每页独有 decor 的存档，别删）。
+const G={x0:40,y0:40,cw:116,ch:90,gap:16,cols:8};
+const gx=k=>G.x0+Math.floor(k)*(G.cw+G.gap)+(k%1)*G.cw;        // 列 k 的左边（k 可为 .5）
+const gy=k=>G.y0+Math.floor(k)*(G.ch+G.gap)+(k%1)*G.ch;        // 行 k 的上边
+const ex=e=>e%1?gx(e):gx(e)-G.gap, ey=e=>e%1?gy(e):gy(e)-G.gap; // 跨到第 e 条线时的右/下边（整数线要退回一个槽）
+// [列,行,跨列,跨行] → 像素盒；flip 时左右镜像
+const box=([c,r,cs=1,rs=1],flip)=>{if(flip)c=G.cols-c-cs;const x=gx(c),y=gy(r);return{x,y,w:ex(c+cs)-x,h:ey(r+rs)-y}};
+const at=b=>`left:${pct(b.x,1120)};top:${pct(b.y,700)};width:${pct(b.w,1120)};height:${pct(b.h,700)}`;
+
+// ── §3.5 撕边：把直边和正圆全部换掉 ──────────────────────────────────────
+// 所有 seed 由 d.id 派生（d.id*1000+k），同一页每次打开撕口完全一致；全程不用 Math.random()。
+// 轮廓一律按屏幕坐标顺时针走（上→右→下→左），外法线 = (dy,-dx)/len；depth 为正时撕口整体朝外偏置。
+function tornEdge(ax,ay,bx,by,depth,seed,step=7){const rnd=rng(seed),dx=bx-ax,dy=by-ay,len=Math.hypot(dx,dy)||1,n=Math.max(4,Math.round(len/step)),nx=dy/len,ny=-dx/len,pts=[];
+ for(let i=0;i<=n;i++){const t=i/n;
+  // 低频正弦给方向感，高频抖动给毛刺；0.35 的偏置让撕口整体外凸，而不是贴着边线上下对称地波动
+  const wave=Math.sin(t*Math.PI*3.1+seed)*.45+(rnd()-.5)*1.15,taper=Math.sin(t*Math.PI)**.35,d=depth?depth*taper*(.35+wave):0;
+  pts.push([ax+dx*t+nx*d,ay+dy*t+ny*d])}
+ return pts}
+// 点列 → 平滑 path（Catmull-Rom 转三次贝塞尔），放大也看不到棱角。p 为小数位（objectBoundingBox 坐标要 4 位）
+function toPath(pts,closed=true,p=1){const P=closed?[...pts,pts[0]]:pts,f=v=>v.toFixed(p);let d=`M${f(P[0][0])} ${f(P[0][1])}`;
+ for(let i=0;i<P.length-1;i++){const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||P[i+1];
+  d+=`C${f(p1[0]+(p2[0]-p0[0])/6)} ${f(p1[1]+(p2[1]-p0[1])/6)} ${f(p2[0]-(p3[0]-p1[0])/6)} ${f(p2[1]-(p3[1]-p1[1])/6)} ${f(p2[0])} ${f(p2[1])}`}
+ return d+(closed?'Z':'')}
+// 每块纸片最多撕 2 条边，优先级 下 > 右 > 上 > 左；多给的边按优先级丢掉（limit 只给照片框的轻撕放宽）
+const EDGE_ORDER=['bottom','right','top','left'];
+function pickEdges(t={},limit=2){const o={top:0,right:0,bottom:0,left:0};EDGE_ORDER.filter(k=>t[k]).slice(0,limit).forEach(k=>o[k]=t[k]);return o}
+function paperPts(x,y,w,h,seed,t){const e=(a,b,c,d2,dep,k)=>tornEdge(a,b,c,d2,dep,seed+k).slice(0,-1);
+ return [...e(x,y,x+w,y,t.top,1),...e(x+w,y,x+w,y+h,t.right,2),...e(x+w,y+h,x,y+h,t.bottom,3),...e(x,y+h,x,y,t.left,4)]}
+function paperPath(x,y,w,h,seed,torn={},limit=2){return toPath(paperPts(x,y,w,h,seed,pickEdges(torn,limit)))}
+// 手撕圆：半径带扰动，替换所有 border-radius:50%。照片框 amp .035 / 头光 .02 / 印章 .06
+function tornCircle(cx,cy,r,seed,amp=.05,k=7,p=1){const rnd=rng(seed),N=64,pts=[];
+ for(let i=0;i<N;i++){const a=i/N*Math.PI*2,wob=1+amp*Math.sin(a*k+seed)+(rnd()-.5)*amp*.9;pts.push([cx+Math.cos(a)*r*wob,cy+Math.sin(a)*r*wob])}
+ return toPath(pts,true,p)}
+
+// 拱形（窑门）：左沿自下而上 → 半圆拱顶 → 右沿自上而下 → 底边。pad 向外扩，dep 为两侧撕口深度，amp 为拱顶半径扰动
+function archPts(w,h,seed,pad=0,dep=0,amp=.02){const r=w/2,R=r+pad,rnd=rng(seed+7),pts=[...tornEdge(-pad,h,-pad,r,dep,seed+1).slice(0,-1)];
+ for(let i=0,N=36;i<N;i++){const a=Math.PI+i/N*Math.PI,wob=1+amp*Math.sin(a*6+seed)+(rnd()-.5)*amp*.9;pts.push([r+Math.cos(a)*R*wob,r+Math.sin(a)*R*wob])}
+ return [...pts,...tornEdge(w+pad,r,w+pad,h,dep,seed+2).slice(0,-1),...tornEdge(w+pad,h,-pad,h,0,seed+3).slice(0,-1)]}
+
+// 母版只描述骨架。纸片 = 定位容器（不裁切）+ 撕边背景 svg + 文字层，三者分开，文字内边距 ≥ 撕口深度 + 10px。
+// tone 取 --soft/--accent，o 为透明度 1/.78/.42 三档；torn 写各边撕口深度（中撕 10–16，轻撕 4–6）。
+// 照片区（上沿 3–7 列、右侧 6–7 列、两纸片之间）每页按自己的图比例落位：PAGES[].slots；不写则按 scatter 自动分。
+// tape = [x,y,长,角度]（像素，中心落在两块交界处）。所有坐标按“不镜像”写，flip 时整体左右翻。
+const MASTERS={
+ A:{ // 散点拼贴：人物强、照片质量高，让照片当主角。留白只留一处，在人名的对角（2 列 × 1 行）
+  head:{at:[0,0,3,2],tone:'soft',o:.42,torn:{bottom:12,right:10}},
+  // 段落纸片宽 2.5–3.5 列（一行 18–24 字）；高 2.5 行：实测 110 字的段落在 2 行高里会溢出，按“调母版不缩字号”放到半格
+  blocks:{a:{at:[.5,2,3,2.5],tone:'soft',o:.78,torn:{bottom:14,right:10},rot:-.6,strip:16}, // 右沿与 b 共线，撕开才能咬合
+          b:{at:[3.5,3.5,2.5,2.5],tone:'accent',inv:1,torn:{bottom:14,right:12},rot:.7,strip:120}},
+  decor:[{at:[0,4.5,3.5,1.5],tone:'accent',o:.42,torn:{right:10,top:12}}],
+  spot:{at:[6,2,2,2],dy:19},
+  scene:{at:[6,0,2,2],tone:'soft',o:.42,torn:{bottom:12,right:10}},
+  scatter:[{at:[3,0],w:2},{at:[5,0],w:1,tall:1},{at:[4,2],w:1.5}],
+  note:[0,5.6,3,.4], // 右端让开 b 的时间标签
+  tape:[[178,252,118,-7],[494,648,100,4]], // 第二条压在 b 侧沿的下边距里，避开正文末行
+  seal:[1036,612],
+ },
+ B:{ // 主轴贯穿：一条横带把上下分开，像手账里的时间轴。其余照片沿带的上沿交替跨压（下沿落在带上，高低错开）；
+     // 带下左右两张段落纸，中间一栏放本页记忆点。段落纸 2.5 行高：方案的 2 行装不下 100 字以上的段落，按“调母版不缩字号”加高，带相应收窄到半行。
+     // 留白只留一处：在照片列上方（带上沿照片与页眉之间），人名对角让给了 b 纸片——主轴版的 b 必须落在带下右侧。
+  head:{at:[0,0,3.5,2.5],tone:'soft',o:.42,torn:{bottom:12,right:10}}, // 下沿撕口咬进横带
+  band:{at:[0,2.5,8,.5],tone:'accent',o:1,torn:{bottom:5,top:5}},
+  labels:[[0,2.5,'01'],[7,2.5,'02']],
+  // 段落纸宽 2.5 / 3 列（一行 18–22 字），首字不下沉（方案：B/D 段落较窄）
+  blocks:{a:{at:[.5,3.5,2.5,2.5],tone:'soft',o:.78,torn:{bottom:14,right:10},rot:-.5,strip:18},
+          b:{at:[5,3.5,3,2.5],tone:'accent',inv:1,torn:{bottom:14,right:12},rot:.6,strip:18}},
+  decor:[{at:[3.5,1,4.5,1.5],tone:'soft',o:.42,torn:{top:10,right:8}}, // 照片下垫的一条纸
+         {at:[3,3.5,2,2.5],tone:'accent',o:.42,torn:{bottom:10,top:8}}], // 中间一栏给记忆点垫的卡纸
+  note:[6,0,2,1],
+  tape:[[150,401,100,-3],[780,401,100,3]], // 第一条让开 a 角上的大号年份
+  seal:[1030,646],
+  vnote:false,
+ },
+ D:{ // 连环横读：榜题单独一列，标题组一张横纸；其下一条连环带——照片同高、宽按原图比例、格框是粗矿物色线，首尾格编号；
+     // 带下左右两张段落纸（2.5 行高，长段落才装得下），短句右对齐压在带的下沿。留白只留一处：b 右侧那一列。
+  plaque:{at:[0,0,1,2.5],tone:'soft',o:.78,torn:{bottom:10,right:6}}, // 群像人名竖排约 165px，2.5 行够用
+  head:{at:[1,0,7,1.5],tone:'soft',o:.42,torn:{bottom:8,right:8}},
+  strip:{at:[1,1.5,7,1.5],tone:'accent',o:.42,torn:{bottom:6,top:6},pad:9},
+  blocks:{a:{at:[.5,3.5,3,2.5],tone:'soft',o:.78,torn:{bottom:14,right:10},rot:-.5,strip:18},
+          b:{at:[4,3.5,3,2.5],tone:'accent',inv:1,torn:{bottom:14,right:12},rot:.6,strip:18,yearL:1}},
+  decor:[],
+  note:[5.5,3,2.5,.4], // 右对齐短句，左端让开 b 左上角的年份
+  tape:[[150,401,100,-3],[880,401,100,3]],
+  seal:[1030,615],
+  vnote:false,
+ },
+ E:{ // 满幅色地：整页深色壁面，白字。页眉与段落 a 压在 12% 的浅墨纸上，b 用主色纸；
+     // 右上一片照片区，照片落在四角、中间空出来，让超大数字底纹透出来——这块空处就是本版唯一的留白。
+  head:{at:[0,0,4,2.5],tone:'ink',o:.12,torn:{bottom:10,right:10}},
+  blocks:{a:{at:[.5,3,2.5,2.5],tone:'ink',o:.12,torn:{bottom:14,right:10},rot:-.5,strip:18},
+          b:{at:[5,3,3,2.5],tone:'accent',inv:1,torn:{bottom:14,right:12},rot:.6,strip:18,yearL:1}},
+  decor:[],
+  scene:{tone:'ink',o:1,torn:{bottom:8,right:8}},
+  note:[0,5.6,3,.4],
+  tape:[[150,358,100,-3],[1000,358,100,3]],
+  seal:[1034,622],
+  vnote:false,
+ },
+ C:{ // 左右分区：左边一整列实色手撕纸（撕口朝右）承载人名与段落 01；右边自由——一列竖排照片 + 右上记忆点与横图 + 右下段落 02。
+     // 段落 02 宽 3 列（方案的 4 列一行会到 33 字，超出 18–24 字的行宽），时间标签贴在它外侧（右）、年份压在左上角，让开上方照片。
+     // 留白只留一处：note 那一行的左段（短句右对齐后空出来的 2–3 列）。
+  head:{at:[0,0,3,2.5],tone:'soft',o:0}, // 2.5 行：群像页榜题常有三四列人名
+  blocks:{a:{at:[.5,2.5,2.5,3],tone:'soft',o:0,torn:{},rot:0,strip:18,minPad:{right:28}}, // 文字直接写在左列上；右内边距让开左列 16px 的撕口
+          b:{at:[4.5,3,3,3],tone:'accent',inv:1,torn:{bottom:14},rot:.6,strip:18,stripR:1,yearL:1}},
+  decor:[{at:[0,0,3,5.5],tone:'soft',o:1,torn:{right:16,bottom:10}}], // 左列（底边留半行，覆盖率不超 86%）
+  scene:{at:[6.5,1,1.5,2],tone:'soft',o:.42,torn:{bottom:10,right:8}},
+  note:[4,0,4,1],
+  tape:[[420,585,100,-6],[940,358,100,4]], // 第二条让开 b 左上角的年份
+  seal:[1034,615],
+  vnote:false,
+ },
+};
+// 每页：母版 + 色组 + 镜像 + 记忆点（spot）。同一母版的页靠这三件事拉开差异。
+// spot.type：ring 绷圈 / arch 窑门 / records 唱片 / window 影窗。k 为拼贴件 [素材名,列,行,跨列,旋转]；seal 为印章字；scene 为长卷裁出的小景。
+const SCENE='../assets/images/diary/scenes/';
+const PAGES={
+ 1:{m:'A',c:'qing',flip:1,seal:'录',k:[['jar',.25,4.7,.6,-2]],
+  // 记忆点：主图嵌进窑门——拱形框外两道撕边拱圈，像一层层窑砖
+  spot:{type:'arch',idx:0,at:[6,2,2,1],h:282},
+  slots:[{i:1,at:[3,0],w:2},{i:3,at:[5,0],w:1},{i:2,at:[4,2],w:1.5}],
+  scene:{src:SCENE+'scene-porcelain-vase.webp',cap:'青花玉壶春瓶（插画局部）'}},
+ 2:{m:'A',c:'zhu',flip:0,seal:'传',k:[['strip-dragon',0,5,3,-1]],
+  // 记忆点：主图做成绣绷——手撕头光即绷圈，一根丝线从绷上牵出，落到段落 02
+  spot:{type:'ring',idx:1},thread:1,
+  scene:{src:SCENE+'scene-suzhou-hoop.webp',cap:'绣绷上的牡丹与丝线（插画局部）'}},
+ 3:{m:'B',c:'shilv',flip:0,seal:'记',
+  // 记忆点：人物照上撑开一面伞——手撕伞面、九根伞骨（标题里那把“不能省掉根”的伞）
+  spot:{type:'umbrella',idx:0,photo:[436,460,160]},
+  slots:[{i:2,x:510,w:116,bot:336},{i:4,x:636,w:190,bot:300},{i:1,x:836,w:116,bot:330},{i:3,x:962,w:116,bot:316}]},
+ 4:{m:'B',c:'tuhuang',flip:1,seal:'录',
+  // 记忆点：梁架照装进四根出头搭接的梁枋里，像榫卯
+  spot:{type:'joint',idx:0,photo:[448,380,170]},
+  slots:[{i:1,x:510,w:116,bot:336},{i:3,x:636,w:153,bot:300},{i:4,x:799,w:153,bot:326},{i:2,x:962,w:116,bot:310}]},
+ 14:{m:'B',c:'lv',flip:0,seal:'传',
+  // 记忆点：王永中端着热干面的头像做成一只碗口，三缕热气往上冒（原图是带白边的圆头像，框对准那个圆）
+  spot:{type:'steam',idx:0,photo:[444,450,180],zoom:[.472,.461,.33]},
+  slots:[{i:3,x:510,w:116,bot:336},{i:1,x:636,w:150,bot:304},{i:2,x:796,w:116,bot:330},{i:4,x:940,w:116,bot:314}]},
+ 16:{m:'B',c:'shiqing',flip:1,seal:'录',
+  // 记忆点：围成一圈的鱼糕切片装进圆框，上半圈压一道粗黄边——鱼糕“黄顶白身”的切面
+  spot:{type:'fishcake',idx:0,photo:[446,424,180]},
+  slots:[{i:4,x:510,w:116,bot:336},{i:1,x:634,w:148,bot:300},{i:2,x:790,w:148,bot:326},{i:3,x:946,w:134,bot:304}]},
+ 17:{m:'B',c:'qing',flip:0,seal:'传',
+  // 记忆点：白瓷盘里的干茶放进圆框，外面三圈渐淡的水纹，像茶汤一圈圈漾开
+  spot:{type:'ripple',idx:1,photo:[451,440,170]},
+  slots:[{i:2,x:510,w:116,bot:336},{i:0,x:634,w:157,bot:300},{i:3,x:799,w:116,bot:330},{i:4,x:923,w:157,bot:312}]},
+ 8:{m:'C',c:'shiqing',flip:0,seal:'传',
+  // 记忆点：帘幕后的操偶照下伸出三根铁枝（题目“三根铁枝，撑起一座小戏台”）
+  spot:{type:'rods',idx:0,photo:[436,146,174]},
+  slots:[{i:2,x:626,y:146,w:248},{i:1,x:436,y:440,w:174}],
+  scene:{src:SCENE+'scene-iron-rod-puppet.webp',cap:'铁枝木偶（插画局部）'}},
+ 9:{m:'C',c:'qing',flip:1,seal:'录',k:[['indigo-sea',3,4.85,1.3,-1]],
+  // 记忆点：海边王船那张下面压一条手撕船身和一道水纹
+  spot:{type:'hull',idx:0,photo:[626,146,200]},
+  slots:[{i:3,x:882,y:146,w:198},{i:1,x:436,y:146,w:174},{i:2,x:436,y:391,w:174}]},
+ 10:{m:'C',c:'zhu',flip:0,seal:'记',
+  // 记忆点：银冠照下沿一道银条，垂下一排银铃流苏
+  spot:{type:'fringe',idx:1,photo:[436,146,174]},
+  slots:[{i:4,x:626,y:146,w:284},{i:0,x:942,y:146,w:138},{i:3,x:942,y:254,w:138},{i:2,x:436,y:490,w:106}]},
+ 11:{m:'D',c:'tuhong',flip:0,seal:'记',extra:'run',
+  // 记忆点：队伍从连环带最后一格冲出去——虚线箭头与速度线（“小时候看长辈奔跑”）
+  spot:{type:'none'}},
+ 12:{m:'D',c:'lv',flip:1,seal:'录',extra:'slope',
+  // 记忆点：连环带下一面手撕斜坡——端坡，赛马就在坡上
+  spot:{type:'none'}},
+ 13:{m:'D',c:'qing',flip:0,seal:'传',extra:'water',
+  // 记忆点：连环带浮在一道手撕水面上，下面一条水纹（“把水会重新带回河面”）
+  spot:{type:'none'}},
+ 5:{m:'E',c:'tuhong',flip:0,seal:'传',
+  // 记忆点：照片框中间透出一个超大的“14”——十四岁走上的赛场
+  // 长卷上的“黄龙溪火龙灯舞”是另一个项目（四川），不是藤县狮舞，不拿来当插画
+  spot:{type:'bigtext',text:'14',box:[748,40,172,302]},
+  // 四张照片没有第五张要放，段落纸放宽到几乎相接，中间只留 b 的时间标签
+  blocks:{a:{at:[.5,3,3,2.5]},b:{at:[4.5,3,3,2.5]}},
+  slots:[{i:0,x:568,y:40,w:170},{i:3,x:964,y:40,w:116},{i:1,x:568,y:165,w:116},{i:2,x:930,y:230,w:150}]},
+ 15:{m:'E',c:'shiqing',flip:1,seal:'录',
+  // 记忆点：照片框中间透出“4:00”——凌晨四点开始的一张馅饼
+  spot:{type:'bigtext',text:'4:00',box:[718,40,210,302]},
+  slots:[{i:1,x:568,y:40,w:150},{i:0,x:930,y:40,w:150},{i:2,x:568,y:241,w:150},{i:3,x:452,y:374,w:170},{i:4,x:452,y:503,w:170}],
+  scene:{src:SCENE+'scene-dwarf-pie.webp',cap:'荆门矮子馅饼（插画局部）'},sceneAt:[935,228,145,114]},
+ 6:{m:'A',c:'tuhong',flip:0,seal:'记',k:[['robe-band',0,4.72,3,0]],
+  // 记忆点：两张唱片——人物照压在两张手撕圆的唱片上（题目“两张唱片，引她走进老生的世界”）
+  spot:{type:'records',idx:0,at:[6,2,2,2],discs:[[1000,298,66],[878,342,92]],photo:[912,334,156]},
+  slots:[{i:3,at:[3,0],w:2},{i:2,at:[5,0],w:1},{i:1,at:[4,2],w:1.5}],
+  scene:{src:SCENE+'scene-opera-stage.webp',cap:'戏台与花旦（插画局部）'}},
+ 7:{m:'A',c:'mei',flip:1,seal:'传',k:[['shadow',.2,4.6,.5,3]],
+  // 记忆点：影窗——主图装进一道粗撕边的窗框，纱幕后的三位艺人就是窗里的戏
+  spot:{type:'window',idx:0,at:[3,0,2.5,2]},
+  slots:[{i:1,at:[6,2],w:2},{i:2,at:[4,2.25],w:1.4},{i:3,at:[6,3.7],w:1.5}],
+  scene:{src:SCENE+'scene-shadow-screen.webp',cap:'纱幕皮影（插画局部）'}},
+};
+
+const em=px=>(px/15).toFixed(3)+'em'; // 画布 1em = 15px（按 1120 宽计）
+// 纸片：bg 只放撕边 path（含一层壁面肌理），txt 放文字；撕口朝外，文字层再按深度留足内边距
+function paperEl(b,q,seed,{cls='',html='',tag='div',style=''}={}){const t=pickEdges(q.torn),id=`dp-pp${seed}`,d=paperPath(0,0,b.w,b.h,seed,t),tex=window.ARTISAN_COLLAGE?.['tex-plaster'];
+ const pad=k=>em(Math.max(14,t[k]+10,(q.minPad||{})[k]||0)),rot=q.rot?`;transform:rotate(${q.rot}deg)`:'';
+ return `<${tag} class="dp-paper is-${q.tone}${q.inv?' inv':''}${cls}" style="${at(b)}${rot}${style}"><svg class="dp-paper-bg" viewBox="0 0 ${b.w} ${b.h}" preserveAspectRatio="none" aria-hidden="true"><clipPath id="${id}"><path d="${d}"/></clipPath><path d="${d}" fill="var(--${q.tone})" fill-opacity="${q.o||1}"/>${tex&&(q.o??1)>0?`<image href="${esc(tex.src)}" x="-20" y="-20" width="${b.w+40}" height="${b.h+40}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})" opacity=".3" style="mix-blend-mode:multiply"/>`:''}</svg>`+
+  (html?`<div class="dp-paper-txt" style="padding:${pad('top')} ${pad('right')} ${pad('bottom')} ${pad('left')}">${html}</div>`:'')+`</${tag}>`}
+// 照片：方角换成轻撕 4px，圆框换成手撕圆；保留“壁面色留白 + 一线矿物色”，只是那两环也跟着撕。
+// shape：rect 普通 / circle 绷圈（加头光）/ arch 窑门（加拱圈）/ window 影窗（加粗窗框）
+//        umbrella 伞（照片上方撑一面手撕伞面）/ joint 榫卯（四根梁枋出头搭接）/ steam 一碗热气（手撕圆 + 三缕热气）
+//        fishcake 鱼糕切面（上半圈一道粗黄边 = 黄顶白身）/ ripple 茶汤漾开（三圈渐淡的水纹）
+// zoom=[cx,cy,d]：图里本来就是一张圆形头像（网页配图带白边和题字）时，把框对准那个圆，cx/cy 为圆心、d 为直径占图宽的比例；只去白边，不裁主体
+function tornPhoto(d,i,b,seed,defs,shape='rect',zoom){const p=d.photos[i],{w,h}=b,id=`dp-k${seed}`,P=shape==='umbrella'?140:shape==='steam'?90:shape==='rods'?72:/^(hull|fringe|ripple)$/.test(shape)?52:30,r=w/2,norm=pts=>toPath(pts.map(([x,y])=>[x/w,y/h]),true,4);
+ const clipD=/^(circle|steam|fishcake|ripple)$/.test(shape)?tornCircle(.5,.5,.488,seed,.035,7,4):shape==='arch'?norm(archPts(w,h,seed,-1.5,-3,.02)):norm(paperPts(0,0,w,h,seed,{top:-4,right:-4,bottom:-4,left:-4}));
+ defs.push(`<clipPath id="${id}" clipPathUnits="objectBoundingBox"><path d="${clipD}"/></clipPath>`);
+ const rect=(pad,dep,k)=>paperPath(-pad,-pad,w+pad*2,h+pad*2,seed+k,{top:dep*.6,right:dep,bottom:dep,left:dep*.6},4);
+ const ring={
+  circle:`<path d="${tornCircle(r,h/2,r+3.4,seed+1,.035)}" fill="var(--paper)"/><path d="${tornCircle(r,h/2,r+9,seed+2,.02)}" fill="none" stroke="var(--soft)" stroke-width="8"/><path d="${tornCircle(r,h/2,r+16,seed+3,.02)}" fill="none" stroke="var(--accent)" stroke-width="1.8"/><path d="${tornCircle(r,h/2,r+22,seed+4,.02)}" fill="none" stroke="var(--accent)" stroke-width="1"/>`,
+  arch:`<path d="${toPath(archPts(w,h,seed+1,3.4,2,.02))}" fill="var(--paper)"/><path d="${toPath(archPts(w,h,seed+2,10,3,.02))}" fill="none" stroke="var(--soft)" stroke-width="9"/><path d="${toPath(archPts(w,h,seed+3,18,3,.015))}" fill="none" stroke="var(--accent)" stroke-width="1.8"/><path d="${toPath(archPts(w,h,seed+4,24,2,.015))}" fill="none" stroke="var(--accent)" stroke-width="1"/>`,
+  window:`<path d="${rect(3.4,2,1)}" fill="var(--paper)"/><path d="${rect(10,3,2)}" fill="none" stroke="var(--accent)" stroke-width="9"/><path d="${rect(19,3,3)}" fill="none" stroke="var(--accent)" stroke-width="1.2"/>`,
+  rect:`<path d="${rect(3.2,3,1)}" fill="var(--paper)"/><path d="${rect(4.6,4,2)}" fill="none" stroke="var(--accent)" stroke-width="1"/>`};
+ ring.steam=ring.circle;ring.umbrella=ring.joint=ring.rect;
+ // 连环格：格框是一道 6px 的矿物色粗线，同样手撕
+ ring.panel=`<path d="${rect(2.4,2,1)}" fill="var(--paper)"/><path d="${rect(6,3,2)}" fill="none" stroke="var(--accent)" stroke-width="6"/>`;
+ const base=`<path d="${tornCircle(r,h/2,r+3.4,seed+1,.035)}" fill="var(--paper)"/>`;
+ // 半圈手撕弧：沿圆周取点，半径带轻扰动，开口路径
+ const arc=(R,a0,a1,k,amp=.02)=>{const rnd=rng(seed+k),pts=[];for(let j=0;j<=40;j++){const a=a0+(a1-a0)*j/40,wob=1+amp*Math.sin(a*7+seed)+(rnd()-.5)*amp*.9;pts.push([r+Math.cos(a)*R*wob,h/2+Math.sin(a)*R*wob])}return toPath(pts,false)};
+ // 鱼糕：先垫一圈壁面色的底，黄边压在底上才看得出（中间那栏的垫纸本身就是黄色调）
+ ring.fishcake=`<path d="${tornCircle(r,h/2,r+16,seed+1,.03)}" fill="var(--paper)"/><path d="${arc(r+9,Math.PI*1.04,Math.PI*1.96,5)}" fill="none" stroke="var(--accent)" stroke-width="11" stroke-linecap="round"/><path d="${tornCircle(r,h/2,r+21,seed+6,.02)}" fill="none" stroke="var(--accent)" stroke-width="1.2"/>`;
+ ring.ripple=base+[[10,1.6,.8],[19,1.2,.5],[28,1,.28]].map(([o,sw2,op],k)=>`<path d="${tornCircle(r,h/2,r+o,seed+7+k,.025)}" fill="none" stroke="var(--accent)" stroke-width="${sw2}" stroke-opacity="${op}"/>`).join('');
+ let extra='';
+ if(shape==='umbrella'){ // 伞面：上半圆，伞骨之间的伞面略向里收（扇形边），顶上一截伞尖
+  const R=w*.62,cx=w/2,cy=-6,N=9,rnd=rng(seed+5),rim=[];
+  for(let k=0;k<=72;k++){const a=Math.PI+k/72*Math.PI,ph=(k/72*(N-1))%1,dip=1-.045*(1-Math.abs(Math.cos(ph*Math.PI)));rim.push([cx+Math.cos(a)*R*dip*(1+(rnd()-.5)*.02),cy+Math.sin(a)*R*dip*(1+(rnd()-.5)*.02)])}
+  const ribs=Array.from({length:N},(_,k)=>{const a=Math.PI+k/(N-1)*Math.PI;return `M${cx.toFixed(1)} ${cy.toFixed(1)}L${(cx+Math.cos(a)*R*.99).toFixed(1)} ${(cy+Math.sin(a)*R*.99).toFixed(1)}`}).join('');
+  extra=`<path d="${toPath([...rim,[cx+R,cy+2],[cx-R,cy+2]])}" fill="var(--accent)" fill-opacity=".42"/><path d="${ribs}" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-opacity=".9"/><path d="M${cx} ${cy-R}L${cx} ${cy-R-14}" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>`}
+ if(shape==='joint'){ // 梁枋：上下两根横枋、左右两根立柱，四角各出头一截，像榫卯搭接
+  const o=10,x=22,line=(ax,ay,bx,by,k)=>toPath(tornEdge(ax,ay,bx,by,1.2,seed+k,9),false);
+  extra=[line(-x,-o,w+x,-o,11),line(-x,h+o,w+x,h+o,12),line(-o,-x,-o,h+x,13),line(w+o,-x,w+o,h+x,14)].map(d2=>`<path d="${d2}" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="square"/>`).join('')}
+ if(shape==='steam'){ // 三缕热气，自碗沿向上，左右轻摆
+  extra=[.32,.5,.68].map((q,k)=>{const rnd=rng(seed+20+k),pts=[];for(let j=0;j<=8;j++){const t=j/8;pts.push([w*q+Math.sin(t*Math.PI*2.2+k*1.7)*7*(1-t*.3)+(rnd()-.5)*1.5,-8-t*(58-k*6)])}
+   return `<path d="${toPath(pts,false)}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-opacity=".75"/>`}).join('')}
+ if(shape==='rods'){ // 三根铁枝：自照片下沿伸出，略向中间收，末端一个手柄
+  extra=[[.28,.4],[.5,.5],[.72,.6]].map(([q,e],k)=>{const x0=w*q,x1=w*(q+(e-q)*.5),pts=tornEdge(x0,h+3,x1,h+62,1,seed+30+k,8);const[ex2,ey2]=pts[pts.length-1];return `<path d="${toPath(pts,false)}" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/><path d="${tornCircle(ex2,ey2+3,4,seed+35+k,.12)}" fill="var(--accent)"/>`}).join('')}
+ if(shape==='hull'){ // 王船：照片下压一条手撕船身（梯形），再下一道水纹
+  const e=(ax,ay,bx,by,k)=>tornEdge(ax,ay,bx,by,2,seed+40+k,8).slice(0,-1);
+  extra=`<path d="${toPath([...e(-16,h+5,w+16,h+5,1),...e(w+16,h+5,w-14,h+30,2),...e(w-14,h+30,14,h+30,3),...e(14,h+30,-16,h+5,4)])}" fill="var(--accent)"/><path d="${toPath(Array.from({length:25},(_,j)=>[-24+j*(w+48)/24,h+40+Math.sin(j*1.1+seed)*3]),false)}" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round"/>`}
+ if(shape==='fringe'){ // 银饰流苏：照片下沿一道手撕银条，垂下一排长短相间的银铃
+  const N=11,rnd=rng(seed+50);extra=`<path d="${paperPath(-10,h+3,w+20,9,seed+51,{bottom:2,top:1.5})}" fill="var(--accent)"/>`+Array.from({length:N},(_,k)=>{const x=-4+k*(w+8)/(N-1),L=k%2?22:34,y2=h+12+L+(rnd()-.5)*3;return `<path d="M${x.toFixed(1)} ${h+12}L${(x+(rnd()-.5)*2).toFixed(1)} ${y2.toFixed(1)}" stroke="var(--accent)" stroke-width="1.2"/><path d="${tornCircle(x,y2+3.5,3.6,seed+60+k,.12)}" fill="var(--paper)" stroke="var(--accent)" stroke-width="1.1"/>`}).join('')}
+ const ringSvg=(ring[shape]||ring.rect)+extra;
+ return `<figure class="dp-photo torn dp-${shape}" tabindex="0" style="${at(b)};--ar:${(w/h).toFixed(3)}"><svg class="dp-ring" viewBox="${-P} ${-P} ${w+2*P} ${h+2*P}" style="left:${(-P/w*100).toFixed(3)}%;top:${(-P/h*100).toFixed(3)}%;width:${((w+2*P)/w*100).toFixed(3)}%;height:${((h+2*P)/h*100).toFixed(3)}%" aria-hidden="true">${ringSvg}</svg><span class="dp-frame" style="clip-path:url(#${id})"><img src="${esc(p.src)}" alt="${esc(p.cap)}"${zoom?` style="position:absolute;max-width:none;width:${(100/zoom[2]).toFixed(2)}%;height:auto;left:${(50-zoom[0]/zoom[2]*100).toFixed(2)}%;top:${(50-zoom[1]/(zoom[2]*p.r)*100).toFixed(2)}%"`:""}></span><figcaption>${esc(p.cap)}</figcaption></figure>`}
+// 唱片：手撕圆盘 + 几圈唱纹 + 中心标签，全用本页四色
+function records(discs,seed,f){return `<svg class="dp-records" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${discs.map(([x,y,r],k)=>{const cx=f?1120-x:x,s=seed+k*10;
+ return `<path d="${tornCircle(cx,y,r,s,.03)}" fill="var(--soft)" stroke="var(--accent)" stroke-width="1" stroke-opacity=".7"/>${[.88,.76,.64,.52].map((q,j)=>`<path d="${tornCircle(cx,y,r*q,s+j+1,.02)}" fill="none" stroke="var(--ink)" stroke-opacity=".16" stroke-width="1"/>`).join('')}<path d="${tornCircle(cx,y,r*.32,s+6,.04)}" fill="var(--accent)"/><path d="${tornCircle(cx,y,r*.045,s+7,.1)}" fill="var(--paper)"/>`}).join('')}</svg>`}
+
+function renderGrid(d,P){const M=MASTERS[P.m],f=P.flip,s=styles[d.group],S=d.id*1000,defs=[],SP=P.spot;
+ const head=box(M.head.at,f),noSpot=!SP||SP.type==='none'||SP.type==='bigtext',sp=!noSpot&&(SP.at||M.spot)?box(SP.at||M.spot.at,f):null;
+ // 记忆点主图的盒子：ring 为正方形（竖向按 dy 微调），arch 用给定高度，window 按原图比例，records 由页面给出像素位
+ const spotB=noSpot?{x:0,y:0,w:0,h:0}:SP.type==='ring'?{x:sp.x,y:sp.y+(SP.dy??M.spot.dy),w:sp.w,h:sp.w}:SP.type==='arch'?{x:sp.x,y:sp.y,w:sp.w,h:SP.h}:SP.type==='window'?{x:sp.x,y:sp.y,w:sp.w,h:sp.w/d.photos[SP.idx].r}:
+  (()=>{const[x,y,w]=SP.photo;return{x:f?1120-x-w:x,y,w,h:/^(steam|fishcake|ripple)$/.test(SP.type)?w:w/d.photos[SP.idx].r}})(),sw=spotB.w;
+ // 其余照片：页面写了 slots 就照写，否则按 scatter 自动分（竖图先占 tall 槽）；高度一律按原图比例，不裁成方形
+ let placed=[];
+ // 连环带（母版 D）：所有照片同一高度、宽度按原图比例（不裁切），从左往右排；放不满就留在带尾
+ let stripB=null,stripH=0;
+ if(M.strip){stripB=box(M.strip.at,f);const pad=M.strip.pad,ids=P.strip||d.photos.map((p,i)=>i),gap=16,sum=ids.reduce((t,i)=>t+d.photos[i].r,0);
+  stripH=Math.min(stripB.h-2*pad,(stripB.w-2*pad-gap*(ids.length-1))/sum);let x=stripB.x+pad;const y=stripB.y+(stripB.h-stripH)/2;
+  placed=ids.map((i,o)=>{const w=stripH*d.photos[i].r,b={x,y,w,h:stripH};x+=w+gap;return{i,o,b}})}
+ // slots 两种写法：{i,at:[列,行],w:跨列}；或主轴母版用的像素写法 {i,x,w,bot}——照片下沿落在 bot，跨在横带上
+ else if(P.slots)placed=P.slots.map((q,o)=>{if(q.x!=null){const h=q.w/d.photos[q.i].r;return{i:q.i,o,b:{x:f?1120-q.x-q.w:q.x,y:q.y??q.bot-h,w:q.w,h}}}const b=box([q.at[0],q.at[1],q.w,1],f);return{i:q.i,o,b:{...b,h:b.w/d.photos[q.i].r}}});
+ else{const rest=d.photos.map((p,i)=>i).filter(i=>i!==SP.idx),slots=M.scatter.slice();
+  rest.sort((a,b)=>d.photos[a].r-d.photos[b].r).forEach(i=>{const tall=d.photos[i].r<.85,k=Math.max(0,slots.findIndex(q=>!!q.tall===tall)),q=slots.splice(k,1)[0];if(!q)return;
+   const b=box([q.at[0],q.at[1],q.w,1],f);placed.push({i,o:M.scatter.indexOf(q),b:{...b,h:b.w/d.photos[i].r}})});
+  placed.sort((a,b)=>a.o-b.o)}
+ // 段落纸片 + 外置时间标签 + 角上大号年份 + 首字下沉；时间仍写在文字层里，供窄屏和读屏使用
+ // 页面可以改段落纸的位置（P.blocks），其余属性沿用母版
+ const block=(k,i)=>{const q={...M.blocks[k],...(P.blocks?.[k]||{})},b=box(q.at,f),[when,what='']=String(d.dates[i]).split(' · '),yr=(when.match(/\d{4}/)||[''])[0];
+  const html=`<time>${esc(when)}${what?`<i>${esc(what)}</i>`:''}</time><h3>${esc(d.headings[i])}</h3><p>${esc(d.paragraphs[i])}</p>`;
+  // 58×90 起，字多时按竖排字数加高（.78em ≈ 11.7px/字，上下各留 9px + 撕口 5px），不缩字号
+  const sh=Math.max(90,Math.ceil(Math.max(when.length,what.length)*13.5+24)),sr=(q.stripR?1:0)^(f?1:0),strip={x:sr?b.x+b.w-12:b.x-46,y:b.y+q.strip,w:58,h:sh};
+  const stripEl=`<b class="dp-strip" aria-hidden="true" style="${at(strip)}"><svg class="dp-paper-bg" viewBox="0 0 58 ${sh}" preserveAspectRatio="none"><path d="${paperPath(0,0,58,sh,S+40+i,{bottom:5,right:4})}" fill="var(--accent)"/></svg><span>${esc(when)}</span>${what?`<span>${esc(what)}</span>`:''}</b>`;
+  // 年份压在纸片外上角（远离时间标签那一侧）
+  const yl=(q.yearL?1:0)^(f?1:0),year=yr?`<b class="dp-year${yl?' l':''}" aria-hidden="true" style="left:${pct(yl?b.x+40:b.x+b.w-40-140,1120)};top:${pct(b.y-34,700)};width:${pct(140,1120)}">${yr}</b>`:'';
+  return paperEl(b,{...q,rot:(f?-1:1)*(q.rot||0),minPad:{...q.minPad,...(sr?{right:22}:{left:22})}},S+10+i*5,{cls:' dp-slot dp-block',tag:'section',html})+stripEl+year};
+ const decor=M.decor.map((q,i)=>paperEl(box(q.at,f),q,S+60+i*5,{cls:' is-decor'})).join('');
+ // 长卷小景：连纸底一起贴在一块手撕纸片上
+ // 深色壁面上改用墨色（即浅米色）卡纸，长卷本是画在米黄纸上的
+ const sceneB=P.sceneAt?(([x,y,w,h])=>({x:f?1120-x-w:x,y,w,h}))(P.sceneAt):M.scene?.at?box(M.scene.at,f):null;
+ const darkWall=parseInt(WALL[P.c][0].slice(1,3),16)<140,scene=P.scene&&sceneB?paperEl(sceneB,darkWall?{...M.scene,tone:"ink",o:1}:M.scene,S+80,{cls:' dp-scene-card',html:`<img class="dp-scene" src="${esc(P.scene.src)}" alt="">`}):'';
+ const tape=M.tape.map(([x,y,len,deg],i)=>{const r=rng(S+90+i),cut=(2+r()*5).toFixed(1),X=f?1120-x:x;
+  // 两端不齐：一端斜切（像从卷上撕下），另一端打碎 3–4 个点
+  return `<i class="dp-tape" aria-hidden="true" style="left:${pct(X-len/2,1120)};top:${pct(y,700)};width:${pct(len,1120)};transform:translateY(-50%) rotate(${(f?-1:1)*deg}deg);clip-path:polygon(${cut}% 0,${(97+r()*2).toFixed(1)}% ${(r()*12).toFixed(1)}%,100% ${(38+r()*10).toFixed(1)}%,${(96+r()*3).toFixed(1)}% ${(70+r()*10).toFixed(1)}%,${(98+r()*2).toFixed(1)}% 100%,0 100%)"></i>`}).join('');
+ const [sx0,sy0]=M.seal,seal=P.seal?`<b class="dp-seal" aria-hidden="true" style="left:${pct((f?1120-sx0-40:sx0),1120)};top:${pct(sy0,700)}"><svg viewBox="0 0 40 40"><path d="${tornCircle(20,20,19,S+95,.06)}" fill="var(--accent)"/></svg><span>${esc(P.seal)}</span></b>`:'';
+ const clips=(P.k||[]).map(([id,c,r,cs,rot])=>{const b=box([c,r,cs,1],f);return clip([id,b.x,b.y,b.w,rot])}).join('');
+ // 竖排批注：贴在 a 纸片外侧，写地点
+ // 主轴横带（母版 B）：一条手撕实色带横贯全页，带上一排手点的联珠（小手撕圆，不用正圆），两端压 01 / 02 标签
+ let band='';if(M.band){const bb=box(M.band.at,f),cy=bb.y+bb.h/2,rnd=rng(S+70);band=paperEl(bb,M.band,S+71,{cls:' is-decor dp-band'})+
+  `<svg class="dp-pearls" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${Array.from({length:Math.floor(bb.w/22)},(_,k)=>`<path d="${tornCircle(bb.x+11+k*22+(rnd()-.5)*1.6,cy+(rnd()-.5)*1.6,2.4*(.85+rnd()*.3),S+700+k,.12,5)}" fill="var(--paper)" fill-opacity=".85"/>`).join('')}</svg>`+
+  M.labels.map(([c,r,t],k)=>{const lb=box([c,r,1,.5],f);return `<b class="dp-label" aria-hidden="true" style="${at(lb)}"><svg class="dp-paper-bg" viewBox="0 0 ${lb.w} ${lb.h}" preserveAspectRatio="none"><path d="${paperPath(0,0,lb.w,lb.h,S+75+k,{bottom:4,right:4})}" fill="var(--paper)"/></svg><span>${t}</span></b>`}).join('')}
+ // 连环带底纸 + 上下两排联珠 + 首尾格编号；各页的记忆点画在带上或带下
+ const pearlRow=(x0,x1,y,seed)=>{const r=rng(seed),n=Math.floor((x1-x0)/22);return Array.from({length:n},(_,k)=>`<path d="${tornCircle(x0+11+k*22+(r()-.5)*1.6,y+(r()-.5)*1.6,2.4*(.85+r()*.3),seed+k+1,.12,5)}" fill="var(--accent)" fill-opacity=".8"/>`).join('')};
+ let strip='';if(M.strip){const sb=stripB;
+  strip=paperEl(sb,M.strip,S+71,{cls:' is-decor dp-band'})+`<svg class="dp-pearls" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${pearlRow(sb.x,sb.x+sb.w,sb.y-7,S+720)}${pearlRow(sb.x,sb.x+sb.w,sb.y+sb.h+7,S+760)}</svg>`;
+  const lab=(q,t,k)=>`<b class="dp-label sm" aria-hidden="true" style="${at({x:q.b.x-10,y:q.b.y-14,w:44,h:28})}"><svg class="dp-paper-bg" viewBox="0 0 44 28" preserveAspectRatio="none"><path d="${paperPath(0,0,44,28,S+80+k,{bottom:3,right:3})}" fill="var(--paper)"/></svg><span>${t}</span></b>`;
+  strip+=lab(placed[0],'01',0)+lab(placed[placed.length-1],String(placed.length).padStart(2,'0'),1);
+  const last=placed[placed.length-1].b,end=sb.x+sb.w,my=sb.y+sb.h/2;let g='';
+  if(P.extra==='run'){ // 走古事：队伍从最后一格冲出去——一道虚线箭头 + 三条速度线
+   const x0=last.x+last.w+18,x1=end-16,hd=t=>`${round(x1-12*Math.cos(t))} ${round(my-12*Math.sin(t))}`;
+   g=`<path d="M${round(x0)} ${round(my)}L${round(x1)} ${round(my)}" stroke="var(--accent)" stroke-width="2.4" stroke-dasharray="1 9" stroke-linecap="round"/><path d="M${hd(.5)}L${round(x1)} ${round(my)}L${hd(-.5)}" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>`+
+    [-26,0,26].map((o,k)=>`<path d="${toPath(tornEdge(x0+6+k*8,my+o-12,x0+46+k*8,my+o-12,1,S+790+k,8),false)}" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" fill="none"/>`).join('')}
+  if(P.extra==='slope'){ // 端坡：带下一面手撕斜坡，左低右高，赛马就在坡上
+   // 只铺后半段（赛马冲向坡顶的那一半），覆盖率不超 86%；镜像页跟着翻
+   const y0=sb.y+sb.h+8,top=t=>y0+44-t*40,X=v=>f?1120-v:v,pts=[...tornEdge(560,top(0),1080,top(1),5,S+800,10).slice(0,-1),[1080,y0+58],[560,y0+58]].map(([x,y])=>[X(x),y]);
+   g=`<path d="${toPath(pts)}" fill="var(--accent)" fill-opacity=".32"/>`}
+  if(P.extra==='water'){ // 蚕花水会：带下一道手撕水面和一条水纹，船就漂在上面
+   // 水纹线停在短句之前，不从字底下穿过
+   const y0=sb.y+sb.h-12,pts=[...Array.from({length:49},(_,j)=>[sb.x+j*sb.w/48,y0+Math.sin(j*.9+S)*4]),[sb.x+sb.w,y0+22],[sb.x,y0+22]],nbb=box(M.note,f),w0=f?nbb.x+nbb.w+16:sb.x,w1=f?sb.x+sb.w:nbb.x-16;
+   g=`<path d="${toPath(pts)}" fill="var(--accent)" fill-opacity=".38"/><path d="${toPath(Array.from({length:33},(_,j)=>[w0+j*(w1-w0)/32,y0+34+Math.sin(j*1.3+S*2)*3]),false)}" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round"/>`}
+  if(g)strip+=`<svg class="dp-records" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${g}</svg>`}
+ const ab=box(M.blocks.a.at,f),vnote=M.vnote===false?'':`<p class="dp-vnote" aria-hidden="true" style="left:${pct(f?ab.x-24:ab.x+ab.w+10,1120)};top:${pct(ab.y+18,700)}">${esc(d.place)}</p>`;
+ // 丝线：从绷圈左下牵出，落到 b 纸片右沿
+ let thread='';if(P.thread){const bb=box(M.blocks.b.at,f),cx=spotB.x+sw/2,cy=spotB.y+sw/2,a0=f?Math.PI/4:Math.PI*3/4,R=sw/2+22,sx=cx+Math.cos(a0)*R,sy=cy+Math.sin(a0)*R,tx=f?bb.x-14:bb.x+bb.w+14,ty=bb.y+bb.h*.78,qx=(sx+tx)/2+(f?20:-20),qy=Math.max(sy,ty)+10,
+  a=Math.atan2(ty-qy,tx-qx),hd=t=>`${round(tx-11*Math.cos(a+t))} ${round(ty-11*Math.sin(a+t))}`;
+  thread=`<path d="M${round(sx)} ${round(sy)}Q${round(qx)} ${round(qy)} ${round(tx)} ${round(ty)}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round"/><path d="M${hd(.5)}L${round(tx)} ${round(ty)}L${hd(-.5)}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`}
+ const photos=placed.map((q,k)=>tornPhoto(d,q.i,q.b,S+100+k*10,defs,M.strip?'panel':'rect')),split=Math.ceil(photos.length/2);
+ // 满幅色地的记忆点：一个超大数字压在照片框中间的空处，透明度 .18 当底纹
+ // 字号按空处的宽度算（Georgia 数字约 .62em、冒号约 .32em），整串字落在空处里，不钻到照片底下
+ const bigEl=SP&&SP.type==='bigtext'?(([x,y,w,h])=>{const k=[...SP.text].reduce((t,c)=>t+(c===':'?.32:.62),0),px=Math.min(h*.86,w*.94/k);return `<b class="dp-bigtext" aria-hidden="true" style="${at({x:f?1120-x-w:x,y,w,h})};font-size:${em(px)}">${esc(SP.text)}</b>`})(SP.box):'';
+ const spotEl=noSpot?bigEl:(SP.type==='records'?records(SP.discs,S+300,f):'')+tornPhoto(d,SP.idx,spotB,S+200,defs,{ring:'circle',arch:'arch',window:'window',records:'rect'}[SP.type]||SP.type,SP.zoom);
+ const nb=box(M.note,f);
+ const lead=`<div class="dp-lead"><p class="dp-title">${esc(d.title)}</p><p class="dp-project">${esc(d.project)}<span>${esc(d.place)}</span></p><p class="dp-identity">${esc(d.identity)}</p></div>`;
+ // 母版 D：榜题单独一列（群像人名可以竖得很长），标题组在右边一张纸上
+ const heads=M.plaque?paperEl(box(M.plaque.at,f),M.plaque,S+2,{cls:' dp-head-paper dp-plaque-col',html:`<header class="dp-head dp-head-split">${plaque(d.person)}</header>`})+paperEl(head,M.head,S+1,{cls:' dp-head-paper',html:lead}):null;
+ const headHtml=`<header class="dp-head">${plaque(d.person)}<div class="dp-lead"><p class="dp-title">${esc(d.title)}</p><p class="dp-project">${esc(d.project)}<span>${esc(d.place)}</span></p><p class="dp-identity">${esc(d.identity)}</p></div></header>`;
+ return `<div class="dp-canvas dp-grid dp-m${P.m} dp-l${d.id}"><i class="dp-tex" aria-hidden="true"></i><svg class="dp-decor" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${thread}</svg>${decor}${band}${strip}${clips}${scene}`+
+  (heads||paperEl(head,M.head,S+1,{cls:' dp-head-paper',html:headHtml}))+spotEl+block('a',0)+photos.slice(0,split).join('')+block('b',1)+photos.slice(split).join('')+
+  `<p class="dp-slot dp-note end" style="${at(nb)}">${esc(s[1])}</p>${vnote}${tape}${seal}<svg class="dp-defs" width="0" height="0" aria-hidden="true">${defs.join('')}</svg></div>`;
+}
+// 小标题前的手绘短横（Rough.js），不用 • — ▸ 这类字体符号
+function sketchGrid(seed){if(!page.querySelector('.dp-grid'))return;let n=seed*1000+500;
+ page.querySelectorAll('.dp-grid .dp-paper-txt h3').forEach(h=>{const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','dp-h3-mark');svg.setAttribute('viewBox','0 0 28 12');svg.setAttribute('aria-hidden','true');
+  const rc=rough.svg(svg);svg.append(rc.line(1,6.5,26,5.2,{seed:++n,stroke:'currentColor',strokeWidth:2.2,roughness:1.4,bowing:2}));h.prepend(svg)})}
+
 const dialog=document.createElement('dialog');dialog.className='artisan-diary'+(window.rough?' has-rough':'');dialog.setAttribute('aria-labelledby','diary-name');
-dialog.innerHTML='<div class="dp-sheet"><div class="dp-page"></div><div class="dp-foot"><p class="dp-disclaimer"><b class="dp-kind"></b>据公开报道整理的纪实札记，并非人物亲笔日记。</p><div class="dp-actions"><button class="dp-info-toggle" type="button" aria-expanded="false">图注与来源</button><button class="dp-close" type="button" aria-label="关闭匠人故事"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>关闭</button></div></div><aside class="dp-info" hidden></aside></div>';document.body.append(dialog);
+dialog.innerHTML='<div class="dp-sheet"><div class="dp-page"></div><div class="dp-foot"><p class="dp-disclaimer"><b class="dp-kind"></b>据公开报道整理的纪实札记，并非人物亲笔日记。</p><div class="dp-actions"><button class="dp-info-toggle" type="button" aria-expanded="false"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.6h3.8L9 3.8V10.4H3z" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linejoin="round"/><path d="M6.8 1.6v2.2H9" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linejoin="round"/><path d="M4.6 5.9h2.8M4.6 7.9h2.8" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round"/></svg><span class="dp-info-label">图注与来源</span></button><button class="dp-close" type="button" aria-label="关闭匠人故事"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>关闭</button></div></div><aside class="dp-info" hidden></aside></div>';document.body.append(dialog);
 const sheet=dialog.querySelector('.dp-sheet'),page=dialog.querySelector('.dp-page'),info=dialog.querySelector('.dp-info'),toggle=dialog.querySelector('.dp-info-toggle'),kind=dialog.querySelector('.dp-kind');
 let opener=null,closing=null,settled=null;
 const pct=(v,t)=>(v/t*100).toFixed(3)+'%';
@@ -143,18 +477,19 @@ const clip=c=>{const[id,x,y,w,r]=c,m=window.ARTISAN_COLLAGE?.[id];return m?`<img
 function block(d,i,s){const[when,what]=String(d.dates[i]).split(' · ');return `<section class="dp-slot dp-block${cls(s)}" style="${slot(s)}"><time>${esc(when)}${what?`<i>${esc(what)}</i>`:''}</time><h3>${esc(d.headings[i])}</h3><p>${esc(d.paragraphs[i])}</p></section>`}
 // 榜题：人名竖排。多人时按“、”和“与”分列，每列一组。
 function plaque(name){const parts=name.split(/(?<=、)|(?=与)/);return `<h2 class="dp-name${parts.length>1?' many':''}" id="diary-name">${parts.map(n=>`<span>${esc(n)}</span>`).join('')}</h2>`}
-function render(d){const L=LAYOUTS[d.id],s=styles[d.group],[paper,ink,accent,soft]=L.c,photos=L.p.map(q=>q[0]);
+function render(d){const P=PAGES[d.id],L=P?{c:WALL[P.c],k:P.k}:LAYOUTS[d.id],s=styles[d.group],[paper,ink,accent,soft]=L.c,photos=P?d.photos.map((p,i)=>i):L.p.map(q=>q[0]);
  const st=dialog.style;st.setProperty('--paper',paper);st.setProperty('--ink',ink);st.setProperty('--accent',accent);st.setProperty('--soft',soft);
  // 深色色地：全部文字改用壁面浅色（判定依据是壁面亮度，而不是逐页写死）
  const dark=parseInt(paper.slice(1,3),16)<140;dialog.classList.toggle('is-dark',dark);
  kind.textContent=s[0];
+ if(P)page.innerHTML=renderGrid(d,P);else{
  const rest=L.p.slice(),first=rest.shift(),n=rest.length,split=Math.ceil(n/2);
  page.innerHTML=`<div class="dp-canvas dp-l${d.id}"><svg class="dp-decor" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${L.decor}</svg><i class="dp-tex" aria-hidden="true"></i>${(L.k||[]).map(clip).join('')}`+
   `<header class="dp-slot dp-head${cls(L.head)}" style="${slot(L.head)}">${plaque(d.person)}<div class="dp-lead"><p class="dp-title">${esc(d.title)}</p><p class="dp-project">${esc(d.project)}<span>${esc(d.place)}</span></p><p class="dp-identity">${esc(d.identity)}</p></div></header>`+
   photo(d,first)+block(d,0,L.a)+rest.slice(0,split).map(q=>photo(d,q)).join('')+block(d,1,L.b)+rest.slice(split).map(q=>photo(d,q)).join('')+
-  (L.note?`<p class="dp-slot dp-note${cls(L.note)}" style="${slot(L.note)}">${esc(s[1])}</p>`:'')+`</div>`;
+  (L.note?`<p class="dp-slot dp-note${cls(L.note)}" style="${slot(L.note)}">${esc(s[1])}</p>`:'')+`</div>`;}
  const used=[...new Set(photos)].map(i=>d.photos[i]);
- const clips=[...new Set([...(L.k||[]).map(c=>c[0]),'tex-plaster'])].map(id=>window.ARTISAN_COLLAGE?.[id]).filter(Boolean),credit=m=>`${m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener noreferrer">${esc(m.credit)} ↗</a>`:esc(m.credit)}`;
+ const clips=[...new Set([...(L.k||[]).map(c=>c[0]),'tex-plaster'])].map(id=>window.ARTISAN_COLLAGE?.[id]).filter(Boolean).concat(P?.scene?[{cap:P.scene.cap,credit:'自本站首页时间轴长卷裁切'}]:[]),credit=m=>`${m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener noreferrer">${esc(m.credit)} ↗</a>`:esc(m.credit)}`;
  info.innerHTML=`<h3>图片</h3><ol>${used.map(p=>`<li>${esc(p.cap)}${p.person?'（人物照片）':''}<span>${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.credit)} ↗</a>`:esc(p.credit)}</span></li>`).join('')}</ol>${clips.length?`<h3>拼贴素材</h3><ol>${clips.map(m=>`<li>${esc(m.cap)}<span>${credit(m)}</span></li>`).join('')}</ol>`:''}<h3>文字来源</h3><ol>${d.sources.map(q=>`<li><a href="${esc(q[3])}" target="_blank" rel="noopener noreferrer">${esc(q[2])} ↗</a><span>${esc(q[0])} · ${esc(q[1])}</span></li>`).join('')}</ol><p>文字按报道归纳改写，章节名为编辑拟定；人物身份与经历以对应报道时点为准。未注明“人物照片”的均为项目资料图，并非传主本人；拼贴素材经裁切、抠图或撕边处理，是馆藏或公开资料，并非传主作品。整理于 2026 年 11 月。</p>`;
  page.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{img.closest('figure').classList.add('is-missing')},{once:true}));
 }
@@ -180,7 +515,7 @@ function sketchDecor(svg,seed){const rc=rough.svg(svg),rand=rng(seed);let n=seed
 }
 function layer(host,w,h){const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','dp-rough');svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.setAttribute('preserveAspectRatio','none');svg.setAttribute('aria-hidden','true');host.prepend(svg);return svg}
 function sketchFrames(seed){let n=seed*1000;
- page.querySelectorAll('.dp-photo').forEach(fig=>{const{width:w,height:h}=fig.querySelector('.dp-frame').getBoundingClientRect();if(!w)return;
+ page.querySelectorAll('.dp-photo:not(.torn)').forEach(fig=>{const{width:w,height:h}=fig.querySelector('.dp-frame').getBoundingClientRect();if(!w)return;
   const u=parseFloat(getComputedStyle(fig).fontSize)/15,rc=rough.svg(layer(fig,w,h)),svg=fig.querySelector('.dp-rough'),line={stroke:'var(--accent)',roughness:1,bowing:1.2};
   const ring=(pad,width,stroke='var(--accent)')=>svg.append(rc.ellipse(w/2,h/2,w+pad*u,h+pad*u,{...line,seed:++n,stroke,strokeWidth:width*u}));
   if(fig.matches('.ring')){ring(16,8,'var(--soft)');ring(30,1.8);ring(42,1)}
@@ -190,8 +525,8 @@ function sketchFrames(seed){let n=seed*1000;
  const name=page.querySelector('.dp-name'),{width:w,height:h}=name.getBoundingClientRect(),u=parseFloat(getComputedStyle(page.querySelector('.dp-canvas')).fontSize)/15,svg=layer(name,w,h),rc=rough.svg(svg);
  svg.append(rc.polygon(densify(0,0,w,h,26*u),{seed:++n,fill:'var(--plaque)',fillStyle:'solid',stroke:'var(--plaque)',strokeWidth:1,roughness:1,maxRandomnessOffset:1.8*u}),rc.rectangle(-5*u,-5*u,w+10*u,h+10*u,{seed:++n,stroke:'var(--plaque)',strokeWidth:1.2*u,roughness:1,bowing:1.2}));
 }
-function sketch(d){if(!window.rough)return;sketchDecor(page.querySelector('.dp-decor'),d.id);sketchFrames(d.id)}
-function setInfo(open){info.hidden=!open;toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'收起图注':'图注与来源'}
+function sketch(d){if(!window.rough)return;sketchDecor(page.querySelector('.dp-decor'),d.id);sketchFrames(d.id);sketchGrid(d.id)}
+function setInfo(open){info.hidden=!open;toggle.setAttribute('aria-expanded',String(open));toggle.querySelector('.dp-info-label').textContent=open?'收起图注':'图注与来源'}
 
 // 持灯入窟：光从按下的按钮处照进来，壁面由近及远亮起，随后颜料显色、榜题落下。
 const clamp=(v,a,b)=>Math.min(Math.max(v,a),b);
@@ -201,7 +536,7 @@ function open(id,button){const d=data.find(x=>x.id===id);if(!d)return;opener=but
 function close(){if(!dialog.open||closing)return;dialog.classList.remove('is-opening');dialog.classList.add('is-closing');closing=setTimeout(()=>{dialog.close();reset()},240)}
 // close 事件要等渲染帧才派发，后台标签页里可能迟迟不来，所以关闭时主动收尾；事件只兜底第二次按 Esc 的强制关闭。
 function reset(){clearTimeout(closing);closing=null;dialog.classList.remove('is-opening','is-closing');document.documentElement.classList.remove('diary-no-scroll');opener?.focus();opener=null}
-document.querySelectorAll('.project__text h2,main .cards article > h2').forEach(h=>{const d=data.find(d=>d.project===h.textContent.trim());if(!d)return;const row=document.createElement('div');row.className='artisan-title-row';h.before(row);row.append(h);const b=document.createElement('button');b.type='button';b.className='artisan-story-tag';b.textContent='匠人故事';b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-label',`打开${d.person}的匠人故事`);b.addEventListener('click',()=>open(d.id,b));row.append(b)});
+document.querySelectorAll('.project__text h2,main .cards article > h2').forEach(h=>{const d=data.find(d=>d.project===h.textContent.trim());if(!d)return;const row=document.createElement('div');row.className='artisan-title-row';h.before(row);row.append(h);const b=document.createElement('button');b.type='button';b.className='artisan-story-tag';b.innerHTML='<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.3 1.7h7.4v8.6H2.3z" fill="none" stroke="currentColor" stroke-width="1.05"/><path d="M4.2 4.1h3.6M4.2 6h3.6M4.2 7.9h2.1" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round"/></svg><span>匠人故事</span>';b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-label',`打开${d.person}的匠人故事`);b.addEventListener('click',()=>open(d.id,b));row.append(b)});
 toggle.addEventListener('click',()=>setInfo(info.hidden));
 dialog.querySelector('.dp-close').addEventListener('click',close);
 sheet.addEventListener('animationend',e=>{if(e.target===sheet)dialog.classList.remove('is-opening')});

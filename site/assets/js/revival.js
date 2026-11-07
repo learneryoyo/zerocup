@@ -116,6 +116,17 @@
     const plus = el('span', 'rv-plus');
     plus.setAttribute('aria-hidden', 'true');
     bar.append(plus);
+    // 「去哪里遇见它」提到卡片正面：渠道类型 + 地点首句，常驻一行；全文留在弹窗。
+    if (item.access) {
+      const where = item.access.where.split(/[；。（，]/)[0].trim();
+      const reach = el('span', 'rv-card-hook rv-card-access', `${item.access.label} · ${where}`);
+      reach.title = item.access.where;
+      // 只占一行，不压住图片；超长时省略，全文在悬停提示和弹窗里。
+      reach.style.whiteSpace = 'nowrap';
+      reach.style.textOverflow = 'ellipsis';
+      bar.append(reach);
+      button.setAttribute('aria-label', `${SHORT[item.id] || item.title}，${item.access.label}：${where}，查看档案`);
+    }
     button.append(bar);
     button.addEventListener('click', () => openCase(item, button));
     return button;

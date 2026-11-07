@@ -2,12 +2,12 @@
    1-2 底、3-5 控件底与悬停、6-8 边框、9-10 实色、11-12 文字。壁面矿物色不走这套，见下。 */
 .artisan-story-tag,.artisan-diary{--bronze-3:#f6edea;--bronze-4:#efe4df;--bronze-6:#dfcdc5;--bronze-8:#c2a499;--bronze-9:#a18072;--bronze-11:#7d5e54;--bronze-12:#43302b;
  --bronze-d2:#1c1917;--bronze-d4:#302a27;--bronze-d7:#5a4c47;--bronze-d8:#6f5f58;--bronze-d9:#a18072;--bronze-d11:#d4b3a5;--bronze-d12:#ede0d9}
-.artisan-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.artisan-title-row h2{margin-right:0!important}.artisan-story-tag{display:inline-flex;align-items:center;gap:7px;flex:none;border:1px solid var(--bronze-8)!important;border-radius:3px!important;background:var(--bronze-3)!important;color:var(--bronze-12)!important;padding:5px 10px!important;font:12px/1.6 "Microsoft YaHei",sans-serif!important;letter-spacing:.08em;cursor:pointer;vertical-align:middle;white-space:nowrap}.artisan-story-tag::before{content:'▤';font-size:16px}.artisan-story-tag:hover{background:var(--bronze-4)!important;transform:translateY(-1px)}.artisan-story-tag:focus-visible{outline:3px solid var(--bronze-9);outline-offset:4px}
+.artisan-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.artisan-title-row h2{margin-right:0!important}.artisan-story-tag{display:inline-flex;align-items:center;gap:6px;flex:none;border:1px solid var(--bronze-8)!important;border-radius:2px!important;background:var(--bronze-3)!important;color:var(--bronze-12)!important;padding:5px 11px 5px 9px!important;font:500 12px/1.5 "STZhongsong","Songti SC","STSong","Noto Serif SC",serif!important;letter-spacing:.14em;cursor:pointer;vertical-align:middle;white-space:nowrap;transition:background-color .16s,border-color .16s,transform .16s}.artisan-story-tag svg{width:12px;height:12px;flex:none;opacity:.68}.artisan-story-tag:hover{background:var(--bronze-4)!important;border-color:var(--bronze-9)!important;transform:translateY(-1px)}.artisan-story-tag:focus-visible{outline:2px solid var(--bronze-9);outline-offset:3px}
 
 /* 匠人故事：单页。画布 1120×700，字号和位置都随宽度等比缩放，整页留在一屏内。
    视觉取自敦煌壁画：--paper 壁面、--ink 墨、--accent 主矿物色、--soft 衬色，由 JS 按页写入。 */
 @property --lamp{syntax:'<length>';inherits:false;initial-value:0px}
-.artisan-diary{--foot:44px;--title:"STZhongsong","Songti SC","STSong","Noto Serif SC","SimSun",serif;--text:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;--ui:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
+.artisan-diary{--foot:48px;--title:"STZhongsong","Songti SC","STSong","Noto Serif SC","SimSun",serif;--text:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;--ui:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
  border:0;padding:0;background:transparent;overflow:visible;color:var(--ink);
  width:min(96vw,1200px,calc((96dvh - var(--foot))*1.6));max-width:none;max-height:none;font-family:var(--ui)}
 .artisan-diary::backdrop{background:radial-gradient(ellipse at 50% 42%,#3a2318e8,#120c09f5 72%);backdrop-filter:blur(5px)}
@@ -32,14 +32,14 @@
 .dp-name.many{font-size:1.5em;min-height:0;flex-direction:column;gap:.1em;padding:.6em .5em;letter-spacing:.1em}
 .dp-lead{padding-top:.1em}
 .dp-lead>*{margin:0}
-.dp-title{font:700 1.68em/1.34 var(--title);color:var(--accent);letter-spacing:.03em;text-wrap:balance}
-.dp-project{margin-top:.75em!important;font-size:.84em;line-height:1.5;letter-spacing:.04em}
-.dp-project span{display:block;opacity:.76}
-.dp-identity{margin-top:.2em!important;font-size:.8em;line-height:1.5;opacity:.76}
+.dp-title{font:700 1.5em/1.28 var(--title);color:var(--ink);letter-spacing:.015em;text-wrap:balance}
+.dp-project{margin-top:.95em!important;font-size:.82em;line-height:1.62;letter-spacing:.07em;opacity:.86}
+.dp-project span{display:block;opacity:.78;letter-spacing:.05em}
+.dp-identity{margin-top:.34em!important;font-size:.78em;line-height:1.58;letter-spacing:.03em;opacity:.7}
 .dp-block time{display:flex;align-items:baseline;gap:.7em;font:700 .86em/1.4 var(--title);letter-spacing:.06em;color:var(--ink)}
 .dp-block time i{font:400 .9em/1.4 var(--ui);opacity:.72}
-.dp-block h3{margin:.3em 0 .4em;font:700 1.34em/1.35 var(--title);letter-spacing:.03em;color:var(--accent)}
-.dp-block p{margin:0;font:1.03em/1.74 var(--text);text-align:justify;letter-spacing:.02em;text-wrap:pretty}
+.dp-block h3{margin:.32em 0 .45em;font:700 1.28em/1.34 var(--title);letter-spacing:.02em;color:var(--accent)}
+.dp-block p{margin:0;font:1.02em/1.82 var(--text);text-align:justify;letter-spacing:.015em;text-wrap:pretty}
 .dp-note{font:1em/1.6 var(--text);letter-spacing:.06em;color:var(--accent);text-wrap:balance}
 .is-dark .dp-block p,.is-dark .dp-note{letter-spacing:.035em}
 .dp-slot.inv,.dp-slot.inv :is(.dp-title,.dp-project,.dp-identity,h3){color:#f7ecd6}
@@ -49,6 +49,57 @@
 .dp-slot.mid{text-align:center}
 .dp-head.mid{grid-template-columns:auto auto;justify-content:center;text-align:left}
 .dp-l11 .dp-title,.dp-l13 .dp-title,.dp-l16 .dp-title{text-wrap:wrap}
+
+/* 手账槽位系统（.dp-grid）：叠压顺序 底纹 → decor 纸片 → 段落纸片 → 照片 → 文字 → 胶带 → 印章。
+   纸片只用本页矿物色，靠透明度分深浅；边缘一律手撕（JS 生成 SVG path），不用圆角、阴影、渐变。 */
+.dp-grid .dp-tex{z-index:0}.dp-grid .dp-decor,.dp-grid .dp-clip,.dp-grid .is-decor{z-index:1}
+.dp-grid .dp-paper{z-index:2}.dp-grid .dp-strip{z-index:4}.dp-grid .dp-photo{z-index:3}.dp-grid .dp-note,.dp-grid .dp-year,.dp-grid .dp-vnote{z-index:4}.dp-grid .dp-tape{z-index:5}.dp-grid .dp-seal{z-index:6}
+.dp-grid .dp-scene-card{z-index:3}
+/* 纸片：容器只定位不裁切；撕边背景和文字是两个节点，撕口外凸到盒子外，文字内边距由 JS 按深度 + 10px 写入 */
+.dp-paper{position:absolute;margin:0;box-sizing:border-box;transform-origin:50% 50%}
+.dp-paper-bg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.dp-paper-txt{position:relative;box-sizing:border-box;height:100%}
+
+.dp-paper.inv h3{color:var(--soft)!important}
+.dp-grid .dp-block time{display:none}
+.dp-grid .dp-head{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:1.15em;align-items:start}
+.dp-grid .dp-lead{margin-right:-1em} /* 主标题允许溢出纸片右沿一个字宽以内 */
+.dp-grid .dp-title{transform:rotate(-1deg);transform-origin:0 50%}
+/* 首字下沉（母版 A / C）；每段紧接小标题，不缩进 */
+.dp-mA .dp-block p::first-letter{float:left;font-size:1.9em;line-height:.92;margin:.06em .08em 0 0;color:var(--accent);font-family:var(--title)}
+.dp-mA .dp-paper.inv p::first-letter{color:var(--soft)}
+.dp-h3-mark{display:inline-block;width:1.15em;height:.5em;margin-right:.4em;vertical-align:.18em;overflow:visible}
+/* 外置时间标签：58×90 的小实色条，贴在纸片左沿之外 */
+.dp-strip{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.15em;padding:.5em .2em;color:var(--paper);font:700 .78em/1.15 var(--title);letter-spacing:.06em;writing-mode:vertical-rl;transform:rotate(-1.5deg)}
+.dp-strip span{position:relative;white-space:nowrap}
+.dp-strip span+span{font-weight:400;opacity:.86}
+.dp-year{position:absolute;margin:0;text-align:right;font:400 3.2em/1 Georgia,"Times New Roman",serif;color:var(--accent);opacity:.85;letter-spacing:.01em;pointer-events:none;-webkit-text-stroke:.09em var(--paper);paint-order:stroke fill} /* 跨在纸片角上：描一圈壁面色，压在同色纸上也看得清 */
+.dp-vnote{position:absolute;margin:0;writing-mode:vertical-rl;font:.72em/1.4 var(--title);letter-spacing:.24em;color:var(--accent);opacity:.75}
+.dp-scene-card .dp-paper-txt{padding:.55em!important}
+.dp-scene{display:block;width:100%;height:100%;object-fit:contain}
+/* 照片：方角/圆框换成手撕；两环留白随框一起撕，画在框后面的 svg 里 */
+.dp-photo.torn .dp-frame{position:relative;z-index:1;box-shadow:none!important;border-radius:0}
+.dp-ring{position:absolute;overflow:visible;pointer-events:none}
+.dp-tape{position:absolute;height:1.75em;background:color-mix(in srgb,var(--paper),var(--ink) 12%);opacity:.62;pointer-events:none}
+.dp-seal{position:absolute;display:grid;place-items:center;width:2.667em;height:2.667em;color:var(--paper);font:700 1.45em/1 var(--title);transform:rotate(-4deg);pointer-events:none}
+.dp-seal svg{position:absolute;inset:0;width:100%;height:100%}
+.dp-seal span{position:relative;font-size:1.45em}
+.dp-seal{font-size:1em}
+/* note：右对齐 + 4px 实心小圆点 + 小一档字号 + 字距 .14em，不居中 */
+.dp-note.end{display:flex;align-items:center;justify-content:flex-end;gap:.6em;text-align:right;font-size:.9em;letter-spacing:.14em}
+.dp-note.end::before{content:'';flex:none;width:4px;height:4px;background:currentColor;clip-path:polygon(50% 0,92% 22%,100% 62%,70% 100%,22% 92%,0 50%,18% 10%)}
+.dp-year.l{text-align:left}
+.dp-records{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+/* 主轴横带：联珠与 01/02 标签压在带上，照片跨压在带的上沿 */
+.dp-pearls{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.dp-label{position:absolute;z-index:4;display:flex;align-items:center;justify-content:center;font:400 1.75em/1 Georgia,"Times New Roman",serif;color:var(--accent);letter-spacing:.06em;transform:rotate(-2deg)}
+.dp-label span{position:relative}
+.dp-label.sm{font-size:1.05em;transform:rotate(-3deg)} /* 连环格首尾编号 */
+.dp-head-split{display:flex;justify-content:center} /* 母版 D：榜题独占一列 */
+.dp-bigtext{position:absolute;z-index:1;display:flex;align-items:center;justify-content:center;margin:0;font:400 9.5em/1 Georgia,"Times New Roman",serif;color:var(--ink);opacity:.18;letter-spacing:-.02em;white-space:nowrap;pointer-events:none} /* 满幅色地的超大数字底纹 */
+/* 深色壁面：胶带用墨色调出来（壁面本身是深色，按“壁面 +12% 墨”会看不见）；反白字改用壁面色，压在浅色主色纸上才读得清 */
+.is-dark .dp-tape{background:color-mix(in srgb,var(--ink) 58%,var(--paper));opacity:.5}
+.dp-paper.inv .dp-paper-txt{color:var(--paper)}
 
 /* 照片：去掉白边和歪斜，改成壁画分栏的框——一道壁面色留白，外加一线矿物色 */
 .dp-photo{position:absolute;margin:0;outline:0}
@@ -78,15 +129,18 @@
 .has-rough .dp-photo.ring .dp-frame{box-shadow:none}
 .has-rough .dp-name,.has-rough .dp-slot.inv .dp-name{background:none;box-shadow:none}
 
-.dp-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;box-sizing:border-box;height:var(--foot);padding:0 14px 0 18px;background:var(--bronze-d2);color:var(--bronze-d12);font-size:12px}
-.dp-disclaimer{margin:0;line-height:1.5}
-.dp-kind{margin-right:1em;font:700 13px/1.5 var(--title);letter-spacing:.14em;color:var(--bronze-d11)}
-.dp-actions{display:flex;flex:none;gap:8px}
-.dp-info-toggle,.dp-close{display:inline-flex;align-items:center;gap:6px;flex:none;border:1px solid var(--bronze-d7);border-radius:2px;background:transparent;color:inherit;padding:0 12px;min-height:30px;font:12px/1 var(--ui);cursor:pointer;transition:background-color .14s,color .14s,border-color .14s}
-.dp-close{border-color:var(--bronze-d12);background:var(--bronze-d12);color:var(--bronze-d2)}
-.dp-close svg{width:11px;height:11px}
-.dp-info-toggle:hover{background:var(--bronze-d4);border-color:var(--bronze-d8)}.dp-close:hover{background:var(--bronze-d11);border-color:var(--bronze-d11)}
-.dp-info-toggle:focus-visible,.dp-close:focus-visible{outline:2px solid var(--bronze-d9);outline-offset:2px}
+.dp-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;box-sizing:border-box;height:var(--foot);padding:0 14px 0 20px;background:var(--bronze-d2);color:var(--bronze-d12);font-size:12px;border-top:1px solid color-mix(in srgb,var(--accent) 42%,var(--bronze-d2))}
+.dp-disclaimer{margin:0;line-height:1.5;letter-spacing:.02em}
+.dp-kind{margin-right:.9em;font:700 13px/1.5 var(--title);letter-spacing:.16em;color:var(--bronze-d11)}
+.dp-actions{display:flex;flex:none;align-items:center;gap:10px}
+.dp-info-toggle,.dp-close{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:none;border:1px solid transparent;border-radius:2px;background:transparent;color:var(--bronze-d12);padding:0 14px;min-height:32px;font:500 12px/1 var(--title);letter-spacing:.12em;cursor:pointer;transition:background-color .16s,border-color .16s,color .16s}
+.dp-info-toggle{border-color:color-mix(in srgb,var(--bronze-d12) 34%,transparent)}
+.dp-info-toggle:hover{border-color:color-mix(in srgb,var(--bronze-d12) 62%,transparent);background:color-mix(in srgb,var(--bronze-d12) 12%,transparent)}
+.dp-close{border-color:var(--bronze-d12);background:var(--bronze-d12);color:var(--bronze-d2);letter-spacing:.16em}
+.dp-close:hover{background:var(--bronze-d11);border-color:var(--bronze-d11)}
+.dp-info-toggle svg{width:12px;height:12px;opacity:.8}
+.dp-close svg{width:9px;height:9px;opacity:.72}
+.dp-info-toggle:focus-visible,.dp-close:focus-visible{outline:2px solid var(--bronze-d9);outline-offset:3px}
 .dp-info{position:absolute;z-index:4;top:0;right:0;bottom:var(--foot);width:min(44%,460px);box-sizing:border-box;overflow:auto;padding:22px 24px;background:var(--bronze-3);color:var(--bronze-12);font-size:13px;line-height:1.7;box-shadow:-10px 0 28px #1c0f0840;scrollbar-width:thin;scrollbar-color:var(--bronze-8) transparent;animation:dp-info-in .24s cubic-bezier(.16,1,.3,1)}
 .dp-info[hidden]{display:none}
 .dp-info h3{margin:0 0 8px;font:700 16px/1.4 var(--title);color:var(--bronze-12)}
@@ -120,6 +174,19 @@
  .dp-canvas{aspect-ratio:auto;min-height:100%;box-sizing:border-box;font-size:15px;padding:30px 18px 26px;align-items:start;display:grid;grid-template-columns:1fr 1fr;gap:16px;overflow:visible}
  .dp-canvas::before{content:'';position:absolute;left:0;right:0;top:8px;height:8px;background:radial-gradient(circle,var(--accent) 3px,transparent 3.5px) 0 0/14px 8px repeat-x}
  .dp-canvas::after,.dp-decor,.dp-clip{display:none}
+ /* 手账元件：叠压在竖排里没有意义。撕边背景、胶带、印章、标签、小景隐去，纸片退化成普通底色块 */
+ .dp-paper-bg,.dp-ring,.dp-records,.dp-bigtext,.dp-pearls,.dp-label,.dp-tape,.dp-seal,.dp-strip,.dp-year,.dp-vnote,.dp-paper.is-decor,.dp-scene-card,.dp-defs{display:none}
+ .dp-paper{position:static;grid-column:1/-1;width:auto!important;height:auto!important;transform:none!important}
+ .dp-paper-txt{height:auto;padding:16px!important;background:color-mix(in srgb,var(--soft) 30%,transparent)}
+ .dp-head-paper .dp-paper-txt{padding:0!important;background:none}
+ .dp-grid .dp-block time{display:flex}
+ .dp-paper.inv .dp-paper-txt{color:var(--ink)}
+ .dp-paper.inv h3{color:var(--accent)!important}
+ .dp-mA .dp-paper.inv p::first-letter{color:var(--accent)}
+ .dp-grid .dp-title{transform:none}
+ .dp-grid .dp-lead{margin-right:0}
+ .dp-note.end{display:block;text-align:left}
+ .dp-note.end::before{display:none}
  .dp-slot{position:static;grid-column:1/-1;width:auto!important}
  .dp-photo{position:relative;left:auto!important;top:auto!important;width:auto!important;height:auto!important}
  .dp-photo .dp-frame{height:auto;aspect-ratio:var(--ar)}
