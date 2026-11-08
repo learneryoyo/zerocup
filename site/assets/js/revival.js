@@ -233,6 +233,17 @@
     const title = el('h2', '', item.title);
     title.id = 'rv-dialog-title';
     text.append(title, el('p', 'rv-detail-hook', item.hook));
+    const tags = el('ul', 'rv-tags rv-tags--head');
+    tags.setAttribute('aria-label', '创新标签');
+    item.tags.forEach(tag => tags.append(el('li', '', tag)));
+    text.append(tags, el('p', 'rv-detail-lead', item.summary));
+    text.append(row('古今对照', compare(item.compare)));
+    if (item.access) text.append(row('去哪里遇见它', access(item.access)));
+
+    // 档案数字、图片来源和资料出处都要留着备查，但默认收起，不打断阅读
+    const more = el('details', 'rv-more');
+    more.append(el('summary', '', '档案与来源'));
+    more.append(row('产品档案', item.archive));
     if (item.imageMeta) {
       const meta = item.imageMeta;
       const caption = el('div', 'rv-image-caption');
@@ -244,15 +255,8 @@
         source.rel = 'noopener noreferrer';
       }
       caption.append(source, el('p', '', `来源日期：${meta.date}`));
-      text.append(caption);
+      more.append(row('配图', caption));
     }
-    text.append(row('古今对照', compare(item.compare)));
-    text.append(row('案例总述', item.summary));
-    text.append(row('产品档案', item.archive));
-    if (item.access) text.append(row('去哪里遇见它', access(item.access)));
-    const tags = el('ul', 'rv-tags');
-    item.tags.forEach(tag => tags.append(el('li', '', tag)));
-    text.append(row('创新标签', tags));
     const list = el('ul', 'rv-sources');
     item.sources.forEach(source => {
       const a = el('a', '', source.label);
@@ -263,8 +267,9 @@
       li.append(a);
       list.append(li);
     });
-    text.append(row('资料来源', list));
-    text.append(el('p', 'rv-note', '非遗级别指所依托的代表性项目，产品本身不获非遗认定；数字均为报道时口径。'));
+    more.append(row('资料来源', list));
+    more.append(el('p', 'rv-note', '非遗级别指所依托的代表性项目，产品本身不获非遗认定；数字均为报道时口径。'));
+    text.append(more);
 
     const nav = el('div', 'rv-detail-nav');
     const prev = el('button', '', '← 上一个');
@@ -361,4 +366,19 @@
 
   select(0);
   setView('counter');
+
+  // 外部入口：revival.html?case=05 直接落到「分类」页里对应的那件新作。
+  // 首页「今天它长这样」的三张卡就靠这个参数指过来，找不到编号时保持默认的柜台页。
+  const wanted = cases.find(item => item.id === new URLSearchParams(location.search).get('case'));
+  if (wanted) {
+    current = wanted.category;
+    setView('paths');
+    requestAnimationFrame(() => {
+      const target = grid.children[inPath(wanted.category).indexOf(wanted)];
+      if (!target) return;
+      // 分类页只有六件，通常首屏就能看全；只在卡片露不出来时才滚动，避免把页头推走。
+      if (typeof target.scrollIntoView === 'function') target.scrollIntoView({ block: 'nearest' });
+      target.focus({ preventScroll: true });
+    });
+  }
 })();

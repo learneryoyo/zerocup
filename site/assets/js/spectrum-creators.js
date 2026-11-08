@@ -15,9 +15,9 @@
     "home": "https://weibo.com/u/6394994683",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-02.webp",
-    "photoSource": "https://static.nfnews.com/content/202505/03/c11255582.html",
-    "photoLabel": "高清正面人物照",
-    "position": "65% 38%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_24535838",
+    "photoLabel": "手持自制鱼灯",
+    "position": "50% 50%",
     "title": "把好奇心，做成一门手艺",
     "noteTitle": "从拜师开始",
     "note": "学艺、缠线、绘图与上色，是这些画面里反复出现的动作。通草花、鱼灯和纸鸢的形态各不相同，共同之处是创作者始终把自己放在学习者的位置上。",
@@ -129,9 +129,9 @@
     "home": "https://www.weibo.com/mianyangdanshen",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-01.webp",
-    "photoSource": "https://galapagosfrog.hatenablog.com/entry/2019/09/19/%E6%9D%8E%E5%AD%90%E6%9F%92%E3%81%8CForbes%E4%B8%AD%E5%9B%BD%E7%89%88%E3%81%A750%E4%BA%BA%E3%81%AE%E3%82%AA%E3%83%94%E3%83%8B%E3%82%AA%E3%83%B3%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC%E3%81%AE1",
-    "photoLabel": "人物正面照",
-    "position": "50% 35%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_29365493",
+    "photoLabel": "漆树割漆",
+    "position": "50% 50%",
     "title": "从一棵漆树，到一件器物",
     "noteTitle": "器物之前的时间",
     "note": "补充影像把目光从漆器成品移向制作现场：漆树取漆、修整、打磨，再到摆满工具的工作台。漂亮的表面背后，是材料与双手长时间的相处。",
@@ -194,9 +194,9 @@
     "home": "https://space.bilibili.com/589188442",
     "homeLabel": "前往 B 站主页 ↗",
     "image": "../assets/img/creators/creator-03.webp",
-    "photoSource": "https://www.thepaper.cn/newsDetail_forward_18823849",
-    "photoLabel": "人物生活照",
-    "position": "50% 35%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_26074240",
+    "photoLabel": "挑担行走",
+    "position": "50% 50%",
     "title": "在院子里，慢慢做出来",
     "noteTitle": "手边的生活，也是材料",
     "note": "石磨、案桌、院落与茶叶，把手艺串回具体的日常。看他的作品，不妨多留意工具怎样被使用，以及那些看起来重复、却决定成品的细小动作。",
@@ -280,9 +280,9 @@
     "home": "https://space.bilibili.com/1475425645",
     "homeLabel": "前往 B 站主页 ↗",
     "image": "../assets/img/creators/creator-04.webp",
-    "photoSource": "https://www.cnr.cn/hunan/zhxw/20230117/t20230117_526129421.shtml",
-    "photoLabel": "制作糍粑视频截图",
-    "position": "50% 35%",
+    "photoSource": "http://hn.people.com.cn/n2/2025/0507/c208814-41220127.html",
+    "photoLabel": "田间收割水稻",
+    "position": "50% 50%",
     "title": "老物件里，有乡土的来路",
     "noteTitle": "工具与它生长的地方",
     "note": "老屋里的劳作、山林中的取材和糍粑的晾晒，保留了手艺发生的环境。器物并不是孤立的展品，它与山林、天气和一个地方的生活节奏相连。",
@@ -331,9 +331,9 @@
     "home": "https://space.bilibili.com/513192993",
     "homeLabel": "前往 B 站主页 ↗",
     "image": "../assets/img/creators/creator-05.webp",
-    "photoSource": "https://j.people.com.cn/n3/2021/0910/c94638-9894919.html",
-    "photoLabel": "独竹漂表演照",
-    "position": "50% 35%",
+    "photoSource": "https://m.thepaper.cn/newsDetail_forward_8821787",
+    "photoLabel": "独竹漂 · 红裙起舞",
+    "position": "50% 50%",
     "title": "把舞台，交给一片水面",
     "noteTitle": "轻盈不是没有重量",
     "note": "竹上独立、展袖与转身，放到峡谷和瀑布前便有了不同的气韵。这组照片可以从动作读起：先看脚下如何站稳，再看上半身怎样把舞蹈延伸出去。",
@@ -445,9 +445,9 @@
     "home": "https://weibo.com/u/7840319821",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-06.webp",
-    "photoSource": "https://m.thepaper.cn/newsDetail_forward_24320485",
-    "photoLabel": "向宏俊人物工作照",
-    "position": "50% 35%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_24320485",
+    "photoLabel": "团扇前剪影",
+    "position": "50% 50%",
     "title": "两个人，一段漫长的手作",
     "noteTitle": "把等待留在画面里",
     "note": "从田间扛回工具，到作坊里操作纺车，山白的影像常把人放在环境之中。夜色、窗光和工具的轮廓，让制作过程有了自己的叙事节奏。",
@@ -510,9 +510,9 @@
     "home": "https://www.weibo.com/u/7397682499",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-07.webp",
-    "photoSource": "https://news.sina.cn/2025-01-28/detail-inehnwwh7074386.d.html",
-    "photoLabel": "正面人物照",
-    "position": "50% 35%",
+    "photoSource": "https://city.cri.cn/2024-08-22/da9acbd3-20d7-537d-75f5-f288542b3361.html",
+    "photoLabel": "炭花舞表演",
+    "position": "50% 50%",
     "title": "从一道菜，走进更大的世界",
     "noteTitle": "先去请教，再去尝试",
     "note": "向匠人学习的近景，与炭花舞铺开的光轨形成对照：一边是细看手上的动作，一边是走进现场的身体体验。理解一门手艺，也可以从认真参与开始。",
@@ -583,19 +583,19 @@
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-08.webp",
     "photoSource": "https://www.thepaper.cn/newsDetail_forward_24635924",
-    "photoLabel": "人物视频截图",
-    "position": "50% 35%",
+    "photoLabel": "齐天大圣造型",
+    "position": "50% 28%",
     "title": "镜头前的英雄，镜头后的认真",
     "noteTitle": "变身之前，还有许多准备",
     "note": "戏服、纸扎、面具与幕后的讨论，构成了国风短片的另一面。看完镜头中的角色，再回头看道具和排练，便能发现一个短暂的瞬间如何被共同完成。",
     "layout": "backstage",
     "gallery": [
       {
-        "src": "../assets/img/creators/film-07-01.webp",
-        "label": "国风表演形象",
-        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
-        "width": 530,
-        "height": 942
+        "src": "../assets/img/creators/film-07-04.webp",
+        "label": "舞台川剧变装",
+        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
+        "width": 700,
+        "height": 488
       },
       {
         "src": "../assets/img/creators/film-07-02.webp",
@@ -605,46 +605,11 @@
         "height": 467
       },
       {
-        "src": "../assets/img/creators/film-07-03.webp",
-        "label": "齐天大圣造型",
-        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
-        "width": 530,
-        "height": 942
-      },
-      {
-        "src": "../assets/img/creators/film-07-04.webp",
-        "label": "舞台川剧变装",
-        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
-        "width": 700,
-        "height": 488
-      },
-      {
-        "src": "../assets/img/creators/film-07-05.webp",
-        "label": "后台受访",
-        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
-        "width": 530,
-        "height": 640
-      },
-      {
         "src": "../assets/img/creators/film-07-06.webp",
-        "label": "手持纸扎道具",
+        "label": "与齐天大圣画像合影",
         "source": "https://www.thepaper.cn/newsDetail_forward_26349132",
         "width": 1080,
         "height": 1413
-      },
-      {
-        "src": "../assets/img/creators/film-07-07.webp",
-        "label": "幕后讨论",
-        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
-        "width": 700,
-        "height": 524
-      },
-      {
-        "src": "../assets/img/creators/film-07-08.webp",
-        "label": "手持面具道具",
-        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
-        "width": 700,
-        "height": 466
       }
     ]
   },
@@ -661,9 +626,9 @@
     "home": "https://weibo.com/u/7030023973",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-09.webp",
-    "photoSource": "https://www.thepaper.cn/newsDetail_forward_29825469",
-    "photoLabel": "武术人物展示照",
-    "position": "50% 35%",
+    "photoSource": "http://www.xinhuanet.com/20240615/d4ecdf3e5e9844dea861330df85f2a63/c.html",
+    "photoLabel": "竹林列阵练功",
+    "position": "50% 50%",
     "title": "一招一式，练成自己的力量",
     "noteTitle": "从个人身法，到团队阵列",
     "note": "持剑、踢腿与列阵，让这组影像拥有清晰的节奏。一个人的身法与一群人的配合，呈现出不同的观看方式，也把武术训练与舞台表达连接起来。",
@@ -760,9 +725,9 @@
 ];
  const root=document.getElementById('creatorCarousel');if(!root)return;
  root.removeAttribute('aria-roledescription');root.setAttribute('aria-label','镜头里的守艺人');
- root.innerHTML=`<div class="ribbon-stage"><svg class="creator-ribbon" viewBox="0 0 1000 460" aria-hidden="true"><defs><filter id="filmInk" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1 -1 -1 0 3"/></filter><linearGradient id="ribbonFade"><stop offset="0" stop-color="white" stop-opacity=".12"/><stop offset=".4" stop-color="white" stop-opacity=".4"/><stop offset="1" stop-color="white"/></linearGradient><mask id="ribbonDistance"><rect width="1000" height="460" fill="url(#ribbonFade)"/></mask></defs><g mask="url(#ribbonDistance)"><svg x="0" width="650" height="460" viewBox="60 270 1270 460" preserveAspectRatio="none"><image filter="url(#filmInk)" href="../assets/img/creators/curved-film-reference.png" width="1672" height="941"/></svg></g><svg x="650" width="350" height="460" viewBox="1330 270 250 460" preserveAspectRatio="none"><image filter="url(#filmInk)" href="../assets/img/creators/curved-film-reference.png" width="1672" height="941"/></svg></svg><button type="button" class="creator-open ribbon-window" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="creator-picture"><img></span><span class="ribbon-open-hint">查看人物 ↗</span></button></div><div class="ribbon-copy"><div class="creator-heading"><span>镜头里的守艺人</span><span class="creator-count"></span></div><strong class="creator-name"></strong><span class="creator-field"></span><p class="ribbon-summary"></p><div class="creator-controls"><button type="button" class="ribbon-pause" aria-pressed="false">暂停轮播</button><div><button class="creator-prev" aria-label="上一位创作者">←</button><button class="creator-next" aria-label="下一位创作者">→</button></div></div><div class="creator-thumbs" aria-label="选择创作者"></div></div><span class="creator-sr" aria-live="polite"></span>`;
+ root.innerHTML=`<div class="ribbon-stage"><svg class="creator-ribbon" viewBox="80 255 1320 425" aria-hidden="true"><defs><filter id="filmInk" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1 -1 -1 0 3"/></filter><linearGradient id="ribbonFade"><stop offset="0" stop-color="white" stop-opacity=".07"/><stop offset=".42" stop-color="white" stop-opacity=".1"/><stop offset=".58" stop-color="white" stop-opacity=".24"/><stop offset=".65" stop-color="white" stop-opacity=".65"/><stop offset=".72" stop-color="white" stop-opacity="1"/></linearGradient><mask id="ribbonDistance"><rect width="1536" height="1024" fill="url(#ribbonFade)"/></mask></defs><image filter="url(#filmInk)" mask="url(#ribbonDistance)" href="../assets/img/creators/wide-film-reference.png" width="1536" height="1024"/></svg><button type="button" class="creator-open ribbon-window" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="creator-picture"><img></span><span class="ribbon-open-hint">查看人物 ↗</span></button><div class="ribbon-navigation"><button type="button" class="creator-prev" aria-label="上一位创作者">‹</button><button type="button" class="creator-next" aria-label="下一位创作者">›</button><div class="creator-dots" aria-label="选择创作者"></div></div></div><div class="ribbon-copy"><div class="creator-heading"><span>镜头里的守艺人</span><span class="creator-count"></span></div><strong class="creator-name"></strong><span class="creator-field"></span><p class="ribbon-summary"></p><div class="creator-controls"><button type="button" class="ribbon-pause" aria-pressed="false">暂停轮播</button></div></div><span class="creator-sr" aria-live="polite"></span>`;
  const dialog=document.createElement('dialog');dialog.id='creatorDialog';dialog.className='creator-dialog';dialog.setAttribute('aria-labelledby','creatorTitle');
- dialog.innerHTML='<div class="creator-topbar"><span class="creator-issue"></span><button class="creator-close" autofocus aria-label="关闭人物影集">关闭 ×</button></div><article class="creator-detail"></article>';
+ dialog.innerHTML='<div class="creator-topbar"><span class="creator-issue"></span><button class="creator-close" autofocus aria-label="关闭人物影集">×</button></div><article class="creator-detail"></article>';
  document.body.append(dialog);
  const q=s=>root.querySelector(s), d=s=>dialog.querySelector(s);let index=0,oldOverflow='';const opener=q('.creator-open');
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -775,15 +740,49 @@
  root.addEventListener('focusin',schedule);root.addEventListener('focusout',()=>setTimeout(schedule,0));document.addEventListener('visibilitychange',schedule);
  new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;schedule();}).observe(root);
  reduced.addEventListener('change',()=>{if(reduced.matches){paused=true;pauseLabel();}});
- const thumbs=people.map((p,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','选择'+p.name);b.innerHTML=`<img src="${esc(p.image)}" alt=""><span>${String(i+1).padStart(2,'0')}</span>`;b.onclick=()=>show(i);q('.creator-thumbs').append(b);return b;});
- function show(n){index=(n+people.length)%people.length;const p=people[index];q('.creator-picture img').src=p.image;q('.creator-picture img').alt=p.name+' · '+p.photoLabel;q('.creator-picture img').style.objectPosition=p.position;q('.creator-name').textContent=p.name;q('.creator-field').textContent=p.field;q('.creator-count').textContent=String(index+1).padStart(2,'0')+' / 10';q('.ribbon-summary').textContent=p.story.split('。')[0]+'。';opener.setAttribute('aria-label','打开'+p.name+'的人物影集');thumbs.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));q('.creator-sr').textContent='当前人物：'+p.name;schedule();}
+ const dots=people.map((p,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','选择'+p.name);b.title=p.name;b.onclick=()=>show(i);q('.creator-dots').append(b);return b;});
+ /* 切换动效：暗房叠印——新一格叠在旧格上面慢慢显影，只带一点点推近，不横向位移；
+    旧格原样留在下层，显影完成后才撤掉，中间不会露出黑底。文字随后由下往上淡入。
+    图片先解码再动，避免白闪；连点时直接收尾上一段。 */
+ let revision=0,first=true;
+ const picture=q('.creator-picture');
+ // 十张头像都不大，首屏后先全部解码好，切换时就不用等
+ const preload=()=>people.forEach(p=>{const im=new Image();im.src=p.image;im.decode().catch(()=>{});});
+ if(document.readyState==='complete')setTimeout(preload,300);else addEventListener('load',()=>setTimeout(preload,300),{once:true});
+ function swapText(p,animate){
+  q('.creator-name').textContent=p.name;q('.creator-field').textContent=p.field;q('.ribbon-summary').textContent=p.story.split('。')[0]+'。';
+  if(!animate)return;
+  ['.creator-name','.creator-field','.ribbon-summary'].forEach((sel,i)=>q(sel).animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:460,delay:120+i*60,easing:'cubic-bezier(.4,0,.2,1)',fill:'backwards'}));
+ }
+ function show(n){
+  index=(n+people.length)%people.length;const p=people[index],token=++revision,animate=!first&&!reduced.matches;first=false;
+  q('.creator-count').textContent=String(index+1).padStart(2,'0')+' / 10';
+  opener.setAttribute('aria-label','打开'+p.name+'的人物影集');dots.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));q('.creator-sr').textContent='当前人物：'+p.name;schedule();
+  // 收掉上一段还没走完的显影
+  picture.getAnimations({subtree:true}).forEach(x=>x.finish());
+  const imgs=[...picture.querySelectorAll('img')];imgs.slice(0,-1).forEach(x=>x.remove());
+  const old=picture.querySelector('img');
+  const next=document.createElement('img');next.src=p.image;next.alt=p.name+' · '+p.photoLabel;next.style.objectPosition=p.position;next.draggable=false;
+  const run=()=>{
+   if(token!==revision)return;
+   swapText(p,animate);
+   if(!old||!animate){picture.replaceChildren(next);return;}
+   picture.append(next);old.alt='';
+   // 旧格留在下面不动，新格在上层慢慢显影；显影完成后直接撤掉旧格，中间不会露出黑底
+   const ease='cubic-bezier(.4,0,.2,1)',dur=880;
+   const inn=next.animate([{opacity:0,transform:'scale(1.04)'},{opacity:1,transform:'scale(1)'}],{duration:dur,easing:ease});
+   inn.onfinish=()=>old.remove();
+  };
+  // 解码完再动；最多等 250ms
+  Promise.race([next.decode().catch(()=>{}),new Promise(r=>setTimeout(r,250))]).then(run);
+ }
  q('.creator-prev').onclick=()=>show(index-1);q('.creator-next').onclick=()=>show(index+1);
- q('.creator-thumbs').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();show(index+(e.key==='ArrowRight'?1:-1));thumbs[index].focus();}});
+ q('.creator-dots').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();show(index+(e.key==='ArrowRight'?1:-1));dots[index].focus();}});
  function photo(g,i){return `<figure class="creator-shot ${g.height>g.width?'is-portrait':'is-landscape'}"><a class="film-frame" href="${esc(g.src)}" target="_blank" rel="noopener" aria-label="查看大图：${esc(g.label)}"><span class="film-stock" aria-hidden="true">HERITAGE 400 <b>${String(i+1).padStart(2,'0')} ▷</b></span><img src="${esc(g.src)}" alt="${esc(g.label)}" width="${g.width}" height="${g.height}" loading="lazy"><span class="film-edge" aria-hidden="true">FRAME ${String(i+1).padStart(2,'0')} / MEMORY IN THE MAKING</span></a><figcaption><span>${esc(g.label)}</span>${link(g.source,'出处 ↗')}</figcaption></figure>`;}
  opener.onclick=()=>{
   const p=people[index];dialog.dataset.layout=p.layout;d('.creator-issue').textContent='守艺人影集 / VOL. '+String(index+1).padStart(2,'0');
   const sentences=p.story.match(/[^。！？]+[。！？]?/g)||[p.story];const split=Math.ceil(sentences.length/2);
-  const portrait=`<figure class="creator-portrait"><div class="film-frame"><span class="film-stock">PORTRAIT / ${String(index+1).padStart(2,'0')}</span><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}"></div><figcaption>${esc(p.photoLabel)} · ${link(p.photoSource,'图片来源 ↗')}</figcaption></figure>`;
+  const portrait=`<figure class="creator-portrait"><div class="film-frame"><span class="film-stock">STILL / ${String(index+1).padStart(2,'0')}</span><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}"></div><figcaption>${esc(p.photoLabel)} · ${link(p.photoSource,'图片来源 ↗')}</figcaption></figure>`;
   const heading=`<header class="creator-profile"><p class="creator-eyebrow">镜头里的守艺人 / ${esc(p.field)}</p><h2 id="creatorTitle">${esc(p.name)}</h2><p class="creator-role">${esc(p.role)}</p><p class="creator-deck">${esc(p.title)}</p><div class="creator-links">${link(p.home,p.homeLabel,'creator-home')}${link(p.source,'人物资料 ↗','creator-reference')}</div>${p.homeLabel.includes('作品')?'<p class="creator-link-note">可从作品页进入作者空间</p>':''}</header>`;
   const story=`<section class="creator-story"><h3>创作的来处</h3><p>${esc(sentences.slice(0,split).join(''))}</p><p>${esc(sentences.slice(split).join(''))}</p></section>`;
   const achievements=`<section class="creator-results"><h3>代表创作与成果</h3><ul class="creator-achievements">${p.achievements.map(a=>'<li>'+esc(a)+'</li>').join('')}</ul></section>`;
@@ -799,7 +798,15 @@
   d('.film-prev').onclick=()=>move(-1);d('.film-next').onclick=()=>move(1);
   viewport.addEventListener('scroll',updateButtons,{passive:true});
   viewport.addEventListener('keydown',e=>{if(e.target===viewport&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();move(e.key==='ArrowRight'?1:-1);}});
-  requestAnimationFrame(updateButtons);
+  // 胶卷放得下时不该再写「横向浏览」——没有可横拉的内容，提示就与事实相反。
+  // 必须在 rAF 里量：这一句跑在 showModal 之前，此刻弹窗还是 display:none，宽度一律是 0。
+  requestAnimationFrame(()=>{
+    updateButtons();
+    const filmHint=d('.creator-gallery-title>span');
+    if(filmHint&&viewport.clientWidth&&viewport.scrollWidth<=viewport.clientWidth+1){
+      filmHint.textContent=`${p.gallery.length} FRAMES / 点击查看大图`;
+    }
+  });
   oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();dialog.scrollTop=0;schedule();
  };
  d('.creator-close').onclick=()=>dialog.close();let onBackdrop=false;

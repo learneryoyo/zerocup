@@ -406,16 +406,33 @@
 }
 
 @media (max-width: 900px) {
+  /* 小屏改回纵向流：卷首语排在画上方，不再压在人物与飘带上；
+     画面按自身比例收高，页面不再被 min-height 撑出大片空白。 */
+  .heritage-scroll {
+    min-height: 0;
+  }
+  .heritage-scroll__scroll {
+    padding-bottom: 36px;
+  }
   .heritage-scroll__scene {
-    min-height: 720px;
-    padding-top: 0;
-    padding-top: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .heritage-scroll__stage {
+    position: static;
+    order: -1;
   }
   .heritage-scroll__copy {
-    top: 24px;
-    left: 20px;
-    right: 20px;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
     gap: 10px;
+  }
+  .heritage-scroll__copy::after {
+    display: none;
   }
   .heritage-scroll__card {
     min-width: clamp(110px, 24vw, 150px);
@@ -436,12 +453,7 @@
     font-size: 13px;
   }
   .heritage-scroll__scene {
-    min-height: 760px;
-  }
-  .heritage-scroll__copy {
-    top: 20px;
-    left: 18px;
-    right: 18px;
+    gap: 14px;
   }
   .heritage-scroll__copyTitle {
     font-size: clamp(24px, 7vw, 34px);

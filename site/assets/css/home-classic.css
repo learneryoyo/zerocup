@@ -204,7 +204,7 @@
     padding-top: clamp(56px, 14vw, 84px);
     gap: 24px;
   }
-  .intro h1 { font-size: clamp(44px, 14.2vw, 70px); max-width: none; }
+  .intro h1 { font-size: clamp(28px, 10vw, 70px); max-width: none; }
   .intro-copy { margin-bottom: 0; }
   .section-heading { grid-template-columns: 1fr; align-items: start; }
   .section-heading > p:last-child { margin-top: 4px; text-align: left; }
