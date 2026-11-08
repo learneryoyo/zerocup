@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#10100f">
   <title>首页 · 非遗辑录</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/cursor.css">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/home-classic.css">
   <link rel="stylesheet" href="assets/css/heritage-story.css">
@@ -86,7 +87,7 @@
         <h2 id="today-title">今天它长这样</h2>
         <p>从过节的一张画，到随身、案头的小物。<a href="revival.html">走近古艺新生</a></p>
       </div>
-      <div class="section-heading">
+      <div class="section-heading today-row">
         <div>
           <a class="story-card story-card--secondary" href="revival.html?case=05" aria-label="桃花坞年画衍生丝绸文创系列">
             <img src="assets/images/revival/05.jpg" alt="桃花坞年画衍生丝绸文创系列" loading="lazy" decoding="async">
@@ -101,7 +102,7 @@
         </div>
         <div>
           <a class="story-card story-card--secondary" href="revival.html?case=10" aria-label="印有动漫角色的王星记联名白纸扇">
-            <img src="assets/images/revival/10.png" alt="印有动漫角色的王星记联名白纸扇" loading="lazy" decoding="async">
+            <img src="assets/images/revival/10.webp" alt="印有动漫角色的王星记联名白纸扇" loading="lazy" decoding="async">
           </a>
           <p>联名纸扇，把老手艺带在手边。</p>
         </div>
@@ -110,8 +111,9 @@
 
     <!--
       时间轴图层：固定在视口正中的一条环带，默认压在页面内容下面（z-index: -1）。
-      只有三种情况会升到内容之上：鼠标停在左右两端、点击这一带、或播放开屏动画
-      （<html> 或 <body> 带 intro 类）；右上角的赭红方块是退出键，点击就落回底层。
+      桌面端：鼠标停在左右两端会升到内容之上，点击这一带则保持；右上角的赭红方块是退出键。
+      触屏：轻点这一带展开，再轻点一次落回底层。开屏动画（intro 类）时同样升起。
+      图层后面的 .tl-hints 是两端的小字说明，按设备显示「悬停」或「轻点」。
       页面往下滚，轨道按滚动进度横向移动，二者线性对应。始终不折叠、不变高。
     -->
     <section class="tl-layer" id="timeline" aria-labelledby="timeline-title">
@@ -135,7 +137,8 @@
           换图后要同步改 --x。--plain 表示该节点暂时没有画，只显示文字。
         -->
         <div class="tl-layer__art" hidden aria-hidden="true">
-          <img class="tl-layer__art-img" src="assets/images/timeline/timeline-design.webp" alt="" decoding="async">
+          <!-- 长卷图有几百 KB，不参与首屏：src 由 timeline.js 在页面加载完或开始滚动后再补上。 -->
+          <img class="tl-layer__art-img" data-src="assets/images/timeline/timeline-design.webp" alt="" decoding="async">
         </div>
 
         <ol class="tl-layer__track">
@@ -260,6 +263,15 @@
         <span class="tl-layer__edge">今天</span>
       </div>
     </section>
+
+    <div class="tl-hints" aria-hidden="true">
+      <span class="tl-hint tl-hint--start">
+        <span class="tl-hint__hover">悬停展开时间轴</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+      </span>
+      <span class="tl-hint tl-hint--end">
+        <span class="tl-hint__hover">悬停展开时间轴</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+      </span>
+    </div>
 
     <section class="manifesto" aria-label="项目理念">
       <span class="sec-mark" aria-hidden="true"></span>

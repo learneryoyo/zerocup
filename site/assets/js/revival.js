@@ -41,6 +41,8 @@
   const dialogBody = document.getElementById('rv-dialog-body');
   if (!tabList || !grid) return;
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let firstSelection = true;
   let current = 0;
   let open = null;      // 当前弹窗里的案例
   let trigger = null;   // 打开弹窗的卡片，关闭后焦点回去
@@ -133,13 +135,13 @@
   }
 
   function setLine(text) {
-    lineEl.classList.remove('is-in');
-    void lineEl.offsetWidth;
     lineEl.textContent = text;
-    lineEl.classList.add('is-in');
   }
 
   function select(index, focus) {
+    const initial = firstSelection;
+    firstSelection = false;
+    const unchanged = !initial && current === index;
     current = index;
     [...tabList.children].forEach((tab, i) => {
       const on = i === index;
@@ -150,9 +152,12 @@
     });
     panel.setAttribute('aria-labelledby', `rv-tab-${index}`);
     setLine(PATHS[index].line);
-    grid.replaceChildren(...inPath(index).map(card));
+    if (!unchanged) {
+      grid.classList.toggle('is-first-entry', initial && !reducedMotion.matches);
+      grid.replaceChildren(...inPath(index).map(card));
+    }
     if (window.matchMedia('(max-width: 720px)').matches) {
-      tabList.children[index].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+      tabList.children[index].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reducedMotion.matches || focus ? 'instant' : 'smooth' });
     }
   }
 
@@ -164,7 +169,7 @@
     tab.setAttribute('aria-controls', 'rv-panel');
     tab.innerHTML = icon(index);
     tab.append(el('span', 'rv-tab-name', path.name));
-    tab.addEventListener('click', () => select(index));
+    tab.addEventListener('click', event => select(index, event.detail === 0));
     tabList.append(tab);
   });
 

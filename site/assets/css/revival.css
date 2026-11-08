@@ -1,9 +1,8 @@
-/* 古艺新生：左侧标签切换 + 右侧 3×2 产品卡。背景沿用 site.css 的 body，不另设。 */
+/* 古艺新生：左侧标签切换 + 右侧 3×2 产品卡。
+   页面只用 --rv-* 自己的砖红色系，不覆盖全站的 --paper / --ink / --line：
+   那三个变量会连带改掉页眉底色、导航下划线和页脚，导致这页的站务元素与其他页有色差。 */
 :root {
   /* 砖红复古色系：米白 #E8E2D6、砖红 #904038、深红 #602020、杏色 #E0BA95、金棕 #B28750 */
-  --paper: #e8e2d6;
-  --ink: #602020;
-  --line: rgba(96, 32, 32, .18);
   --rv-brown: #904038;
   --rv-brown-deep: #602020;
   --rv-gold: #b28750;
@@ -15,7 +14,6 @@
   --rv-holder: var(--rv-surface);
 }
 
-.site-header { background: rgba(232, 226, 214, .94); }
 
 .revival {
   min-height: calc(100vh - var(--header-height));
@@ -35,25 +33,25 @@
 
 /* 左侧标签 */
 .rv-tabs { grid-area: tabs; display: flex; flex-direction: column; gap: clamp(18px, 3.2vh, 34px); align-self: start; }
-.rv-tab { --tab-bg: var(--rv-brown); position: relative; display: flex; align-items: center; gap: 12px; width: 72%; min-height: 66px; padding: 7px 18px 7px clamp(16px, 2vw, 34px); border: 0; border-radius: 0 3px 3px 0; color: var(--rv-cream); background: var(--tab-bg); font: 17px/1.2 var(--serif); letter-spacing: .14em; text-align: left; cursor: pointer; filter: drop-shadow(0 2px 0 rgba(96, 32, 32, .14)); transition: width 300ms cubic-bezier(.22, 1, .36, 1), min-height 300ms ease, filter 200ms ease, font-size 300ms ease; }
+.rv-tab { --tab-bg: var(--rv-brown); position: relative; display: flex; align-items: center; gap: 12px; width: 100%; min-height: 78px; padding: 7px 18px 7px clamp(16px, 2vw, 34px); border: 0; border-radius: 0 3px 3px 0; color: var(--rv-cream); background: var(--tab-bg); font: 17px/1.2 var(--serif); letter-spacing: .14em; text-align: left; cursor: pointer; filter: drop-shadow(0 2px 0 rgba(96, 32, 32, .14)); transition: filter 160ms ease; }
 /* 底色与该类图标的背景色一致，顺序见 revival.js 的 ICONS。 */
 .rv-tab:nth-child(even) { --tab-bg: var(--rv-apricot); color: var(--rv-brown-deep); }
 .rv-tab:hover { filter: brightness(.96) drop-shadow(0 2px 0 rgba(96, 32, 32, .14)); }
 .rv-tab:focus-visible { outline: 2px solid var(--rv-gold); outline-offset: 3px; }
-.rv-tab.is-active { width: 100%; min-height: 78px; font-size: clamp(21px, 1.9vw, 26px); font-weight: 700; }
-.rv-badge { position: relative; flex: none; display: block; width: 40px; height: 40px; transition: width 300ms ease, height 300ms ease; }
+.rv-tab.is-active { font-weight: 700; filter: drop-shadow(0 3px 0 var(--rv-brown-deep)); }
+.rv-badge { position: relative; flex: none; display: block; width: 50px; height: 50px; }
 .rv-tab.is-active .rv-badge { width: 50px; height: 50px; }
 .rv-badge img { display: block; width: 100%; height: 100%; }
 
 /* 右侧卡片 */
 .rv-panel { grid-area: panel; min-width: 0; }
 .rv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); max-width: 860px; margin-inline: auto; }
-.rv-card { position: relative; display: block; aspect-ratio: 1; padding: 0; overflow: hidden; border: 0; color: var(--rv-cream); background: var(--rv-holder); text-align: left; cursor: pointer; box-shadow: 0 1px 0 rgba(96, 32, 32, .1); animation: rv-rise 460ms cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 60ms); }
+.rv-card { position: relative; display: block; aspect-ratio: 1; padding: 0; overflow: hidden; border: 0; color: var(--rv-cream); background: var(--rv-holder); text-align: left; cursor: pointer; box-shadow: 0 1px 0 rgba(96, 32, 32, .1);  }
 .rv-card:focus-visible { outline: 2px solid var(--rv-brown); outline-offset: 3px; }
 .rv-card-media { position: absolute; inset: 0; transition: transform 400ms ease; }
 .rv-card:hover .rv-card-media, .rv-card:focus-visible .rv-card-media { transform: scale(1.04); }
 .rv-card-media > img, .rv-detail-media > img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.rv-holder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; padding-bottom: 18%; color: color-mix(in srgb, var(--rv-brown) 55%, var(--paper)); }
+.rv-holder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; padding-bottom: 18%; color: color-mix(in srgb, var(--rv-brown) 55%, var(--rv-cream)); }
 .rv-holder .rv-badge { width: clamp(56px, 6vw, 76px); height: clamp(56px, 6vw, 76px); padding: 14%; border-radius: 50%; background: var(--rv-apricot); }
 .rv-holder small { font-size: 12px; letter-spacing: .2em; }
 .rv-holder[hidden] { display: none; }
@@ -77,7 +75,7 @@
 .rv-card:hover .rv-card-hook, .rv-card:focus-visible .rv-card-hook { padding-top: 6px; }
 
 /* 详情弹窗 */
-.rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: min(86vh, 760px); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--paper); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
+.rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: min(86vh, 760px); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--rv-cream); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
 .rv-dialog::backdrop { background: rgba(58, 18, 18, .55); backdrop-filter: blur(3px); }
 .rv-dialog[open] { animation: rv-pop 280ms cubic-bezier(.22, 1, .36, 1); }
 /* 第三页弹窗用普通叉号，覆盖 site.css 里全站退出键的纹样小方块 */
@@ -113,7 +111,7 @@
 .rv-row h3 { margin: 0 0 8px; color: var(--rv-brown); font-size: 13px; font-weight: 600; letter-spacing: .14em; }
 .rv-row p { margin: 0; font-size: 14px; line-height: 1.85; }
 .rv-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: stretch; }
-.rv-compare-side { padding: 10px 12px; background: color-mix(in srgb, var(--paper) 70%, #fff); border: 1px solid rgba(178, 135, 80, .35); }
+.rv-compare-side { padding: 10px 12px; background: color-mix(in srgb, var(--rv-cream) 70%, #fff); border: 1px solid rgba(178, 135, 80, .35); }
 .rv-compare-side b { display: block; margin-bottom: 4px; color: var(--rv-brown); font: 700 16px/1 var(--serif); }
 .rv-compare-side p { font-size: 13px; line-height: 1.75; }
 .rv-compare-arrow { align-self: center; color: var(--rv-gold); font-size: 18px; }
@@ -309,3 +307,9 @@
 .hubi-postcard .miao-postcard-art { background: radial-gradient(ellipse at 50% 42%, #f7e9dfcc, transparent 75%), #e4d8d2; }
 .hubi-postcard .miao-postcard-art > img { filter: saturate(.77) drop-shadow(4px 12px 8px #68533624); }
 .hubi-postcard .miao-postcard-art > p { font-size: 17px; }
+
+/* 仅首次展示错峰入场，筛选与键盘切换不重复隐藏内容。 */
+.rv-grid.is-first-entry .rv-card { animation: rv-rise 250ms cubic-bezier(.23, 1, .32, 1) both; animation-delay: calc(var(--i, 0) * 30ms); }
+@media (prefers-reduced-motion: reduce) {
+  .rv-grid.is-first-entry .rv-card { animation: none; animation-delay: 0s; }
+}

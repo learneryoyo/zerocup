@@ -452,10 +452,24 @@ const clamp=(v,a,b)=>Math.min(Math.max(v,a),b);
 function aimLamp(button){const r=sheet.getBoundingClientRect(),b=button?.getBoundingClientRect(),x=b?clamp(b.left+b.width/2-r.left,0,r.width):r.width/2,y=b?clamp(b.top+b.height/2-r.top,0,r.height):r.height/2,far=Math.hypot(Math.max(x,r.width-x),Math.max(y,r.height-y));
  sheet.style.setProperty('--lx',x+'px');sheet.style.setProperty('--ly',y+'px');sheet.style.setProperty('--lamp-end',Math.ceil(far*1.5)+'px')}
 function open(id,button){const d=data.find(x=>x.id===id);if(!d)return;opener=button;render(d);setInfo(false);document.documentElement.classList.add('diary-no-scroll');dialog.classList.remove('is-closing');dialog.showModal();dialog.scrollTop=0;sketch(d);aimLamp(button);dialog.classList.add('is-opening');clearTimeout(settled);settled=setTimeout(()=>dialog.classList.remove('is-opening'),1200);dialog.querySelector('.dp-close').focus({preventScroll:true})}
-function close(){if(!dialog.open||closing)return;dialog.classList.remove('is-opening');dialog.classList.add('is-closing');closing=setTimeout(()=>{dialog.close();reset()},240)}
+function close(){
+ if(!dialog.open||closing)return;
+ clearTimeout(settled);
+ const style=getComputedStyle(sheet),opening=dialog.classList.contains('is-opening');
+ sheet.style.setProperty('--lamp-start',opening?style.getPropertyValue('--lamp'):style.getPropertyValue('--lamp-end'));
+ sheet.style.setProperty('--lamp-transform',style.transform);
+ sheet.style.setProperty('--lamp-opacity',style.opacity);
+ dialog.style.setProperty('--backdrop-start',getComputedStyle(dialog,'::backdrop').opacity);
+ // 保留尚未结束的显色与榜题动画，关闭光圈从当前半径接续。
+ dialog.classList.add('is-closing');
+ const delay=window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:240;
+ closing=setTimeout(()=>{dialog.close();reset()},delay);
+}
 // close 事件要等渲染帧才派发，后台标签页里可能迟迟不来，所以关闭时主动收尾；事件只兜底第二次按 Esc 的强制关闭。
-function reset(){clearTimeout(closing);closing=null;dialog.classList.remove('is-opening','is-closing');document.documentElement.classList.remove('diary-no-scroll');opener?.focus();opener=null}
-document.querySelectorAll('.project__text h2,main .cards article > h2').forEach(h=>{const d=data.find(d=>d.project===h.textContent.trim());if(!d)return;const row=document.createElement('div');row.className='artisan-title-row';h.before(row);row.append(h);const b=document.createElement('button');b.type='button';b.className='artisan-story-tag';b.innerHTML='<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.3 1.7h7.4v8.6H2.3z" fill="none" stroke="currentColor" stroke-width="1.05"/><path d="M4.2 4.1h3.6M4.2 6h3.6M4.2 7.9h2.1" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round"/></svg><span>匠人故事</span>';b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-label',`打开${d.person}的匠人故事`);b.addEventListener('click',()=>open(d.id,b));row.append(b)});
+function reset(){clearTimeout(closing);clearTimeout(settled);closing=null;sheet.style.removeProperty('--lamp-start');sheet.style.removeProperty('--lamp-transform');sheet.style.removeProperty('--lamp-opacity');dialog.style.removeProperty('--backdrop-start');dialog.classList.remove('is-opening','is-closing');document.documentElement.classList.remove('diary-no-scroll');opener?.focus();opener=null}
+// 按钮图标的手绘质感：共用一个滤镜，让笔画边缘像马克笔那样微微起伏
+if(!document.getElementById('astRough')){const defs=document.createElementNS('http://www.w3.org/2000/svg','svg');defs.setAttribute('width','0');defs.setAttribute('height','0');defs.setAttribute('aria-hidden','true');defs.style.position='absolute';defs.innerHTML='<filter id="astRough" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter>';document.body.append(defs);}
+document.querySelectorAll('.project__text h2,main .cards article > h2').forEach(h=>{const d=data.find(d=>d.project===h.textContent.trim());if(!d)return;const row=document.createElement('div');row.className='artisan-title-row';h.before(row);row.append(h);const b=document.createElement('button');b.type='button';b.className='artisan-story-tag';b.innerHTML='<svg class="ast-icon" viewBox="0 0 48 48" aria-hidden="true"><g filter="url(#astRough)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path class="ast-ticks" d="M5.2 15.8v4.6M5.3 24.6v.2M5.4 27.6v.2" stroke-width="2.6"/><path d="M10.4 9.6 34.8 9.1M10.1 9.9 10.4 37.4M10.6 38.6 36.1 38.2M35.8 22.6 35.9 37.6" stroke-width="3.3"/><path d="M15.2 15.6h12.6M14.8 21.4h8.4M14.9 27.4h14.6M14.7 33.2h16.4" stroke-width="2.8"/><g class="ast-pencil" transform="translate(23.4 28.6) rotate(-45)"><path d="M0 0 6.4-3.4H25.6V3.4H6.4Z" fill="var(--ast-paper)" stroke-width="2.7"/><path d="M6.6-1.2H25.2M6.6 1.2H25.2" stroke-width="1.5"/><path d="M25.6-3.4h2.8a3.4 3.4 0 0 1 0 6.8h-2.8M27.6-3.2v6.4" fill="var(--ast-paper)" stroke-width="2.7"/></g></g></svg><span>匠人故事</span>';b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-label',`打开${d.person}的匠人故事`);b.addEventListener('click',()=>open(d.id,b));row.append(b)});
 toggle.addEventListener('click',()=>setInfo(info.hidden));
 dialog.querySelector('.dp-close').addEventListener('click',close);
 sheet.addEventListener('animationend',e=>{if(e.target===sheet)dialog.classList.remove('is-opening')});

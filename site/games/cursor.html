@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#10100f">
   <title>换一支指针 · 非遗辑录</title>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/cursor.css">
   <link rel="stylesheet" href="../assets/css/site.css">
   <style>
     .cur-page { width: min(100%, 1360px); margin: 0 auto; padding: clamp(36px, 5vw, 72px) var(--page-gutter) clamp(60px, 8vw, 110px); }
@@ -29,6 +30,20 @@
     .cur-arrow { width: 46px; height: 56px; }
     .cur-hammer-big { width: 96px; height: 96px; }
     .cur-film { margin-top: 10px; font-size: 12px; line-height: 1.9; color: #6c675f; }
+    .cur-touch { display: none; margin: 0; font-size: 12px; line-height: 1.8; color: var(--red); letter-spacing: .04em; }
+    /* 触屏没有鼠标指针：不提供选择，只能轻点铁水勺的图打一次铁花 */
+    @media (hover: none) {
+      .cur-pick { display: none; }
+      .cur-touch { display: block; }
+      .cur-card[data-skin="hammer"] .cur-stage { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+      .cur-hammer-big.is-strike { animation: cur-jolt .32s ease-out; }
+    }
+    @keyframes cur-jolt {
+      0% { transform: rotate(0); }
+      30% { transform: rotate(-8deg) translate(-2px, 2px); }
+      100% { transform: rotate(0); }
+    }
+    @media (prefers-reduced-motion: reduce) { .cur-hammer-big.is-strike { animation: none; } }
     @media (max-width: 900px) { .cur-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -42,7 +57,7 @@
       <a href="../index.html">首页</a>
       <a href="../heritage.html">非遗辑录</a>
       <a href="../revival.html">古艺新生</a>
-      <a href="../games/spectrum.html">濒危光谱</a>
+      <a href="../games/spectrum.html">存续有数</a>
       <div class="nav-more">
         <button class="nav-more-btn" type="button" aria-expanded="false" aria-controls="more-panel">更多</button>
         <div class="nav-more-panel" id="more-panel">
@@ -82,15 +97,18 @@
         <span class="cur-tag">NO.01</span>
         <div class="cur-stage">
           <svg class="cur-hammer-big" viewBox="0 0 48 48" aria-hidden="true">
-            <path d="M4.6 4.4 13.6 7.6 41.4 40.2 37.6 43.4 9.2 12.6Z" fill="#c69a63" stroke="#5f3417" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M10.4 9.6 36.6 39.4" fill="none" stroke="#8a5a2a" stroke-width=".8" opacity=".45"/>
-            <circle cx="8.6" cy="8.4" r="8.6" fill="#f0a02a" opacity=".26"/>
-            <path d="M4.4 7.4c.2-2.6 2.6-3.8 4.9-3 2.2.8 3 3 2.1 5-.9 2-3.2 2.6-5.2 1.8-1.7-.7-2.6-2.1-1.8-3.8z" fill="#f7b733" stroke="#c9761c"/>
-            <circle cx="8.6" cy="7.8" r="1.9" fill="#fff6d8"/>
+            <circle cx="12" cy="12" r="10.5" fill="#f0a02a" opacity=".26"/>
+            <path d="M21.3 17.7 43.05 37.95A3.6 3.6 0 0 1 37.95 43.05L17.7 21.3Z" fill="#b8352a" stroke="#5c1a12" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M23.4 21.6 38.6 37.4" fill="none" stroke="#7e2219" stroke-width=".8" opacity=".5"/>
+            <path d="M20.7 16.5 23.5 19.3 19.3 23.5 16.5 20.7Z" fill="#4f4943" stroke="#2b2622" stroke-width="1.2" stroke-linejoin="round"/>
+            <path d="M5 5 11.79 4.8A7.2 7.2 0 1 1 4.8 11.79Z" fill="#c8773a" stroke="#5f3417" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="4.9" fill="#f7b733" stroke="#9a4f1c"/>
+            <circle cx="11" cy="11" r="1.9" fill="#fff6d8"/>
           </svg>
         </div>
-        <h2 class="cur-name">打铁花 · 铁水棍</h2>
-        <p class="cur-sub">前端盛一汪铁水；悬停时另一根棍子举起，按下砸出火星。</p>
+        <h2 class="cur-name">打铁花 · 铁水勺</h2>
+        <p class="cur-sub">勺里盛一汪铁水；悬停时击棍举起，按下砸出火星。</p>
+        <p class="cur-touch">手机上没有鼠标指针，轻点上面的图，打一次铁花。</p>
         <button class="cur-pick" type="button" data-pick="hammer" aria-pressed="false"><span>用这一支</span><span aria-hidden="true">→</span></button>
       </article>
 
@@ -142,6 +160,21 @@
         });
       });
       paint(window.ZCCursor ? window.ZCCursor.current() : "");
+
+      // 触屏：轻点铁水勺的图，从勺口打出一次铁花
+      var stage = document.querySelector('.cur-card[data-skin="hammer"] .cur-stage');
+      var ladle = stage && stage.querySelector(".cur-hammer-big");
+      if (stage && ladle) {
+        stage.addEventListener("click", function () {
+          if (!window.ZCCursor || !window.ZCCursor.touchOnly()) return;
+          var box = ladle.getBoundingClientRect();
+          var unit = box.width / 48;
+          window.ZCCursor.burst(box.left + 12 * unit, box.top + 12 * unit, unit);
+          ladle.classList.remove("is-strike");
+          void ladle.getBoundingClientRect();
+          ladle.classList.add("is-strike");
+        });
+      }
     }());
   </script>
 </body>

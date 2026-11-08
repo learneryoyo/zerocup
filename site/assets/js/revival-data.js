@@ -291,7 +291,7 @@ window.CASES = [
         "url": "https://news.hubeidaily.net/pc/c_4775688.html"
       }
     ],
-    "image": "assets/images/revival/08.png",
+    "image": "assets/images/revival/08.webp",
     "imageMeta": {
       "alt": "荔枝冰酿产品宣传摄影",
       "source": "https://www.foodtalks.cn/news/59601",
@@ -361,7 +361,7 @@ window.CASES = [
         "url": "http://wangxingji.com/works.aspx?id=18"
       }
     ],
-    "image": "assets/images/revival/10.png",
+    "image": "assets/images/revival/10.webp",
     "imageMeta": {
       "alt": "印有动漫角色的王星记联名白纸扇",
       "source": "http://wangxingji.com/works.aspx?id=18",
@@ -525,7 +525,7 @@ window.CASES = [
         "url": "https://www.jwview.cn/cj/2026/08-15/10678254.shtml"
       }
     ],
-    "image": "assets/images/revival/14.png",
+    "image": "assets/images/revival/14.webp",
     "imageMeta": {
       "alt": "唐圣丽介绍竹编暖水壶套（同工艺参考，非竹包或落地灯）",
       "source": "https://www.jpchinapress.com/static/content/WH/2023-05-25/1111351071894683648.html",
@@ -611,7 +611,7 @@ window.CASES = [
         "url": "https://www.sohu.com/a/963364011_121106994"
       }
     ],
-    "image": "assets/images/revival/16.png",
+    "image": "assets/images/revival/16.webp",
     "imageMeta": {
       "alt": "走大运NFC智能扇",
       "source": "https://www.ihchina.cn/project_details/14415",
@@ -1110,7 +1110,7 @@ window.CASES = [
         "url": "https://www.gmfyg.org.cn/learning/detail/455"
       }
     ],
-    "image": "assets/images/revival/28.png",
+    "image": "assets/images/revival/28.webp",
     "imageMeta": {
       "alt": "惩恶扬善小哪吒多媒体皮影剧演出画面",
       "source": "https://sn.cri.cn/n/20230701/7db6310c-ab98-479d-bad3-b7485349fc04.html",

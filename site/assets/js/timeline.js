@@ -3,8 +3,9 @@
 
   - 固定在视口正中，高度固定、不折叠；默认压在页面内容下面，只在空白处透出来；
   - 页面滚动时，轨道按页面滚动进度做横向位移，两者线性对应；
-  - 只有三种情况升到内容之上：鼠标停在左右两端、点击这一带、开屏动画（intro 类）；
-  - 右上角的赭红方块是退出键，点击后落回底层；
+  - 桌面端：鼠标停在左右两端浮起，点击这一带保持；右上角的赭红方块是退出键；
+  - 触屏（没有悬停）：轻点这一带浮起，再轻点一次落回底层，浮起时这一下不会点到底下的内容；
+  - 开屏动画（intro 类）时同样浮起；
   - 图层 pointer-events: none，不挡页面点击；悬停位置用坐标判断。
 
   保守约束：故事子页或任何 dialog 打开时不响应悬停；点击链接、按钮、
@@ -16,6 +17,7 @@
   var layer = document.querySelector(".tl-layer");
   if (!layer) return;
 
+  var stage = layer.querySelector(".tl-layer__stage");
   var track = layer.querySelector(".tl-layer__track");
   var railBar = layer.querySelector(".tl-layer__railBar");
   var art = layer.querySelector(".tl-layer__art");
@@ -26,6 +28,7 @@
   if (items.length < 3) return;
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var noHover = window.matchMedia("(hover: none)");
   var centers = [];
   var travel = 0;
   var artWidth = 0;
@@ -79,26 +82,27 @@
 
   function update() {
     scrollFrame = 0;
-    var p = progress();
-    var shift = -p * travel;
+    var manual = reduceMotion.matches;
+    var p = manual ? (travel > 0 ? stage.scrollLeft / travel : 0) : progress();
+    var shift = manual ? 0 : -p * travel;
     track.style.transform = "translate3d(" + shift.toFixed(2) + "px,0,0)";
     if (art && artWidth) {
       art.style.transform = "translate3d(" + shift.toFixed(2) + "px,0,0)";
     }
-    if (railBar) railBar.style.width = (p * 100).toFixed(2) + "%";
+    if (railBar) railBar.style.transform = "scaleX(" + p.toFixed(4) + ")";
 
     var middle = viewWidth / 2;
     var best = 0;
     var bestDistance = Infinity;
 
     for (var i = 0; i < items.length; i += 1) {
-      var distance = Math.abs(centers[i] + shift - middle);
+      var distance = Math.abs(centers[i] + (manual ? -stage.scrollLeft : shift) - middle);
       if (distance < bestDistance) {
         bestDistance = distance;
         best = i;
       }
       // 长卷模式下文字跟着画走，不做远近淡出
-      if (artWidth) {
+      if (artWidth || manual) {
         items[i].style.removeProperty("opacity");
         items[i].style.removeProperty("transform");
         continue;
@@ -137,6 +141,7 @@
 
   function evaluate() {
     moveFrame = 0;
+    if (reduceMotion.matches) return;
 
     if (blocked()) {
       // 上层有内容时不改变状态：hover 抬起的先放下去，手动固定的保持
@@ -185,6 +190,8 @@
   window.addEventListener("orientationchange", onResize);
 
   window.addEventListener("mousemove", function (event) {
+    // 触屏点按也会补发 mousemove，不能当成悬停
+    if (noHover.matches) return;
     pointer.x = event.clientX;
     pointer.y = event.clientY;
     // 只有指针真的离开这一带，才解除退出后的压制
@@ -205,19 +212,31 @@
   });
 
   // 点击这一带 → 上浮并保持；右上角的赭红方块 → 落回底层
-  var exitButton = layer.querySelector(".tl-layer__exit");
-  if (exitButton) {
-    exitButton.addEventListener("click", function (event) {
-      event.stopPropagation();
-      pinned = false;
-      suppressed = true;
-      requestEvaluate();
-    });
+  // 退出键：落回底层
+  function collapse(event) {
+    event.stopPropagation();
+    pinned = false;
+    suppressed = true;
+    requestEvaluate();
   }
+  var exitButton = layer.querySelector(".tl-layer__exit");
+  if (exitButton) exitButton.addEventListener("click", collapse);
 
   var INTERACTIVE = "a, button, input, select, textarea, label, summary, [role='button']";
 
+  // 触屏：浮起后在这一带再点一下就落回去。用捕获阶段拦下，免得同时点开底下的图片或链接
   window.addEventListener("click", function (event) {
+    if (reduceMotion.matches || !noHover.matches || !pinned || blocked()) return;
+    if (!inBand(event.clientY)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    pinned = false;
+    suppressed = true;
+    evaluate();
+  }, true);
+
+  window.addEventListener("click", function (event) {
+    if (reduceMotion.matches) return;
     var target = event.target;
     if (target && target.closest) {
       if (target.closest(".tl-layer")) return;
@@ -249,8 +268,45 @@
     artImg.addEventListener("error", measure);
   }
 
+  // 长卷图几百 KB，不占首屏带宽：页面加载完、或用户开始滚动 / 按下时再取。
+  // 没取到之前 measure() 会走「环带 + 文字」的退路，不会露破图。
+  if (artImg && artImg.dataset && artImg.dataset.src) {
+    var artKicked = false;
+    var kickArt = function () {
+      if (artKicked) return;
+      artKicked = true;
+      var start = function () {
+        if (!artImg.getAttribute("src")) artImg.setAttribute("src", artImg.dataset.src);
+      };
+      if (window.requestIdleCallback) window.requestIdleCallback(start, { timeout: 2000 });
+      else window.setTimeout(start, 1000);
+    };
+    window.addEventListener("load", kickArt);
+    window.addEventListener("scroll", kickArt, { passive: true, once: true });
+    window.addEventListener("pointerdown", kickArt, { passive: true, once: true });
+  }
+
   window.addEventListener("load", measure);
 
-  measure();
+  function syncMotionMode() {
+    pinned = false;
+    suppressed = false;
+    layer.classList.remove("is-raised");
+    if (reduceMotion.matches) {
+      stage.tabIndex = 0;
+      stage.setAttribute("role", "region");
+      stage.setAttribute("aria-label", "非遗时间轴，可左右滚动浏览");
+    } else {
+      stage.removeAttribute("tabindex");
+      stage.removeAttribute("role");
+      stage.removeAttribute("aria-label");
+      stage.scrollLeft = 0;
+    }
+    measure();
+    requestEvaluate();
+  }
+  stage.addEventListener("scroll", requestUpdate, { passive: true });
+  reduceMotion.addEventListener("change", syncMotionMode);
+  syncMotionMode();
   readIntro();
 }());

@@ -158,10 +158,11 @@
 .is-opening::backdrop{animation:dp-dim .3s ease-out both}
 .is-opening .dp-photo img{animation:dp-pigment .95s cubic-bezier(.16,1,.3,1) .1s backwards}
 .is-opening .dp-name{animation:dp-hang .56s cubic-bezier(.16,1,.3,1) .24s backwards}
-.is-closing .dp-sheet{animation:dp-lamp-out .24s cubic-bezier(.5,0,.8,.4) both}
-.is-closing::backdrop{animation:dp-dim .24s ease-in reverse both}
+.is-closing .dp-sheet{transform:var(--lamp-transform,none);animation:dp-lamp-out .24s cubic-bezier(.23,1,.32,1) both}
+.is-closing::backdrop{animation:dp-backdrop-out .24s cubic-bezier(.23,1,.32,1) both}
 @keyframes dp-lamp{from{--lamp:0px;transform:scale(.985)}to{--lamp:var(--lamp-end);transform:none}}
-@keyframes dp-lamp-out{from{--lamp:var(--lamp-end);opacity:1}to{--lamp:0px;opacity:.4}}
+@keyframes dp-lamp-out{from{--lamp:var(--lamp-start,var(--lamp-end));opacity:var(--lamp-opacity,1)}to{--lamp:0px;opacity:0}}
+@keyframes dp-backdrop-out{from{opacity:var(--backdrop-start,1)}to{opacity:0}}
 @keyframes dp-dim{from{opacity:0}}
 @keyframes dp-pigment{from{filter:sepia(.75) brightness(.55) saturate(.7)}}
 @keyframes dp-hang{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(-.4em)}}
@@ -219,6 +220,15 @@
  .is-opening .dp-photo img,.is-opening .dp-name,.dp-info{animation:none}
  .is-opening .dp-sheet,.is-closing .dp-sheet{-webkit-mask-image:none;mask-image:none}
  .is-opening .dp-sheet{animation:dp-dim .2s ease-out both}
- .is-closing .dp-sheet{animation:dp-dim .16s ease-in reverse both}
+ .is-closing .dp-sheet{animation:dp-backdrop-out .16s cubic-bezier(.23,1,.32,1) both}
 }
 @media print{.artisan-story-tag,.artisan-diary{display:none!important}}
+/* 匠人故事按钮：手绘便签 + 铅笔图标，去掉方框，文字放大 */
+.artisan-story-tag{--ast-ink:#5e4036;--ast-paper:#f4f0e8;gap:4px!important;border:0!important;background:none!important;color:var(--ast-ink)!important;padding:2px 6px 2px 0!important;font:700 16px/1.4 "STZhongsong","Songti SC","STSong","Noto Serif SC",serif!important;letter-spacing:.12em;min-height:40px;position:relative}
+.artisan-story-tag svg.ast-icon{width:36px;height:36px;opacity:1;transition:transform .2s ease}
+.artisan-story-tag span{position:relative;padding-bottom:2px;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .22s ease}
+.artisan-story-tag:hover{background:none!important;transform:none}
+.artisan-story-tag:hover svg.ast-icon{transform:rotate(-5deg) translateY(-1px)}
+.artisan-story-tag:hover span{background-size:100% 2px}
+.artisan-story-tag:focus-visible{outline:2px solid var(--ast-ink);outline-offset:3px;border-radius:4px!important}
+@media(prefers-reduced-motion:reduce){.artisan-story-tag svg.ast-icon,.artisan-story-tag span{transition:none}}

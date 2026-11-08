@@ -102,3 +102,9 @@
 .ronghua-photo-grid .ronghua-photo { max-width: none; }
 .ronghua-hero > img,
 .story-card[data-story-url="heritage/ronghua.html"] > img { object-position: center; transform: scale(1.64); }
+
+/* 尺寸一次切换，避免 iframe 在全屏过渡中逐帧重排；保留原开合节奏。 */
+.story-overlay--editorial .story-shell {
+  transition: transform 520ms cubic-bezier(.2,.72,.15,1), opacity 280ms ease;
+  will-change: transform;
+}

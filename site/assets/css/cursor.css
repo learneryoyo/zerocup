@@ -1,0 +1,83 @@
+/* ============================================================
+   鼠标指针皮肤（仅在本站内）—— 打铁花 · 铁水勺
+   从 site.css 拆出：存续有数页不引入 site.css，需要单独挂载本文件。
+   site.css 以 @import 引用本文件，全站仍是同一份样式。
+   ============================================================ */
+html.zc-cursor-on,
+html.zc-cursor-on * { cursor: none !important; }
+
+#zc-cursor {
+  position: fixed; left: 0; top: 0; z-index: 2147483000;
+  width: 36px; height: 36px; margin-left: -4px; margin-top: -4px;
+  pointer-events: none; will-change: transform;
+  transition: opacity .18s ease;
+  filter: drop-shadow(0 1px 2px rgba(16, 16, 15, .3));
+}
+#zc-cursor.is-hidden { opacity: 0; }
+/* 作为 popover 放在浏览器顶层：清掉 popover 自带的定位、边框、底色 */
+#zc-cursor[popover] {
+  right: auto; bottom: auto; inset-inline: auto; inset-block: auto;
+  left: 0; top: 0;
+  border: 0; padding: 0; background: transparent; color: inherit; overflow: visible;
+}
+
+.zc-wand { display: block; width: 100%; height: 100%; overflow: visible; }
+/* 扁平铁水勺：铜勺、铁箍、红木柄，描边统一用深褐 */
+.zc-ladle__cup { fill: #c8773a; stroke: #5f3417; stroke-width: 1.5; stroke-linejoin: round; }
+.zc-ladle__collar { fill: #4f4943; stroke: #2b2622; stroke-width: 1.2; stroke-linejoin: round; }
+.zc-ladle__handle { fill: #b8352a; stroke: #5c1a12; stroke-width: 1.5; stroke-linejoin: round; }
+.zc-ladle__grain { fill: none; stroke: #7e2219; stroke-width: .8; opacity: .5; }
+
+.zc-iron__glow { fill: #f0a02a; opacity: .26; }
+.zc-iron__pool { fill: #f7b733; stroke: #9a4f1c; stroke-width: 1; }
+.zc-iron__core { fill: #fff6d8; }
+#zc-cursor.is-hover .zc-iron__glow { opacity: .45; }
+
+.zc-striker {
+  opacity: 0;
+  transform-origin: 6.9px 32.9px;
+  transform: translate(6px, -6px) rotate(-16deg);
+  transition: opacity .3s ease, transform .3s cubic-bezier(.2, .8, .3, 1);
+}
+/* 击棍：和勺柄同一套红木配色，两头深色端头 */
+.zc-striker__body { fill: #b8352a; stroke: #5c1a12; stroke-width: 1.4; stroke-linejoin: round; }
+.zc-striker__grain { fill: none; stroke: #7e2219; stroke-width: .7; opacity: .5; }
+.zc-striker__cap { fill: #4f4943; stroke: #2b2622; stroke-width: 1.2; stroke-linejoin: round; }
+
+/* 举起时往右让开 9px，不挡勺里的铁水 */
+#zc-cursor.is-hover .zc-striker {
+  opacity: 1;
+  transform: translate(9px, 1px) rotate(-30deg);
+  animation: zc-raise 1.7s ease-in-out infinite;
+}
+#zc-cursor.is-strike .zc-striker {
+  opacity: 1;
+  transform: translate(3px, -2px) rotate(22.5deg);
+  transition-duration: .1s;
+  animation: none;
+}
+#zc-cursor.is-strike .zc-iron__glow { opacity: 0; }
+#zc-cursor.is-strike .zc-iron__pool,
+#zc-cursor.is-strike .zc-iron__core { opacity: 0; }
+
+.zc-spray { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.zc-burst { position: fixed; z-index: 2147483000; width: 0; height: 0; pointer-events: none; }
+.zc-spray i {
+  position: absolute; border-radius: 50%;
+  background: #ffd166; box-shadow: 0 0 5px rgba(255, 170, 40, .9);
+  animation: zc-spark .62s cubic-bezier(.2, .7, .3, 1) forwards;
+}
+
+@keyframes zc-raise {
+  0%, 100% { transform: translate(9px, 1px) rotate(-30deg); }
+  50% { transform: translate(9px, 1px) rotate(-22deg); }
+}
+@keyframes zc-spark {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  60% { opacity: .95; }
+  100% { transform: translate(var(--dx), calc(var(--dy) + var(--fall))) scale(.3); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #zc-cursor.is-hover .zc-striker { animation: none; transform: translate(9px, 1px) rotate(-26deg); }
+  .zc-spray i { animation-duration: .34s; }
+}

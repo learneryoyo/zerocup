@@ -49,6 +49,17 @@ SKIP_FILES = {
     "site/home-mosaic.html",      # 六色块备选首页，无入链
     "site/template.html",         # 新页面模板
     "site/heritage/template.html",# 非遗子页模板
+    # 设计参考图：是他人网站的设计截图，不是作品内容。
+    # 赛制按「与现有项目重复度」判定抄袭，这类图进包只会给自己添材料。
+    "docs/heritage-ref-class.jpg",
+    # 内部施工方案：写着本机绝对路径 C:/Users/<用户名>/…，属于匿名版明令要清的身份线索，
+    # 对评委也没有参考价值，整份不进包。
+    "docs/work-split-3ai.md",
+}
+
+# 不进入提交包的目录（相对仓库根，正斜杠，含子目录）
+SKIP_DIRS = {
+    "docs/timeline-guide",        # 时间轴长卷的生成工具与中间产物，22 MB，与作品无关
 }
 
 # 匿名单里允许出现的第三方联系方式（赛事官方收件邮箱）
@@ -57,6 +68,8 @@ WHITELIST_CONTACTS = {"2402065071@qq.com"}
 MEMBERS_RE = re.compile(r"<!--\s*BEGIN-MEMBERS\s*-->.*?<!--\s*END-MEMBERS\s*-->", re.S)
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE_RE = re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")
+# 本机绝对路径会带出系统用户名，匿名版明令要清
+PATH_RE = re.compile(r"(?:[A-Za-z]:[\\/]+Users[\\/]+[^\\/\s\"'<>|]+|/Users/[^/\s\"'<>|]+)")
 
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 
@@ -77,7 +90,12 @@ def collect_files():
         parts = rel.parts
         if parts[0] in SKIP_TOP:
             continue
+        # 下划线开头的是本地探针 / 截图脚本（与 .gitignore 的 _* 规则一致），不进提交包
+        if any(part.startswith("_") for part in parts):
+            continue
         if rel.as_posix() in SKIP_FILES:
+            continue
+        if any(rel.as_posix() == d or rel.as_posix().startswith(d + "/") for d in SKIP_DIRS):
             continue
         picked.append(rel)
     return sorted(picked)
@@ -197,7 +215,7 @@ def build(out_dir: Path, files, anon: bool, members: list) -> Path:
 
 def audit(zip_path: Path, members: list) -> bool:
     """在压缩包内回扫个人信息，命中姓名直接判定失败。"""
-    name_hits, mail_hits, phone_hits = [], set(), set()
+    name_hits, mail_hits, phone_hits, path_hits = [], set(), set(), set()
 
     with zipfile.ZipFile(zip_path) as zf:
         for info in zf.infolist():
@@ -221,6 +239,8 @@ def audit(zip_path: Path, members: list) -> bool:
                     mail_hits.add((info.filename, e))
             for ph in PHONE_RE.findall(text):
                 phone_hits.add((info.filename, ph))
+            for pa in PATH_RE.findall(text):
+                path_hits.add((info.filename, pa))
 
     ok = True
     if name_hits:
@@ -236,8 +256,12 @@ def audit(zip_path: Path, members: list) -> bool:
         print("  [注意] 疑似手机号：")
         for f, ph in sorted(phone_hits)[:10]:
             print("         %s → %s" % (f, ph))
-    if ok and not mail_hits and not phone_hits:
-        print("  [通过] 未发现姓名、邮箱、手机号")
+    if path_hits:
+        print("  [注意] 本机绝对路径（会带出系统用户名）：")
+        for f, pa in sorted(path_hits)[:10]:
+            print("         %s → %s" % (f, pa))
+    if ok and not mail_hits and not phone_hits and not path_hits:
+        print("  [通过] 未发现姓名、邮箱、手机号、本机路径")
     return ok
 
 
