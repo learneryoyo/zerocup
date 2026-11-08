@@ -1,14 +1,18 @@
 /* 节日页专属纹样：叠在 category.css 之后，只在 category/festival.html 加载。
    每个小项一枚代表纹样，落在文字栏下方的留白里，都完整显示、不裁切。
-   纹样是 category/festival/images/motif-*.webp 艾草绿水彩图，白底用 multiply 吃掉；
-   只有水族端节仍用 motif-shuishu-qd.svg，它的渐变与投影已画在 SVG 里，不叠混合和滤镜。 */
+   纹样是 category/festival/images/motif-*.webp 艾草绿水彩图，已抠成透明底，直接叠在纸色上；
+   只有水族端节仍用 motif-shuishu-qd.svg，它的渐变与投影已画在 SVG 里，不叠混合和滤镜。
+
+   不要再用 mix-blend-mode: multiply 去吃掉白底。混合模式要读它下面的背景（backdrop），
+   而纹样都带 transform 浮动动画、会被提升成独立合成层，滚动一快浏览器来不及准备 backdrop，
+   就用白色兜底，整块矩形露成白方块。透明底不依赖背景，怎么滚都不会出白块。 */
 
 /* 首屏火龙是横图，放进 4:5 竖框：取景略左移，主龙从龙须到龙身才完整 */
 .category-hero__media img { object-position: 43% 50%; }
 
 /* ── 首屏鱼灯：完整放在「节日」右上的留白里，不碰标题、副标题和照片 ──
    --fs 同 category.css 的 h1 字号：左缘按字号让开标题，提杆底端停在标题中上部（图片下方自带约 15% 空白）。
-   31px = 眉题高度 + h1 上外边距。原图白底，用 multiply 吃掉；降饱和后才贴近其他纹样的艾草绿。 */
+   31px = 眉题高度 + h1 上外边距。透明底，降饱和后才贴近其他纹样的艾草绿。 */
 .category-hero__inner > div { position: relative; }
 .category-hero__inner > div::before {
   --fs: clamp(52px, 8vw, 118px);
@@ -20,7 +24,6 @@
   left: calc(var(--fs) * 2.15);
   top: calc(31px + var(--fs) * .6 - var(--s) * .86);
   background: url("../../category/festival/images/fish-lantern.webp") center / contain no-repeat;
-  mix-blend-mode: multiply;
   filter: brightness(1.04) saturate(.76);
   opacity: .82;
   animation: qd-float 8s ease-in-out infinite alternate;
@@ -56,9 +59,8 @@
 }
 /* 偶数项文字栏在右，纹样靠右 */
 .project:nth-child(even) .project__text::after { margin-left: auto; }
-/* 水彩纹样：提亮把近白底推成纯白，与首屏鱼灯同一套调淡方式 */
+/* 水彩纹样：透明底，与首屏鱼灯同一套调淡方式 */
 .project:not(#shuizu-duanjie) .project__text::after {
-  mix-blend-mode: multiply;
   filter: brightness(1.04) saturate(.8);
   opacity: .82;
 }

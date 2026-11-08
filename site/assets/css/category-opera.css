@@ -1,6 +1,10 @@
 /* 曲艺页专属纹样：叠在 category.css 之后，只在 category/opera.html 加载。
    每个小项一幅石榴红手绘插图，落在文字栏下方的留白里，都完整显示、不裁切。
-   插图是绢白底，提亮把底色推成纯白，再用 multiply 吃掉；降饱和、降透明度调淡。 */
+   插图已抠成透明底，直接叠在纸色上；降饱和、降透明度调淡。
+
+   不要再用 mix-blend-mode: multiply 去吃掉白底。混合模式要读它下面的背景（backdrop），
+   而这两处插图都带 transform 浮动动画、会被提升成独立合成层，滚动一快浏览器来不及
+   准备 backdrop，就用白色兜底，整块矩形露成白方块。透明底不依赖背景，怎么滚都不会出白块。 */
 
 /* ── 首屏英歌鼓手：完整放在「曲艺」右上的留白里，不碰标题、副标题和照片 ──
    --fs 同 category.css 的 h1 字号：左缘按字号让开标题，底边停在标题下沿。
@@ -18,7 +22,6 @@
   left: calc(var(--fs) * 2.3);
   top: calc(31px + var(--fs) * 1.04 - var(--s) * 4 / 3);
   background: url("../../category/opera/images/motif-yingge-drummer.webp") center / contain no-repeat;
-  mix-blend-mode: multiply;
   filter: brightness(1.2) saturate(.82);
   opacity: .6;
   animation: qd-float 8s ease-in-out infinite alternate;
@@ -47,7 +50,6 @@
   aspect-ratio: var(--ms-ratio);
   margin-top: auto;
   background: var(--motif) center / contain no-repeat;
-  mix-blend-mode: multiply;
   filter: brightness(1.2) saturate(.82);
   opacity: .6;
   animation: qd-float 8s ease-in-out infinite alternate;
