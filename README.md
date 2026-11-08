@@ -3,7 +3,7 @@
 2026 零杯网页设计大赛（零组）参赛项目。
 
 首页已恢复首版双图排版，入口为 `site/index.html`。
-六色块方案完整保留在 `site/home-mosaic.html`，后续可用于第二页；相关工程说明见 `docs/mosaic-design.md`。
+六色块备选首页已于 2026-11-08 移除（无入链、不进提交包），工程说明留档在 `docs/mosaic-design.md`。
 前端运行与协作方式见 `docs/frontend.md`，既有分类资料均保留。
 
 ---
@@ -91,7 +91,6 @@ zerocup/
 ├── package.py             ← 打包成比赛要的两个 zip
 ├── site/                  ← 网站本体，最后交的就是这个文件夹
 │   ├── index.html         ← 首页
-│   ├── home-mosaic.html   ← 六色块备选首页（无入链，不进提交包）
 │   ├── heritage.html      ← 非遗辑录
 │   ├── revival.html       ← 古艺新生
 │   ├── about.html         ← 关于我们
@@ -224,7 +223,7 @@ dist/零杯零组-队伍名-队长姓名.zip
 
 | 步骤 | 说明 |
 |---|---|
-| 排除 | `.git`、`git-manual.md`、`prototypes/`、模板页、`home-mosaic.html`；下划线开头的本地探针脚本（`_*.js`）；`docs/timeline-guide/`（22 MB 生成工具）；以及三张无入链的设计参考图（`docs/heritage-ref-class.jpg` 是他人网站截图，两张 `*-reference.png` 是他人作品参考）——参考图进包只会给「抄袭」判定添材料 |
+| 排除 | `.git`、`git-manual.md`、`prototypes/`、模板页；下划线开头的本地探针脚本（`_*.js`）；`docs/timeline-guide/`（22 MB 生成工具）；以及三张无入链的设计参考图（`docs/heritage-ref-class.jpg` 是他人网站截图，两张 `*-reference.png` 是他人作品参考）——参考图进包只会给「抄袭」判定添材料 |
 | 剥 EXIF | 所有图片去掉相机型号 / GPS / 作者字段 |
 | 匿名化 | 删掉 README 里的 `<!-- BEGIN-MEMBERS -->` 到 `<!-- END-MEMBERS -->` 整段 |
 | 回扫 | 打包后在包内搜成员姓名、邮箱、手机号，命中姓名就报错中止 |

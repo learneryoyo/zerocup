@@ -242,28 +242,6 @@
 #lion-dance img[src*="lion-04"] { aspect-ratio: 1; object-position: 50% 17%; }
 
 /* ── 分类底部导航 ─────────────────────────────────────────── */
-/* 次入口：同一大类下的另一页（例如瓦舍勾栏里的舞蹈） */
-.cat-also {
-  margin: 0;
-  padding: 20px 0;
-  border-top: 1px solid var(--cat-line);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 10px 20px;
-  font-size: 12px;
-  letter-spacing: .12em;
-  color: var(--cat-muted);
-}
-.cat-also a {
-  font: 700 clamp(17px, 1.5vw, 21px)/1.4 var(--serif);
-  letter-spacing: .04em;
-  text-decoration: none;
-}
-.cat-also a::after { content: " ↗"; font-size: .8em; color: var(--cat-muted); }
-.cat-also a:hover, .cat-also a:focus-visible { color: var(--cat-accent); }
-.cat-also a:focus-visible { outline: 2px solid var(--cat-accent); outline-offset: 5px; }
-
 .category-nav {
   border-top: 1px solid var(--cat-line);
   padding: 34px 0 56px;

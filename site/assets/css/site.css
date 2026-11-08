@@ -53,7 +53,7 @@ img { display: block; max-width: 100%; }
 .nav-more-btn:hover::before, .nav-more-btn:focus-visible::before, .nav-more.is-open .nav-more-btn::before, .nav-more-btn.is-current::before { transform: scaleX(1); transform-origin: left; }
 .nav-toggle { display: none; border: 0; background: transparent; cursor: pointer; }
 
-/* 首页专属样式见 home.css。 */
+/* 首页专属样式见 home-classic.css。 */
 .site-footer { min-height: 190px; padding: 48px var(--page-gutter); display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,.14); }
 .site-footer p { margin: 0; font: 700 17px/1 var(--serif); letter-spacing: .12em; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 24px; }

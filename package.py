@@ -46,7 +46,6 @@ SKIP_TOP = {
 
 # 包内不进入提交包的单个文件（相对仓库根，正斜杠）
 SKIP_FILES = {
-    "site/home-mosaic.html",      # 六色块备选首页，无入链
     "site/template.html",         # 新页面模板
     "site/heritage/template.html",# 非遗子页模板
     # 设计参考图：是他人网站的设计截图，不是作品内容。
