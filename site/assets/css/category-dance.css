@@ -45,9 +45,10 @@ body.dance-body { background: var(--paper); }
 .dance-artifact img {
   width: 100%;
   height: auto;
-  /* 灰底扫描件放在米白纸上：multiply 吃掉白底，再压一点对比，像一页图录 */
-  mix-blend-mode: multiply;
-  filter: grayscale(1) contrast(1.04) brightness(1.02);
+  /* 图本身已是透明 PNG（白底早已抠掉），这里不再用 multiply 去底：
+     混合模式要读它下面的背景（backdrop），滚动一快会来不及准备，颜色会闪。
+     亮度压到 .97，补回原先 multiply 与纸色相乘的那点压暗，保持「图录」的灰调。 */
+  filter: grayscale(1) contrast(1.04) brightness(.97);
 }
 .dance-artifact figcaption {
   margin-top: 16px;

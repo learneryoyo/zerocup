@@ -22,8 +22,8 @@ body { background: var(--paper); }
   left: calc(var(--fs) * 1.55);
   top: calc(31px + var(--fs) * 1.04 - var(--s) * .91);
   background: url("../../category/food/images/tanghua-koi.webp") center / contain no-repeat;
-  mix-blend-mode: multiply;
-  /* 原图底色约 rgb(250 238 216)，提亮 1.2 倍推成纯白，multiply 后才不留方框；再降饱和、降透明度调淡 */
+  /* 图已抠成透明底，不再靠 mix-blend-mode 吃白底（混合模式要读 backdrop，
+     滚动一快会来不及准备、整块露白）；提亮与降饱和只为调淡，保留 */
   filter: brightness(1.2) saturate(.8);
   opacity: .45;
   pointer-events: none;
@@ -36,7 +36,7 @@ body { background: var(--paper); }
 }
 
 /* ── 项目区：每个小项一幅手绘食物插图，摆法同器物页：落在文字栏下方的留白角落 ──
-   插图是绢白底，先提亮把底色推成纯白，再用 multiply 吃掉；降饱和、降透明度调淡。 */
+   插图已抠成透明底，直接叠在纸色上；降饱和、降透明度调淡。 */
 .project__text {
   align-self: stretch;
   display: flex;
@@ -59,7 +59,6 @@ body { background: var(--paper); }
   margin-top: auto;
   margin-left: calc(var(--page-gutter) * -1);
   background: var(--motif) left var(--ms-x) bottom var(--ms-y) / var(--ms) var(--ms) no-repeat;
-  mix-blend-mode: multiply;
   filter: brightness(1.18) saturate(.72);
   opacity: .5;
   animation: food-drift-left 8s ease-in-out infinite alternate;
