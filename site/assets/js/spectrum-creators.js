@@ -1,7 +1,7 @@
-/* Local, credited creator data. Works with file:// and without a build step. */
+/* 静态人物选片与胶卷图文特写。资料见 docs/creator-film-sources.json。 */
 (() => {
-  'use strict';
-  const people = [
+ 'use strict';
+ const people = [
   {
     "name": "江寻千（九月）",
     "field": "确山铁花、糖画、通草花、传统手工",
@@ -17,7 +17,104 @@
     "image": "../assets/img/creators/creator-02.webp",
     "photoSource": "https://static.nfnews.com/content/202505/03/c11255582.html",
     "photoLabel": "高清正面人物照",
-    "position": "65% 38%"
+    "position": "65% 38%",
+    "title": "把好奇心，做成一门手艺",
+    "noteTitle": "从拜师开始",
+    "note": "学艺、缠线、绘图与上色，是这些画面里反复出现的动作。通草花、鱼灯和纸鸢的形态各不相同，共同之处是创作者始终把自己放在学习者的位置上。",
+    "layout": "journal",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-00-01.webp",
+        "label": "全身人物照",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 986,
+        "height": 1600
+      },
+      {
+        "src": "../assets/img/creators/film-00-02.webp",
+        "label": "打铁花表演",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "../assets/img/creators/film-00-03.webp",
+        "label": "向老手艺人学艺",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 800,
+        "height": 450
+      },
+      {
+        "src": "../assets/img/creators/film-00-04.webp",
+        "label": "与师傅院中练习",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 800,
+        "height": 450
+      },
+      {
+        "src": "../assets/img/creators/film-00-05.webp",
+        "label": "与师傅一起制作",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "../assets/img/creators/film-00-06.webp",
+        "label": "工作台前缠线",
+        "source": "https://www.thepaper.cn/newsDetail_forward_23786941",
+        "width": 1080,
+        "height": 603
+      },
+      {
+        "src": "../assets/img/creators/film-00-07.webp",
+        "label": "手持通草花成品",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 750,
+        "height": 640
+      },
+      {
+        "src": "../assets/img/creators/film-00-08.webp",
+        "label": "手持自制鱼灯",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24535838",
+        "width": 1080,
+        "height": 720
+      },
+      {
+        "src": "../assets/img/creators/film-00-09.webp",
+        "label": "与师傅揉面制作",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "../assets/img/creators/film-00-10.webp",
+        "label": "双手制作纸鸢",
+        "source": "https://www.thepaper.cn/newsDetail_forward_23786941",
+        "width": 1080,
+        "height": 601
+      },
+      {
+        "src": "../assets/img/creators/film-00-11.webp",
+        "label": "绘制纸鸢图样",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24535838",
+        "width": 1080,
+        "height": 534
+      },
+      {
+        "src": "../assets/img/creators/film-00-12.webp",
+        "label": "给纸鸢上色",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24535838",
+        "width": 847,
+        "height": 413
+      },
+      {
+        "src": "../assets/img/creators/film-00-13.webp",
+        "label": "冰雕创作",
+        "source": "https://static.nfnews.com/content/202505/03/c11255582.html",
+        "width": 800,
+        "height": 450
+      }
+    ]
   },
   {
     "name": "李子柒",
@@ -34,7 +131,55 @@
     "image": "../assets/img/creators/creator-01.webp",
     "photoSource": "https://galapagosfrog.hatenablog.com/entry/2019/09/19/%E6%9D%8E%E5%AD%90%E6%9F%92%E3%81%8CForbes%E4%B8%AD%E5%9B%BD%E7%89%88%E3%81%A750%E4%BA%BA%E3%81%AE%E3%82%AA%E3%83%94%E3%83%8B%E3%82%AA%E3%83%B3%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC%E3%81%AE1",
     "photoLabel": "人物正面照",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "从一棵漆树，到一件器物",
+    "noteTitle": "器物之前的时间",
+    "note": "补充影像把目光从漆器成品移向制作现场：漆树取漆、修整、打磨，再到摆满工具的工作台。漂亮的表面背后，是材料与双手长时间的相处。",
+    "layout": "process",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-01-01.webp",
+        "label": "非遗交流活动",
+        "source": "https://www.thepaper.cn/newsDetail_forward_29517867",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "../assets/img/creators/film-01-02.webp",
+        "label": "漆艺作品",
+        "source": "https://www.thepaper.cn/newsDetail_forward_29517867",
+        "width": 1151,
+        "height": 651
+      },
+      {
+        "src": "../assets/img/creators/film-01-03.webp",
+        "label": "割漆-漆树取生漆",
+        "source": "https://www.thepaper.cn/newsDetail_forward_29365493",
+        "width": 1080,
+        "height": 598
+      },
+      {
+        "src": "../assets/img/creators/film-01-04.webp",
+        "label": "打磨漆面",
+        "source": "https://www.thepaper.cn/newsDetail_forward_29517867",
+        "width": 1170,
+        "height": 649
+      },
+      {
+        "src": "../assets/img/creators/film-01-05.webp",
+        "label": "户外修整漆器",
+        "source": "https://www.thepaper.cn/newsDetail_forward_29365493",
+        "width": 1080,
+        "height": 608
+      },
+      {
+        "src": "../assets/img/creators/film-01-06.webp",
+        "label": "漆器工作台与工具",
+        "source": "https://www.thepaper.cn/newsDetail_forward_29517867",
+        "width": 1161,
+        "height": 666
+      }
+    ]
   },
   {
     "name": "彭传明",
@@ -51,7 +196,76 @@
     "image": "../assets/img/creators/creator-03.webp",
     "photoSource": "https://www.thepaper.cn/newsDetail_forward_18823849",
     "photoLabel": "人物生活照",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "在院子里，慢慢做出来",
+    "noteTitle": "手边的生活，也是材料",
+    "note": "石磨、案桌、院落与茶叶，把手艺串回具体的日常。看他的作品，不妨多留意工具怎样被使用，以及那些看起来重复、却决定成品的细小动作。",
+    "layout": "workshop",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-02-01.webp",
+        "label": "书写工作照",
+        "source": "https://www.thepaper.cn/newsDetail_forward_18823849",
+        "width": 578,
+        "height": 725
+      },
+      {
+        "src": "../assets/img/creators/film-02-02.webp",
+        "label": "传统工艺作品拼图",
+        "source": "https://www.thepaper.cn/newsDetail_forward_18823849",
+        "width": 677,
+        "height": 1154
+      },
+      {
+        "src": "../assets/img/creators/film-02-03.webp",
+        "label": "石磨碾磨",
+        "source": "https://www.thepaper.cn/newsDetail_forward_26074240",
+        "width": 828,
+        "height": 1277
+      },
+      {
+        "src": "../assets/img/creators/film-02-04.webp",
+        "label": "案前裁切",
+        "source": "https://www.thepaper.cn/newsDetail_forward_18823849",
+        "width": 578,
+        "height": 725
+      },
+      {
+        "src": "../assets/img/creators/film-02-05.webp",
+        "label": "院中制作",
+        "source": "https://www.thepaper.cn/newsDetail_forward_26074240",
+        "width": 838,
+        "height": 472
+      },
+      {
+        "src": "../assets/img/creators/film-02-06.webp",
+        "label": "案上加工",
+        "source": "https://www.thepaper.cn/newsDetail_forward_26074240",
+        "width": 828,
+        "height": 1446
+      },
+      {
+        "src": "../assets/img/creators/film-02-07.webp",
+        "label": "案前书写",
+        "source": "https://www.thepaper.cn/newsDetail_forward_18257854",
+        "width": 578,
+        "height": 726
+      },
+      {
+        "src": "../assets/img/creators/film-02-08.webp",
+        "label": "挑担行走",
+        "source": "https://www.thepaper.cn/newsDetail_forward_26074240",
+        "width": 679,
+        "height": 724
+      },
+      {
+        "src": "../assets/img/creators/film-02-09.webp",
+        "label": "揉制茶叶",
+        "source": "https://www.thepaper.cn/newsDetail_forward_26074240",
+        "width": 640,
+        "height": 945
+      }
+    ]
   },
   {
     "name": "彭南科",
@@ -68,7 +282,41 @@
     "image": "../assets/img/creators/creator-04.webp",
     "photoSource": "https://www.cnr.cn/hunan/zhxw/20230117/t20230117_526129421.shtml",
     "photoLabel": "制作糍粑视频截图",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "老物件里，有乡土的来路",
+    "noteTitle": "工具与它生长的地方",
+    "note": "老屋里的劳作、山林中的取材和糍粑的晾晒，保留了手艺发生的环境。器物并不是孤立的展品，它与山林、天气和一个地方的生活节奏相连。",
+    "layout": "scrapbook",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-03-01.webp",
+        "label": "传统农具制作截图",
+        "source": "https://www.cnr.cn/hunan/zhxw/20230117/t20230117_526129421.shtml",
+        "width": 1080,
+        "height": 1080
+      },
+      {
+        "src": "../assets/img/creators/film-03-02.webp",
+        "label": "老屋巷中劳作",
+        "source": "https://www.cnr.cn/hunan/zhxw/20230117/t20230117_526129421.shtml",
+        "width": 831,
+        "height": 541
+      },
+      {
+        "src": "../assets/img/creators/film-03-03.webp",
+        "label": "山林中取材（短视频画面）",
+        "source": "https://www.cnr.cn/hunan/zhxw/20230117/t20230117_526129421.shtml",
+        "width": 1080,
+        "height": 1080
+      },
+      {
+        "src": "../assets/img/creators/film-03-04.webp",
+        "label": "晾晒糍粑（短视频画面）",
+        "source": "https://www.cnr.cn/hunan/zhxw/20230117/t20230117_526129421.shtml",
+        "width": 793,
+        "height": 1600
+      }
+    ]
   },
   {
     "name": "杨柳",
@@ -85,7 +333,104 @@
     "image": "../assets/img/creators/creator-05.webp",
     "photoSource": "https://j.people.com.cn/n3/2021/0910/c94638-9894919.html",
     "photoLabel": "独竹漂表演照",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "把舞台，交给一片水面",
+    "noteTitle": "轻盈不是没有重量",
+    "note": "竹上独立、展袖与转身，放到峡谷和瀑布前便有了不同的气韵。这组照片可以从动作读起：先看脚下如何站稳，再看上半身怎样把舞蹈延伸出去。",
+    "layout": "panorama",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-04-01.webp",
+        "label": "独竹漂动态展示（静帧）",
+        "source": "https://j.people.com.cn/n3/2021/0528/c94475-9855175.html",
+        "width": 540,
+        "height": 903
+      },
+      {
+        "src": "../assets/img/creators/film-04-02.webp",
+        "label": "竹上独立",
+        "source": "https://m.thepaper.cn/newsDetail_forward_8821787",
+        "width": 1080,
+        "height": 608
+      },
+      {
+        "src": "../assets/img/creators/film-04-03.webp",
+        "label": "竹上舒袖",
+        "source": "https://www.thepaper.cn/newsDetail_forward_16909286",
+        "width": 1080,
+        "height": 719
+      },
+      {
+        "src": "../assets/img/creators/film-04-04.webp",
+        "label": "竹上起舞",
+        "source": "https://www.thepaper.cn/newsDetail_forward_16909286",
+        "width": 595,
+        "height": 892
+      },
+      {
+        "src": "../assets/img/creators/film-04-05.webp",
+        "label": "红衣双人",
+        "source": "https://m.thepaper.cn/newsDetail_forward_8821787",
+        "width": 1080,
+        "height": 797
+      },
+      {
+        "src": "../assets/img/creators/film-04-06.webp",
+        "label": "白纱竹上起舞",
+        "source": "https://www.thepaper.cn/newsDetail_forward_16909286",
+        "width": 594,
+        "height": 892
+      },
+      {
+        "src": "../assets/img/creators/film-04-07.webp",
+        "label": "白纱立于竹上",
+        "source": "https://m.thepaper.cn/newsDetail_forward_8821787",
+        "width": 1080,
+        "height": 687
+      },
+      {
+        "src": "../assets/img/creators/film-04-08.webp",
+        "label": "粉衣展袖",
+        "source": "https://m.thepaper.cn/newsDetail_forward_8821787",
+        "width": 1080,
+        "height": 591
+      },
+      {
+        "src": "../assets/img/creators/film-04-09.webp",
+        "label": "峡谷水上",
+        "source": "https://www.thepaper.cn/newsDetail_forward_16909286",
+        "width": 1080,
+        "height": 1392
+      },
+      {
+        "src": "../assets/img/creators/film-04-10.webp",
+        "label": "峭壁水上",
+        "source": "https://www.thepaper.cn/newsDetail_forward_16909286",
+        "width": 1080,
+        "height": 1386
+      },
+      {
+        "src": "../assets/img/creators/film-04-11.webp",
+        "label": "红裙飞扬",
+        "source": "https://m.thepaper.cn/newsDetail_forward_8821787",
+        "width": 1080,
+        "height": 720
+      },
+      {
+        "src": "../assets/img/creators/film-04-12.webp",
+        "label": "暗水红衣",
+        "source": "https://www.thepaper.cn/newsDetail_forward_16909286",
+        "width": 595,
+        "height": 893
+      },
+      {
+        "src": "../assets/img/creators/film-04-13.webp",
+        "label": "瀑布前起舞",
+        "source": "https://m.thepaper.cn/newsDetail_forward_8821787",
+        "width": 1080,
+        "height": 591
+      }
+    ]
   },
   {
     "name": "山白（向宏俊）",
@@ -102,7 +447,55 @@
     "image": "../assets/img/creators/creator-06.webp",
     "photoSource": "https://m.thepaper.cn/newsDetail_forward_24320485",
     "photoLabel": "向宏俊人物工作照",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "两个人，一段漫长的手作",
+    "noteTitle": "把等待留在画面里",
+    "note": "从田间扛回工具，到作坊里操作纺车，山白的影像常把人放在环境之中。夜色、窗光和工具的轮廓，让制作过程有了自己的叙事节奏。",
+    "layout": "notebook",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-05-01.webp",
+        "label": "叔侄团队合照",
+        "source": "https://m.thepaper.cn/newsDetail_forward_24320485",
+        "width": 912,
+        "height": 605
+      },
+      {
+        "src": "../assets/img/creators/film-05-02.webp",
+        "label": "工作坊内制作",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24320485",
+        "width": 695,
+        "height": 1053
+      },
+      {
+        "src": "../assets/img/creators/film-05-03.webp",
+        "label": "夜间操作",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24320485",
+        "width": 1080,
+        "height": 708
+      },
+      {
+        "src": "../assets/img/creators/film-05-04.webp",
+        "label": "团扇前剪影",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24320485",
+        "width": 1080,
+        "height": 717
+      },
+      {
+        "src": "../assets/img/creators/film-05-05.webp",
+        "label": "田间扛工具",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24320485",
+        "width": 725,
+        "height": 1088
+      },
+      {
+        "src": "../assets/img/creators/film-05-06.webp",
+        "label": "绕线纺车",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24320485",
+        "width": 753,
+        "height": 1136
+      }
+    ]
   },
   {
     "name": "南翔",
@@ -119,7 +512,62 @@
     "image": "../assets/img/creators/creator-07.webp",
     "photoSource": "https://news.sina.cn/2025-01-28/detail-inehnwwh7074386.d.html",
     "photoLabel": "正面人物照",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "从一道菜，走进更大的世界",
+    "noteTitle": "先去请教，再去尝试",
+    "note": "向匠人学习的近景，与炭花舞铺开的光轨形成对照：一边是细看手上的动作，一边是走进现场的身体体验。理解一门手艺，也可以从认真参与开始。",
+    "layout": "cinema",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-06-01.webp",
+        "label": "传统工艺制作照",
+        "source": "https://www.xinhuanet.com/local/20261003/348ffd278ba14547825a0fb6d901f30b/c.html",
+        "width": 1024,
+        "height": 665
+      },
+      {
+        "src": "../assets/img/creators/film-06-02.webp",
+        "label": "非遗学习场景",
+        "source": "https://www.xinhuanet.com/local/20261003/348ffd278ba14547825a0fb6d901f30b/c.html",
+        "width": 1024,
+        "height": 651
+      },
+      {
+        "src": "../assets/img/creators/film-06-03.webp",
+        "label": "向匠人学习",
+        "source": "https://city.cri.cn/2024-08-22/da9acbd3-20d7-537d-75f5-f288542b3361.html",
+        "width": 1147,
+        "height": 670
+      },
+      {
+        "src": "../assets/img/creators/film-06-04.webp",
+        "label": "炭花舞现场",
+        "source": "https://city.cri.cn/2024-08-22/da9acbd3-20d7-537d-75f5-f288542b3361.html",
+        "width": 1103,
+        "height": 607
+      },
+      {
+        "src": "../assets/img/creators/film-06-05.webp",
+        "label": "炭花舞表演",
+        "source": "https://yule.sohu.com/a/801145525_120914498",
+        "width": 1080,
+        "height": 720
+      },
+      {
+        "src": "../assets/img/creators/film-06-06.webp",
+        "label": "炭花舞光轨",
+        "source": "https://yule.sohu.com/a/801145525_120914498",
+        "width": 1080,
+        "height": 720
+      },
+      {
+        "src": "../assets/img/creators/film-06-07.webp",
+        "label": "炭花舞近景",
+        "source": "https://city.cri.cn/2024-08-22/da9acbd3-20d7-537d-75f5-f288542b3361.html",
+        "width": 1090,
+        "height": 601
+      }
+    ]
   },
   {
     "name": "朱铁雄",
@@ -136,7 +584,69 @@
     "image": "../assets/img/creators/creator-08.webp",
     "photoSource": "https://www.thepaper.cn/newsDetail_forward_24635924",
     "photoLabel": "人物视频截图",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "镜头前的英雄，镜头后的认真",
+    "noteTitle": "变身之前，还有许多准备",
+    "note": "戏服、纸扎、面具与幕后的讨论，构成了国风短片的另一面。看完镜头中的角色，再回头看道具和排练，便能发现一个短暂的瞬间如何被共同完成。",
+    "layout": "backstage",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-07-01.webp",
+        "label": "国风表演形象",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
+        "width": 530,
+        "height": 942
+      },
+      {
+        "src": "../assets/img/creators/film-07-02.webp",
+        "label": "庭院戏服表演",
+        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
+        "width": 700,
+        "height": 467
+      },
+      {
+        "src": "../assets/img/creators/film-07-03.webp",
+        "label": "齐天大圣造型",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
+        "width": 530,
+        "height": 942
+      },
+      {
+        "src": "../assets/img/creators/film-07-04.webp",
+        "label": "舞台川剧变装",
+        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
+        "width": 700,
+        "height": 488
+      },
+      {
+        "src": "../assets/img/creators/film-07-05.webp",
+        "label": "后台受访",
+        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
+        "width": 530,
+        "height": 640
+      },
+      {
+        "src": "../assets/img/creators/film-07-06.webp",
+        "label": "手持纸扎道具",
+        "source": "https://www.thepaper.cn/newsDetail_forward_26349132",
+        "width": 1080,
+        "height": 1413
+      },
+      {
+        "src": "../assets/img/creators/film-07-07.webp",
+        "label": "幕后讨论",
+        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
+        "width": 700,
+        "height": 524
+      },
+      {
+        "src": "../assets/img/creators/film-07-08.webp",
+        "label": "手持面具道具",
+        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
+        "width": 700,
+        "height": 466
+      }
+    ]
   },
   {
     "name": "凌云（马赵凌云）",
@@ -153,7 +663,62 @@
     "image": "../assets/img/creators/creator-09.webp",
     "photoSource": "https://www.thepaper.cn/newsDetail_forward_29825469",
     "photoLabel": "武术人物展示照",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "一招一式，练成自己的力量",
+    "noteTitle": "从个人身法，到团队阵列",
+    "note": "持剑、踢腿与列阵，让这组影像拥有清晰的节奏。一个人的身法与一群人的配合，呈现出不同的观看方式，也把武术训练与舞台表达连接起来。",
+    "layout": "motion",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-08-01.webp",
+        "label": "武术动态展示（静帧）",
+        "source": "https://www.thepaper.cn/newsDetail_forward_29825469",
+        "width": 474,
+        "height": 804
+      },
+      {
+        "src": "../assets/img/creators/film-08-02.webp",
+        "label": "竹林列阵练功",
+        "source": "http://www.xinhuanet.com/20240615/d4ecdf3e5e9844dea861330df85f2a63/c.html",
+        "width": 1024,
+        "height": 683
+      },
+      {
+        "src": "../assets/img/creators/film-08-03.webp",
+        "label": "殿前练功",
+        "source": "http://www.xinhuanet.com/sports/20240715/450bf46cabdc4799bd73e65c65b48cf3/c.html",
+        "width": 1024,
+        "height": 713
+      },
+      {
+        "src": "../assets/img/creators/film-08-04.webp",
+        "label": "山门前高踢腿",
+        "source": "http://www.xinhuanet.com/sports/20240715/450bf46cabdc4799bd73e65c65b48cf3/c.html",
+        "width": 870,
+        "height": 1021
+      },
+      {
+        "src": "../assets/img/creators/film-08-05.webp",
+        "label": "练功服团队合影",
+        "source": "http://www.xinhuanet.com/sports/20240715/450bf46cabdc4799bd73e65c65b48cf3/c.html",
+        "width": 1014,
+        "height": 676
+      },
+      {
+        "src": "../assets/img/creators/film-08-06.webp",
+        "label": "石阶上持剑",
+        "source": "http://www.xinhuanet.com/sports/20240715/450bf46cabdc4799bd73e65c65b48cf3/c.html",
+        "width": 997,
+        "height": 665
+      },
+      {
+        "src": "../assets/img/creators/film-08-07.webp",
+        "label": "舞台列阵",
+        "source": "http://www.xinhuanet.com/20240615/d4ecdf3e5e9844dea861330df85f2a63/c.html",
+        "width": 1020,
+        "height": 502
+      }
+    ]
   },
   {
     "name": "邹小和",
@@ -170,67 +735,69 @@
     "image": "../assets/img/creators/creator-10.webp",
     "photoSource": "https://www.sohu.com/a/401216004_120006290",
     "photoLabel": "人物工作照",
-    "position": "50% 35%"
+    "position": "50% 35%",
+    "title": "让老味道，回到今天的餐桌",
+    "noteTitle": "把经验说给更多人听",
+    "note": "工作照、食物与直播画面，记录的是同一门手艺的不同出口。制作之外，把材料与做法解释清楚，也让观众有机会理解熟悉味道背后的经验。",
+    "layout": "table",
+    "gallery": [
+      {
+        "src": "../assets/img/creators/film-09-01.webp",
+        "label": "正面直播截图",
+        "source": "https://www.sohu.com/a/401216004_120006290",
+        "width": 402,
+        "height": 812
+      },
+      {
+        "src": "../assets/img/creators/film-09-02.webp",
+        "label": "传统美食展示",
+        "source": "https://www.sohu.com/a/401216004_120006290",
+        "width": 640,
+        "height": 589
+      }
+    ]
   }
 ];
-  const root = document.getElementById('creatorCarousel');
-  if (!root) return;
-  root.innerHTML = `<div class="creator-heading"><span>让非遗被看见</span><span class="creator-count"></span></div>
-    <button type="button" class="creator-open" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="creator-picture"><img><img aria-hidden="true" alt=""></span><span class="creator-caption"><span class="creator-name"></span><span class="creator-field"></span><span class="creator-cta">读一读 TA 的故事 ↗</span></span></button>
-    <div class="creator-controls"><button type="button" class="creator-pause" aria-pressed="false">暂停轮播</button><div class="creator-arrows"><button type="button" class="creator-prev" aria-label="上一位创作者">←</button><button type="button" class="creator-next" aria-label="下一位创作者">→</button></div></div><span class="creator-sr" aria-live="polite"></span>`;
-  const dialog = document.createElement('dialog');
-  dialog.id = 'creatorDialog'; dialog.className = 'creator-dialog'; dialog.setAttribute('aria-labelledby','creatorTitle');
-  dialog.innerHTML = `<button type="button" class="creator-close" aria-label="关闭人物详情" autofocus>×</button><div class="creator-detail"><figure><img><figcaption></figcaption></figure><div class="creator-text"><p class="creator-eyebrow">镜头里的守艺人</p><h2 id="creatorTitle"></h2><p class="creator-role"></p><p class="creator-story"></p><h3>代表创作与成果</h3><ul class="creator-achievements"></ul><div class="creator-links"><a class="creator-home" target="_blank" rel="noopener noreferrer"></a><a class="creator-reference" target="_blank" rel="noopener noreferrer">资料出处 ↗</a></div><p class="creator-link-note"></p></div></div>`;
-  document.body.append(dialog);
-  const q = s => root.querySelector(s), d = s => dialog.querySelector(s);
-  const images = [...root.querySelectorAll('.creator-picture img')];
-  const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  let index = 0, layer = 0, revision = 0, timer, hovered = false, inView = true, paused = motion.matches, oldOverflow = '';
-  const opener = q('.creator-open');
-  function schedule() {
-    clearTimeout(timer);
-    if (!paused && !hovered && !root.contains(document.activeElement) && !document.hidden && inView && !dialog.open) timer = setTimeout(() => show(index+1),6500);
-  }
-  function show(next, manual=false) {
-    index = (next+people.length)%people.length; const p = people[index], token = ++revision;
-    const target = images[1-layer];
-    const commit = () => {
-      if (token !== revision) return;
-      images[layer].setAttribute('aria-hidden','true'); images[layer].alt='';
-      target.alt=p.name+' · '+p.photoLabel;target.style.objectPosition=p.position;target.setAttribute('aria-hidden','false');layer=1-layer;
-      q('.creator-name').textContent=p.name;q('.creator-field').textContent=p.field;
-      q('.creator-count').textContent=String(index+1).padStart(2,'0')+' / 10';
-      opener.setAttribute('aria-label','了解'+p.name+'的创作故事');
-      if(manual) q('.creator-sr').textContent='第'+(index+1)+'位，'+p.name;
-      schedule();
-      const preload=new Image();preload.src=people[(index+1)%people.length].image;
-    };
-    target.onload=commit;target.onerror=()=>{if(token===revision){target.alt=p.name+'（图片暂时无法加载）';commit();}};
-    target.src=p.image;if(target.complete && target.naturalWidth){target.onload=null;commit();}
-  }
-  q('.creator-prev').onclick=()=>show(index-1,true);q('.creator-next').onclick=()=>show(index+1,true);
-  function pauseLabel(){q('.creator-pause').textContent=paused?'播放轮播':'暂停轮播';q('.creator-pause').setAttribute('aria-pressed',String(paused));schedule();}
-  q('.creator-pause').onclick=()=>{paused=!paused;pauseLabel();};
-  root.addEventListener('mouseenter',()=>{hovered=true;schedule();});root.addEventListener('mouseleave',()=>{hovered=false;schedule();});
-  root.addEventListener('focusin',schedule);root.addEventListener('focusout',()=>setTimeout(schedule,0));
-  document.addEventListener('visibilitychange',schedule);
-  new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;schedule();}).observe(root);
-  motion.addEventListener('change',()=>{if(motion.matches){paused=true;pauseLabel();}});
-  opener.onclick=()=>{
-    const p=people[index];d('#creatorTitle').textContent=p.name;d('.creator-role').textContent=p.role;
-    d('.creator-story').textContent=p.story;
-    d('figure img').src=p.image;d('figure img').alt=p.name+' · '+p.photoLabel;
-    const credit=document.createElement('a');credit.href=p.photoSource;credit.target='_blank';credit.rel='noopener noreferrer';credit.textContent='图片来源 ↗';
-    d('figcaption').replaceChildren(document.createTextNode(p.photoLabel+' · '),credit);
-    d('.creator-achievements').replaceChildren(...p.achievements.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
-    d('.creator-home').href=p.home;d('.creator-home').textContent=p.homeLabel;d('.creator-reference').href=p.source;
-    d('.creator-link-note').textContent=p.homeLabel.includes('作品')?'账号主页暂未核实，可从作品页进入作者空间。':'在新标签页打开创作者主页';
-    oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();dialog.scrollTop=0;schedule();
-  };
-  d('.creator-close').onclick=()=>dialog.close();
-  let backdropDown=false;
-  dialog.addEventListener('pointerdown',e=>{backdropDown=e.target===dialog;});
-  dialog.addEventListener('click',e=>{if(e.target===dialog&&backdropDown){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-  dialog.addEventListener('close',()=>{document.body.style.overflow=oldOverflow;opener.focus({preventScroll:true});schedule();});
-  pauseLabel();show(0);
+ const root=document.getElementById('creatorCarousel');if(!root)return;
+ root.removeAttribute('aria-roledescription');root.setAttribute('aria-label','镜头里的守艺人');
+ const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="4"/><circle cx="12" cy="12.5" r="4"/><path d="M8 5l1-2h6l1 2"/><circle cx="18" cy="8" r=".7"/></svg>';
+ root.innerHTML=`<div class="creator-heading"><span class="creator-camera">${icon}</span><div><b>镜头里的守艺人</b><small>HERITAGE / PEOPLE</small></div><span class="creator-count"></span></div><button type="button" class="creator-open" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="creator-picture film-frame"><img><span class="viewfinder" aria-hidden="true"><i></i><i></i><i></i><i></i><small>PORTRAIT · 01</small></span></span><span class="creator-caption"><strong class="creator-name"></strong><span class="creator-field"></span><span class="creator-cta">打开人物影集 ↗</span></span></button><div class="creator-thumbs" aria-label="选择创作者"></div><div class="creator-controls"><span>一人一卷 · 十种传承</span><div><button class="creator-prev" aria-label="上一位创作者">←</button><button class="creator-next" aria-label="下一位创作者">→</button></div></div><span class="creator-sr" aria-live="polite"></span>`;
+ const dialog=document.createElement('dialog');dialog.id='creatorDialog';dialog.className='creator-dialog';dialog.setAttribute('aria-labelledby','creatorTitle');
+ dialog.innerHTML='<div class="creator-topbar"><span class="creator-issue"></span><button class="creator-close" autofocus aria-label="关闭人物影集">关闭 ×</button></div><article class="creator-detail"></article>';
+ document.body.append(dialog);
+ const q=s=>root.querySelector(s), d=s=>dialog.querySelector(s);let index=0,oldOverflow='';const opener=q('.creator-open');
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const link=(url,label,cls='')=>`<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+ const thumbs=people.map((p,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','选择'+p.name);b.innerHTML=`<img src="${esc(p.image)}" alt=""><span>${String(i+1).padStart(2,'0')}</span>`;b.onclick=()=>show(i);q('.creator-thumbs').append(b);return b;});
+ function show(n){index=(n+people.length)%people.length;const p=people[index];q('.creator-picture img').src=p.image;q('.creator-picture img').alt=p.name+' · '+p.photoLabel;q('.creator-picture img').style.objectPosition=p.position;q('.creator-name').textContent=p.name;q('.creator-field').textContent=p.field;q('.creator-count').textContent=String(index+1).padStart(2,'0')+' / 10';q('.viewfinder small').textContent='PORTRAIT · '+String(index+1).padStart(2,'0');opener.setAttribute('aria-label','打开'+p.name+'的人物影集');thumbs.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));q('.creator-sr').textContent='当前人物：'+p.name;}
+ q('.creator-prev').onclick=()=>show(index-1);q('.creator-next').onclick=()=>show(index+1);
+ q('.creator-thumbs').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();show(index+(e.key==='ArrowRight'?1:-1));thumbs[index].focus();}});
+ function photo(g,i){return `<figure class="creator-shot ${g.height>g.width?'is-portrait':'is-landscape'}"><a class="film-frame" href="${esc(g.src)}" target="_blank" rel="noopener" aria-label="查看大图：${esc(g.label)}"><span class="film-stock" aria-hidden="true">HERITAGE 400 <b>${String(i+1).padStart(2,'0')} ▷</b></span><img src="${esc(g.src)}" alt="${esc(g.label)}" width="${g.width}" height="${g.height}" loading="lazy"><span class="film-edge" aria-hidden="true">FRAME ${String(i+1).padStart(2,'0')} / MEMORY IN THE MAKING</span></a><figcaption><span>${esc(g.label)}</span>${link(g.source,'出处 ↗')}</figcaption></figure>`;}
+ opener.onclick=()=>{
+  const p=people[index];dialog.dataset.layout=p.layout;d('.creator-issue').textContent='守艺人影集 / VOL. '+String(index+1).padStart(2,'0');
+  const sentences=p.story.match(/[^。！？]+[。！？]?/g)||[p.story];const split=Math.ceil(sentences.length/2);
+  const portrait=`<figure class="creator-portrait"><div class="film-frame"><span class="film-stock">PORTRAIT / ${String(index+1).padStart(2,'0')}</span><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}"></div><figcaption>${esc(p.photoLabel)} · ${link(p.photoSource,'图片来源 ↗')}</figcaption></figure>`;
+  const heading=`<header class="creator-profile"><p class="creator-eyebrow">镜头里的守艺人 / ${esc(p.field)}</p><h2 id="creatorTitle">${esc(p.name)}</h2><p class="creator-role">${esc(p.role)}</p><p class="creator-deck">${esc(p.title)}</p><div class="creator-links">${link(p.home,p.homeLabel,'creator-home')}${link(p.source,'人物资料 ↗','creator-reference')}</div>${p.homeLabel.includes('作品')?'<p class="creator-link-note">可从作品页进入作者空间</p>':''}</header>`;
+  const story=`<section class="creator-story"><h3>创作的来处</h3><p>${esc(sentences.slice(0,split).join(''))}</p><p>${esc(sentences.slice(split).join(''))}</p></section>`;
+  const achievements=`<section class="creator-results"><h3>代表创作与成果</h3><ul class="creator-achievements">${p.achievements.map(a=>'<li>'+esc(a)+'</li>').join('')}</ul></section>`;
+  const note=`<aside class="creator-note"><span>FIELD NOTES / 观片笔记</span><h3>${esc(p.noteTitle)}</h3><p>${esc(p.note)}</p></aside>`;
+  const photos=p.gallery.map(photo);
+  // Different editorial structures, not a single repeated photo grid.
+  const variant=p.layout;
+  const top=['cinema','panorama','motion'].includes(variant)?heading+portrait:portrait+heading;
+  d('.creator-detail').innerHTML=`<div class="creator-intro">${top}</div><div class="creator-context">${story}${achievements}</div>${note}<section class="creator-gallery-section" aria-label="创作与现场影像"><div class="creator-gallery-title"><h3>手艺发生的现场</h3><span>${p.gallery.length} FRAMES / 横向浏览 · 点击查看大图</span><div class="film-navigation"><button type="button" class="film-prev" aria-label="向前浏览胶卷">←</button><button type="button" class="film-next" aria-label="向后浏览胶卷">→</button></div></div><div class="film-viewport" tabindex="0" role="region" aria-label="人物照片胶卷，可左右滚动"><div class="creator-gallery">${photos.join('')}</div></div></section><footer class="creator-end"><span>一门手艺，仍在继续。</span>${link(p.home,p.homeLabel)}</footer>`;
+  const viewport=d('.film-viewport');
+  const move=direction=>viewport.scrollBy({left:direction*Math.max(240,viewport.clientWidth*.75),behavior:'instant'});
+  const updateButtons=()=>{d('.film-prev').disabled=viewport.scrollLeft<=1;d('.film-next').disabled=viewport.scrollLeft+viewport.clientWidth>=viewport.scrollWidth-2;};
+  d('.film-prev').onclick=()=>move(-1);d('.film-next').onclick=()=>move(1);
+  viewport.addEventListener('scroll',updateButtons,{passive:true});
+  viewport.addEventListener('keydown',e=>{if(e.target===viewport&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();move(e.key==='ArrowRight'?1:-1);}});
+  requestAnimationFrame(updateButtons);
+  oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();dialog.scrollTop=0;
+ };
+ d('.creator-close').onclick=()=>dialog.close();let onBackdrop=false;
+ dialog.addEventListener('pointerdown',e=>onBackdrop=e.target===dialog);
+ dialog.addEventListener('click',e=>{if(onBackdrop&&e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+ dialog.addEventListener('close',()=>{document.body.style.overflow=oldOverflow;opener.focus({preventScroll:true});});
+ show(0);
 })();
