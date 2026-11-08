@@ -2,6 +2,19 @@
 (function () {
   "use strict";
 
+  /* 有指针皮肤时，按 site.js 的位置加载 cursor.js */
+  (function () {
+    var me = document.currentScript;
+    if (!me || !me.src) return;
+    var skin = "";
+    try { skin = localStorage.getItem("zc-cursor") || ""; } catch (e) { return; }
+    if (!skin) return;
+    var el = document.createElement("script");
+    el.src = me.src.replace(/site\.js(\?.*)?$/, "cursor.js");
+    el.defer = true;
+    document.head.appendChild(el);
+  }());
+
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".primary-nav");
   if (toggle && nav) {
