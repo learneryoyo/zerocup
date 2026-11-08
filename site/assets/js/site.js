@@ -59,6 +59,9 @@
     return element !== overlay && element.tagName !== "SCRIPT";
   });
 
+  // 关闭态直接移出渲染树，别让固定层和模糊背景留在页面里（残影来源）。
+  overlay.classList.add("is-idle");
+
   function setBackgroundInert(value) {
     background.forEach(function (element) { element.inert = value; });
   }
@@ -89,6 +92,8 @@
     activeCard = card;
     closing = false;
     resetFullscreen();
+    // 先回到渲染树，否则量不到弹层尺寸（display: none 时 offsetWidth 为 0）。
+    overlay.classList.remove("is-idle");
     setOrigin(card);
     title.textContent = card.dataset.storyTitle || "非遗子页";
     frame.title = title.textContent + " · 独立子页";
@@ -111,7 +116,13 @@
     timer = window.setTimeout(function () {
       var previousCard = activeCard;
       overlay.setAttribute("aria-hidden", "true");
+      // 动画走完再整层收起；全屏状态也在隐藏后复位，下一次展开量到的一定是最终宽度。
+      overlay.classList.add("is-idle");
       resetFullscreen();
+      shell.style.removeProperty("--shift-x");
+      shell.style.removeProperty("--shift-y");
+      shell.style.removeProperty("--scale-x");
+      shell.style.removeProperty("--scale-y");
       frame.removeAttribute("src");
       document.body.classList.remove("is-story-open");
       setBackgroundInert(false);

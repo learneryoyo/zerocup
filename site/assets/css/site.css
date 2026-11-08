@@ -59,6 +59,9 @@ img { display: block; max-width: 100%; }
 
 .story-overlay { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; visibility: hidden; pointer-events: none; }
 .story-overlay[aria-hidden="false"] { visibility: visible; pointer-events: auto; }
+/* 关闭后整层移出渲染树：只翻 visibility 时，固定层里的 backdrop-filter 与
+   .story-shell 的 will-change 合成层不会被回收，卡片位置会留下上一帧的残影。 */
+.story-overlay.is-idle { display: none; }
 .story-backdrop { position: absolute; inset: 0; background: rgba(8,8,7,.84); opacity: 0; transition: opacity 380ms ease; backdrop-filter: blur(6px); }
 .story-overlay.is-open .story-backdrop { opacity: 1; }
 .story-shell {

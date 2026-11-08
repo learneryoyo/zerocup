@@ -319,6 +319,7 @@
 </style>
 <link rel="stylesheet" href="nav.css">
 
+<link rel="stylesheet" href="../assets/css/spectrum-creators.css">
 </head>
 <body>
 <header class="site-header">
@@ -343,7 +344,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="seal">非遗</div>
+    <div class="creator-copy">
     <div class="kicker"><span class="dot"></span>国家级 · 人类非遗代表作 · 存续力观察</div>
     <h1>中国非遗<br><em>濒危光谱</em></h1>
     <p class="lede">把 <b id="totalCount">—</b> 项有代表性的国家级及以上非遗，按存续状态排进同一条光谱。拖动下方拉条，只留下你想看的那一段。</p>
@@ -353,6 +354,8 @@
       <div><b>3056</b><span>国家级代表性传承人</span></div>
       <div><b>45</b><span>列入 UNESCO 名录名册</span></div>
     </div>
+    </div>
+    <aside id="creatorCarousel" class="creator-carousel" aria-label="非遗创作者" aria-roledescription="轮播"></aside>
   </div>
 </header>
 
@@ -1014,5 +1017,6 @@ sync();
 })();
 </script>
 <script src="../assets/js/spectrum-contact.js"></script>
+<script src="../assets/js/spectrum-creators.js"></script>
 </body>
 </html>

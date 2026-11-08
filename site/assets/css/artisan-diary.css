@@ -86,8 +86,11 @@
 .dp-seal span{position:relative;font-size:1.45em}
 .dp-seal{font-size:1em}
 /* note：右对齐 + 4px 实心小圆点 + 小一档字号 + 字距 .14em，不居中 */
-.dp-note.end{display:flex;align-items:center;justify-content:flex-end;gap:.6em;text-align:right;font-size:.9em;letter-spacing:.14em}
-.dp-note.end::before{content:'';flex:none;width:4px;height:4px;background:currentColor;clip-path:polygon(50% 0,92% 22%,100% 62%,70% 100%,22% 92%,0 50%,18% 10%)}
+/* note：和榜题人名同号（2.05em），逗号处断成两行；右对齐，镜像页左对齐；首行字前一粒手点的小圆点 */
+.dp-note.end{display:flex;align-items:flex-start;justify-content:flex-end;text-align:right;font-size:2.05em;line-height:1.4;letter-spacing:.06em}
+.dp-note.end.start{justify-content:flex-start;text-align:left}
+.dp-note-t span{display:block;white-space:nowrap}
+.dp-note.end .dp-note-t span:first-child::before{content:'';display:inline-block;margin-right:.4em;vertical-align:.32em;width:.16em;height:.16em;background:currentColor;clip-path:polygon(50% 0,92% 22%,100% 62%,70% 100%,22% 92%,0 50%,18% 10%)}
 .dp-year.l{text-align:left}
 .dp-records{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 /* 主轴横带：联珠与 01/02 标签压在带上，照片跨压在带的上沿 */
@@ -182,8 +185,9 @@
  .dp-mA .dp-paper.inv p::first-letter{color:var(--accent)}
  .dp-grid .dp-title{transform:none}
  .dp-grid .dp-lead{margin-right:0}
- .dp-note.end{display:block;text-align:left}
- .dp-note.end::before{display:none}
+ .dp-note.end{display:block;text-align:left;font-size:26px}
+ .dp-note-t span{white-space:normal}
+ .dp-note.end .dp-note-t span:first-child::before{display:none}
  .dp-slot{position:static;grid-column:1/-1;width:auto!important}
  .dp-photo{position:relative;left:auto!important;top:auto!important;width:auto!important;height:auto!important}
  .dp-photo .dp-frame{height:auto;aspect-ratio:var(--ar)}

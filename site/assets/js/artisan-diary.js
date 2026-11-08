@@ -186,7 +186,7 @@ const MASTERS={
   spot:{at:[6,2,2,2],dy:19},
   scene:{at:[6,0,2,2],tone:'soft',o:.42,torn:{bottom:12,right:10}},
   scatter:[{at:[3,0],w:2},{at:[5,0],w:1,tall:1},{at:[4,2],w:1.5}],
-  note:[0,5.6,3,.4], // 右端让开 b 的时间标签
+  note:[0,5,3,1], // 和人名同号，两行；占下方装饰纸底边，右端让开 b 的时间标签和胶带
   tape:[[178,252,118,-7],[494,648,100,4]], // 第二条压在 b 侧沿的下边距里，避开正文末行
   seal:[1036,612],
  },
@@ -201,7 +201,7 @@ const MASTERS={
           b:{at:[5,3.5,3,2.5],tone:'accent',inv:1,torn:{bottom:14,right:12},rot:.6,strip:18}},
   decor:[{at:[3.5,1,4.5,1.5],tone:'soft',o:.42,torn:{top:10,right:8}}, // 照片下垫的一条纸
          {at:[3,3.5,2,2.5],tone:'accent',o:.42,torn:{bottom:10,top:8}}], // 中间一栏给记忆点垫的卡纸
-  note:[6,0,2,1],
+  note:[5,0,3,1], // 和人名同号，两行，需要 3 列宽
   tape:[[150,401,100,-3],[780,401,100,3]], // 第一条让开 a 角上的大号年份
   seal:[1030,646],
   vnote:false,
@@ -210,9 +210,9 @@ const MASTERS={
      // 段落 02 宽 3 列（方案的 4 列一行会到 33 字，超出 18–24 字的行宽），时间标签贴在它外侧（右）、年份压在左上角，让开上方照片。
      // 留白只留一处：note 那一行的左段（短句右对齐后空出来的 2–3 列）。
   head:{at:[0,0,3,2.5],tone:'soft',o:0}, // 2.5 行：群像页榜题常有三四列人名
-  blocks:{a:{at:[.5,2.5,2.5,3],tone:'soft',o:0,torn:{},rot:0,strip:18,minPad:{right:28}}, // 文字直接写在左列上；右内边距让开左列 16px 的撕口
+  blocks:{a:{at:[.5,2.5,2.5,3.5],tone:'soft',o:0,torn:{},rot:0,strip:18,minPad:{right:28}}, // 文字直接写在左列上；右内边距让开左列 16px 的撕口
           b:{at:[4.5,3,3,3],tone:'accent',inv:1,torn:{bottom:14},rot:.6,strip:18,stripR:1,yearL:1}},
-  decor:[{at:[0,0,3,5.5],tone:'soft',o:1,torn:{right:16,bottom:10}}], // 左列（底边留半行，覆盖率不超 86%）
+  decor:[{at:[0,0,3,6],tone:'soft',o:1,torn:{right:16,bottom:10}}], // 左列，通高
   scene:{at:[6.5,1,1.5,2],tone:'soft',o:.42,torn:{bottom:10,right:8}},
   note:[4,0,4,1],
   tape:[[420,585,100,-6],[940,358,100,4]], // 第二条让开 b 左上角的年份
@@ -224,12 +224,12 @@ const MASTERS={
 // spot.type：ring 绷圈 / arch 窑门 / records 唱片 / window 影窗。k 为拼贴件 [素材名,列,行,跨列,旋转]；seal 为印章字；scene 为长卷裁出的小景。
 const SCENE='../assets/images/diary/scenes/';
 const PAGES={
- 1:{m:'A',c:'qing',flip:1,seal:'录',k:[['jar',.25,4.7,.6,-2]],
+ 1:{m:'A',c:'qing',flip:1,seal:'录',k:[['jar',.05,5,.6,-2]],
   // 记忆点：主图嵌进窑门——拱形框外两道撕边拱圈，像一层层窑砖
   spot:{type:'arch',idx:0,at:[6,2,2,1],h:282},
   slots:[{i:1,at:[3,0],w:2},{i:3,at:[5,0],w:1},{i:2,at:[4,2],w:1.5}],
   scene:{src:SCENE+'scene-porcelain-vase.webp',cap:'青花玉壶春瓶（插画局部）'}},
- 2:{m:'A',c:'zhu',flip:0,seal:'传',k:[['strip-dragon',0,5,3,-1]],
+ 2:{m:'A',c:'zhu',flip:0,seal:'传',k:[['strip-dragon',0,4.62,2,-1]],
   // 记忆点：主图做成绣绷——手撕头光即绷圈，一根丝线从绷上牵出，落到段落 02
   spot:{type:'ring',idx:1},thread:1,
   scene:{src:SCENE+'scene-suzhou-hoop.webp',cap:'绣绷上的牡丹与丝线（插画局部）'}},
@@ -240,7 +240,7 @@ const PAGES={
  4:{m:'B',c:'tuhuang',flip:1,seal:'录',
   // 记忆点：梁架照装进四根出头搭接的梁枋里，像榫卯
   spot:{type:'joint',idx:0,photo:[448,380,170]},
-  slots:[{i:1,x:510,w:116,bot:336},{i:3,x:636,w:153,bot:300},{i:4,x:799,w:153,bot:326},{i:2,x:962,w:116,bot:310}]},
+  slots:[{i:1,x:510,w:116,bot:336},{i:3,x:638,w:146,bot:300},{i:4,x:800,w:146,bot:326},{i:2,x:962,w:116,bot:310}]},
  14:{m:'B',c:'lv',flip:0,seal:'传',
   // 记忆点：王永中端着热干面的头像做成一只碗口，三缕热气往上冒（原图是带白边的圆头像，框对准那个圆）
   spot:{type:'steam',idx:0,photo:[444,450,180],zoom:[.472,.461,.33]},
@@ -266,12 +266,12 @@ const PAGES={
   // 记忆点：银冠照下沿一道银条，垂下一排银铃流苏
   spot:{type:'fringe',idx:1,photo:[436,146,174]},
   slots:[{i:4,x:626,y:146,w:284},{i:0,x:942,y:146,w:138},{i:3,x:942,y:254,w:138},{i:2,x:436,y:490,w:106}]},
- 6:{m:'A',c:'tuhong',flip:0,seal:'记',k:[['robe-band',0,4.72,3,0]],
+ 6:{m:'A',c:'tuhong',flip:0,seal:'记',k:[['robe-band',0,4.62,3,0]],
   // 记忆点：两张唱片——人物照压在两张手撕圆的唱片上（题目“两张唱片，引她走进老生的世界”）
   spot:{type:'records',idx:0,at:[6,2,2,2],discs:[[1000,298,66],[878,342,92]],photo:[912,334,156]},
   slots:[{i:3,at:[3,0],w:2},{i:2,at:[5,0],w:1},{i:1,at:[4,2],w:1.5}],
   scene:{src:SCENE+'scene-opera-stage.webp',cap:'戏台与花旦（插画局部）'}},
- 7:{m:'A',c:'mei',flip:1,seal:'传',k:[['shadow',.2,4.6,.5,3]],
+ 7:{m:'A',c:'mei',flip:1,seal:'传',k:[['shadow',.05,4.95,.42,3]],
   // 记忆点：影窗——主图装进一道粗撕边的窗框，纱幕后的三位艺人就是窗里的戏
   spot:{type:'window',idx:0,at:[3,0,2.5,2]},
   slots:[{i:1,at:[6,2],w:2},{i:2,at:[4,2.25],w:1.4},{i:3,at:[6,3.7],w:1.5}],
@@ -377,7 +377,7 @@ function renderGrid(d,P){const M=MASTERS[P.m],f=P.flip,s=styles[d.group],S=d.id*
  const headHtml=`<header class="dp-head">${plaque(d.person)}<div class="dp-lead"><p class="dp-title">${esc(d.title)}</p><p class="dp-project">${esc(d.project)}<span>${esc(d.place)}</span></p><p class="dp-identity">${esc(d.identity)}</p></div></header>`;
  return `<div class="dp-canvas dp-grid dp-m${P.m} dp-l${d.id}"><i class="dp-tex" aria-hidden="true"></i><svg class="dp-decor" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${thread}</svg>${decor}${band}${clips}${scene}`+
   paperEl(head,M.head,S+1,{cls:' dp-head-paper',html:headHtml})+spotEl+block('a',0)+photos.slice(0,split).join('')+block('b',1)+photos.slice(split).join('')+
-  `<p class="dp-slot dp-note end" style="${at(nb)}">${esc(s[1])}</p>${vnote}${tape}${seal}<svg class="dp-defs" width="0" height="0" aria-hidden="true">${defs.join('')}</svg></div>`;
+  `<p class="dp-slot dp-note end${f?' start':''}" style="${at(nb)}"><span class="dp-note-t">${s[1].split(/(?<=，)/).map(x=>`<span>${esc(x)}</span>`).join('')}</span></p>${vnote}${tape}${seal}<svg class="dp-defs" width="0" height="0" aria-hidden="true">${defs.join('')}</svg></div>`;
 }
 // 小标题前的手绘短横（Rough.js），不用 • — ▸ 这类字体符号
 function sketchGrid(seed){if(!page.querySelector('.dp-grid'))return;let n=seed*1000+500;
