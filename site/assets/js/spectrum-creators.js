@@ -897,17 +897,17 @@
   const sentences=p.story.match(/[^。！？]+[。！？]?/g)||[p.story];
   const origin=(sentences.length>2?sentences.slice(1):sentences).join('');
   const small=[0,1,2].map(i=>{
-   const g=shots[i],no=18+i,num=`<span class="cf-no" style="grid-row:${i+1}">▶ ${no}</span>`;
+   const g=shots[i],no=2+i,num=`<span class="cf-no" style="grid-row:${i+1}">▶ ${no}</span>`;
    if(!g)return `<a class="cf-hole cf-blank" style="grid-row:${i+1}" href="${esc(p.home)}" target="_blank" rel="noopener noreferrer"><span>去看完整作品 ↗</span></a>`+num;
    const c=cropOf(g),crop=c.pos?` style="object-position:${c.pos};transform-origin:${c.pos};transform:scale(${c.zoom||1})"`:'';
    return `<figure class="cf-hole" style="grid-row:${i+1}"><img src="${esc(g.src)}"${crop} alt="${esc((pr.steps[i]||'')+'：'+g.label)}"><figcaption>${esc(pr.steps[i]||'')}</figcaption></figure>`+num;
   }).join('');
   const sources=[...new Set(shots.concat(extra||[]).map(g=>g.source))];
   const credit='人物照 '+link(p.photoSource,'来源 ↗')+(sources.length?' · 过程图 '+sources.map((u,i)=>link(u,sources.length>1?'出处'+(i+1)+' ↗':'出处 ↗')).join(' '):'');
-  const steps=pr.steps.map((t,i)=>'<b>'+(18+i)+'</b> '+esc(t)).join('<i>→</i>');
+  const steps=pr.steps.map((t,i)=>'<b>'+(2+i)+'</b> '+esc(t)).join('<i>→</i>');
   d('.cf-sheet').innerHTML=`<div class="cf-film-wrap">
     <div class="cf-film">
-     <span class="cf-edge" aria-hidden="true"><span>FILM</span><span>HERITAGE 400</span><span>▶ 17</span></span>
+     <span class="cf-edge" aria-hidden="true"><span>FILM</span><span>HERITAGE 400</span><span>▶ 1</span></span>
      ${big}
      <div class="cf-smalls">${small}</div>
     </div>

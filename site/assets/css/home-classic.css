@@ -177,7 +177,7 @@
 }
 .manifesto p { margin: 0; font: 700 clamp(30px, 4.6vw, 72px)/1.38 var(--serif); text-wrap: pretty; }
 .manifesto p + p { color: #918d85; }
-.manifesto > span:not(.sec-mark) {
+.manifesto > span {
   margin-top: clamp(34px, 4vw, 54px);
   padding-top: 18px;
   width: fit-content;
@@ -314,6 +314,11 @@
   max-width: none;
 }
 .tl-layer.is-art .tl-layer__axis { visibility: hidden; }
+/* 长卷图还在下载：线条版先不露面，免得手机慢网时一直看到线条；下完淡入 */
+.tl-layer.is-art-pending .tl-layer__axis,
+.tl-layer.is-art-pending .tl-layer__track { visibility: hidden; }
+.tl-layer.is-art .tl-layer__art { animation: tl-art-in .6s ease both; }
+@keyframes tl-art-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* 长卷模式下取消内容的上下渐隐：图本身已留白，时间轴文字贴着底部，需要看得清 */
 .tl-layer.is-art.is-raised .tl-layer__stage,
@@ -408,9 +413,14 @@
 }
 .tl-hint--start { left: clamp(4px, 1.2vw, 18px); }
 .tl-hint--end { right: clamp(4px, 1.2vw, 18px); }
+.tl-hint__unpin,
 .tl-hint__tap,
 .tl-hint__close { display: none; }
 .tl-layer.is-raised + .tl-hints .tl-hint { opacity: 0; }
+/* 桌面端点击固定后，两端提示改成「点击收起」 */
+.tl-layer.is-pinned + .tl-hints .tl-hint { opacity: 1; }
+.tl-layer.is-pinned + .tl-hints .tl-hint__hover { display: none; }
+.tl-layer.is-pinned + .tl-hints .tl-hint__unpin { display: inline; }
 html.intro .tl-hints,
 body.is-story-open .tl-hints { display: none; }
 @media (hover: none) {
@@ -419,36 +429,9 @@ body.is-story-open .tl-hints { display: none; }
   .tl-layer.is-raised + .tl-hints .tl-hint { opacity: 1; }
   .tl-layer.is-raised + .tl-hints .tl-hint__tap { display: none; }
   .tl-layer.is-raised + .tl-hints .tl-hint__close { display: inline; }
+  .tl-layer.is-pinned + .tl-hints .tl-hint__unpin { display: none; }
 }
 
-/* 右上角：赭红大矩形（小方块的 2 倍高、3 倍宽），同时是退出键 */
-.tl-layer__exit {
-  position: absolute;
-  z-index: 4;
-  top: 12px;
-  right: 12px;
-  pointer-events: auto;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .3s ease;
-}
-.tl-layer.is-raised .tl-layer__exit { opacity: 1; visibility: visible; }
-.tl-layer__exit:hover { background: #7f2f1e; }
-.tl-layer__exit:focus-visible { outline: 2px solid #9e3b26; outline-offset: 3px; }
-
-/* 左下角：墨绿小方块 */
-.tl-layer__mark {
-  position: absolute;
-  z-index: 4;
-  left: 12px;
-  bottom: 12px;
-  width: 30px;
-  height: 15px;
-  background: var(--mark-green);
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.tl-layer.is-raised .tl-layer__mark { opacity: 1; }
 
 /* 环带：两条弧线夹出一条带，中间 36px、两端收薄，延伸到视口外 */
 .tl-layer__axis {
@@ -675,35 +658,10 @@ body.is-story-open .tl-hints { display: none; }
   .tl-layer__intro { transition: none; }
 }
 
-/* 首页每个版面的角标：右上赭红、左下墨绿，20×10 */
+/* 各版面的定位上下文（角上的色块已去掉，这里仍需要 relative 供内部绝对定位元素使用） */
 .intro,
 .feature-section,
 .manifesto { position: relative; }
-.sec-mark {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-.sec-mark::before,
-.sec-mark::after {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 15px;
-}
-.sec-mark::before {
-  top: 12px;
-  right: 12px;
-  background: var(--mark-red);
-}
-.sec-mark::after {
-  bottom: 12px;
-  left: 12px;
-  background: var(--mark-green);
-}
-.manifesto .sec-mark::before { background: #b8503a; }
-.manifesto .sec-mark::after { background: #3f6a53; }
 
 /* 减少动态效果时，长卷留在文档中，由用户手动浏览。 */
 @media (prefers-reduced-motion: reduce) {
@@ -711,6 +669,6 @@ body.is-story-open .tl-hints { display: none; }
   .tl-layer__stage { overflow-x: auto; overflow-y: hidden; scroll-behavior: auto; overscroll-behavior-x: contain; bottom: 28px; }
   .tl-layer__stage:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
   .tl-layer__track, .tl-layer__art { will-change: auto; }
-  .tl-layer__exit, .tl-hints { display: none; }
+  .tl-hints { display: none; }
   .tl-layer__foot { pointer-events: none; }
 }

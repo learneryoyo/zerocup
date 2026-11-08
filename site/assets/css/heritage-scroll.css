@@ -437,6 +437,25 @@
   .heritage-scroll__card {
     min-width: clamp(110px, 24vw, 150px);
   }
+  /* 小屏人物贴着画面底边，卡片往下弹会压到下面的「色取」色名：改成弹在人物上方 */
+  .heritage-scroll__card {
+    top: auto;
+    bottom: calc(100% + 10px);
+    transform: translate(-50%, 10px) scale(0.96);
+  }
+  /* 随机探索的热区连着飘带，很高：卡片落在热区中下部，不碰上方的卷首语 */
+  .heritage-scroll__hotspot[data-random-explore] .heritage-scroll__card {
+    bottom: 30%;
+  }
+  /* 最左边一组靠左对齐，免得卡片伸出屏幕 */
+  .heritage-scroll__hotspot[data-category="objects"] .heritage-scroll__card {
+    left: 0;
+    transform: translate(0, 10px) scale(0.96);
+  }
+  .heritage-scroll__hotspot[data-category="objects"]:hover .heritage-scroll__card,
+  .heritage-scroll__hotspot[data-category="objects"]:focus-visible .heritage-scroll__card {
+    transform: translate(0, 0) scale(1);
+  }
 }
 
 @media (max-width: 640px) {

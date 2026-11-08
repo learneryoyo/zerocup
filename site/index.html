@@ -41,7 +41,6 @@
 
   <main id="main-content" tabindex="-1">
     <section class="intro" aria-labelledby="intro-title">
-      <span class="sec-mark" aria-hidden="true"></span>
       <p class="eyebrow">CHINA · LIVING HERITAGE</p>
       <h1 id="intro-title">见物，见人，<br>见一门手艺的时间。</h1>
       <p class="intro-copy">从一抔瓷土到一束蚕丝，沿着手艺人的双手，重新认识那些仍在生长的传统。</p>
@@ -49,7 +48,6 @@
     </section>
 
     <section class="feature-section" aria-labelledby="feature-title">
-      <span class="sec-mark" aria-hidden="true"></span>
       <div class="section-heading">
         <p class="eyebrow">本期辑录 · 01</p>
         <h2 id="feature-title">手中有万象</h2>
@@ -111,16 +109,15 @@
 
     <!--
       时间轴图层：固定在视口正中的一条环带，默认压在页面内容下面（z-index: -1）。
-      桌面端：鼠标停在左右两端会升到内容之上，点击这一带则保持；右上角的赭红方块是退出键。
+      桌面端：鼠标停在左右两端会升到内容之上，点击这一带则保持，再点一次落回底层。
       触屏：轻点这一带展开，再轻点一次落回底层。开屏动画（intro 类）时同样升起。
+      长卷图还没下载完时整条先空着，下完淡入；下载失败才退回线条版。
       图层后面的 .tl-hints 是两端的小字说明，按设备显示「悬停」或「轻点」。
       页面往下滚，轨道按滚动进度横向移动，二者线性对应。始终不折叠、不变高。
     -->
     <section class="tl-layer" id="timeline" aria-labelledby="timeline-title">
       <h2 class="visually-hidden" id="timeline-title">从榫卯，到今天</h2>
 
-      <button class="tl-layer__exit" type="button" aria-label="收起时间轴" title="收起时间轴"></button>
-      <span class="tl-layer__mark" aria-hidden="true"></span>
 
 
       <div class="tl-layer__stage">
@@ -266,15 +263,14 @@
 
     <div class="tl-hints" aria-hidden="true">
       <span class="tl-hint tl-hint--start">
-        <span class="tl-hint__hover">悬停展开时间轴</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+        <span class="tl-hint__hover">悬停展开时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
       </span>
       <span class="tl-hint tl-hint--end">
-        <span class="tl-hint__hover">悬停展开时间轴</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+        <span class="tl-hint__hover">悬停展开时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
       </span>
     </div>
 
     <section class="manifesto" aria-label="项目理念">
-      <span class="sec-mark" aria-hidden="true"></span>
       <p>传统不是一件被时间封存的旧物。</p>
       <p>它在人的手里，被一遍遍做成新的今天。</p>
       <span aria-hidden="true">未完待续</span>

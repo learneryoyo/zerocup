@@ -3,8 +3,10 @@
 
   - 固定在视口正中，高度固定、不折叠；默认压在页面内容下面，只在空白处透出来；
   - 页面滚动时，轨道按页面滚动进度做横向位移，两者线性对应；
-  - 桌面端：鼠标停在左右两端浮起，点击这一带保持；右上角的赭红方块是退出键；
-  - 触屏（没有悬停）：轻点这一带浮起，再轻点一次落回底层，浮起时这一下不会点到底下的内容；
+  - 桌面端：鼠标停在左右两端浮起，点击这一带保持，再点一次落回底层；
+  - 触屏（没有悬停）：轻点这一带浮起，再轻点一次落回底层；
+  - 浮起后「再点一次」只负责收起，不会点到底下的图片或链接；
+  - 长卷图下载中先空着（is-art-pending），下完切到长卷，下载失败才退回线条版；
   - 开屏动画（intro 类）时同样浮起；
   - 图层 pointer-events: none，不挡页面点击；悬停位置用坐标判断。
 
@@ -43,6 +45,7 @@
   var suppressed = false;
   var layerTop = 0;
   var layerBottom = 0;
+  var artFailed = false;
 
   function measure() {
     viewWidth = layer.clientWidth;
@@ -62,6 +65,7 @@
       layer.classList.remove("is-art");
       track.style.removeProperty("width");
     }
+    layer.classList.toggle("is-art-pending", !!(art && artImg && !artFailed && !artWidth));
 
     // 先定模式再量位置：长卷模式下节点是绝对定位的
     centers = items.map(function (item) {
@@ -161,6 +165,7 @@
     if (raised !== layer.classList.contains("is-raised")) {
       layer.classList.toggle("is-raised", raised);
     }
+    layer.classList.toggle("is-pinned", pinned && raised);
   }
 
   function requestEvaluate() {
@@ -211,22 +216,13 @@
     requestEvaluate();
   });
 
-  // 点击这一带 → 上浮并保持；右上角的赭红方块 → 落回底层
-  // 退出键：落回底层
-  function collapse(event) {
-    event.stopPropagation();
-    pinned = false;
-    suppressed = true;
-    requestEvaluate();
-  }
-  var exitButton = layer.querySelector(".tl-layer__exit");
-  if (exitButton) exitButton.addEventListener("click", collapse);
 
   var INTERACTIVE = "a, button, input, select, textarea, label, summary, [role='button']";
 
-  // 触屏：浮起后在这一带再点一下就落回去。用捕获阶段拦下，免得同时点开底下的图片或链接
+  // 浮起并固定后，在这一带再点一下就落回去（桌面和触屏都一样）。
+  // 用捕获阶段拦下，免得同时点开底下的图片或链接
   window.addEventListener("click", function (event) {
-    if (reduceMotion.matches || !noHover.matches || !pinned || blocked()) return;
+    if (reduceMotion.matches || !pinned || blocked()) return;
     if (!inBand(event.clientY)) return;
     event.preventDefault();
     event.stopPropagation();
@@ -265,7 +261,7 @@
   // 设计图可能比脚本晚到：加载完成或失败都重测一次，决定是否切到 is-art
   if (artImg) {
     artImg.addEventListener("load", measure);
-    artImg.addEventListener("error", measure);
+    artImg.addEventListener("error", function () { artFailed = true; measure(); });
   }
 
   // 长卷图几百 KB，不占首屏带宽：页面加载完、或用户开始滚动 / 按下时再取。
@@ -291,7 +287,7 @@
   function syncMotionMode() {
     pinned = false;
     suppressed = false;
-    layer.classList.remove("is-raised");
+    layer.classList.remove("is-raised", "is-pinned");
     if (reduceMotion.matches) {
       stage.tabIndex = 0;
       stage.setAttribute("role", "region");
