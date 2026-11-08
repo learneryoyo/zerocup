@@ -10,7 +10,6 @@
 }
 .module--objects  { --x: 0;  --y: 8;  --w: 10; --h: 14; --mx: 0;  --my: 0;  --tone: 47 69 57; }   /* 深林绿 */
 .module--opera    { --x: 11; --y: 4;  --w: 10; --h: 14; --mx: 0;  --my: 15; --tone: 199 181 154; } /* 沙色 */
-.module--dance    { --x: 11; --y: 19; --w: 10; --h: 14; --mx: 0;  --my: 30; --tone: 84 41 41; }    /* 暗酒红 */
 .module--food     { --x: 22; --y: 0;  --w: 10; --h: 14; --mx: 11; --my: 4;  --tone: 94 61 47; }    /* 土褐 */
 .module--festival { --x: 22; --y: 15; --w: 10; --h: 14; --mx: 11; --my: 19; --tone: 46 33 32; }    /* 深棕 */
 .module--other    { --x: 33; --y: 12; --w: 10; --h: 14; --mx: 11; --my: 34; --tone: 37 42 64; }    /* 靛蓝 */
@@ -18,7 +17,6 @@
 /* 每块的待机漂浮：各自的周期、相位与幅度（2–5px），互不同步。 */
 .module--objects  { --i: 0; --float-x: 2px;  --float-y: -4px; --float-dur: 7.2s; --float-delay: -1.3s; }
 .module--opera    { --i: 1; --float-x: 3px;  --float-y: 3px;  --float-dur: 6.1s; --float-delay: -4s; }
-.module--dance    { --i: 2; --float-x: -2px; --float-y: 4px;  --float-dur: 8.3s; --float-delay: -2.2s; }
 .module--food     { --i: 3; --float-x: -3px; --float-y: -3px; --float-dur: 6.7s; --float-delay: -.6s; }
 .module--festival { --i: 4; --float-x: 2px;  --float-y: -5px; --float-dur: 7.8s; --float-delay: -5.1s; }
 .module--other    { --i: 5; --float-x: -2px; --float-y: 3px;  --float-dur: 5.9s; --float-delay: -3.4s; }
