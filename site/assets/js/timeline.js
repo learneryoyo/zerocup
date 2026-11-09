@@ -19,7 +19,6 @@
   var layer = document.querySelector(".tl-layer");
   if (!layer) return;
 
-  var stage = layer.querySelector(".tl-layer__stage");
   var track = layer.querySelector(".tl-layer__track");
   var railBar = layer.querySelector(".tl-layer__railBar");
   var art = layer.querySelector(".tl-layer__art");
@@ -86,9 +85,8 @@
 
   function update() {
     scrollFrame = 0;
-    var manual = reduceMotion.matches;
-    var p = manual ? (travel > 0 ? stage.scrollLeft / travel : 0) : progress();
-    var shift = manual ? 0 : -p * travel;
+    var p = progress();
+    var shift = -p * travel;
     track.style.transform = "translate3d(" + shift.toFixed(2) + "px,0,0)";
     if (art && artWidth) {
       art.style.transform = "translate3d(" + shift.toFixed(2) + "px,0,0)";
@@ -100,13 +98,13 @@
     var bestDistance = Infinity;
 
     for (var i = 0; i < items.length; i += 1) {
-      var distance = Math.abs(centers[i] + (manual ? -stage.scrollLeft : shift) - middle);
+      var distance = Math.abs(centers[i] + shift - middle);
       if (distance < bestDistance) {
         bestDistance = distance;
         best = i;
       }
       // 长卷模式下文字跟着画走，不做远近淡出
-      if (artWidth || manual) {
+      if (artWidth) {
         items[i].style.removeProperty("opacity");
         items[i].style.removeProperty("transform");
         continue;
@@ -145,7 +143,6 @@
 
   function evaluate() {
     moveFrame = 0;
-    if (reduceMotion.matches) return;
 
     if (blocked()) {
       // 上层有内容时不改变状态：hover 抬起的先放下去，手动固定的保持
@@ -222,7 +219,7 @@
   // 浮起并固定后，在这一带再点一下就落回去（桌面和触屏都一样）。
   // 用捕获阶段拦下，免得同时点开底下的图片或链接
   window.addEventListener("click", function (event) {
-    if (reduceMotion.matches || !pinned || blocked()) return;
+    if (!pinned || blocked()) return;
     if (!inBand(event.clientY)) return;
     event.preventDefault();
     event.stopPropagation();
@@ -232,7 +229,6 @@
   }, true);
 
   window.addEventListener("click", function (event) {
-    if (reduceMotion.matches) return;
     var target = event.target;
     if (target && target.closest) {
       if (target.closest(".tl-layer")) return;
@@ -264,15 +260,19 @@
     artImg.addEventListener("error", function () { artFailed = true; measure(); });
   }
 
-  // 长卷图几百 KB，不占首屏带宽：页面加载完、或用户开始滚动 / 按下时再取。
-  // 没取到之前 measure() 会走「环带 + 文字」的退路，不会露破图。
+  // 长卷图不占首屏带宽：页面加载完、或用户开始滚动 / 按下时再取。
+  // 普通屏取 1 倍图（4044 宽），高清屏取 2 倍图（8088 宽），由 srcset 决定。
+  // 没取到之前整条先空着（is-art-pending），取到后淡入。
   if (artImg && artImg.dataset && artImg.dataset.src) {
     var artKicked = false;
     var kickArt = function () {
       if (artKicked) return;
       artKicked = true;
       var start = function () {
-        if (!artImg.getAttribute("src")) artImg.setAttribute("src", artImg.dataset.src);
+        if (artImg.getAttribute("src")) return;
+        if (artImg.dataset.sizes) artImg.setAttribute("sizes", artImg.dataset.sizes);
+        if (artImg.dataset.srcset) artImg.setAttribute("srcset", artImg.dataset.srcset);
+        artImg.setAttribute("src", artImg.dataset.src);
       };
       if (window.requestIdleCallback) window.requestIdleCallback(start, { timeout: 2000 });
       else window.setTimeout(start, 1000);
@@ -284,25 +284,6 @@
 
   window.addEventListener("load", measure);
 
-  function syncMotionMode() {
-    pinned = false;
-    suppressed = false;
-    layer.classList.remove("is-raised", "is-pinned");
-    if (reduceMotion.matches) {
-      stage.tabIndex = 0;
-      stage.setAttribute("role", "region");
-      stage.setAttribute("aria-label", "非遗时间轴，可左右滚动浏览");
-    } else {
-      stage.removeAttribute("tabindex");
-      stage.removeAttribute("role");
-      stage.removeAttribute("aria-label");
-      stage.scrollLeft = 0;
-    }
-    measure();
-    requestEvaluate();
-  }
-  stage.addEventListener("scroll", requestUpdate, { passive: true });
-  reduceMotion.addEventListener("change", syncMotionMode);
-  syncMotionMode();
+  measure();
   readIntro();
 }());

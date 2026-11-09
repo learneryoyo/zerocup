@@ -666,10 +666,6 @@ body.is-story-open .tl-hints { display: none; }
 
 /* 减少动态效果时，长卷留在文档中，由用户手动浏览。 */
 @media (prefers-reduced-motion: reduce) {
-  .tl-layer { position: relative; top: auto; z-index: 0; transform: none; opacity: 1; pointer-events: auto; }
-  .tl-layer__stage { overflow-x: auto; overflow-y: hidden; scroll-behavior: auto; overscroll-behavior-x: contain; bottom: 28px; }
-  .tl-layer__stage:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
   .tl-layer__track, .tl-layer__art { will-change: auto; }
-  .tl-hints { display: none; }
-  .tl-layer__foot { pointer-events: none; }
+  .tl-layer.is-art .tl-layer__art { animation: none; }
 }
