@@ -218,7 +218,7 @@
     cab.root.classList.add('is-open');
     cab.pane.remove();
     cab.cracks.replaceChildren();
-    cab.button.setAttribute('aria-label', `第 ${cab.index + 1} 座展柜已打开，展品待补`);
+    cab.button.setAttribute('aria-label', `第 ${cab.index + 1} 座展柜已打开`);
     if (cab.exhibit) {
       cab.button.setAttribute('aria-label', cab.exhibit.oldName + '已焕新为' + cab.exhibit.newName + '，查看明信片');
       cab.root.querySelector('.vt-caption').textContent = cab.exhibit.newName + ' · 点击读信';

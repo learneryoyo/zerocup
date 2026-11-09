@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>中国非遗濒危光谱 · 一条拉条看存续</title>
+<title>存续有数 · 中国非遗濒危光谱</title>
+<meta name="description" content="存续有数：收录 101 项国家级与人类非遗代表作，按存续状况排在一条光谱上。拖一拖，看哪些项目随时可能断代，以及可以怎么参与。">
 <style>
   :root{
     --paper:#f3efe4;
@@ -191,6 +192,7 @@
     opacity:.85;
   }
   .card:hover{transform:translateY(-2px);box-shadow:0 10px 26px -14px rgba(33,29,24,.35);border-color:rgba(33,29,24,.14)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:9px}
   .lv{
     display:inline-flex;align-items:center;gap:5px;font-size:11.5px;letter-spacing:.05em;
@@ -216,6 +218,31 @@
   .empty b{display:block;font-family:var(--serif);font-size:18px;color:var(--ink-2);margin-bottom:6px}
 
   /* ---------- notes ---------- */
+  /* 筛选区下方的行动提示：不打断「筛选 → 结果」的动线，只用一行把人引到页尾 */
+  .panel-cta{
+    display:flex;align-items:baseline;gap:8px 10px;flex-wrap:wrap;
+    margin:16px 0 0;padding:12px 16px;border:1px solid var(--line-soft);border-radius:4px;
+    background:rgba(255,253,247,.55);font-size:13px;color:var(--ink-2);line-height:1.75;
+  }
+  .panel-cta b{font-family:var(--serif);font-weight:600;color:var(--ink);letter-spacing:.04em}
+  .panel-cta a{
+    margin-left:auto;color:var(--accent);text-decoration:none;white-space:nowrap;
+    border-bottom:1px solid rgba(168,53,43,.3);padding-bottom:1px;
+  }
+  .panel-cta a:hover{border-bottom-color:var(--accent)}
+  .panel-cta a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  /* 从上方跳下来时别被固定页眉挡住 */
+  #do-title{scroll-margin-top:96px}
+  /* 分批展开：101 张卡片一次铺开会把页尾的说明推到近万像素之外 */
+  .more-wrap{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:28px 0 0}
+  .more{
+    padding:11px 26px;border-radius:3px;border:1px solid var(--ink);background:transparent;
+    font-family:var(--serif);font-size:14.5px;letter-spacing:.12em;color:var(--ink);
+    cursor:pointer;transition:background .18s,color .18s;
+  }
+  .more:hover{background:var(--ink);color:#fbf8f0}
+  .more:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .more-note{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.03em}
   .notes{
     margin:64px 0 0;padding:30px 0 0;border-top:1px solid var(--line);
     display:grid;grid-template-columns:1.1fr 1fr;gap:44px;
@@ -318,6 +345,8 @@
     .stats span{font-size:10.5px;line-height:1.5;letter-spacing:0}
     .notes{grid-template-columns:1fr;gap:26px}
     .readout .desc{display:none}
+    .panel-cta{padding:11px 14px}
+    .panel-cta a{margin-left:0}
     .drawer{padding:26px 22px 34px}
     .drawer-cta{margin:auto -22px -34px;padding:10px 22px 14px;bottom:-34px}
     .cta-main{font-size:17px}
@@ -354,7 +383,7 @@
 <header class="hero">
   <div class="wrap">
     <div class="creator-copy">
-    <div class="kicker"><span class="dot"></span>国家级 · 人类非遗代表作 · 存续力观察</div>
+    <div class="kicker"><span class="dot"></span>存续有数 · 国家级与人类非遗代表作 · 存续力观察</div>
     <h1>中国非遗<br><em>濒危光谱</em></h1>
     <p class="lede">这里收录了 <b id="totalCount">—</b> 项有代表性的国家级及以上非遗，按存续状况排列。拖动下方滑块，可以查看不同区间的项目。</p>
     <div class="stats">
@@ -397,6 +426,12 @@
     </div>
   </section>
 
+  <p class="panel-cta">
+    <b>看完现状，还能做点什么？</b>
+    点开任意一项，能看到它的属地保护单位与查询入口；想学一门手艺，也可以顺着这条路找到门路。
+    <a href="#do-title">看怎么参与 ↓</a>
+  </p>
+
   <div class="toolbar">
     <label class="search">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.4" stroke="#5c5449" stroke-width="1.4"/><path d="M9.4 9.4L12.5 12.5" stroke="#5c5449" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -412,6 +447,10 @@
   <div class="cats" id="cats"></div>
 
   <section class="grid" id="grid"></section>
+  <div class="more-wrap" id="moreWrap" hidden>
+    <button class="more" id="moreBtn" type="button">继续展开</button>
+    <span class="more-note" id="moreNote"></span>
+  </div>
   <div class="empty" id="empty" style="display:none">
     <b>这一段光谱是空的</b>
     把拉条放宽一点，或清空搜索词试试。
@@ -707,9 +746,13 @@ let activeCat = '全部';
 let sortMode = 'score';
 let query = '';
 let dragging = null;
+/* 分批展示：一次铺 101 张卡片，页尾的说明要滚过近万像素才看得到 */
+const PAGE = 24;
+let shown = PAGE;
 
 const $ = id => document.getElementById(id);
 const grid = $('grid'), emptyEl = $('empty');
+const moreWrap = $('moreWrap'), moreBtn = $('moreBtn'), moreNote = $('moreNote');
 const thLo = $('thLo'), thHi = $('thHi'), railWrap = $('railWrap');
 const railActive = $('railActive'), dimL = $('dimL'), dimR = $('dimR');
 
@@ -748,7 +791,7 @@ const railActive = $('railActive'), dimL = $('dimL'), dimR = $('dimR');
     b.addEventListener('click', ()=>{
       activeCat = c;
       [...box.children].forEach(x=>x.classList.toggle('on', x.dataset.cat === c));
-      render();
+      resetPage();
     });
     box.appendChild(b);
   });
@@ -834,7 +877,7 @@ function sync(){
     const l = LEVELS.find(x=>x.key === b.dataset.key);
     b.classList.toggle('on', lo === l.min && hi === l.max);
   });
-  render();
+  resetPage();
 }
 
 /* ====== 渲染 ====== */
@@ -867,12 +910,14 @@ function render(){
   if(!list.length){
     grid.innerHTML = '';
     emptyEl.style.display = 'block';
+    moreWrap.hidden = true;
     return;
   }
   emptyEl.style.display = 'none';
-  grid.innerHTML = list.map((d,i)=>{
+  const visible = list.slice(0, shown);
+  grid.innerHTML = visible.map((d,i)=>{
     const l = levelOf(d.s);
-    return `<article class="card" data-i="${DATA.indexOf(d)}" style="--c:${l.color};animation-delay:${Math.min(i*14,340)}ms">
+    return `<article class="card" data-i="${DATA.indexOf(d)}" tabindex="0" role="button" aria-label="查看 ${d.n} 的存续详情" style="--c:${l.color};animation-delay:${Math.min(i*14,340)}ms">
       <div class="card-top">
         <span class="lv">${l.name}</span>
         <span class="score">${d.s}</span>
@@ -884,16 +929,41 @@ function render(){
       ${d.u ? `<div class="utag">${d.u}</div>` : `<div class="utag is-empty">·</div>`}
     </article>`;
   }).join('');
+  const rest = list.length - visible.length;
+  moreNote.textContent = '已显示 ' + visible.length + ' / ' + list.length + ' 项';
+  moreWrap.hidden = rest <= 0;
+  if(rest > 0) moreBtn.textContent = '继续展开 ' + Math.min(rest, PAGE) + ' 项';
 }
+
+/* 换筛选条件时回到第一批，避免「展开过 96 张后切门类」直接见底 */
+function resetPage(){
+  shown = PAGE;
+  render();
+}
+
+moreBtn.addEventListener('click', ()=>{
+  shown += PAGE;
+  render();
+  if(shown >= currentList().length) moreBtn.blur();
+});
 
 grid.addEventListener('click', e=>{
   const card = e.target.closest('.card');
   if(!card) return;
   openDrawer(DATA[+card.dataset.i]);
 });
+/* 卡片是 role=button，键盘也要能进详情 */
+grid.addEventListener('keydown', e=>{
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.card');
+  if(!card) return;
+  e.preventDefault();
+  openDrawer(DATA[+card.dataset.i]);
+});
 
 /* ====== 详情抽屉 ====== */
 const drawer = $('drawer'), scrim = $('scrim');
+let lastFocus = null;
 /* 「想学怎么找」：数据来自 ../assets/js/spectrum-contact.js，只含属地机构与报名路径，
    不含任何匠人的手机号/微信。脚本没加载时静默返回空串。 */
 function contactBlock(d){
@@ -951,24 +1021,29 @@ function openDrawer(d){
     ${contactBlock(d)}
     ${ctaBar(d)}
   `;
+  lastFocus = document.activeElement;
   drawer.classList.add('on');
   scrim.classList.add('on');
   drawer.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
+  $('closeBtn').focus({ preventScroll: true });
 }
 function closeDrawer(){
+  if(!drawer.classList.contains('on')) return;
   drawer.classList.remove('on');
   scrim.classList.remove('on');
   drawer.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  if(lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  lastFocus = null;
 }
 $('closeBtn').addEventListener('click', closeDrawer);
 scrim.addEventListener('click', closeDrawer);
 window.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeDrawer(); });
 
 /* ====== 工具栏 ====== */
-$('q').addEventListener('input', e=>{ query = e.target.value; render(); });
-$('sort').addEventListener('change', e=>{ sortMode = e.target.value; render(); });
+$('q').addEventListener('input', e=>{ query = e.target.value; resetPage(); });
+$('sort').addEventListener('change', e=>{ sortMode = e.target.value; resetPage(); });
 
 /* ====== 启动 ====== */
 $('totalCount').textContent = DATA.length;

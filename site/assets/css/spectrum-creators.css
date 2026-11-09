@@ -192,3 +192,7 @@
  #creatorCarousel .ribbon-navigation>button{display:none}
  #creatorCarousel .ribbon-window{touch-action:pan-y}
 }
+
+/* 慢网时保留上一张照片，并显示等待状态。 */
+.creator-picture[aria-busy="true"]::after { content: "照片加载中…"; position: absolute; z-index: 4; bottom: 12px; left: 12px; padding: 5px 9px; color: #fff; background: #28231dcc; font-size: 12px; }
+.creator-photo-status { display: grid; place-content: center; height: 100%; padding: 20px; color: #fff; background: #332d27; font-size: 14px; line-height: 1.7; }

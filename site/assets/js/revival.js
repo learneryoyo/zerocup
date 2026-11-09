@@ -60,7 +60,7 @@
     const box = el('div', cls);
     const holder = el('div', 'rv-holder');
     holder.innerHTML = icon(item.category);
-    holder.append(el('small', '', '影像待补'));
+    holder.append(el('small', '', '图片加载中…'));
     box.append(holder);
     if (item.image) {
       const img = el('img');
@@ -68,7 +68,8 @@
       img.loading = cls === 'rv-detail-media' ? 'eager' : 'lazy';
       img.decoding = 'async';
       img.addEventListener('load', () => { holder.hidden = true; });
-      img.addEventListener('error', () => { holder.hidden = false; img.remove(); });
+      holder.querySelector('small').textContent = '图片加载中…';
+      img.addEventListener('error', () => { holder.hidden = false; holder.querySelector('small').textContent = '图片暂未加载，仍可查看介绍'; img.remove(); });
       img.src = item.image;
       // 用内联 SVG 的视口裁去截图边框，原始照片保持完整。
       const crop = item.imageMeta?.crop;
@@ -83,7 +84,8 @@
         const photo = document.createElementNS(ns, 'image');
         photo.setAttribute('width', item.imageMeta.width);
         photo.setAttribute('height', item.imageMeta.height);
-        photo.setAttribute('href', item.image);
+        // SVG image 不支持原生懒加载；由下方 img 进入视口后触发请求。
+        img.addEventListener('load', () => photo.setAttribute('href', item.image));
         const clip = document.createElementNS(ns, 'clipPath');
         clip.id = 'rv-crop-' + cls + '-' + item.id;
         const rect = document.createElementNS(ns, 'rect');
@@ -93,7 +95,9 @@
         viewport.append(clip, photo);
         // 独立图片元素负责加载检测；SVG 负责统一卡片和详情的裁切。
         img.addEventListener('error', () => viewport.remove());
-        box.append(viewport);
+        img.style.opacity = '0';
+        img.setAttribute('aria-hidden', 'true');
+        box.append(img, viewport);
       } else {
         box.append(img);
       }

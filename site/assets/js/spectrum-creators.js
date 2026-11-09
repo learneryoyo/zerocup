@@ -732,8 +732,8 @@
  const q=s=>root.querySelector(s), d=s=>dialog.querySelector(s);let index=0,oldOverflow='';const opener=q('.creator-open');
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const link=(url,label,cls='')=>`<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');let paused=reduced.matches,timer,hovered=false,visible=true;
- function schedule(){clearTimeout(timer);if(!paused&&!hovered&&visible&&!document.hidden&&!dialog.open&&!root.contains(document.activeElement))timer=setTimeout(()=>show(index+1),6500);}
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');const connection=navigator.connection;const slowNetwork=!!(connection&&(connection.saveData||/(^|-)2g$/.test(connection.effectiveType||'')||(connection.downlink>0&&connection.downlink<1.5)));let paused=reduced.matches||slowNetwork,timer,hovered=false,visible=true;
+ function schedule(){clearTimeout(timer);if(!paused&&!hovered&&visible&&!document.hidden&&!dialog.open&&!root.querySelector('.creator-picture[aria-busy="true"]')&&!root.contains(document.activeElement))timer=setTimeout(()=>show(index+1),6500);}
  function pauseLabel(){q('.ribbon-pause').textContent=paused?'播放轮播':'暂停轮播';q('.ribbon-pause').setAttribute('aria-pressed',String(paused));schedule();}
  q('.ribbon-pause').onclick=()=>{paused=!paused;pauseLabel();};
  root.addEventListener('mouseenter',()=>{hovered=true;schedule();});root.addEventListener('mouseleave',()=>{hovered=false;schedule();});
@@ -748,9 +748,8 @@
  const picture=q('.creator-picture');
  let curImg=picture.querySelector('img');   // 窗口里当前那一格；其余的都是正在退场或预览的，随时可以撤掉
  const tidy=()=>{picture.getAnimations({subtree:true}).forEach(x=>x.finish());[...picture.querySelectorAll('img')].forEach(x=>{if(x!==curImg)x.remove();});if(curImg)curImg.style.transform='';};
- // 十张头像都不大，首屏后先全部解码好，切换时就不用等
- const preload=()=>people.forEach(p=>{const im=new Image();im.src=p.image;im.decode().catch(()=>{});});
- if(document.readyState==='complete')setTimeout(preload,300);else addEventListener('load',()=>setTimeout(preload,300),{once:true});
+ // 按需请求人物照片，避免占用正文与首屏图片的带宽
+ // 仅加载当前人物或用户滑到的相邻人物，不再一次预取全部头像。
  function swapText(p,animate){
   q('.creator-name').textContent=p.name;q('.creator-field').textContent=p.field;q('.ribbon-summary').textContent=p.story.split('。')[0]+'。';
   if(!animate)return;
@@ -761,7 +760,7 @@
   q('.creator-count').textContent=String(index+1).padStart(2,'0')+' / 10';
   opener.setAttribute('aria-label','打开'+p.name+'的人物影集');dots.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));q('.creator-sr').textContent='当前人物：'+p.name;schedule();
   // 手指拖过来的那一格已经在窗口里：接着它当前的位置滑完，不再重新显影
-  if(drag){
+  if(drag){ picture.removeAttribute('aria-busy'); schedule();
    curImg=drag.next;swapText(p,animate);drag.next.alt=p.name+' · '+p.photoLabel;drag.cur.alt='';
    const w=picture.clientWidth,ease='cubic-bezier(.2,.8,.2,1)',dur=reduced.matches?0:Math.max(160,320*(1-Math.abs(drag.dx)/w));
    drag.next.animate([{transform:`translateX(${drag.dx+drag.dir*w}px)`},{transform:'translateX(0)'}],{duration:dur,easing:ease}).onfinish=()=>{drag.next.style.transform='';};
@@ -772,9 +771,13 @@
   // 收掉上一段还没走完的显影
   tidy();
   const old=curImg;
+  clearTimeout(timer);
+  picture.setAttribute('aria-busy','true');
   const next=document.createElement('img');next.src=p.image;next.alt=p.name+' · '+p.photoLabel;next.style.objectPosition=p.position;next.draggable=false;
   const run=()=>{
    if(token!==revision)return;
+   picture.removeAttribute("aria-busy");
+   schedule();
    swapText(p,animate);
    curImg=next;
    if(!old||!animate){picture.replaceChildren(next);return;}
@@ -784,8 +787,13 @@
    const inn=next.animate([{opacity:0,transform:'scale(1.04)'},{opacity:1,transform:'scale(1)'}],{duration:dur,easing:ease});
    inn.onfinish=()=>old.remove();
   };
-  // 解码完再动；最多等 250ms
-  Promise.race([next.decode().catch(()=>{}),new Promise(r=>setTimeout(r,250))]).then(run);
+  // 保留旧图直到新图就绪，慢网下不再在250ms后强行显示未下载的图片。
+  next.decode().then(run).catch(()=>{
+   if(token!==revision)return;
+   picture.removeAttribute('aria-busy');
+   picture.replaceChildren(Object.assign(document.createElement('span'),{className:'creator-photo-status',textContent:'照片暂未加载，点击仍可阅读人物故事'}));
+   curImg=null;swapText(p,false);schedule();
+  });
  }
  q('.creator-prev').onclick=()=>show(index-1);q('.creator-next').onclick=()=>show(index+1);
  /* 手机上左右滑动切换（箭头在触屏上隐藏）：照片跟着手指走，旁边一格从另一侧露出来；

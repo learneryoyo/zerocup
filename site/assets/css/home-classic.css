@@ -1,4 +1,4 @@
-﻿/* 首版双图首页专用样式。共享导航和子页容器继续由 site.css 维护。
+/* 首版双图首页专用样式。共享导航和子页容器继续由 site.css 维护。
    六色块方案使用 home.css / home.js，入口 home-mosaic.html，彼此不混用。 */
 
 /* ── 首屏 ───────────────────────────────────────────────── */
@@ -209,11 +209,11 @@
   .section-heading { grid-template-columns: 1fr; align-items: start; }
   .section-heading > p:last-child { margin-top: 4px; text-align: left; }
   .story-grid { grid-template-columns: 1fr; }
-  .story-card--hero { min-height: 118vw; }
+  .story-grid > .story-card--hero { width: 90%; min-height: 96vw; justify-self: start; }
   /* 窄屏上把 3:4 的纸本插画收窄成一枚「画片」，别让它占满一屏 */
   .story-card--secondary {
     aspect-ratio: 3 / 4;
-    width: min(100%, 78vw);
+    width: min(100%, 66vw);
     justify-self: end;
   }
   .story-card--secondary strong { font-size: 42px; }
@@ -651,6 +651,13 @@ body.is-story-open .tl-hints { display: none; }
   .tl-layer.is-art .tl-layer__name { font-size: 13px; top: calc(85.5% + 16px); }
   .tl-layer.is-art .tl-layer__item--plain .tl-layer__intro { font-size: 13px; }
   .tl-layer.is-art .tl-layer__foot { bottom: 3px; }
+}
+/* 手机竖屏：固定在中线、0.3 透明度的环带在窄栏里一定会压住正文，
+   两端竖排的「展开时间轴」小字也只能浮在页边。这里把图层和提示一起收起，
+   时间轴留给 701px 以上的屏幕（触屏平板仍可轻点展开）。 */
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+  .tl-layer,
+  .tl-hints { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tl-layer,

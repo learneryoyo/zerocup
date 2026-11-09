@@ -160,3 +160,8 @@ img { display: block; max-width: 100%; }
   .nav-more.is-open .nav-more-panel { display: block; }
   .nav-more-panel a { padding: 9px 0; font-size: 14px; }
 }
+
+/* 子页等待提示不遮住已加载内容，也不拦截关闭操作。 */
+.story-loading-note { position: absolute; z-index: 2; bottom: 16px; left: 16px; right: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 12px 16px; color: #602020; background: #f1ece3; border: 1px solid #b28750; font-size: 13px; }
+.story-loading-note[hidden] { display: none; }
+.story-loading-note a { color: inherit; }

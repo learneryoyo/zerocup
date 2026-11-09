@@ -483,6 +483,33 @@
   .heritage-scroll__card {
     min-width: clamp(104px, 30vw, 150px);
   }
+  /* 长卷里的剪影在手机上只有拇指大，点不准。
+     把这排「色取」色名升级成真正可点的入口：两列、整行可点、字号跟正文一致。 */
+  .heritage-scroll__palette {
+    display: block;
+    margin-top: 26px;
+    font-size: 11px;
+  }
+  .heritage-scroll__paletteLine { display: none; }
+  .heritage-scroll__swatches {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 12px;
+    border-top: 1px solid color-mix(in srgb, var(--hs-ink) 14%, transparent);
+  }
+  .heritage-scroll__swatch {
+    padding: 15px 4px;
+    font-size: 13px;
+    letter-spacing: .06em;
+    color: var(--hs-ink);
+    border-bottom: 1px solid color-mix(in srgb, var(--hs-ink) 14%, transparent);
+  }
+  .heritage-scroll__swatch i {
+    width: 12px;
+    height: 12px;
+  }
+  .heritage-scroll__swatch:active { color: var(--c); }
 }
 
 @media (prefers-reduced-motion: reduce) {
