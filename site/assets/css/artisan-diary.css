@@ -224,7 +224,7 @@
 }
 @media print{.artisan-story-tag,.artisan-diary{display:none!important}}
 /* 匠人故事按钮：手绘便签 + 铅笔图标，去掉方框，文字放大 */
-.artisan-story-tag{--ast-ink:#5e4036;--ast-paper:#f4f0e8;gap:4px!important;border:0!important;background:none!important;color:var(--ast-ink)!important;padding:2px 6px 2px 0!important;font:700 16px/1.4 "STZhongsong","Songti SC","STSong","Noto Serif SC",serif!important;letter-spacing:.12em;min-height:40px;position:relative}
+.artisan-story-tag{--ast-ink:#5e4036;--ast-paper:#f6efe4;gap:4px!important;border:0!important;background:none!important;color:var(--ast-ink)!important;padding:2px 6px 2px 0!important;font:700 16px/1.4 "STZhongsong","Songti SC","STSong","Noto Serif SC",serif!important;letter-spacing:.12em;min-height:40px;position:relative}
 .artisan-story-tag svg.ast-icon{width:36px;height:36px;opacity:1;transition:transform .2s ease}
 .artisan-story-tag span{position:relative;padding-bottom:2px;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .22s ease}
 .artisan-story-tag:hover{background:none!important;transform:none}

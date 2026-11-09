@@ -372,14 +372,14 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(244, 240, 232, .92);
+  background: rgba(246, 239, 228, .92);
   background-image: none;
   color: #10100f;
   font: 400 26px/36px var(--sans, sans-serif);
   text-align: center;
   box-shadow: 0 1px 4px rgba(16, 16, 15, .25);
 }
-.cat-lightbox button:hover { background: #10100f; color: #f4f0e8; filter: none; }
+.cat-lightbox button:hover { background: #10100f; color: #f6efe4; filter: none; }
 .cat-lightbox button:focus-visible { outline: 2px solid #10100f; outline-offset: 2px; }
 
 /* ── 内容整理中 ───────────────────────────────────────────── */

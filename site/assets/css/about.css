@@ -211,7 +211,7 @@
   place-items: center;
   border-radius: 3px;
   background: var(--red);
-  color: #f4f0e8;
+  color: #f6efe4;
   font: 700 22px/1 var(--serif);
   transform: rotate(-3deg);
 }

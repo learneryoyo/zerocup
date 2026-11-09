@@ -3,7 +3,7 @@
 
 :root {
   --ink: #10100f;
-  --paper: #f4f0e8;
+  --paper: #f6efe4;
   --accent: #f3c623;
   --red: #a6281f;
   --line: rgba(16, 16, 15, 0.18);
@@ -55,7 +55,7 @@ img { display: block; max-width: 100%; }
 .site-header {
   position: sticky; z-index: 50; top: 0; height: var(--header-height); padding: 0 var(--page-gutter);
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(244,240,232,.94); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px);
+  background: rgba(246,239,228,.94); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px);
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 /* 页眉标志预留：正式标志以 <img class="brand-logo"> 放入 .brand，位于站名之前。 */

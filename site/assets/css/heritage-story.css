@@ -1,6 +1,6 @@
 /* 子页的默认起点。每项非遗可替换本样式，或在自己的 CSS 中覆盖。 */
 .story-document {
-  --story-paper: #f4f0e8;
+  --story-paper: #f6efe4;
   --story-serif: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
 }
 .story-document, .story-document * { box-sizing: border-box; }
