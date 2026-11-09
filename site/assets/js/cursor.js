@@ -15,6 +15,7 @@
   var resetTimer = 0;
   var touchOnly = window.matchMedia("(hover: none)");
   var topDialog = null;
+  var armed = false;   // 真的收到过一次鼠标坐标，才敢把系统指针藏起来
 
   // 原生弹窗（dialog.showModal）在浏览器顶层，z-index 盖不过它。
   // 指针也做成 popover 放进顶层；每打开一个弹窗，就把指针重新提到最上面。
@@ -32,12 +33,28 @@
     raise();
   }
 
-  function skin() { try { return localStorage.getItem(KEY) || ""; } catch (e) { return ""; } }
-  function store(v) { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch (e) {} }
+  /* 皮肤只在「这一次浏览」里有效：存在 sessionStorage，新开标签页/重新进站一律回到系统默认。
+     旧版本把它写进了 localStorage，老访客一进站就是铁水勺；这里清掉那条遗留记录。 */
+  function skin() { try { return sessionStorage.getItem(KEY) || ""; } catch (e) { return ""; } }
+  function store(v) {
+    try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {}
+  }
+  try { localStorage.removeItem(KEY); } catch (e) {}
   function isInteractive(el) {
     return !!(el && el.closest && el.closest("a, button, input, select, textarea, label, summary, [role='button'], [role='slider'], .story-card"));
   }
-  function place() { frame = 0; if (root) root.style.transform = "translate3d(" + pointer.x + "px," + pointer.y + "px,0)"; }
+  function place() {
+    frame = 0;
+    if (!root) return;
+    root.style.transform = "translate3d(" + pointer.x + "px," + pointer.y + "px,0)";
+    /* 拿到真实坐标之后才隐藏系统指针：否则页面刚打开、鼠标还没动时，
+       系统箭头被 cursor:none 藏掉，自制指针又停在屏幕外，看起来就是「没有指针」。 */
+    if (!armed && pointer.x >= 0 && pointer.y >= 0) {
+      armed = true;
+      root.classList.remove("is-hidden");
+      document.documentElement.classList.add("zc-cursor-on");
+    }
+  }
 
   function onMove(e) {
     pointer.x = e.clientX; pointer.y = e.clientY;
@@ -82,7 +99,13 @@
     window.setTimeout(function () { if (host.parentNode) host.parentNode.removeChild(host); }, 800);
   }
 
-  function onDown() {
+  function onDown(e) {
+    /* 记下按下的坐标：在「换一支指针」里点选时，指针还停在按钮上，
+       皮肤启用后就能立刻出现在那儿，不用等下一次移动。 */
+    if (e && typeof e.clientX === "number") {
+      pointer.x = e.clientX; pointer.y = e.clientY;
+      if (!frame) frame = window.requestAnimationFrame(place);
+    }
     if (!root) return;
     root.classList.remove("is-strike");
     void root.offsetWidth;
@@ -118,12 +141,14 @@
     topDialog = null;
     syncLayer();
     raise();
-    document.documentElement.classList.add("zc-cursor-on");
+    /* 这里不再直接给 html 加 zc-cursor-on：等 place() 拿到第一次真实坐标再加，
+       页面刚打开时系统箭头还在，不会出现「指针消失」的空档。 */
   }
 
   function destroy() {
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
+    armed = false;
     document.documentElement.classList.remove("zc-cursor-on");
   }
 

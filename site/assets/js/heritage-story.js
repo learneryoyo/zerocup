@@ -5,7 +5,7 @@
   var me = document.currentScript;
   if (!me || !me.src) return;
   var skin = "";
-  try { skin = localStorage.getItem("zc-cursor") || ""; } catch (e) { return; }
+  try { skin = sessionStorage.getItem("zc-cursor") || ""; } catch (e) { return; }
   if (!skin) return;
   var css = document.createElement("link");
   css.rel = "stylesheet";
