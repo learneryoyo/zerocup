@@ -700,3 +700,32 @@ h1 span {
     transition-duration: .001ms !important;
   }
 }
+
+/* 游戏字体与其他子页统一：标题用本地宋刻，操作与说明用正文无衬线。 */
+.page, .result-layer {
+  --font-hand: "DingLie SongKe", "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+  --font-body: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+  font-family: var(--font-body);
+}
+.page h1, .result-top h2 {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: .04em;
+}
+.page h1 span { font-weight: 400; }
+.page .eyebrow, .result-layer .eyebrow { font-size: 12px; }
+.page .btn, .result-layer .btn { font-family: var(--font-body); font-size: 14px; letter-spacing: .06em; }
+.page .steps li { font-size: 13px; }
+.page .hud-text, .page .toast { font-size: 14px; line-height: 1.6; letter-spacing: .04em; }
+.page .meter { font-size: 12px; font-variant-numeric: tabular-nums; }
+.page .footnote, .result-note { font-size: 12px; line-height: 1.8; letter-spacing: .04em; }
+.result-layer .metric { font-family: var(--font-body); font-variant-numeric: tabular-nums; }
+.page #stage .hint text { font-family: var(--font-body); font-size: 15px; letter-spacing: .04em; }
+@media (max-width: 720px) {
+  .page .actions .btn { font-size: 13px; }
+  .page .steps li { font-size: 12px; }
+  .page .hud-text, .page .toast { font-size: 12px; }
+  .page .meter { font-size: 11px; }
+  .page .eyebrow, .page .footnote { font-size: 11px; }
+}

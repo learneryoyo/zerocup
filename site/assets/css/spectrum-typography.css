@@ -1,0 +1,68 @@
+/* 与首页、非遗辑录共用本地字体；swap 保证下载期间文字仍可阅读。 */
+@font-face {
+  font-family: "DingLie SongKe";
+  src: url("../fonts/dinglie-songke.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: block;
+}
+@font-face {
+  font-family: "HongLei XingShu";
+  src: url("../fonts/honglei-xingshu.woff2") format("woff2");
+  font-weight: 400;
+  font-display: block;
+}
+:root {
+  --serif: "DingLie SongKe", "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+  --xingshu: "HongLei XingShu", "Kaiti SC", "STKaiti", "KaiTi", var(--serif);
+}
+.site-header .brand-name { font-family: var(--serif); }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 6.8vw, 80px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: .04em;
+}
+.hero .kicker { font: 700 15px/1.6 var(--sans); letter-spacing: .18em; }
+.hero .lede { font: 400 17px/1.85 var(--sans); letter-spacing: .03em; }
+.hero .lede b { font-weight: 400; }
+.stats b, .score, .d-score b, .readout .count b {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+}
+.stats span { font-size: 13px; line-height: 1.6; }
+.panel-head h2 { font: 700 clamp(23px, 2.3vw, 28px)/1.4 var(--serif); letter-spacing: .08em; }
+.card h3 { font: 700 22px/1.45 var(--serif); letter-spacing: .04em; overflow-wrap: anywhere; }
+.card .intro { font-size: 15px; line-height: 1.85; }
+.meta, .hint, .readout .desc { font-size: 13px; line-height: 1.7; }
+.band { font-size: 13px; line-height: 1.6; }
+.notes h3 { font: 700 23px/1.45 var(--serif); letter-spacing: .06em; }
+.notes p, .grad li { font-size: 15px; line-height: 1.9; }
+.notes .dim, .score-note p { font-size: 14px; line-height: 1.85; }
+.score-note h3 { font: 700 19px/1.5 var(--serif); }
+.panel-cta { font-size: 15px; line-height: 1.8; }
+.drawer h2 { font: 700 clamp(28px, 3vw, 36px)/1.4 var(--serif); letter-spacing: .04em; }
+.d-sec h4 { font: 700 18px/1.5 var(--serif); letter-spacing: .06em; }
+.d-sec p { font-size: 16px; line-height: 1.9; }
+.d-sec p.muted { font-size: 14px; }
+.cta-main { font: 700 21px/1.5 var(--serif); }
+/* 胶片人物与详情：名字、章节、引语使用同一组字体。 */
+#creatorCarousel .creator-name { font: 700 30px/1.4 var(--serif); letter-spacing: .08em; }
+#creatorCarousel .creator-heading, #creatorCarousel .creator-field { font-size: 13px; line-height: 1.7; }
+.ribbon-summary { font-size: 15px; line-height: 1.85; }
+#creatorDialog .creator-story p { font-size: 16px; line-height: 1.95; }
+#creatorDialog .creator-achievements { font-size: 14px; line-height: 1.9; }
+#creatorDialog .creator-note h3 { font: 400 clamp(25px, 2.5vw, 32px)/1.65 var(--xingshu); }
+#creatorDialog .creator-note p { font-size: 15px; line-height: 1.9; }
+@media (max-width: 760px) {
+  .hero h1 { font-size: clamp(40px, 10.5vw, 64px); }
+  .hero .lede { font-size: 16px; line-height: 1.85; }
+  .stats span { font-size: 12px; }
+  .band { font-size: 12px; letter-spacing: 0; }
+  .card h3 { font-size: 21px; }
+  .grad li { flex-wrap: wrap; }
+  .grad li span { white-space: normal; }
+  #creatorCarousel .creator-name { font-size: 28px; }
+  #creatorCarousel .ribbon-copy { width: min(100%, 340px); }
+  .search input, select { font-size: 16px; }
+}

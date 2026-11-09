@@ -2,11 +2,29 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
+  <style id="page-navigation-transition">
+    html { background: #f6efe4; scrollbar-gutter: stable; }
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+      .site-header { view-transition-name: site-navigation; }
+      ::view-transition-group(root),
+      ::view-transition-group(site-navigation) { animation: none; }
+      ::view-transition-old(root) { animation: none; opacity: 1; }
+      ::view-transition-new(root) {
+        animation: page-arrive 150ms linear both;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(site-navigation) { animation: none; opacity: 0; }
+      ::view-transition-new(site-navigation) { animation: none; opacity: 1; }
+      @keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#10100f">
   <meta name="description" content="古艺新生：三十个非遗焕新案例，可按柜台与分类两种方式浏览，六座玻璃展柜可以叩开。">
   <title>古艺新生 · 非遗辑录</title>
+  <link rel="preload" href="assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/cursor.css">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/revival.css">

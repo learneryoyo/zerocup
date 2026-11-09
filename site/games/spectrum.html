@@ -2,6 +2,23 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+  <style id="page-navigation-transition">
+    html { background: #f6efe4; scrollbar-gutter: stable; }
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+      .site-header { view-transition-name: site-navigation; }
+      ::view-transition-group(root),
+      ::view-transition-group(site-navigation) { animation: none; }
+      ::view-transition-old(root) { animation: none; opacity: 1; }
+      ::view-transition-new(root) {
+        animation: page-arrive 150ms linear both;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(site-navigation) { animation: none; opacity: 0; }
+      ::view-transition-new(site-navigation) { animation: none; opacity: 1; }
+      @keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>存续有数 · 中国非遗濒危光谱</title>
 <meta name="description" content="存续有数：收录 101 项国家级与人类非遗代表作，按存续状况排在一条光谱上。拖一拖，看哪些项目随时可能断代，以及可以怎么参与。">
@@ -212,12 +229,15 @@
 
   /* ---------- notes ---------- */
   /* 筛选区下方的行动提示：不打断「筛选 → 结果」的动线，只用一行把人引到页尾 */
-  .panel-cta{
+  /* 与页面其余正文（.lede / .ribbon-summary / .card p / .notes p）保持同一套无衬线，
+     原来硬编码 SimSun，是页面上唯一一处系统宋体。 */
+  .panel-cta{font-family:var(--sans);font-weight:400;letter-spacing:normal;
     display:flex;align-items:baseline;gap:8px 10px;flex-wrap:wrap;
     margin:16px 0 0;padding:12px 16px;border:1px solid var(--line-soft);border-radius:4px;
     background:rgba(255,253,247,.55);font-size:13px;color:var(--ink-2);line-height:1.75;
   }
-  .panel-cta b{font-family:var(--serif);font-weight:600;color:var(--ink);letter-spacing:.04em}
+  /* 导语保留加粗做视觉锚点，字体跟正文同一套无衬线 */
+  .panel-cta b{font-family:inherit;font-weight:600;color:inherit;letter-spacing:inherit}
   .panel-cta a{
     margin-left:auto;color:var(--accent);text-decoration:none;white-space:nowrap;
     border-bottom:1px solid rgba(168,53,43,.3);padding-bottom:1px;
@@ -345,9 +365,11 @@
     .cta-main{font-size:17px}
   }
 </style>
+<link rel="preload" href="../assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="nav.css">
 
 <link rel="stylesheet" href="../assets/css/spectrum-creators.css">
+<link rel="stylesheet" href="../assets/css/spectrum-typography.css">
 <link rel="stylesheet" href="../assets/css/cursor.css">
 </head>
 <body>
@@ -1042,59 +1064,7 @@ $('sort').addEventListener('change', e=>{ sortMode = e.target.value; resetPage()
 $('totalCount').textContent = DATA.length;
 sync();
 </script>
-<script>
-(function () {
-  var header = document.querySelector('.site-header');
-  if (!header) return;
-  var toggle = header.querySelector('.nav-toggle');
-  var nav = header.querySelector('.primary-nav');
-  var wrap = header.querySelector('.nav-more');
-  var moreBtn = wrap && wrap.querySelector('.nav-more-btn');
-
-  function setNav(open) {
-    if (!nav || !toggle) return;
-    nav.classList.toggle('is-open', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
-  function setMore(open) {
-    if (!wrap || !moreBtn) return;
-    wrap.classList.toggle('is-open', open);
-    moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
-
-  if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      setNav(!nav.classList.contains('is-open'));
-    });
-  }
-  if (moreBtn) {
-    moreBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      setMore(!wrap.classList.contains('is-open'));
-    });
-  }
-  if (nav) {
-    nav.addEventListener('click', function (e) {
-      if (wrap && wrap.contains(e.target)) return;
-      setNav(false);
-    });
-  }
-  document.addEventListener('click', function (e) {
-    if (wrap && !wrap.contains(e.target)) setMore(false);
-    if (nav && toggle && !header.contains(e.target)) setNav(false);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    if (wrap && wrap.classList.contains('is-open')) {
-      setMore(false);
-      if (moreBtn) moreBtn.focus();
-    } else if (nav && nav.classList.contains('is-open')) {
-      setNav(false);
-      if (toggle) toggle.focus();
-    }
-  });
-})();
-</script>
+<script src="../assets/js/site.js"></script>
 <script src="../assets/js/spectrum-contact.js"></script>
 <script src="../assets/js/spectrum-creators.js"></script>
 <script src="../assets/js/cursor.js"></script>

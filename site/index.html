@@ -2,11 +2,29 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
+  <style id="page-navigation-transition">
+    html { background: #f6efe4; scrollbar-gutter: stable; }
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+      .site-header { view-transition-name: site-navigation; }
+      ::view-transition-group(root),
+      ::view-transition-group(site-navigation) { animation: none; }
+      ::view-transition-old(root) { animation: none; opacity: 1; }
+      ::view-transition-new(root) {
+        animation: page-arrive 150ms linear both;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(site-navigation) { animation: none; opacity: 0; }
+      ::view-transition-new(site-navigation) { animation: none; opacity: 1; }
+      @keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="非遗辑录：从器物、戏曲、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
   <meta name="theme-color" content="#10100f">
   <title>首页 · 非遗辑录</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/cursor.css">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/home-classic.css">
@@ -42,7 +60,7 @@
   <main id="main-content" tabindex="-1">
     <section class="intro" aria-labelledby="intro-title">
       <p class="eyebrow">CHINA · LIVING HERITAGE</p>
-      <h1 id="intro-title">见物，见人，<br>见一门手艺的时间。</h1>
+      <h1 id="intro-title">见物，见人，<br>见一门手艺的时间</h1>
       <p class="intro-copy">从一抔瓷土到一束蚕丝，沿着手艺人的双手，重新认识那些仍在生长的传统。</p>
       <a class="scroll-cue" href="#feature-title">向下探索 <span aria-hidden="true">↓</span></a>
     </section>
@@ -83,7 +101,7 @@
       <div class="section-heading">
         <p class="eyebrow">古艺新生 · 日常可用</p>
         <h2 id="today-title">今天它长这样</h2>
-        <p>从过节的一张画，到随身、案头的小物。<a href="revival.html">走近古艺新生</a></p>
+        <p>从过节的一张画，到随身、案头的小物。<br><a href="revival.html">走近古艺新生</a></p>
       </div>
       <div class="section-heading today-row">
         <div>

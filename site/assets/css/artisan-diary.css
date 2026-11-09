@@ -1,3 +1,15 @@
+/* 金句专用手写体：Aa「你的温柔被我私藏」。
+   与 about.html 的题记共用同一份子集（68 个字，28 KB），不做全站字体。
+   注意：该字体为「非商免」授权，仅限非商业用途。 */
+/* block 而非 swap：这行金句只在打开日记时才出现，
+   用 swap 会在弹层打开瞬间先闪一下楷体。四个分类页已 preload 这份子集。 */
+@font-face{
+  font-family:"Lede Hand";
+  src:url("../fonts/nidewenrou-lede.woff2") format("woff2");
+  font-weight:400;
+  font-display: block;
+}
+
 /* 界面控件用 Radix Colors 的 bronze 12 阶（MIT，radix-ui/colors 3.0.0）：
    1-2 底、3-5 控件底与悬停、6-8 边框、9-10 实色、11-12 文字。壁面矿物色不走这套，见下。 */
 .artisan-story-tag,.artisan-diary{--bronze-3:#f6edea;--bronze-4:#efe4df;--bronze-6:#dfcdc5;--bronze-8:#c2a499;--bronze-9:#a18072;--bronze-11:#7d5e54;--bronze-12:#43302b;
@@ -40,7 +52,7 @@
 .dp-block time i{font:400 .9em/1.4 var(--ui);opacity:.72}
 .dp-block h3{margin:.32em 0 .45em;font:700 1.28em/1.34 var(--title);letter-spacing:.02em;color:var(--accent)}
 .dp-block p{margin:0;font:1.02em/1.82 var(--text);text-align:justify;letter-spacing:.015em;text-wrap:pretty}
-.dp-note{font:500 2.05em/1.4 var(--text);letter-spacing:.06em;color:var(--accent);text-wrap:balance}
+.dp-note{font:400 2.05em/1.45 "Lede Hand",var(--text);letter-spacing:.03em;color:var(--accent);text-wrap:balance}
 .is-dark .dp-block p,.is-dark .dp-note{letter-spacing:.035em}
 .dp-slot.inv,.dp-slot.inv :is(.dp-title,.dp-project,.dp-identity,h3){color:#f7ecd6}
 .dp-slot.inv .dp-name{--plaque:#e6c177;color:#163f4c;box-shadow:0 0 0 .14em #163f4c,0 0 0 calc(.14em + 1px) #e6c177}
@@ -87,7 +99,7 @@
 .dp-seal{font-size:1em}
 /* 金句统一使用独立展示字号；旧版与手账版共享，不能降为正文小字。 */
 /* note：和榜题人名同号（2.05em），逗号处断成两行；右对齐，镜像页左对齐；首行字前一粒手点的小圆点 */
-.dp-note.end{display:flex;align-items:flex-start;justify-content:flex-end;text-align:right;font-size:2.05em;line-height:1.4;letter-spacing:.06em}
+.dp-note.end{display:flex;align-items:flex-start;justify-content:flex-end;text-align:right;font-size:2.05em;line-height:1.45;letter-spacing:.03em}
 .dp-note.end.start{justify-content:flex-start;text-align:left}
 .dp-note-t span{display:block;white-space:nowrap}
 .dp-note.end .dp-note-t span:first-child::before{content:'';display:inline-block;margin-right:.4em;vertical-align:.32em;width:.16em;height:.16em;background:currentColor;clip-path:polygon(50% 0,92% 22%,100% 62%,70% 100%,22% 92%,0 50%,18% 10%)}

@@ -19,18 +19,23 @@
   --mark-pattern-green: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='20' viewBox='0 0 30 20'%3E%3Cg fill='none' stroke='%2393b29d' stroke-opacity='.42' stroke-width='.85'%3E%3Cpath d='M3.6 16.6c-3.5-2.3-2.7-7.6 1.7-9.4 5.5-2.4 11.3-.4 12.1 3.9.8 4.5-3.3 7.8-8.2 8-2.3.1-4.2-.9-5.6-2.5z'/%3E%3Cpath d='M6.4 15c-2.5-1.8-1.9-5.5 1.2-6.8 4-1.6 8.1-.2 8.6 2.8.5 3.1-2.5 5.4-5.9 5.5-1.6.1-2.8-.5-3.9-1.5z'/%3E%3Cpath d='M9.1 13.3c-1.5-1.1-1.1-3.3.7-4.1 2.4-1 4.7-.1 5 1.7.3 1.8-1.5 3.3-3.5 3.4-1 0-1.7-.3-2.2-1z'/%3E%3Cpath d='M11.8 11.8c-.8-.7-.5-1.9.5-2.3 1.3-.5 2.6 0 2.8 1 .2 1-.9 1.8-2 1.9-.6 0-1-.2-1.3-.6z'/%3E%3Cpath d='M22 5.2c1.6-1.2 3.6-.6 4.1 1.1.5 1.7-.6 3.2-2.2 3.4-1.6.2-3-1-3-2.5 0-.8.4-1.5 1.1-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
+/* 字体加载：一律用 font-display: block，不用 swap。
+   swap 会在字体到达前先画系统宋体/楷体，等字体就绪再跳一次 —— 换页、开弹层、
+   切换分类时都会看到「旧字体闪一下」。block 是字体没到就不画字，
+   到了直接以正确字形出现，没有跳变。代价是首屏文字晚几十毫秒出现，
+   各页 <head> 里已 preload 对应 woff2，实际等待很短。改回 swap 会让闪现复现。 */
 @font-face {
   font-family: "DingLie SongKe";
   src: url("../fonts/dinglie-songke.woff2") format("woff2");
   font-weight: 400 700;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: "HongLei XingShu";
   src: url("../fonts/honglei-xingshu.woff2") format("woff2");
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -160,7 +165,7 @@ img { display: block; max-width: 100%; }
 .nav-more-group { margin: 0 0 4px; font-size: 11px; letter-spacing: .22em; color: #6c675f; }
 .nav-more-panel a.nav-more-about { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--line); }
 .nav-more-panel a.is-current { color: var(--red); }
-.nav-more.is-open .nav-more-panel, .nav-more:focus-within .nav-more-panel { opacity: 1; visibility: visible; }
+.nav-more.is-open .nav-more-panel { opacity: 1; visibility: visible; }
 .nav-more.is-open .nav-more-btn::after { transform: rotate(225deg); }
 
 @media (hover: hover) {

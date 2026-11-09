@@ -2,11 +2,30 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
+  <style id="page-navigation-transition">
+    html { background: #f6efe4; scrollbar-gutter: stable; }
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+      .site-header { view-transition-name: site-navigation; }
+      ::view-transition-group(root),
+      ::view-transition-group(site-navigation) { animation: none; }
+      ::view-transition-old(root) { animation: none; opacity: 1; }
+      ::view-transition-new(root) {
+        animation: page-arrive 150ms linear both;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(site-navigation) { animation: none; opacity: 0; }
+      ::view-transition-new(site-navigation) { animation: none; opacity: 1; }
+      @keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#10100f">
   <meta name="description" content="非遗辑录长卷：天工开物、瓦舍勾栏、四时有节、寻味山河四类，山脚的每一组剪影都是一个入口。">
   <title>非遗辑录 · 四类长卷</title>
+  <link rel="preload" href="assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/honglei-xingshu.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/cursor.css">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/heritage-scroll.css">

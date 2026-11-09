@@ -15,48 +15,95 @@
     document.head.appendChild(el);
   }());
 
-  var toggle = document.querySelector(".nav-toggle");
-  var nav = document.querySelector(".primary-nav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
+  // 所有主页面共用导航；返回缓存页时也恢复到收起状态。
+  var header = document.querySelector('.site-header');
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.primary-nav');
+  var more = document.querySelector('.nav-more');
+  var moreBtn = more && more.querySelector('.nav-more-btn');
+  function setMore(open) {
+    if (!more || !moreBtn) return;
+    more.classList.toggle('is-open', open);
+    moreBtn.setAttribute('aria-expanded', String(open));
+  }
+  function setNav(open) {
+    if (!toggle || !nav) return;
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    if (!open) setMore(false);
+  }
+  if (toggle && nav) toggle.addEventListener('click', function () {
+    setNav(!nav.classList.contains('is-open'));
+  });
+  if (moreBtn) moreBtn.addEventListener('click', function () {
+    setMore(!more.classList.contains('is-open'));
+  });
+  if (header && nav) {
+    header.addEventListener('click', function (event) {
+      var link = event.target.closest('a[href]');
+      if (!link || !header.contains(link)) return;
+      // 当前页不必重新下载、重建页面；保留新标签页等浏览器操作。
+      if (link.href === window.location.href && !event.ctrlKey && !event.metaKey &&
+          !event.shiftKey && !event.altKey && !link.target && !link.hasAttribute('download')) {
+        event.preventDefault();
+      }
+      setNav(false);
     });
-    nav.addEventListener("click", function () {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
+    document.addEventListener('click', function (event) {
+      if (more && !more.contains(event.target)) setMore(false);
+      if (!header.contains(event.target)) setNav(false);
     });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && nav.classList.contains("is-open")) {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      if (more && more.classList.contains('is-open')) {
+        setMore(false);
+        moreBtn.focus();
+      } else if (nav.classList.contains('is-open')) {
+        setNav(false);
         toggle.focus();
       }
     });
-  }
+    window.addEventListener('pageshow', function () { setNav(false); });
+    window.matchMedia('(max-width: 700px)').addEventListener('change', function () { setNav(false); });
 
-  /* 导航「更多」：点击开合，点外部或 Esc 收起；桌面悬停交给 CSS */
-  var more = document.querySelector(".nav-more");
-  var moreBtn = more && more.querySelector(".nav-more-btn");
-  if (moreBtn && more.querySelector(".nav-more-panel")) {
-    var setMore = function (open) {
-      more.classList.toggle("is-open", open);
-      moreBtn.setAttribute("aria-expanded", String(open));
-    };
-    moreBtn.addEventListener("click", function (event) {
-      event.stopPropagation();
-      setMore(!more.classList.contains("is-open"));
-    });
-    document.addEventListener("click", function (event) {
-      if (!more.contains(event.target)) setMore(false);
-    });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && more.classList.contains("is-open")) {
-        setMore(false);
-        moreBtn.focus();
-      }
-    });
+    // 只预取用户停留的导航目标，弱网或省流量模式不增加请求。
+    var prefetched = new Set();
+    var prefetchTimer;
+    function schedulePrefetch(event) {
+      var link = event.target.closest('a[href]');
+      clearTimeout(prefetchTimer);
+      var connection = navigator.connection;
+      if (!link || !nav.contains(link) || (connection && (connection.saveData ||
+          /(^|-)2g$|3g/.test(connection.effectiveType)))) return;
+      var url = new URL(link.href, window.location.href);
+      if (!/^https?:$/.test(url.protocol) || url.origin !== window.location.origin ||
+          url.href === window.location.href || prefetched.has(url.href) || prefetched.size >= 2) return;
+      prefetchTimer = setTimeout(function () {
+        var hint = document.createElement('link');
+        hint.rel = 'prefetch';
+        hint.as = 'document';
+        hint.href = url.href;
+        hint.fetchPriority = 'low';
+        document.head.appendChild(hint);
+        prefetched.add(url.href);
+      }, 120);
+    }
+    nav.addEventListener('pointerover', schedulePrefetch);
+    nav.addEventListener('focusin', schedulePrefetch);
+    nav.addEventListener('pointerleave', function () { clearTimeout(prefetchTimer); });
+    nav.addEventListener('focusout', function () { clearTimeout(prefetchTimer); });
   }
+  // 键盘导航保持即时；浏览器不支持跨文档过渡时仍使用普通链接。
+  var keyboardNavigation = false;
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') keyboardNavigation = true;
+  });
+  document.addEventListener('pointerdown', function () { keyboardNavigation = false; });
+  window.addEventListener('pageswap', function (event) {
+    if (keyboardNavigation && event.viewTransition) event.viewTransition.skipTransition();
+  });
+  window.addEventListener('pageshow', function () { keyboardNavigation = false; });
+
   var overlay = document.querySelector(".story-overlay");
   if (!overlay) return;
 
