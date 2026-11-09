@@ -34,7 +34,7 @@
   --ms: min(100%, 460px);
   --ms-ratio: 1;
 }
-#miao-zimeijie { --ms: min(100%, 400px); --ms-ratio: 1024 / 1536; }
+#miao-zimeijie { --ms: min(100%, 300px); --ms-ratio: 1024 / 1536; }
 #shuizu-duanjie { --ms: min(100%, 500px); --ms-ratio: 1125 / 881; }
 
 .project__text {
@@ -84,7 +84,7 @@
     top: calc(41px + var(--fs) * .6 - var(--s) * .86);
   }
   .project { --ms: min(100%, 300px); }
-  #miao-zimeijie { --ms: min(100%, 240px); }
+  #miao-zimeijie { --ms: min(100%, 190px); }
   #shuizu-duanjie { --ms: min(100%, 300px); }
 }
 
