@@ -31,7 +31,7 @@
 .heritage-scroll__eyebrow {
   margin: 0 0 16px;
   color: var(--hs-muted);
-  font-size: 11px;
+  font-size: 18px;
   letter-spacing: 0.32em;
 }
 
@@ -46,7 +46,7 @@
   max-width: 28em;
   text-align: right;
   color: var(--hs-muted);
-  font: 15px / 2 var(--serif);
+  font: 20px / 2 var(--serif);
 }
 
 .heritage-scroll__intro span {
@@ -338,7 +338,7 @@
   gap: 18px 24px;
   margin-top: clamp(22px, 3vw, 36px);
   color: var(--hs-muted);
-  font-size: 10px;
+  font-size: 16px;
   letter-spacing: 0.1em;
 }
 

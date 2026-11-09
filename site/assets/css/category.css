@@ -33,7 +33,7 @@
 }
 .cat-eyebrow {
   margin: 0;
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: .3em;
   color: var(--cat-muted);
 }
@@ -45,7 +45,7 @@
 .cat-sub {
   margin: 20px 0 0;
   max-width: 28em;
-  font: 400 clamp(15px, 1.35vw, 19px)/1.9 var(--serif);
+  font: 400 clamp(17px, 1.45vw, 20px)/1.9 var(--serif);
   color: var(--cat-muted);
 }
 /* 一句一行；句子过长时只在逗号、分号处换行，不在句中截断 */
@@ -58,7 +58,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px 24px;
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: .1em;
   color: var(--cat-muted);
 }
@@ -94,7 +94,7 @@
 .category-intro p {
   margin: 0;
   max-width: 64em;
-  font-size: clamp(15px, 1.35vw, 19px);
+  font-size: clamp(16px, 1.35vw, 18px);
   line-height: 2;
   color: #403b33;
 }
@@ -116,6 +116,10 @@
 .project:nth-child(even) .project__media { order: 1; }
 
 .project__text { align-self: start; }
+
+/* 条目标题按列宽走：宽屏时一行放下「蔡林记热干面制作技艺」这样的长名，
+   窄屏仍有 32px 兜底、上限不超过原 54px。 */
+.project__text { container-type: inline-size; }
 .project__head {
   display: flex;
   align-items: center;
@@ -136,7 +140,7 @@
 }
 .project h2 {
   margin: 18px 0 0;
-  font: 700 clamp(32px, 3.5vw, 54px)/1.22 var(--serif);
+  font: 700 clamp(32px, 9.2cqw, 54px)/1.22 var(--serif);
   letter-spacing: .04em;
 }
 .project-meta {
@@ -157,7 +161,7 @@
 /* 小项正文的分栏：开场句、小标题、名词卡、工序链、标签 */
 .project-body .pb-lead {
   margin-bottom: 26px;
-  font: 400 clamp(17px, 1.4vw, 20px)/1.85 var(--serif);
+  font: 400 clamp(20px, 1.7vw, 24px)/1.85 var(--serif);
   color: var(--cat-strong);
 }
 .pb-h {
@@ -165,7 +169,7 @@
   align-items: center;
   gap: 10px;
   margin: 30px 0 12px;
-  font: 700 15px/1.4 var(--serif);
+  font: 700 18px/1.4 var(--serif);
   letter-spacing: .12em;
   color: var(--cat-accent);
 }
