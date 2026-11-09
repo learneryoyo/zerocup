@@ -17,7 +17,7 @@
   margin: 0;
   max-width: 9.2em;
   font: 700 clamp(48px, 7vw, 110px)/.98 var(--serif);
-  letter-spacing: -.055em;
+  letter-spacing: -.012em;
 }
 .intro-copy {
   align-self: end;
@@ -26,8 +26,9 @@
   padding-top: 18px;
   border-top: 1px solid var(--line);
   font-size: clamp(15px, 1.4vw, 19px);
-  line-height: 1.9;
+  line-height: 2.05;
   text-wrap: pretty;
+  color: #55504a;
 }
 .scroll-cue {
   grid-column: 1 / -1;
@@ -35,7 +36,7 @@
   margin-top: clamp(26px, 3vw, 44px);
   padding-block: 8px;
   font-size: 11px;
-  letter-spacing: .2em;
+  letter-spacing: .24em;
   text-decoration: none;
 }
 .scroll-cue::before {
