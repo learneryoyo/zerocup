@@ -1,7 +1,7 @@
 /* 「非遗辑录」长卷版：整幅画是页面主体，分类信息压在山脚留白里。 */
 
 .heritage-scroll {
-  --hs-paper: #f6efe4;
+  --hs-paper: #f4f0e8; /* 与全站纸色一致 */
   --hs-ink: #2b1d16;
   --hs-muted: #6e5b4c;
   --hs-line: rgba(43, 29, 22, 0.14);
@@ -523,7 +523,7 @@
 }
 
 /* 纯色画布：移除背景装饰，保留五个人物入口。 */
-body { background: #f6efe4; }
+body { background: var(--paper); }
 .heritage-scroll__picture { border: 0; box-shadow: none; }
 .heritage-scroll__copy::after { content: none; }
 

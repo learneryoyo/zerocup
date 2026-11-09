@@ -1,5 +1,5 @@
 /* 食物页沿用其他分类的项目布局，背景保持纯色。 */
-body { background: var(--paper); }
+/* 大背景沿用 site.css 的纸色 */
 .category-page[data-accent="food"] { --accent: #c79c51; }
 .cat-facts li::before { background: #c79c51; }
 .food-image-open { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }

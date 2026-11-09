@@ -27,17 +27,10 @@
     margin:0;
     font-family:var(--sans);
     color:var(--ink);
-    background:
-      radial-gradient(1200px 600px at 12% -8%, #fffdf6 0%, rgba(255,253,246,0) 60%),
-      radial-gradient(900px 500px at 100% 0%, #f7f1e2 0%, rgba(247,241,226,0) 55%),
-      var(--paper);
+    /* 大背景与全站一致：纸色 #f4f0e8，不加横纹 */
+    background:radial-gradient(circle at 16% 10%, rgba(255,255,255,.8), transparent 32%), #f4f0e8;
     line-height:1.7;
     -webkit-font-smoothing:antialiased;
-  }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
-    background-image:repeating-linear-gradient(0deg,rgba(33,29,24,.028) 0 1px,transparent 1px 3px);
-    mix-blend-mode:multiply;
   }
   .wrap{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
 

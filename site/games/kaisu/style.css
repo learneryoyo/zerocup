@@ -30,23 +30,9 @@ body {
   min-height: 100dvh;
   color: var(--ink);
   font-family: var(--font-body);
-  background:
-    radial-gradient(1100px 620px at 10% -10%, #fdf7ea 0%, transparent 62%),
-    radial-gradient(880px 520px at 102% 4%, #f1e0c2 0%, transparent 58%),
-    repeating-linear-gradient(0deg, rgba(120, 86, 40, .028) 0 1px, transparent 1px 4px),
-    #eee0c5;
+  /* 大背景与全站一致：纸色 #f4f0e8，不加纹理 */
+  background: radial-gradient(circle at 16% 10%, rgba(255,255,255,.8), transparent 32%), #f4f0e8;
   -webkit-font-smoothing: antialiased;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: .5;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
 }
 
 .page {
