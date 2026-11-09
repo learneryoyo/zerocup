@@ -258,6 +258,11 @@
    鼠标停在这一带、且不是停在图片上时，图层升到内容之上；
    播放开屏动画时同样升起。页面滚动时轨道按进度横向移动，线性对应。
    ══════════════════════════════════════════════════════════ */
+/* 时间轴压在 z-index: -1，只有纸色画在根元素（画布）上它才透得出来。
+   若 html 和 body 各有背景，body 的背景会盖住时间轴，所以首页把纸色交给 html、body 透明。 */
+html { background: radial-gradient(circle at 16% 10%, rgba(255,255,255,.8), transparent 32%), var(--paper); }
+body { background: transparent; }
+
 .tl-layer {
   position: fixed;
   z-index: -1;
