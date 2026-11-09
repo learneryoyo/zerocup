@@ -1,5 +1,9 @@
 # 前端协作说明
 
+> 2026-11-08 更新：六色块备选首页（`home-mosaic.html`）连同 `home.css`、`home.js`、
+> `assets/images/home/` 已整体删除，本文下面关于它的表格行和调试参数只作历史记录。
+> 六色块方案的完整工程说明仍在 `docs/mosaic-design.md`。
+
 ## 当前页面与留存方案
 
 首页已恢复为首版的「米白底大标题 + 陶瓷大图 + 木版年画次图 + 黑底理念」排版。
@@ -9,10 +13,10 @@
 |---|---|
 | `site/index.html` | 当前正式首页，首版双图布局 |
 | `site/assets/css/home-classic.css` | 仅供首版首页使用的样式 |
-| `site/home-mosaic.html` | 完整留存的六色块方案，后续可用于第二页 |
-| `site/assets/css/home.css` | 六色块方案的几何、配色、线稿位置及动效 |
-| `site/assets/js/home.js` | 六色块 Logo 旋转展开动画 |
-| `site/assets/images/home/` | 六色块 SVG 线稿与原 PNG 素材，均保留 |
+| ~~`site/home-mosaic.html`~~ | 已删除（2026-11-08） |
+| ~~`site/assets/css/home.css`~~ | 已删除（2026-11-08） |
+| ~~`site/assets/js/home.js`~~ | 已删除（2026-11-08） |
+| ~~`site/assets/images/home/`~~ | 已删除（2026-11-08） |
 | `docs/mosaic-design.md` | 六色块方案回滚前的完整工程说明 |
 | `site/assets/css/site.css` | 两个方案共用的导航、页脚及阅读容器 |
 | `site/assets/js/site.js` | 两个方案共用的菜单和阅读容器交互 |

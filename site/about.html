@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>关于我们 · 非遗辑录</title>
+  <link rel="stylesheet" href="assets/css/cursor.css">
   <link rel="stylesheet" href="assets/css/site.css">
   <style>
 /* ============================================================
@@ -162,12 +163,14 @@
       <a href="index.html">首页</a>
       <a href="heritage.html">非遗辑录</a>
       <a href="revival.html">古艺新生</a>
-      <a href="games/spectrum.html">濒危光谱</a>
+      <a href="games/spectrum.html">存续有数</a>
       <div class="nav-more">
         <button class="nav-more-btn is-current" type="button" aria-expanded="false" aria-controls="more-panel">更多</button>
         <div class="nav-more-panel" id="more-panel">
           <p class="nav-more-group">小游戏</p>
           <a href="games/kaisu/index.html">开酥 · 荆门酥饼</a>
+          <p class="nav-more-group">小玩意</p>
+          <a href="games/cursor.html">换一支指针</a>
           <a class="nav-more-about is-current" aria-current="page" href="about.html">关于我们</a>
         </div>
       </div>
@@ -261,7 +264,7 @@
         <div class="ab-two ab-reveal">
           <div class="ab-prose">
             <p>本站图像取自公共馆藏机构的开放数据、新闻出版机构的公开报道，以及摄影者的个人作品。器物一类的藏品照多来自博物馆的在线藏品库，图注中记有馆名与藏品编号；戏曲、食物与节日，则多取自通讯社与报社的现场报道，随图注明摄影者。</p>
-            <p>部分图像的原始出处一时难以考订，图注仅记述画面内容，暂未标注来源。相关查证仍在进行，后续版本将陆续补注。</p>
+            <p>部分图像的原始出处一时难以考订，图注统一记为「图片来源于网络」，不再逐个猜测署名。相关查证仍在进行，确认来源后会陆续补注。</p>
           </div>
 
           <dl class="ab-agency">
@@ -299,12 +302,13 @@
 
           <div>
             <p class="ab-label">成员</p>
-            <!-- 名单式：代号与职责为占位，按实际改写；不写真名，匿名版可直接使用 -->
             <dl class="ab-credit ab-reveal">
-              <div><dt>成员甲</dt><dd>版式与前端 · 页面结构、交互与动效，全站手写 HTML／CSS／JS</dd></div>
-              <div><dt>成员乙</dt><dd>图像与考据 · 图像检索、出处核对、名录编号与年份</dd></div>
-              <div><dt>成员丙</dt><dd>文本 · 题记、图注与三十件新作的档案撰写</dd></div>
-              <div><dt>成员丁</dt><dd>实测与打包 · 多端浏览、无障碍检查与提交打包</dd></div>
+              <!-- 匿名评审：本页不得出现任何选手姓名。成员真名只写在「完整版 README」的成员表里，
+                   匿名版打包时按 BEGIN-MEMBERS 标记整段删除。往这里加名字等于自曝身份。 -->
+              <div><dt>版式与前端</dt><dd>页面结构、交互与动效，全站手写 HTML／CSS／JS</dd></div>
+              <div><dt>图像与考据</dt><dd>图像检索、出处核对、名录编号与年份</dd></div>
+              <div><dt>文本</dt><dd>题记、图注与三十件新作的档案撰写</dd></div>
+              <div><dt>实测与打包</dt><dd>多端浏览、无障碍检查与提交打包</dd></div>
             </dl>
           </div>
 
@@ -319,9 +323,10 @@
 
           <div>
             <p class="ab-label">联系我们</p>
-            <!-- 邮箱为占位，上线前替换为队内真实邮箱 -->
+            <!-- 邮箱待定：拿到队内邮箱后，在此处补回
+                 <a class="ab-mail" href="mailto:真实邮箱?subject=非遗辑录 · 读者来信">写信给编辑组</a>
+                 目前不挂空 mailto，避免点开是空白收件人。 -->
             <div class="ab-reveal">
-              <a class="ab-mail" href="mailto:?subject=%E9%9D%9E%E9%81%97%E8%BE%91%E5%BD%95%20%C2%B7%20%E8%AF%BB%E8%80%85%E6%9D%A5%E4%BF%A1">写信给编辑组</a>
               <p class="ab-note-t">收件地址随参赛材料另附。考据、图注或购买渠道有误，欢迎来信指正，我们会在下一版补注。本站不收集任何读者信息。</p>
             </div>
           </div>

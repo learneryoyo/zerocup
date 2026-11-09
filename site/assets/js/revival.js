@@ -41,6 +41,8 @@
   const dialogBody = document.getElementById('rv-dialog-body');
   if (!tabList || !grid) return;
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let firstSelection = true;
   let current = 0;
   let open = null;      // 当前弹窗里的案例
   let trigger = null;   // 打开弹窗的卡片，关闭后焦点回去
@@ -58,7 +60,7 @@
     const box = el('div', cls);
     const holder = el('div', 'rv-holder');
     holder.innerHTML = icon(item.category);
-    holder.append(el('small', '', '影像待补'));
+    holder.append(el('small', '', '图片加载中…'));
     box.append(holder);
     if (item.image) {
       const img = el('img');
@@ -66,7 +68,8 @@
       img.loading = cls === 'rv-detail-media' ? 'eager' : 'lazy';
       img.decoding = 'async';
       img.addEventListener('load', () => { holder.hidden = true; });
-      img.addEventListener('error', () => { holder.hidden = false; img.remove(); });
+      holder.querySelector('small').textContent = '图片加载中…';
+      img.addEventListener('error', () => { holder.hidden = false; holder.querySelector('small').textContent = '图片暂未加载，仍可查看介绍'; img.remove(); });
       img.src = item.image;
       // 用内联 SVG 的视口裁去截图边框，原始照片保持完整。
       const crop = item.imageMeta?.crop;
@@ -81,7 +84,8 @@
         const photo = document.createElementNS(ns, 'image');
         photo.setAttribute('width', item.imageMeta.width);
         photo.setAttribute('height', item.imageMeta.height);
-        photo.setAttribute('href', item.image);
+        // SVG image 不支持原生懒加载；由下方 img 进入视口后触发请求。
+        img.addEventListener('load', () => photo.setAttribute('href', item.image));
         const clip = document.createElementNS(ns, 'clipPath');
         clip.id = 'rv-crop-' + cls + '-' + item.id;
         const rect = document.createElementNS(ns, 'rect');
@@ -91,7 +95,9 @@
         viewport.append(clip, photo);
         // 独立图片元素负责加载检测；SVG 负责统一卡片和详情的裁切。
         img.addEventListener('error', () => viewport.remove());
-        box.append(viewport);
+        img.style.opacity = '0';
+        img.setAttribute('aria-hidden', 'true');
+        box.append(img, viewport);
       } else {
         box.append(img);
       }
@@ -133,13 +139,13 @@
   }
 
   function setLine(text) {
-    lineEl.classList.remove('is-in');
-    void lineEl.offsetWidth;
     lineEl.textContent = text;
-    lineEl.classList.add('is-in');
   }
 
   function select(index, focus) {
+    const initial = firstSelection;
+    firstSelection = false;
+    const unchanged = !initial && current === index;
     current = index;
     [...tabList.children].forEach((tab, i) => {
       const on = i === index;
@@ -150,9 +156,12 @@
     });
     panel.setAttribute('aria-labelledby', `rv-tab-${index}`);
     setLine(PATHS[index].line);
-    grid.replaceChildren(...inPath(index).map(card));
+    if (!unchanged) {
+      grid.classList.toggle('is-first-entry', initial && !reducedMotion.matches);
+      grid.replaceChildren(...inPath(index).map(card));
+    }
     if (window.matchMedia('(max-width: 720px)').matches) {
-      tabList.children[index].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+      tabList.children[index].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reducedMotion.matches || focus ? 'instant' : 'smooth' });
     }
   }
 
@@ -164,7 +173,7 @@
     tab.setAttribute('aria-controls', 'rv-panel');
     tab.innerHTML = icon(index);
     tab.append(el('span', 'rv-tab-name', path.name));
-    tab.addEventListener('click', () => select(index));
+    tab.addEventListener('click', event => select(index, event.detail === 0));
     tabList.append(tab);
   });
 
@@ -233,6 +242,17 @@
     const title = el('h2', '', item.title);
     title.id = 'rv-dialog-title';
     text.append(title, el('p', 'rv-detail-hook', item.hook));
+    const tags = el('ul', 'rv-tags rv-tags--head');
+    tags.setAttribute('aria-label', '创新标签');
+    item.tags.forEach(tag => tags.append(el('li', '', tag)));
+    text.append(tags, el('p', 'rv-detail-lead', item.summary));
+    text.append(row('古今对照', compare(item.compare)));
+    if (item.access) text.append(row('去哪里遇见它', access(item.access)));
+
+    // 档案数字、图片来源和资料出处都要留着备查，但默认收起，不打断阅读
+    const more = el('details', 'rv-more');
+    more.append(el('summary', '', '档案与来源'));
+    more.append(row('产品档案', item.archive));
     if (item.imageMeta) {
       const meta = item.imageMeta;
       const caption = el('div', 'rv-image-caption');
@@ -244,15 +264,8 @@
         source.rel = 'noopener noreferrer';
       }
       caption.append(source, el('p', '', `来源日期：${meta.date}`));
-      text.append(caption);
+      more.append(row('配图', caption));
     }
-    text.append(row('古今对照', compare(item.compare)));
-    text.append(row('案例总述', item.summary));
-    text.append(row('产品档案', item.archive));
-    if (item.access) text.append(row('去哪里遇见它', access(item.access)));
-    const tags = el('ul', 'rv-tags');
-    item.tags.forEach(tag => tags.append(el('li', '', tag)));
-    text.append(row('创新标签', tags));
     const list = el('ul', 'rv-sources');
     item.sources.forEach(source => {
       const a = el('a', '', source.label);
@@ -263,8 +276,9 @@
       li.append(a);
       list.append(li);
     });
-    text.append(row('资料来源', list));
-    text.append(el('p', 'rv-note', '非遗级别指所依托的代表性项目，产品本身不获非遗认定；数字均为报道时口径。'));
+    more.append(row('资料来源', list));
+    more.append(el('p', 'rv-note', '非遗级别指所依托的代表性项目，产品本身不获非遗认定；数字均为报道时口径。'));
+    text.append(more);
 
     const nav = el('div', 'rv-detail-nav');
     const prev = el('button', '', '← 上一个');
@@ -361,4 +375,19 @@
 
   select(0);
   setView('counter');
+
+  // 外部入口：revival.html?case=05 直接落到「分类」页里对应的那件新作。
+  // 首页「今天它长这样」的三张卡就靠这个参数指过来，找不到编号时保持默认的柜台页。
+  const wanted = cases.find(item => item.id === new URLSearchParams(location.search).get('case'));
+  if (wanted) {
+    current = wanted.category;
+    setView('paths');
+    requestAnimationFrame(() => {
+      const target = grid.children[inPath(wanted.category).indexOf(wanted)];
+      if (!target) return;
+      // 分类页只有六件，通常首屏就能看全；只在卡片露不出来时才滚动，避免把页头推走。
+      if (typeof target.scrollIntoView === 'function') target.scrollIntoView({ block: 'nearest' });
+      target.focus({ preventScroll: true });
+    });
+  }
 })();

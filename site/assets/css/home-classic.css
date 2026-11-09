@@ -1,4 +1,4 @@
-﻿/* 首版双图首页专用样式。共享导航和子页容器继续由 site.css 维护。
+/* 首版双图首页专用样式。共享导航和子页容器继续由 site.css 维护。
    六色块方案使用 home.css / home.js，入口 home-mosaic.html，彼此不混用。 */
 
 /* ── 首屏 ───────────────────────────────────────────────── */
@@ -178,7 +178,7 @@
 }
 .manifesto p { margin: 0; font: 700 clamp(30px, 4.6vw, 72px)/1.38 var(--serif); text-wrap: pretty; }
 .manifesto p + p { color: #918d85; }
-.manifesto > span:not(.sec-mark) {
+.manifesto > span {
   margin-top: clamp(34px, 4vw, 54px);
   padding-top: 18px;
   width: fit-content;
@@ -205,19 +205,43 @@
     padding-top: clamp(56px, 14vw, 84px);
     gap: 24px;
   }
-  .intro h1 { font-size: clamp(44px, 14.2vw, 70px); max-width: none; }
+  .intro h1 { font-size: clamp(28px, 10vw, 70px); max-width: none; }
   .intro-copy { margin-bottom: 0; }
   .section-heading { grid-template-columns: 1fr; align-items: start; }
   .section-heading > p:last-child { margin-top: 4px; text-align: left; }
   .story-grid { grid-template-columns: 1fr; }
-  .story-card--hero { min-height: 118vw; }
+  .story-grid > .story-card--hero { width: 90%; min-height: 96vw; justify-self: start; }
   /* 窄屏上把 3:4 的纸本插画收窄成一枚「画片」，别让它占满一屏 */
   .story-card--secondary {
     aspect-ratio: 3 / 4;
-    width: min(100%, 78vw);
+    width: min(100%, 66vw);
     justify-self: end;
   }
   .story-card--secondary strong { font-size: 42px; }
+  /* 「今天它长这样」三张产品图：横向阶梯——三条竖条并排、底边对齐，左低、中高、右中 */
+  .today-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .today-row > div { min-width: 0; }
+  .today-row .story-card--secondary {
+    width: 100%;
+    justify-self: stretch;
+    aspect-ratio: auto;
+    height: var(--strip, 46vw);
+  }
+  .today-row > div:nth-child(1) { --strip: 40vw; }
+  .today-row > div:nth-child(2) { --strip: 58vw; }
+  .today-row > div:nth-child(3) { --strip: 49vw; }
+  .today-row p {
+    margin: 9px 0 0;
+    min-height: 3.1em;
+    font-size: 11px;
+    line-height: 1.55;
+    letter-spacing: .02em;
+  }
   .story-card-content { bottom: 26px; }
   .image-credit { right: 14px; bottom: 10px; }
   .manifesto { min-height: 0; }
@@ -291,6 +315,11 @@
   max-width: none;
 }
 .tl-layer.is-art .tl-layer__axis { visibility: hidden; }
+/* 长卷图还在下载：线条版先不露面，免得手机慢网时一直看到线条；下完淡入 */
+.tl-layer.is-art-pending .tl-layer__axis,
+.tl-layer.is-art-pending .tl-layer__track { visibility: hidden; }
+.tl-layer.is-art .tl-layer__art { animation: tl-art-in .6s ease both; }
+@keyframes tl-art-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* 长卷模式下取消内容的上下渐隐：图本身已留白，时间轴文字贴着底部，需要看得清 */
 .tl-layer.is-art.is-raised .tl-layer__stage,
@@ -367,34 +396,43 @@
   color: #6c675f;
 }
 
-/* 右上角：赭红大矩形（小方块的 2 倍高、3 倍宽），同时是退出键 */
-.tl-layer__exit {
-  position: absolute;
-  z-index: 4;
-  top: 12px;
-  right: 12px;
-  pointer-events: auto;
-  opacity: 0;
-  visibility: hidden;
+/* 两端的小字说明：落在悬停区里，贴着页边竖排，不压正文。
+   桌面端只在图层暗着时出现；触屏上展开后改成「轻点收起」。 */
+.tl-hint {
+  position: fixed;
+  z-index: 31;
+  top: 50%;
+  writing-mode: vertical-rl;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: .32em;
+  color: rgba(16, 16, 15, .46);
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateY(-50%);
   transition: opacity .3s ease;
 }
-.tl-layer.is-raised .tl-layer__exit { opacity: 1; visibility: visible; }
-.tl-layer__exit:hover { background: #7f2f1e; }
-.tl-layer__exit:focus-visible { outline: 2px solid #9e3b26; outline-offset: 3px; }
+.tl-hint--start { left: clamp(4px, 1.2vw, 18px); }
+.tl-hint--end { right: clamp(4px, 1.2vw, 18px); }
+.tl-hint__unpin,
+.tl-hint__tap,
+.tl-hint__close { display: none; }
+.tl-layer.is-raised + .tl-hints .tl-hint { opacity: 0; }
+/* 桌面端点击固定后，两端提示改成「点击收起」 */
+.tl-layer.is-pinned + .tl-hints .tl-hint { opacity: 1; }
+.tl-layer.is-pinned + .tl-hints .tl-hint__hover { display: none; }
+.tl-layer.is-pinned + .tl-hints .tl-hint__unpin { display: inline; }
+html.intro .tl-hints,
+body.is-story-open .tl-hints { display: none; }
+@media (hover: none) {
+  .tl-hint__hover { display: none; }
+  .tl-hint__tap { display: inline; }
+  .tl-layer.is-raised + .tl-hints .tl-hint { opacity: 1; }
+  .tl-layer.is-raised + .tl-hints .tl-hint__tap { display: none; }
+  .tl-layer.is-raised + .tl-hints .tl-hint__close { display: inline; }
+  .tl-layer.is-pinned + .tl-hints .tl-hint__unpin { display: none; }
+}
 
-/* 左下角：墨绿小方块 */
-.tl-layer__mark {
-  position: absolute;
-  z-index: 4;
-  left: 12px;
-  bottom: 12px;
-  width: 30px;
-  height: 15px;
-  background: var(--mark-green);
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.tl-layer.is-raised .tl-layer__mark { opacity: 1; }
 
 /* 环带：两条弧线夹出一条带，中间 36px、两端收薄，延伸到视口外 */
 .tl-layer__axis {
@@ -596,7 +634,9 @@
 .tl-layer__railBar {
   position: absolute;
   inset: 0 auto 0 0;
-  width: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
   background: #9e3b26;
 }
 
@@ -613,38 +653,24 @@
   .tl-layer.is-art .tl-layer__item--plain .tl-layer__intro { font-size: 13px; }
   .tl-layer.is-art .tl-layer__foot { bottom: 3px; }
 }
+/* 手机端保留时间轴长卷与轻点展开提示，沿用触屏交互。 */
 @media (prefers-reduced-motion: reduce) {
   .tl-layer,
   .tl-layer__dot,
   .tl-layer__intro { transition: none; }
 }
 
-/* 首页每个版面的角标：右上赭红、左下墨绿，20×10 */
+/* 各版面的定位上下文（角上的色块已去掉，这里仍需要 relative 供内部绝对定位元素使用） */
 .intro,
 .feature-section,
 .manifesto { position: relative; }
-.sec-mark {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
+
+/* 减少动态效果时，长卷留在文档中，由用户手动浏览。 */
+@media (prefers-reduced-motion: reduce) {
+  .tl-layer { position: relative; top: auto; z-index: 0; transform: none; opacity: 1; pointer-events: auto; }
+  .tl-layer__stage { overflow-x: auto; overflow-y: hidden; scroll-behavior: auto; overscroll-behavior-x: contain; bottom: 28px; }
+  .tl-layer__stage:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+  .tl-layer__track, .tl-layer__art { will-change: auto; }
+  .tl-hints { display: none; }
+  .tl-layer__foot { pointer-events: none; }
 }
-.sec-mark::before,
-.sec-mark::after {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 15px;
-}
-.sec-mark::before {
-  top: 12px;
-  right: 12px;
-  background: var(--mark-red);
-}
-.sec-mark::after {
-  bottom: 12px;
-  left: 12px;
-  background: var(--mark-green);
-}
-.manifesto .sec-mark::before { background: #b8503a; }
-.manifesto .sec-mark::after { background: #3f6a53; }

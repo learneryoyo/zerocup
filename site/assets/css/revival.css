@@ -1,9 +1,8 @@
-/* 古艺新生：左侧标签切换 + 右侧 3×2 产品卡。背景沿用 site.css 的 body，不另设。 */
+/* 古艺新生：左侧标签切换 + 右侧 3×2 产品卡。
+   页面只用 --rv-* 自己的砖红色系，不覆盖全站的 --paper / --ink / --line：
+   那三个变量会连带改掉页眉底色、导航下划线和页脚，导致这页的站务元素与其他页有色差。 */
 :root {
   /* 砖红复古色系：米白 #E8E2D6、砖红 #904038、深红 #602020、杏色 #E0BA95、金棕 #B28750 */
-  --paper: #e8e2d6;
-  --ink: #602020;
-  --line: rgba(96, 32, 32, .18);
   --rv-brown: #904038;
   --rv-brown-deep: #602020;
   --rv-gold: #b28750;
@@ -15,7 +14,6 @@
   --rv-holder: var(--rv-surface);
 }
 
-.site-header { background: rgba(232, 226, 214, .94); }
 
 .revival {
   min-height: calc(100vh - var(--header-height));
@@ -48,12 +46,12 @@
 /* 右侧卡片 */
 .rv-panel { grid-area: panel; min-width: 0; }
 .rv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); max-width: 860px; margin-inline: auto; }
-.rv-card { position: relative; display: block; aspect-ratio: 1; padding: 0; overflow: hidden; border: 0; color: var(--rv-cream); background: var(--rv-holder); text-align: left; cursor: pointer; box-shadow: 0 1px 0 rgba(96, 32, 32, .1); animation: rv-rise 460ms cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 60ms); }
+.rv-card { position: relative; display: block; aspect-ratio: 1; padding: 0; overflow: hidden; border: 0; color: var(--rv-cream); background: var(--rv-holder); text-align: left; cursor: pointer; box-shadow: 0 1px 0 rgba(96, 32, 32, .1);  }
 .rv-card:focus-visible { outline: 2px solid var(--rv-brown); outline-offset: 3px; }
 .rv-card-media { position: absolute; inset: 0; transition: transform 400ms ease; }
 .rv-card:hover .rv-card-media, .rv-card:focus-visible .rv-card-media { transform: scale(1.04); }
 .rv-card-media > img, .rv-detail-media > img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.rv-holder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; padding-bottom: 18%; color: color-mix(in srgb, var(--rv-brown) 55%, var(--paper)); }
+.rv-holder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; padding-bottom: 18%; color: color-mix(in srgb, var(--rv-brown) 55%, var(--rv-cream)); }
 .rv-holder .rv-badge { width: clamp(56px, 6vw, 76px); height: clamp(56px, 6vw, 76px); padding: 14%; border-radius: 50%; background: var(--rv-apricot); }
 .rv-holder small { font-size: 12px; letter-spacing: .2em; }
 .rv-holder[hidden] { display: none; }
@@ -77,7 +75,7 @@
 .rv-card:hover .rv-card-hook, .rv-card:focus-visible .rv-card-hook { padding-top: 6px; }
 
 /* 详情弹窗 */
-.rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: min(86vh, 760px); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--paper); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
+.rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: min(86vh, 760px); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--rv-cream); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
 .rv-dialog::backdrop { background: rgba(58, 18, 18, .55); backdrop-filter: blur(3px); }
 .rv-dialog[open] { animation: rv-pop 280ms cubic-bezier(.22, 1, .36, 1); }
 /* 第三页弹窗用普通叉号，覆盖 site.css 里全站退出键的纹样小方块 */
@@ -100,11 +98,20 @@
 .rv-detail-meta { margin: 0 0 10px; color: var(--rv-brown); font-size: 12px; letter-spacing: .16em; }
 .rv-detail h2 { margin: 0 40px 12px 0; font: 700 clamp(21px, 2vw, 26px)/1.4 var(--serif); }
 .rv-detail-hook { margin: 0 0 22px; padding-left: 12px; border-left: 3px solid var(--rv-gold); color: var(--rv-brown-deep); font: 16px/1.7 var(--serif); }
+.rv-detail-text .rv-tags--head { margin: -8px 0 18px; }
+.rv-detail-lead { margin: 0 0 22px; font: 15px/1.95 var(--serif); color: var(--rv-brown-deep); }
+.rv-more { margin-top: 6px; border-top: 1px solid rgba(96, 32, 32, .12); }
+.rv-more > summary { padding: 14px 0; cursor: pointer; color: var(--rv-brown); font-size: 13px; font-weight: 600; letter-spacing: .14em; list-style: none; }
+.rv-more > summary::-webkit-details-marker { display: none; }
+.rv-more > summary::after { content: '展开 ＋'; float: right; font-weight: 400; letter-spacing: .04em; color: var(--rv-muted); }
+.rv-more[open] > summary::after { content: '收起 －'; }
+.rv-more .rv-row:first-of-type { border-top: 0; padding-top: 0; }
+.rv-more .rv-image-caption { margin: 0; }
 .rv-row { padding: 14px 0; border-top: 1px solid rgba(96, 32, 32, .12); }
 .rv-row h3 { margin: 0 0 8px; color: var(--rv-brown); font-size: 13px; font-weight: 600; letter-spacing: .14em; }
 .rv-row p { margin: 0; font-size: 14px; line-height: 1.85; }
 .rv-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: stretch; }
-.rv-compare-side { padding: 10px 12px; background: color-mix(in srgb, var(--paper) 70%, #fff); border: 1px solid rgba(178, 135, 80, .35); }
+.rv-compare-side { padding: 10px 12px; background: color-mix(in srgb, var(--rv-cream) 70%, #fff); border: 1px solid rgba(178, 135, 80, .35); }
 .rv-compare-side b { display: block; margin-bottom: 4px; color: var(--rv-brown); font: 700 16px/1 var(--serif); }
 .rv-compare-side p { font-size: 13px; line-height: 1.75; }
 .rv-compare-arrow { align-self: center; color: var(--rv-gold); font-size: 18px; }
@@ -300,3 +307,14 @@
 .hubi-postcard .miao-postcard-art { background: radial-gradient(ellipse at 50% 42%, #f7e9dfcc, transparent 75%), #e4d8d2; }
 .hubi-postcard .miao-postcard-art > img { filter: saturate(.77) drop-shadow(4px 12px 8px #68533624); }
 .hubi-postcard .miao-postcard-art > p { font-size: 17px; }
+
+/* 仅首次展示错峰入场，筛选与键盘切换不重复隐藏内容。 */
+.rv-grid.is-first-entry .rv-card { animation: rv-rise 250ms cubic-bezier(.23, 1, .32, 1) both; animation-delay: calc(var(--i, 0) * 30ms); }
+@media (prefers-reduced-motion: reduce) {
+  .rv-grid.is-first-entry .rv-card { animation: none; animation-delay: 0s; }
+}
+
+/* 减少动态效果时保留选中突出状态，立即完成切换。 */
+@media (prefers-reduced-motion: reduce) {
+  .rv-tab, .rv-tab .rv-badge { transition: none; }
+}

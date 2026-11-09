@@ -2,6 +2,19 @@
 (function () {
   "use strict";
 
+  /* 有指针皮肤时，按 site.js 的位置加载 cursor.js */
+  (function () {
+    var me = document.currentScript;
+    if (!me || !me.src) return;
+    var skin = "";
+    try { skin = sessionStorage.getItem("zc-cursor") || ""; } catch (e) { return; }
+    if (!skin) return;
+    var el = document.createElement("script");
+    el.src = me.src.replace(/site\.js(\?.*)?$/, "cursor.js");
+    el.defer = true;
+    document.head.appendChild(el);
+  }());
+
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".primary-nav");
   if (toggle && nav) {
@@ -52,6 +65,16 @@
   var title = overlay.querySelector("#story-dialog-title");
   var fullButton = overlay.querySelector("[data-story-fullscreen]");
   var closeButton = overlay.querySelector("button[data-story-close]");
+  var loadingNote = document.createElement('div');
+  loadingNote.className = 'story-loading-note';
+  loadingNote.hidden = true;
+  loadingNote.setAttribute('role', 'status');
+  var loadingText = document.createElement('span');
+  var directLink = document.createElement('a');
+  directLink.textContent = '独立打开 ↗';
+  directLink.target = '_blank'; directLink.rel = 'noopener';
+  loadingNote.append(loadingText, directLink); shell.append(loadingNote);
+  frame.addEventListener('load', function () { loadingNote.hidden = true; frame.removeAttribute('aria-busy'); });
   var activeCard = null;
   var closing = false;
   var timer = null;
@@ -97,6 +120,10 @@
     setOrigin(card);
     title.textContent = card.dataset.storyTitle || "非遗子页";
     frame.title = title.textContent + " · 独立子页";
+    loadingText.textContent = '正在打开' + title.textContent + '…';
+    directLink.href = card.href;
+    loadingNote.hidden = false;
+    frame.setAttribute('aria-busy', 'true');
     frame.src = card.href;
     overlay.setAttribute("aria-hidden", "false");
     document.body.classList.add("is-story-open");
@@ -123,6 +150,8 @@
       shell.style.removeProperty("--shift-y");
       shell.style.removeProperty("--scale-x");
       shell.style.removeProperty("--scale-y");
+      loadingNote.hidden = true;
+      frame.removeAttribute("aria-busy");
       frame.removeAttribute("src");
       document.body.classList.remove("is-story-open");
       setBackgroundInert(false);

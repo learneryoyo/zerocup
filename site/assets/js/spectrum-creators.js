@@ -15,9 +15,9 @@
     "home": "https://weibo.com/u/6394994683",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-02.webp",
-    "photoSource": "https://static.nfnews.com/content/202505/03/c11255582.html",
-    "photoLabel": "高清正面人物照",
-    "position": "65% 38%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_24535838",
+    "photoLabel": "手持自制鱼灯",
+    "position": "50% 50%",
     "title": "把好奇心，做成一门手艺",
     "noteTitle": "从拜师开始",
     "note": "学艺、缠线、绘图与上色，是这些画面里反复出现的动作。通草花、鱼灯和纸鸢的形态各不相同，共同之处是创作者始终把自己放在学习者的位置上。",
@@ -129,9 +129,9 @@
     "home": "https://www.weibo.com/mianyangdanshen",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-01.webp",
-    "photoSource": "https://galapagosfrog.hatenablog.com/entry/2019/09/19/%E6%9D%8E%E5%AD%90%E6%9F%92%E3%81%8CForbes%E4%B8%AD%E5%9B%BD%E7%89%88%E3%81%A750%E4%BA%BA%E3%81%AE%E3%82%AA%E3%83%94%E3%83%8B%E3%82%AA%E3%83%B3%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC%E3%81%AE1",
-    "photoLabel": "人物正面照",
-    "position": "50% 35%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_29365493",
+    "photoLabel": "漆树割漆",
+    "position": "50% 50%",
     "title": "从一棵漆树，到一件器物",
     "noteTitle": "器物之前的时间",
     "note": "补充影像把目光从漆器成品移向制作现场：漆树取漆、修整、打磨，再到摆满工具的工作台。漂亮的表面背后，是材料与双手长时间的相处。",
@@ -194,9 +194,9 @@
     "home": "https://space.bilibili.com/589188442",
     "homeLabel": "前往 B 站主页 ↗",
     "image": "../assets/img/creators/creator-03.webp",
-    "photoSource": "https://www.thepaper.cn/newsDetail_forward_18823849",
-    "photoLabel": "人物生活照",
-    "position": "50% 35%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_26074240",
+    "photoLabel": "挑担行走",
+    "position": "50% 50%",
     "title": "在院子里，慢慢做出来",
     "noteTitle": "手边的生活，也是材料",
     "note": "石磨、案桌、院落与茶叶，把手艺串回具体的日常。看他的作品，不妨多留意工具怎样被使用，以及那些看起来重复、却决定成品的细小动作。",
@@ -280,9 +280,9 @@
     "home": "https://space.bilibili.com/1475425645",
     "homeLabel": "前往 B 站主页 ↗",
     "image": "../assets/img/creators/creator-04.webp",
-    "photoSource": "https://www.cnr.cn/hunan/zhxw/20230117/t20230117_526129421.shtml",
-    "photoLabel": "制作糍粑视频截图",
-    "position": "50% 35%",
+    "photoSource": "http://hn.people.com.cn/n2/2025/0507/c208814-41220127.html",
+    "photoLabel": "田间收割水稻",
+    "position": "50% 50%",
     "title": "老物件里，有乡土的来路",
     "noteTitle": "工具与它生长的地方",
     "note": "老屋里的劳作、山林中的取材和糍粑的晾晒，保留了手艺发生的环境。器物并不是孤立的展品，它与山林、天气和一个地方的生活节奏相连。",
@@ -331,9 +331,9 @@
     "home": "https://space.bilibili.com/513192993",
     "homeLabel": "前往 B 站主页 ↗",
     "image": "../assets/img/creators/creator-05.webp",
-    "photoSource": "https://j.people.com.cn/n3/2021/0910/c94638-9894919.html",
-    "photoLabel": "独竹漂表演照",
-    "position": "50% 35%",
+    "photoSource": "https://m.thepaper.cn/newsDetail_forward_8821787",
+    "photoLabel": "独竹漂 · 红裙起舞",
+    "position": "50% 50%",
     "title": "把舞台，交给一片水面",
     "noteTitle": "轻盈不是没有重量",
     "note": "竹上独立、展袖与转身，放到峡谷和瀑布前便有了不同的气韵。这组照片可以从动作读起：先看脚下如何站稳，再看上半身怎样把舞蹈延伸出去。",
@@ -445,9 +445,9 @@
     "home": "https://weibo.com/u/7840319821",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-06.webp",
-    "photoSource": "https://m.thepaper.cn/newsDetail_forward_24320485",
-    "photoLabel": "向宏俊人物工作照",
-    "position": "50% 35%",
+    "photoSource": "https://www.thepaper.cn/newsDetail_forward_24320485",
+    "photoLabel": "团扇前剪影",
+    "position": "50% 50%",
     "title": "两个人，一段漫长的手作",
     "noteTitle": "把等待留在画面里",
     "note": "从田间扛回工具，到作坊里操作纺车，山白的影像常把人放在环境之中。夜色、窗光和工具的轮廓，让制作过程有了自己的叙事节奏。",
@@ -510,9 +510,9 @@
     "home": "https://www.weibo.com/u/7397682499",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-07.webp",
-    "photoSource": "https://news.sina.cn/2025-01-28/detail-inehnwwh7074386.d.html",
-    "photoLabel": "正面人物照",
-    "position": "50% 35%",
+    "photoSource": "https://city.cri.cn/2024-08-22/da9acbd3-20d7-537d-75f5-f288542b3361.html",
+    "photoLabel": "炭花舞表演",
+    "position": "50% 50%",
     "title": "从一道菜，走进更大的世界",
     "noteTitle": "先去请教，再去尝试",
     "note": "向匠人学习的近景，与炭花舞铺开的光轨形成对照：一边是细看手上的动作，一边是走进现场的身体体验。理解一门手艺，也可以从认真参与开始。",
@@ -583,19 +583,19 @@
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-08.webp",
     "photoSource": "https://www.thepaper.cn/newsDetail_forward_24635924",
-    "photoLabel": "人物视频截图",
-    "position": "50% 35%",
+    "photoLabel": "齐天大圣造型",
+    "position": "50% 28%",
     "title": "镜头前的英雄，镜头后的认真",
     "noteTitle": "变身之前，还有许多准备",
     "note": "戏服、纸扎、面具与幕后的讨论，构成了国风短片的另一面。看完镜头中的角色，再回头看道具和排练，便能发现一个短暂的瞬间如何被共同完成。",
     "layout": "backstage",
     "gallery": [
       {
-        "src": "../assets/img/creators/film-07-01.webp",
-        "label": "国风表演形象",
-        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
-        "width": 530,
-        "height": 942
+        "src": "../assets/img/creators/film-07-04.webp",
+        "label": "舞台川剧变装",
+        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
+        "width": 700,
+        "height": 488
       },
       {
         "src": "../assets/img/creators/film-07-02.webp",
@@ -605,46 +605,11 @@
         "height": 467
       },
       {
-        "src": "../assets/img/creators/film-07-03.webp",
-        "label": "齐天大圣造型",
-        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
-        "width": 530,
-        "height": 942
-      },
-      {
-        "src": "../assets/img/creators/film-07-04.webp",
-        "label": "舞台川剧变装",
-        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
-        "width": 700,
-        "height": 488
-      },
-      {
-        "src": "../assets/img/creators/film-07-05.webp",
-        "label": "后台受访",
-        "source": "https://www.thepaper.cn/newsDetail_forward_24635924",
-        "width": 530,
-        "height": 640
-      },
-      {
         "src": "../assets/img/creators/film-07-06.webp",
-        "label": "手持纸扎道具",
+        "label": "与齐天大圣画像合影",
         "source": "https://www.thepaper.cn/newsDetail_forward_26349132",
         "width": 1080,
         "height": 1413
-      },
-      {
-        "src": "../assets/img/creators/film-07-07.webp",
-        "label": "幕后讨论",
-        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
-        "width": 700,
-        "height": 524
-      },
-      {
-        "src": "../assets/img/creators/film-07-08.webp",
-        "label": "手持面具道具",
-        "source": "https://www.chinanews.com.cn/sh/2024/08-28/10276042.shtml",
-        "width": 700,
-        "height": 466
       }
     ]
   },
@@ -661,9 +626,9 @@
     "home": "https://weibo.com/u/7030023973",
     "homeLabel": "前往微博主页 ↗",
     "image": "../assets/img/creators/creator-09.webp",
-    "photoSource": "https://www.thepaper.cn/newsDetail_forward_29825469",
-    "photoLabel": "武术人物展示照",
-    "position": "50% 35%",
+    "photoSource": "http://www.xinhuanet.com/20240615/d4ecdf3e5e9844dea861330df85f2a63/c.html",
+    "photoLabel": "竹林列阵练功",
+    "position": "50% 50%",
     "title": "一招一式，练成自己的力量",
     "noteTitle": "从个人身法，到团队阵列",
     "note": "持剑、踢腿与列阵，让这组影像拥有清晰的节奏。一个人的身法与一群人的配合，呈现出不同的观看方式，也把武术训练与舞台表达连接起来。",
@@ -760,51 +725,218 @@
 ];
  const root=document.getElementById('creatorCarousel');if(!root)return;
  root.removeAttribute('aria-roledescription');root.setAttribute('aria-label','镜头里的守艺人');
- root.innerHTML=`<div class="ribbon-stage"><svg class="creator-ribbon" viewBox="0 0 1000 460" aria-hidden="true"><defs><filter id="filmInk" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1 -1 -1 0 3"/></filter><linearGradient id="ribbonFade"><stop offset="0" stop-color="white" stop-opacity=".12"/><stop offset=".4" stop-color="white" stop-opacity=".4"/><stop offset="1" stop-color="white"/></linearGradient><mask id="ribbonDistance"><rect width="1000" height="460" fill="url(#ribbonFade)"/></mask></defs><g mask="url(#ribbonDistance)"><svg x="0" width="650" height="460" viewBox="60 270 1270 460" preserveAspectRatio="none"><image filter="url(#filmInk)" href="../assets/img/creators/curved-film-reference.png" width="1672" height="941"/></svg></g><svg x="650" width="350" height="460" viewBox="1330 270 250 460" preserveAspectRatio="none"><image filter="url(#filmInk)" href="../assets/img/creators/curved-film-reference.png" width="1672" height="941"/></svg></svg><button type="button" class="creator-open ribbon-window" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="creator-picture"><img></span><span class="ribbon-open-hint">查看人物 ↗</span></button></div><div class="ribbon-copy"><div class="creator-heading"><span>镜头里的守艺人</span><span class="creator-count"></span></div><strong class="creator-name"></strong><span class="creator-field"></span><p class="ribbon-summary"></p><div class="creator-controls"><button type="button" class="ribbon-pause" aria-pressed="false">暂停轮播</button><div><button class="creator-prev" aria-label="上一位创作者">←</button><button class="creator-next" aria-label="下一位创作者">→</button></div></div><div class="creator-thumbs" aria-label="选择创作者"></div></div><span class="creator-sr" aria-live="polite"></span>`;
+ root.innerHTML=`<div class="ribbon-stage"><svg class="creator-ribbon" viewBox="80 255 1320 425" aria-hidden="true"><defs><filter id="filmInk" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1 -1 -1 0 3"/></filter><linearGradient id="ribbonFade"><stop offset="0" stop-color="white" stop-opacity=".07"/><stop offset=".42" stop-color="white" stop-opacity=".1"/><stop offset=".58" stop-color="white" stop-opacity=".24"/><stop offset=".65" stop-color="white" stop-opacity=".65"/><stop offset=".72" stop-color="white" stop-opacity="1"/></linearGradient><mask id="ribbonDistance"><rect width="1536" height="1024" fill="url(#ribbonFade)"/></mask></defs><image filter="url(#filmInk)" mask="url(#ribbonDistance)" href="../assets/img/creators/wide-film-reference.webp" width="1536" height="1024"/></svg><button type="button" class="creator-open ribbon-window" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="creator-picture"><img></span><span class="ribbon-open-hint">查看人物 ↗</span></button><div class="ribbon-navigation"><button type="button" class="creator-prev" aria-label="上一位创作者">‹</button><button type="button" class="creator-next" aria-label="下一位创作者">›</button><div class="creator-dots" aria-label="选择创作者"></div></div></div><div class="ribbon-copy"><div class="creator-heading"><span>镜头里的守艺人</span><span class="creator-count"></span></div><strong class="creator-name"></strong><span class="creator-field"></span><p class="ribbon-summary"></p><div class="creator-controls"><button type="button" class="ribbon-pause" aria-pressed="false">暂停轮播</button></div></div><span class="creator-sr" aria-live="polite"></span>`;
  const dialog=document.createElement('dialog');dialog.id='creatorDialog';dialog.className='creator-dialog';dialog.setAttribute('aria-labelledby','creatorTitle');
- dialog.innerHTML='<div class="creator-topbar"><span class="creator-issue"></span><button class="creator-close" autofocus aria-label="关闭人物影集">关闭 ×</button></div><article class="creator-detail"></article>';
+ dialog.innerHTML='<button type="button" class="creator-close" autofocus aria-label="关闭人物影集">×</button><article class="cf-sheet"></article>';
  document.body.append(dialog);
  const q=s=>root.querySelector(s), d=s=>dialog.querySelector(s);let index=0,oldOverflow='';const opener=q('.creator-open');
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const link=(url,label,cls='')=>`<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');let paused=reduced.matches,timer,hovered=false,visible=true;
- function schedule(){clearTimeout(timer);if(!paused&&!hovered&&visible&&!document.hidden&&!dialog.open&&!root.contains(document.activeElement))timer=setTimeout(()=>show(index+1),6500);}
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');const connection=navigator.connection;const slowNetwork=!!(connection&&(connection.saveData||/(^|-)2g$/.test(connection.effectiveType||'')||(connection.downlink>0&&connection.downlink<1.5)));let paused=reduced.matches||slowNetwork,timer,hovered=false,visible=true;
+ function schedule(){clearTimeout(timer);if(!paused&&!hovered&&visible&&!document.hidden&&!dialog.open&&!root.querySelector('.creator-picture[aria-busy="true"]')&&!root.contains(document.activeElement))timer=setTimeout(()=>show(index+1),6500);}
  function pauseLabel(){q('.ribbon-pause').textContent=paused?'播放轮播':'暂停轮播';q('.ribbon-pause').setAttribute('aria-pressed',String(paused));schedule();}
  q('.ribbon-pause').onclick=()=>{paused=!paused;pauseLabel();};
  root.addEventListener('mouseenter',()=>{hovered=true;schedule();});root.addEventListener('mouseleave',()=>{hovered=false;schedule();});
  root.addEventListener('focusin',schedule);root.addEventListener('focusout',()=>setTimeout(schedule,0));document.addEventListener('visibilitychange',schedule);
  new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;schedule();}).observe(root);
  reduced.addEventListener('change',()=>{if(reduced.matches){paused=true;pauseLabel();}});
- const thumbs=people.map((p,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','选择'+p.name);b.innerHTML=`<img src="${esc(p.image)}" alt=""><span>${String(i+1).padStart(2,'0')}</span>`;b.onclick=()=>show(i);q('.creator-thumbs').append(b);return b;});
- function show(n){index=(n+people.length)%people.length;const p=people[index];q('.creator-picture img').src=p.image;q('.creator-picture img').alt=p.name+' · '+p.photoLabel;q('.creator-picture img').style.objectPosition=p.position;q('.creator-name').textContent=p.name;q('.creator-field').textContent=p.field;q('.creator-count').textContent=String(index+1).padStart(2,'0')+' / 10';q('.ribbon-summary').textContent=p.story.split('。')[0]+'。';opener.setAttribute('aria-label','打开'+p.name+'的人物影集');thumbs.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));q('.creator-sr').textContent='当前人物：'+p.name;schedule();}
+ const dots=people.map((p,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','选择'+p.name);b.title=p.name;b.onclick=()=>show(i);q('.creator-dots').append(b);return b;});
+ /* 切换动效：暗房叠印——新一格叠在旧格上面慢慢显影，只带一点点推近，不横向位移；
+    旧格原样留在下层，显影完成后才撤掉，中间不会露出黑底。文字随后由下往上淡入。
+    图片先解码再动，避免白闪；连点时直接收尾上一段。 */
+ let revision=0,first=true;
+ const picture=q('.creator-picture');
+ let curImg=picture.querySelector('img');   // 窗口里当前那一格；其余的都是正在退场或预览的，随时可以撤掉
+ const tidy=()=>{picture.getAnimations({subtree:true}).forEach(x=>x.finish());[...picture.querySelectorAll('img')].forEach(x=>{if(x!==curImg)x.remove();});if(curImg)curImg.style.transform='';};
+ // 按需请求人物照片，避免占用正文与首屏图片的带宽
+ // 仅加载当前人物或用户滑到的相邻人物，不再一次预取全部头像。
+ function swapText(p,animate){
+  q('.creator-name').textContent=p.name;q('.creator-field').textContent=p.field;q('.ribbon-summary').textContent=p.story.split('。')[0]+'。';
+  if(!animate)return;
+  ['.creator-name','.creator-field','.ribbon-summary'].forEach((sel,i)=>q(sel).animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:460,delay:120+i*60,easing:'cubic-bezier(.4,0,.2,1)',fill:'backwards'}));
+ }
+ function show(n,drag){
+  index=(n+people.length)%people.length;const p=people[index],token=++revision,animate=!first&&!reduced.matches;first=false;
+  q('.creator-count').textContent=String(index+1).padStart(2,'0')+' / 10';
+  opener.setAttribute('aria-label','打开'+p.name+'的人物影集');dots.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));q('.creator-sr').textContent='当前人物：'+p.name;schedule();
+  // 手指拖过来的那一格已经在窗口里：接着它当前的位置滑完，不再重新显影
+  if(drag){ picture.removeAttribute('aria-busy'); schedule();
+   curImg=drag.next;swapText(p,animate);drag.next.alt=p.name+' · '+p.photoLabel;drag.cur.alt='';
+   const w=picture.clientWidth,ease='cubic-bezier(.2,.8,.2,1)',dur=reduced.matches?0:Math.max(160,320*(1-Math.abs(drag.dx)/w));
+   drag.next.animate([{transform:`translateX(${drag.dx+drag.dir*w}px)`},{transform:'translateX(0)'}],{duration:dur,easing:ease}).onfinish=()=>{drag.next.style.transform='';};
+   drag.next.style.transform='';
+   drag.cur.animate([{transform:`translateX(${drag.dx}px)`},{transform:`translateX(${-drag.dir*w}px)`}],{duration:dur,easing:ease,fill:'forwards'}).onfinish=()=>drag.cur.remove();
+   return;
+  }
+  // 收掉上一段还没走完的显影
+  tidy();
+  const old=curImg;
+  clearTimeout(timer);
+  picture.setAttribute('aria-busy','true');
+  const next=document.createElement('img');next.src=p.image;next.alt=p.name+' · '+p.photoLabel;next.style.objectPosition=p.position;next.draggable=false;
+  const run=()=>{
+   if(token!==revision)return;
+   picture.removeAttribute("aria-busy");
+   schedule();
+   swapText(p,animate);
+   curImg=next;
+   if(!old||!animate){picture.replaceChildren(next);return;}
+   picture.append(next);old.alt='';
+   // 旧格留在下面不动，新格在上层慢慢显影；显影完成后直接撤掉旧格，中间不会露出黑底
+   const ease='cubic-bezier(.4,0,.2,1)',dur=880;
+   const inn=next.animate([{opacity:0,transform:'scale(1.04)'},{opacity:1,transform:'scale(1)'}],{duration:dur,easing:ease});
+   inn.onfinish=()=>old.remove();
+  };
+  // 保留旧图直到新图就绪，慢网下不再在250ms后强行显示未下载的图片。
+  next.decode().then(run).catch(()=>{
+   if(token!==revision)return;
+   picture.removeAttribute('aria-busy');
+   picture.replaceChildren(Object.assign(document.createElement('span'),{className:'creator-photo-status',textContent:'照片暂未加载，点击仍可阅读人物故事'}));
+   curImg=null;swapText(p,false);schedule();
+  });
+ }
  q('.creator-prev').onclick=()=>show(index-1);q('.creator-next').onclick=()=>show(index+1);
- q('.creator-thumbs').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();show(index+(e.key==='ArrowRight'?1:-1));thumbs[index].focus();}});
- function photo(g,i){return `<figure class="creator-shot ${g.height>g.width?'is-portrait':'is-landscape'}"><a class="film-frame" href="${esc(g.src)}" target="_blank" rel="noopener" aria-label="查看大图：${esc(g.label)}"><span class="film-stock" aria-hidden="true">HERITAGE 400 <b>${String(i+1).padStart(2,'0')} ▷</b></span><img src="${esc(g.src)}" alt="${esc(g.label)}" width="${g.width}" height="${g.height}" loading="lazy"><span class="film-edge" aria-hidden="true">FRAME ${String(i+1).padStart(2,'0')} / MEMORY IN THE MAKING</span></a><figcaption><span>${esc(g.label)}</span>${link(g.source,'出处 ↗')}</figcaption></figure>`;}
- opener.onclick=()=>{
-  const p=people[index];dialog.dataset.layout=p.layout;d('.creator-issue').textContent='守艺人影集 / VOL. '+String(index+1).padStart(2,'0');
-  const sentences=p.story.match(/[^。！？]+[。！？]?/g)||[p.story];const split=Math.ceil(sentences.length/2);
-  const portrait=`<figure class="creator-portrait"><div class="film-frame"><span class="film-stock">PORTRAIT / ${String(index+1).padStart(2,'0')}</span><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}"></div><figcaption>${esc(p.photoLabel)} · ${link(p.photoSource,'图片来源 ↗')}</figcaption></figure>`;
-  const heading=`<header class="creator-profile"><p class="creator-eyebrow">镜头里的守艺人 / ${esc(p.field)}</p><h2 id="creatorTitle">${esc(p.name)}</h2><p class="creator-role">${esc(p.role)}</p><p class="creator-deck">${esc(p.title)}</p><div class="creator-links">${link(p.home,p.homeLabel,'creator-home')}${link(p.source,'人物资料 ↗','creator-reference')}</div>${p.homeLabel.includes('作品')?'<p class="creator-link-note">可从作品页进入作者空间</p>':''}</header>`;
-  const story=`<section class="creator-story"><h3>创作的来处</h3><p>${esc(sentences.slice(0,split).join(''))}</p><p>${esc(sentences.slice(split).join(''))}</p></section>`;
-  const achievements=`<section class="creator-results"><h3>代表创作与成果</h3><ul class="creator-achievements">${p.achievements.map(a=>'<li>'+esc(a)+'</li>').join('')}</ul></section>`;
-  const note=`<aside class="creator-note"><span>FIELD NOTES / 观片笔记</span><h3>${esc(p.noteTitle)}</h3><p>${esc(p.note)}</p></aside>`;
-  const photos=p.gallery.map(photo);
-  // Different editorial structures, not a single repeated photo grid.
-  const variant=p.layout;
-  const top=['cinema','panorama','motion'].includes(variant)?heading+portrait:portrait+heading;
-  d('.creator-detail').innerHTML=`<div class="creator-intro">${top}</div><div class="creator-context">${story}${achievements}</div>${note}<section class="creator-gallery-section" aria-label="创作与现场影像"><div class="creator-gallery-title"><h3>手艺发生的现场</h3><span>${p.gallery.length} FRAMES / 横向浏览 · 点击查看大图</span><div class="film-navigation"><button type="button" class="film-prev" aria-label="向前浏览胶卷">←</button><button type="button" class="film-next" aria-label="向后浏览胶卷">→</button></div></div><div class="film-viewport" tabindex="0" role="region" aria-label="人物照片胶卷，可左右滚动"><div class="creator-gallery">${photos.join('')}</div></div></section><footer class="creator-end"><span>一门手艺，仍在继续。</span>${link(p.home,p.homeLabel)}</footer>`;
-  const viewport=d('.film-viewport');
-  const move=direction=>viewport.scrollBy({left:direction*Math.max(240,viewport.clientWidth*.75),behavior:'instant'});
-  const updateButtons=()=>{d('.film-prev').disabled=viewport.scrollLeft<=1;d('.film-next').disabled=viewport.scrollLeft+viewport.clientWidth>=viewport.scrollWidth-2;};
-  d('.film-prev').onclick=()=>move(-1);d('.film-next').onclick=()=>move(1);
-  viewport.addEventListener('scroll',updateButtons,{passive:true});
-  viewport.addEventListener('keydown',e=>{if(e.target===viewport&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();move(e.key==='ArrowRight'?1:-1);}});
-  requestAnimationFrame(updateButtons);
-  oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();dialog.scrollTop=0;schedule();
+ /* 手机上左右滑动切换（箭头在触屏上隐藏）：照片跟着手指走，旁边一格从另一侧露出来；
+    松手时滑过约五分之一宽、或甩得够快就换到下一位/上一位，否则弹回原位。
+    左滑看下一位（新照片从右边进来），右滑看上一位。滑过之后吞掉随之而来的 click，免得顺手打开人物页；竖向滑动照常滚动页面。 */
+ let sw=null,swiped=false;
+ const stage=q('.ribbon-stage');
+ function peekFor(dir){
+  const p=people[(index+dir+people.length)%people.length];
+  const im=document.createElement('img');im.src=p.image;im.alt='';im.style.objectPosition=p.position;im.draggable=false;
+  picture.append(im);return im;
+ }
+ function dragTo(dx){
+  const w=picture.clientWidth,dir=dx<0?1:-1;
+  if(!sw.peek||sw.dir!==dir){if(sw.peek)sw.peek.remove();sw.peek=peekFor(dir);sw.dir=dir;}
+  sw.cur.style.transform=`translateX(${dx}px)`;sw.peek.style.transform=`translateX(${dx+dir*w}px)`;
+ }
+ stage.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse'||!e.target.closest('.ribbon-window'))return;
+  tidy();
+  sw={x:e.clientX,y:e.clientY,t:performance.now(),axis:null,cur:curImg,peek:null,dir:0,dx:0};swiped=false;
+ },{passive:true});
+ stage.addEventListener('pointermove',e=>{
+  if(!sw||!sw.cur)return;const dx=e.clientX-sw.x,dy=e.clientY-sw.y;
+  if(!sw.axis){if(Math.abs(dx)<8&&Math.abs(dy)<8)return;sw.axis=Math.abs(dx)>Math.abs(dy)?'x':'y';if(sw.axis==='x')clearTimeout(timer);}
+  if(sw.axis!=='x')return;
+  sw.dx=dx;dragTo(dx);
+ },{passive:true});
+ function endSwipe(cancelled){
+  if(!sw)return;const s=sw;sw=null;
+  if(s.axis!=='x'||!s.peek){if(s.cur)s.cur.style.transform='';schedule();return;}
+  swiped=true;
+  const w=picture.clientWidth,fast=Math.abs(s.dx)/(performance.now()-s.t)>.5;
+  if(!cancelled&&(Math.abs(s.dx)>w*.2||(fast&&Math.abs(s.dx)>24))){show(index+s.dir,{cur:s.cur,next:s.peek,dx:s.dx,dir:s.dir});return;}
+  // 没滑够：两格一起弹回
+  const back={duration:220,easing:'cubic-bezier(.2,.8,.2,1)'};
+  s.cur.animate([{transform:`translateX(${s.dx}px)`},{transform:'translateX(0)'}],back);s.cur.style.transform='';
+  s.peek.animate([{transform:`translateX(${s.dx+s.dir*w}px)`},{transform:`translateX(${s.dir*w}px)`}],{...back,fill:'forwards'}).onfinish=()=>s.peek.remove();
+  schedule();
+ }
+ stage.addEventListener('pointerup',()=>endSwipe(false));
+ stage.addEventListener('pointercancel',()=>endSwipe(true));
+ opener.addEventListener('click',e=>{if(swiped){swiped=false;e.preventDefault();e.stopImmediatePropagation();}},true);
+ q('.creator-dots').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();show(index+(e.key==='ArrowRight'?1:-1));dots[index].focus();}});
+ /* 展开页：一页看完。左边一条胶片——大格是人物照，右侧三小格按顺序截取一段典型的手工过程；
+    右边只留人物、过程的一两句话、创作来处（跳过轮播里已经出现的第一句）、成果和链接。 */
+ const processes={
+  '江寻千（九月）':{steps:['绘样','上色','扎制'],frames:['film-00-11','film-00-12','film-00-10'],line:'一只纸鸢，要先在纸上画好图样，再一笔笔上色，最后用竹篾扎起骨架。她做得不快，却想把每一步都亲手弄懂。'},
+  '李子柒':{steps:['割漆','打磨','修整'],frames:['film-01-03','film-01-04','film-01-05'],line:'生漆要从漆树上一刀一刀割下来，一次只流出薄薄一层。等漆面被反复打磨出光，一件器物已经陪她走过了很长的日子。'},
+  '彭传明':{steps:['碾磨','加工','裁切'],frames:['film-02-03','film-02-06','film-02-04'],line:'石磨转一圈，只碾出一点点粉；纸和墨，都是这样一点点攒出来的。镜头里只有几分钟，院子里却是两年多的日子。'},
+  // 彭南科的素材是手机截屏拼图：用 pos/zoom 只取画面干净的那一半，避开点赞、头像等界面图标
+  '彭南科':{steps:['取材','凿制','年味'],frames:[{id:'film-03-03',pos:'20% 45%',zoom:3.4},{id:'film-03-01',pos:'75% 25%',zoom:3},{id:'film-03-04',pos:'50% 44%',zoom:1.8}],line:'上山砍木取材，回到石臼边一凿一凿地做；到了年底，竹匾里又晒满了糍粑。老物件重新派上用场，那段快被忘掉的乡土日子也回来了。'},
+  '杨柳':{steps:['站稳','舒袖','起舞'],frames:['film-04-02','film-04-03','film-04-04'],line:'一根楠竹浮在水上，先要站稳，才谈得上起舞。七岁起无数次落水，换来了今天在水面上的那一个转身。'},
+  '山白（向宏俊）':{steps:['取材','制作','守夜'],frames:['film-05-05','film-05-02','film-05-03'],line:'白天扛着工具下地，夜里还守在灯下干活。一个几分钟的视频背后，常常是叔侄俩许多天的等待。'},
+  '南翔':{steps:['拜师','上手','登场'],frames:['film-06-03','film-06-01','film-06-05'],line:'先站在匠人身边看，再笨拙地自己上手，最后走进炭花飞溅的现场。他没有剪掉那些学不会的时刻，那正是好奇心最真实的样子。'},
+  '朱铁雄':{steps:['入戏','变装','致敬'],frames:['film-07-02','film-07-04','film-07-06'],line:'穿上戏服的那一刻，普通的少年就走进了戏里。小时候想成为的英雄，后来都被他一帧一帧拍了出来。'},
+  '凌云（马赵凌云）':{steps:['站桩','踢腿','执剑'],frames:['film-08-03','film-08-04','film-08-06'],line:'殿前站桩，山门前踢腿，石阶上执剑——每一个流畅的动作，都从童年的某个清晨开始。后来，她身边多了一群一起练功的姐妹。'},
+  // 邹小和没有多余照片，人物照单独铺满大格；portraitPos 让裁切保住脸、手和锅
+  '邹小和':{portraitPos:'45% 50%',steps:['讲解','上桌'],frames:['film-09-01','film-09-02'],line:'腐乳要等时间慢慢发酵，老手艺也要找到新的讲法。他用一口四川话把做法讲给屏幕那头的人听，长辈的经验就这样上了更多人的餐桌。'}
  };
- d('.creator-close').onclick=()=>dialog.close();let onBackdrop=false;
+ // 人物影集：只动画容器，不重排照片；中途关闭从当前帧接续。
+ let dialogMotion=null,dialogClosing=false;
+ function stopDialogMotion(){
+  if(!dialogMotion)return;
+  dialogMotion.onfinish=null;dialogMotion.cancel();dialogMotion=null;
+ }
+ function revealCreator(instant){
+  dialog.classList.toggle('is-instant',instant);
+  dialog.classList.remove('is-closing');
+  dialogClosing=false;stopDialogMotion();
+  dialog.showModal();dialog.scrollTop=0;
+  if(instant||typeof dialog.animate!=='function')return;
+  const gentle=reduced.matches;
+  dialogMotion=dialog.animate([
+   {opacity:0,transform:gentle?'none':'scale(.97)'},
+   {opacity:1,transform:'none'}
+  ],{duration:gentle?160:240,easing:'cubic-bezier(.23,1,.32,1)'});
+  dialogMotion.onfinish=()=>{dialogMotion=null;};
+ }
+ function closeCreator(instant=false){
+  if(!dialog.open)return;
+  if(instant){dialog.classList.add('is-instant');stopDialogMotion();dialog.close();return;}
+  if(dialogClosing)return;
+  // 先读当前帧，再取消开场，避免从完整大小重新开始退出。
+  const computed=getComputedStyle(dialog);
+  const from={opacity:computed.opacity,transform:computed.transform};
+  stopDialogMotion();dialogClosing=true;dialog.classList.add('is-closing');
+  if(typeof dialog.animate!=='function'){dialog.close();return;}
+  const motion=dialog.animate([from,{opacity:0,transform:reduced.matches?'none':'scale(.97)'}],
+   {duration:160,easing:'cubic-bezier(.23,1,.32,1)',fill:'forwards'});
+  dialogMotion=motion;
+  motion.onfinish=()=>{if(dialogMotion===motion)dialog.close();};
+ }
+ reduced.addEventListener('change',()=>{
+  if(!reduced.matches||!dialog.open)return;
+  if(dialogClosing)closeCreator(true);else stopDialogMotion();
+ });
+ opener.onclick=event=>{
+  if(dialog.open)return;
+  const p=people[index],pr=processes[p.name]||{steps:[],frames:[],line:''};
+  const byFile=new Map(p.gallery.map(g=>[g.src.split('/').pop().replace('.webp',''),g]));
+  const specs=pr.frames.map(k=>typeof k==='string'?{id:k}:k);const shots=specs.map(k=>byFile.get(k.id)).filter(Boolean);const cropOf=g=>specs.find(k=>byFile.get(k.id)===g)||{};
+  // 左大格不留空：横幅人物照按原比例放上半，下半拼一张没用过的现场照（偏横的优先，裁切填满）；
+  // 人物照是竖的、或没有多余照片时，人物照单独铺满整格。
+  const unused=p.gallery.filter(g=>!shots.includes(g)&&g.src!==p.image);
+  const extra=unused.find(g=>g.width>g.height*1.2)||unused[0];
+  const portrait=`<figure class="cf-hole cf-portrait"><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}" style="object-position:${esc(extra?p.position:(pr.portraitPos||p.position))}"></figure>`;
+  const big=`<div class="cf-bigcol${extra?'':' is-single'}">${portrait}${extra?`<figure class="cf-hole cf-extra"><img src="${esc(extra.src)}" alt="${esc(extra.label)}"><figcaption>${esc(extra.label.replace(/（.*?）/g,''))}</figcaption></figure>`:''}</div>`;
+  const sentences=p.story.match(/[^。！？]+[。！？]?/g)||[p.story];
+  const origin=(sentences.length>2?sentences.slice(1):sentences).join('');
+  const small=[0,1,2].map(i=>{
+   const g=shots[i],no=2+i,num=`<span class="cf-no" style="grid-row:${i+1}">▶ ${no}</span>`;
+   if(!g)return `<a class="cf-hole cf-blank" style="grid-row:${i+1}" href="${esc(p.home)}" target="_blank" rel="noopener noreferrer"><span>去看完整作品 ↗</span></a>`+num;
+   const c=cropOf(g),crop=c.pos?` style="object-position:${c.pos};transform-origin:${c.pos};transform:scale(${c.zoom||1})"`:'';
+   return `<figure class="cf-hole" style="grid-row:${i+1}"><img src="${esc(g.src)}"${crop} alt="${esc((pr.steps[i]||'')+'：'+g.label)}"><figcaption>${esc(pr.steps[i]||'')}</figcaption></figure>`+num;
+  }).join('');
+  const sources=[...new Set(shots.concat(extra||[]).map(g=>g.source))];
+  const credit='人物照 '+link(p.photoSource,'来源 ↗')+(sources.length?' · 过程图 '+sources.map((u,i)=>link(u,sources.length>1?'出处'+(i+1)+' ↗':'出处 ↗')).join(' '):'');
+  const steps=pr.steps.map((t,i)=>'<b>'+(2+i)+'</b> '+esc(t)).join('<i>→</i>');
+  d('.cf-sheet').innerHTML=`<div class="cf-film-wrap">
+    <div class="cf-film">
+     <span class="cf-edge" aria-hidden="true"><span>FILM</span><span>HERITAGE 400</span><span>▶ 1</span></span>
+     ${big}
+     <div class="cf-smalls">${small}</div>
+    </div>
+    <p class="cf-credit">${credit}</p>
+   </div>
+   <div class="cf-text">
+    <p class="cf-eyebrow">镜头里的守艺人 / ${esc(p.field)}</p>
+    <h2 id="creatorTitle">${esc(p.name)}</h2>
+    <p class="cf-role">${esc(p.role)}</p>
+    <p class="cf-deck">${esc(p.title)}</p>
+    ${pr.line?`<blockquote class="cf-process"><span class="cf-steps">${steps}</span><p>${esc(pr.line)}</p></blockquote>`:''}
+    <h3>创作的来处</h3><p class="cf-origin">${esc(origin)}</p>
+    <h3>代表创作与成果</h3><ul class="cf-results">${p.achievements.map(a=>'<li>'+esc(a)+'</li>').join('')}</ul>
+    <div class="cf-links">${link(p.home,p.homeLabel,'cf-home')}${link(p.source,'人物资料 ↗','cf-ref')}</div>
+   </div>`;
+  oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';revealCreator(event.detail===0);schedule();
+ };
+ d('.creator-close').onclick=event=>closeCreator(event.detail===0);let onBackdrop=false;
+ dialog.addEventListener('cancel',event=>{event.preventDefault();closeCreator(true);});
  dialog.addEventListener('pointerdown',e=>onBackdrop=e.target===dialog);
- dialog.addEventListener('click',e=>{if(onBackdrop&&e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
- dialog.addEventListener('close',()=>{document.body.style.overflow=oldOverflow;opener.focus({preventScroll:true});});
+ dialog.addEventListener('click',e=>{if(onBackdrop&&e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeCreator();}});
+ dialog.addEventListener('close',()=>{stopDialogMotion();dialogClosing=false;onBackdrop=false;dialog.classList.remove('is-closing','is-instant');document.body.style.overflow=oldOverflow;opener.focus({preventScroll:true});schedule();});
  pauseLabel();show(0);
 })();

@@ -1,12 +1,13 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="非遗辑录：从器物、戏曲、舞蹈、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
+  <meta name="description" content="非遗辑录：从器物、戏曲、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
   <meta name="theme-color" content="#10100f">
   <title>首页 · 非遗辑录</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/cursor.css">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/home-classic.css">
   <link rel="stylesheet" href="assets/css/heritage-story.css">
@@ -24,12 +25,14 @@
       <a class="is-current" href="index.html" aria-current="page">首页</a>
       <a href="heritage.html">非遗辑录</a>
       <a href="revival.html">古艺新生</a>
-      <a href="games/spectrum.html">濒危光谱</a>
+      <a href="games/spectrum.html">存续有数</a>
       <div class="nav-more">
         <button class="nav-more-btn" type="button" aria-expanded="false" aria-controls="more-panel">更多</button>
         <div class="nav-more-panel" id="more-panel">
           <p class="nav-more-group">小游戏</p>
           <a href="games/kaisu/index.html">开酥 · 荆门酥饼</a>
+          <p class="nav-more-group">小玩意</p>
+          <a href="games/cursor.html">换一支指针</a>
           <a class="nav-more-about" href="about.html">关于我们</a>
         </div>
       </div>
@@ -38,7 +41,6 @@
 
   <main id="main-content" tabindex="-1">
     <section class="intro" aria-labelledby="intro-title">
-      <span class="sec-mark" aria-hidden="true"></span>
       <p class="eyebrow">CHINA · LIVING HERITAGE</p>
       <h1 id="intro-title">见物，见人，<br>见一门手艺的时间。</h1>
       <p class="intro-copy">从一抔瓷土到一束蚕丝，沿着手艺人的双手，重新认识那些仍在生长的传统。</p>
@@ -46,7 +48,6 @@
     </section>
 
     <section class="feature-section" aria-labelledby="feature-title">
-      <span class="sec-mark" aria-hidden="true"></span>
       <div class="section-heading">
         <p class="eyebrow">本期辑录 · 01</p>
         <h2 id="feature-title">手中有万象</h2>
@@ -65,7 +66,7 @@
           </span>
         </a>
         <a class="story-card story-card--secondary" href="heritage/ronghua.html" data-story-url="heritage/ronghua.html" data-story-title="南京绒花" aria-haspopup="dialog">
-          <img src="assets/images/ronghua/ronghua-hands-source.jpg" alt="双手用剪刀修整绒花花瓣" width="1179" height="2556" decoding="async">
+          <img src="assets/images/ronghua/ronghua-hands-source.jpg" alt="双手用剪刀修整绒花花瓣" width="1179" height="2556" loading="lazy" decoding="async">
           <span class="story-card-shade" aria-hidden="true"></span>
           <span class="story-card-index">02</span>
           <span class="image-credit">用户供图</span>
@@ -84,22 +85,22 @@
         <h2 id="today-title">今天它长这样</h2>
         <p>从过节的一张画，到随身、案头的小物。<a href="revival.html">走近古艺新生</a></p>
       </div>
-      <div class="section-heading">
+      <div class="section-heading today-row">
         <div>
-          <a class="story-card story-card--secondary" href="revival.html" aria-label="桃花坞年画衍生丝绸文创系列">
+          <a class="story-card story-card--secondary" href="revival.html?case=05" aria-label="桃花坞年画衍生丝绸文创系列">
             <img src="assets/images/revival/05.jpg" alt="桃花坞年画衍生丝绸文创系列" loading="lazy" decoding="async">
           </a>
           <p>年画丝巾，把吉祥纹样穿进日常。</p>
         </div>
         <div>
-          <a class="story-card story-card--secondary" href="revival.html" aria-label="万象更新木刻年画套装及其木版、刻刀、颜料">
+          <a class="story-card story-card--secondary" href="revival.html?case=25" aria-label="万象更新木刻年画套装及其木版、刻刀、颜料">
             <img src="assets/images/revival/25.jpg" alt="万象更新木刻年画套装及其木版、刻刀、颜料" loading="lazy" decoding="async">
           </a>
           <p>木刻套装，在家印一张自己的年画。</p>
         </div>
         <div>
-          <a class="story-card story-card--secondary" href="revival.html" aria-label="印有动漫角色的王星记联名白纸扇">
-            <img src="assets/images/revival/10.png" alt="印有动漫角色的王星记联名白纸扇" loading="lazy" decoding="async">
+          <a class="story-card story-card--secondary" href="revival.html?case=10" aria-label="印有动漫角色的王星记联名白纸扇">
+            <img src="assets/images/revival/10.webp" alt="印有动漫角色的王星记联名白纸扇" loading="lazy" decoding="async">
           </a>
           <p>联名纸扇，把老手艺带在手边。</p>
         </div>
@@ -108,15 +109,15 @@
 
     <!--
       时间轴图层：固定在视口正中的一条环带，默认压在页面内容下面（z-index: -1）。
-      只有三种情况会升到内容之上：鼠标停在左右两端、点击这一带、或播放开屏动画
-      （<html> 或 <body> 带 intro 类）；右上角的赭红方块是退出键，点击就落回底层。
+      桌面端：鼠标停在左右两端会升到内容之上，点击这一带则保持，再点一次落回底层。
+      触屏：轻点这一带展开，再轻点一次落回底层。开屏动画（intro 类）时同样升起。
+      长卷图还没下载完时整条先空着，下完淡入；下载失败才退回线条版。
+      图层后面的 .tl-hints 是两端的小字说明，按设备显示「悬停」或「轻点」。
       页面往下滚，轨道按滚动进度横向移动，二者线性对应。始终不折叠、不变高。
     -->
     <section class="tl-layer" id="timeline" aria-labelledby="timeline-title">
       <h2 class="visually-hidden" id="timeline-title">从榫卯，到今天</h2>
 
-      <button class="tl-layer__exit" type="button" aria-label="收起时间轴" title="收起时间轴"></button>
-      <span class="tl-layer__mark" aria-hidden="true"></span>
 
 
       <div class="tl-layer__stage">
@@ -133,7 +134,8 @@
           换图后要同步改 --x。--plain 表示该节点暂时没有画，只显示文字。
         -->
         <div class="tl-layer__art" hidden aria-hidden="true">
-          <img class="tl-layer__art-img" src="assets/images/timeline/timeline-design.webp" alt="" decoding="async">
+          <!-- 长卷图有几百 KB，不参与首屏：src 由 timeline.js 在页面加载完或开始滚动后再补上。 -->
+          <img class="tl-layer__art-img" data-src="assets/images/timeline/timeline-design.webp" alt="" decoding="async">
         </div>
 
         <ol class="tl-layer__track">
@@ -259,8 +261,16 @@
       </div>
     </section>
 
+    <div class="tl-hints" aria-hidden="true">
+      <span class="tl-hint tl-hint--start">
+        <span class="tl-hint__hover">悬停此处展开时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+      </span>
+      <span class="tl-hint tl-hint--end">
+        <span class="tl-hint__hover">悬停此处展开时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+      </span>
+    </div>
+
     <section class="manifesto" aria-label="项目理念">
-      <span class="sec-mark" aria-hidden="true"></span>
       <p>传统不是一件被时间封存的旧物。</p>
       <p>它在人的手里，被一遍遍做成新的今天。</p>
       <span aria-hidden="true">未完待续</span>

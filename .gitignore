@@ -34,3 +34,6 @@ dist/
 匿名版/
 
 .baseline-ver/
+
+# 本地截图 / 复检产物
+_verify/

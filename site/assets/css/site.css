@@ -1,3 +1,6 @@
+/* cursor.css 已改为各页用 <link> 直接引入：@import 要等本文件下载解析完
+   才会发起下一次请求，慢网下等于白等一个往返。 */
+
 :root {
   --ink: #10100f;
   --paper: #f4f0e8;
@@ -65,7 +68,7 @@ img { display: block; max-width: 100%; }
 .nav-more-btn:hover::before, .nav-more-btn:focus-visible::before, .nav-more.is-open .nav-more-btn::before, .nav-more-btn.is-current::before { transform: scaleX(1); transform-origin: left; }
 .nav-toggle { display: none; border: 0; background: transparent; cursor: pointer; }
 
-/* 首页专属样式见 home.css。 */
+/* 首页专属样式见 home-classic.css。 */
 .site-footer { min-height: 190px; padding: 48px var(--page-gutter); display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,.14); }
 .site-footer p { margin: 0; font: 700 17px/1 var(--serif); letter-spacing: .12em; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 24px; }
@@ -172,3 +175,8 @@ img { display: block; max-width: 100%; }
   .nav-more.is-open .nav-more-panel { display: block; }
   .nav-more-panel a { padding: 9px 0; font-size: 14px; }
 }
+
+/* 子页等待提示不遮住已加载内容，也不拦截关闭操作。 */
+.story-loading-note { position: absolute; z-index: 2; bottom: 16px; left: 16px; right: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 12px 16px; color: #602020; background: #f1ece3; border: 1px solid #b28750; font-size: 13px; }
+.story-loading-note[hidden] { display: none; }
+.story-loading-note a { color: inherit; }

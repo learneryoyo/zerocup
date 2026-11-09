@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10100f">
+  <title>换一支指针 · 非遗辑录</title>
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/cursor.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    .cur-page { width: min(100%, 1360px); margin: 0 auto; padding: clamp(36px, 5vw, 72px) var(--page-gutter) clamp(60px, 8vw, 110px); }
+    .cur-eyebrow { margin: 0 0 14px; font-size: 11px; font-weight: 700; letter-spacing: .28em; color: var(--red); }
+    .cur-title { margin: 0; font: 700 clamp(34px, 4.6vw, 62px)/1.08 var(--serif); letter-spacing: .02em; }
+    .cur-lead { max-width: 34em; margin: 18px 0 0; font-size: clamp(14px, 1.1vw, 16px); line-height: 2; color: #4a453d; }
+    .cur-note { margin: 10px 0 0; font-size: 12px; letter-spacing: .06em; color: #8a8377; }
+    .cur-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: clamp(30px, 4vw, 52px); }
+    .cur-card { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 18px 18px 16px; background: #fbf7ee; border: 1px solid rgba(16,16,15,.12); transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+    .cur-card:hover { transform: translateY(-3px); border-color: rgba(16,16,15,.28); box-shadow: 0 14px 30px -18px rgba(16,16,15,.4); }
+    .cur-card.is-active { border-color: var(--red); }
+    .cur-card.is-soon { opacity: .72; }
+    .cur-stage { position: relative; height: 168px; display: grid; place-items: center; background: linear-gradient(rgba(16,16,15,.035) 1px, transparent 1px) 0 0 / 100% 24px, linear-gradient(90deg, rgba(16,16,15,.035) 1px, transparent 1px) 0 0 / 24px 100%, #f4f0e8; border: 1px solid rgba(16,16,15,.08); overflow: hidden; }
+    .cur-name { margin: 0; font: 700 17px/1.4 var(--serif); }
+    .cur-sub { margin: 0; font-size: 12px; line-height: 1.8; color: #7b756a; letter-spacing: .04em; }
+    .cur-pick { margin-top: auto; display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border: 1px solid rgba(16,16,15,.2); background: transparent; font: 600 12px/1 var(--sans); letter-spacing: .14em; color: #2c2822; cursor: pointer; }
+    .cur-pick:hover { background: #10100f; border-color: #10100f; color: #f4f0e8; }
+    .cur-pick[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+    .cur-pick[disabled] { cursor: not-allowed; color: #a9a296; border-color: rgba(16,16,15,.12); background: transparent; }
+    .cur-tag { position: absolute; z-index: 2; top: 8px; right: 10px; font-size: 10px; letter-spacing: .18em; color: #8a8377; }
+    .cur-arrow { width: 46px; height: 56px; }
+    .cur-hammer-big { width: 96px; height: 96px; }
+    .cur-film { margin-top: 10px; font-size: 12px; line-height: 1.9; color: #6c675f; }
+    .cur-touch { display: none; margin: 0; font-size: 12px; line-height: 1.8; color: var(--red); letter-spacing: .04em; }
+    /* 触屏没有鼠标指针：不提供选择，只能轻点铁水勺的图打一次铁花 */
+    @media (hover: none) {
+      .cur-pick { display: none; }
+      .cur-touch { display: block; }
+      .cur-card[data-skin="hammer"] .cur-stage { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+      .cur-hammer-big.is-strike { animation: cur-jolt .32s ease-out; }
+    }
+    @keyframes cur-jolt {
+      0% { transform: rotate(0); }
+      30% { transform: rotate(-8deg) translate(-2px, 2px); }
+      100% { transform: rotate(0); }
+    }
+    @media (prefers-reduced-motion: reduce) { .cur-hammer-big.is-strike { animation: none; } }
+    @media (max-width: 900px) { .cur-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="非遗辑录首页"><span class="brand-name">非遗辑录</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>菜单</span></button>
+    <nav class="primary-nav" id="primary-nav" aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="../heritage.html">非遗辑录</a>
+      <a href="../revival.html">古艺新生</a>
+      <a href="../games/spectrum.html">存续有数</a>
+      <div class="nav-more">
+        <button class="nav-more-btn" type="button" aria-expanded="false" aria-controls="more-panel">更多</button>
+        <div class="nav-more-panel" id="more-panel">
+          <p class="nav-more-group">小游戏</p>
+          <a href="../games/kaisu/index.html">开酥 · 荆门酥饼</a>
+          <p class="nav-more-group">小玩意</p>
+          <a href="cursor.html" class="is-current">换一支指针</a>
+          <a class="nav-more-about" href="../about.html">关于我们</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="cur-page" tabindex="-1">
+    <p class="cur-eyebrow">WIDGETS · 小玩意</p>
+    <h1 class="cur-title">换一支指针。</h1>
+    <p class="cur-lead">
+      这里换的只是「非遗辑录」站内的鼠标指针：离开本站，指针立刻回到系统默认。
+      选中的皮肤只记在这一次浏览里，翻其他页面一直在；重新打开网站，仍是系统默认的箭头。
+    </p>
+    <p class="cur-note">目前只做好了打铁花一支；划龙舟正在路上。</p>
+
+    <div class="cur-grid">
+      <article class="cur-card" data-skin="">
+        <span class="cur-tag">DEFAULT</span>
+        <div class="cur-stage">
+          <svg class="cur-arrow" viewBox="0 0 46 56" aria-hidden="true">
+            <path d="M10 6 10 42 20 32 27 48 34 45 27 29 40 29Z" fill="#f4f0e8" stroke="#10100f" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="cur-name">无皮肤</h2>
+        <p class="cur-sub">系统默认箭头，最稳妥。</p>
+        <button class="cur-pick" type="button" data-pick="" aria-pressed="false"><span>用这一支</span><span aria-hidden="true">→</span></button>
+      </article>
+
+      <article class="cur-card" data-skin="hammer">
+        <span class="cur-tag">NO.01</span>
+        <div class="cur-stage">
+          <svg class="cur-hammer-big" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="12" cy="12" r="10.5" fill="#f0a02a" opacity=".26"/>
+            <path d="M21.3 17.7 43.05 37.95A3.6 3.6 0 0 1 37.95 43.05L17.7 21.3Z" fill="#b8352a" stroke="#5c1a12" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M23.4 21.6 38.6 37.4" fill="none" stroke="#7e2219" stroke-width=".8" opacity=".5"/>
+            <path d="M20.7 16.5 23.5 19.3 19.3 23.5 16.5 20.7Z" fill="#4f4943" stroke="#2b2622" stroke-width="1.2" stroke-linejoin="round"/>
+            <path d="M5 5 11.79 4.8A7.2 7.2 0 1 1 4.8 11.79Z" fill="#c8773a" stroke="#5f3417" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="4.9" fill="#f7b733" stroke="#9a4f1c"/>
+            <circle cx="11" cy="11" r="1.9" fill="#fff6d8"/>
+          </svg>
+        </div>
+        <h2 class="cur-name">打铁花 · 铁水勺</h2>
+        <p class="cur-sub">勺里盛一汪铁水；悬停时击棍举起，按下砸出火星。</p>
+        <p class="cur-touch">手机上没有鼠标指针，轻点上面的图，打一次铁花。</p>
+        <button class="cur-pick" type="button" data-pick="hammer" aria-pressed="false"><span>用这一支</span><span aria-hidden="true">→</span></button>
+      </article>
+
+      <article class="cur-card is-soon" data-skin="dragon">
+        <span class="cur-tag">NO.02</span>
+        <div class="cur-stage">
+          
+        </div>
+        <h2 class="cur-name">划龙舟 · 桨</h2>
+        <p class="cur-sub">桨叶入水，拖动时带一道水线。</p>
+        <button class="cur-pick" type="button" disabled><span>制作中</span><span aria-hidden="true">·</span></button>
+      </article>
+    </div>
+
+    <p class="cur-film">提示：选中后在本站任何页面移动鼠标都能看到，直到关掉这次浏览；回到这里选「无皮肤」即刻恢复。</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
+    <nav aria-label="页脚导航">
+      <a href="../index.html">首页</a><a href="../heritage.html">非遗辑录</a><a href="../revival.html">古艺新生</a><a href="../about.html">关于我们</a>
+    </nav>
+  </footer>
+
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/cursor.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".cur-card"));
+      function paint(current) {
+        cards.forEach(function (card) {
+          var on = card.getAttribute("data-skin") === current;
+          card.classList.toggle("is-active", on);
+          var btn = card.querySelector(".cur-pick");
+          if (btn && !btn.disabled) {
+            btn.setAttribute("aria-pressed", String(on));
+            btn.querySelector("span").textContent = on ? "使用中" : "用这一支";
+          }
+        });
+      }
+      cards.forEach(function (card) {
+        var btn = card.querySelector(".cur-pick");
+        if (!btn || btn.disabled) return;
+        btn.addEventListener("click", function () {
+          var skin = card.getAttribute("data-skin") || "";
+          if (window.ZCCursor) window.ZCCursor.set(skin);
+          paint(skin);
+        });
+      });
+      paint(window.ZCCursor ? window.ZCCursor.current() : "");
+
+      // 触屏：轻点铁水勺的图，从勺口打出一次铁花
+      var stage = document.querySelector('.cur-card[data-skin="hammer"] .cur-stage');
+      var ladle = stage && stage.querySelector(".cur-hammer-big");
+      if (stage && ladle) {
+        stage.addEventListener("click", function () {
+          if (!window.ZCCursor || !window.ZCCursor.touchOnly()) return;
+          var box = ladle.getBoundingClientRect();
+          var unit = box.width / 48;
+          window.ZCCursor.burst(box.left + 12 * unit, box.top + 12 * unit, unit);
+          ladle.classList.remove("is-strike");
+          void ladle.getBoundingClientRect();
+          ladle.classList.add("is-strike");
+        });
+      }
+    }());
+  </script>
+</body>
+</html>

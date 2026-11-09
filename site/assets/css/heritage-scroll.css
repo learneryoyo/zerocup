@@ -406,19 +406,55 @@
 }
 
 @media (max-width: 900px) {
+  /* 小屏改回纵向流：卷首语排在画上方，不再压在人物与飘带上；
+     画面按自身比例收高，页面不再被 min-height 撑出大片空白。 */
+  .heritage-scroll {
+    min-height: 0;
+  }
+  .heritage-scroll__scroll {
+    padding-bottom: 36px;
+  }
   .heritage-scroll__scene {
-    min-height: 720px;
-    padding-top: 0;
-    padding-top: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .heritage-scroll__stage {
+    position: static;
+    order: -1;
   }
   .heritage-scroll__copy {
-    top: 24px;
-    left: 20px;
-    right: 20px;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
     gap: 10px;
+  }
+  .heritage-scroll__copy::after {
+    display: none;
   }
   .heritage-scroll__card {
     min-width: clamp(110px, 24vw, 150px);
+  }
+  /* 小屏人物贴着画面底边，卡片往下弹会压到下面的「色取」色名：改成弹在人物上方 */
+  .heritage-scroll__card {
+    top: auto;
+    bottom: calc(100% + 10px);
+    transform: translate(-50%, 10px) scale(0.96);
+  }
+  /* 随机探索的热区连着飘带，很高：卡片落在热区中下部，不碰上方的卷首语 */
+  .heritage-scroll__hotspot[data-random-explore] .heritage-scroll__card {
+    bottom: 30%;
+  }
+  /* 最左边一组靠左对齐，免得卡片伸出屏幕 */
+  .heritage-scroll__hotspot[data-category="objects"] .heritage-scroll__card {
+    left: 0;
+    transform: translate(0, 10px) scale(0.96);
+  }
+  .heritage-scroll__hotspot[data-category="objects"]:hover .heritage-scroll__card,
+  .heritage-scroll__hotspot[data-category="objects"]:focus-visible .heritage-scroll__card {
+    transform: translate(0, 0) scale(1);
   }
 }
 
@@ -436,12 +472,7 @@
     font-size: 13px;
   }
   .heritage-scroll__scene {
-    min-height: 760px;
-  }
-  .heritage-scroll__copy {
-    top: 20px;
-    left: 18px;
-    right: 18px;
+    gap: 14px;
   }
   .heritage-scroll__copyTitle {
     font-size: clamp(24px, 7vw, 34px);
@@ -452,6 +483,33 @@
   .heritage-scroll__card {
     min-width: clamp(104px, 30vw, 150px);
   }
+  /* 长卷里的剪影在手机上只有拇指大，点不准。
+     把这排「色取」色名升级成真正可点的入口：两列、整行可点、字号跟正文一致。 */
+  .heritage-scroll__palette {
+    display: block;
+    margin-top: 26px;
+    font-size: 11px;
+  }
+  .heritage-scroll__paletteLine { display: none; }
+  .heritage-scroll__swatches {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 12px;
+    border-top: 1px solid color-mix(in srgb, var(--hs-ink) 14%, transparent);
+  }
+  .heritage-scroll__swatch {
+    padding: 15px 4px;
+    font-size: 13px;
+    letter-spacing: .06em;
+    color: var(--hs-ink);
+    border-bottom: 1px solid color-mix(in srgb, var(--hs-ink) 14%, transparent);
+  }
+  .heritage-scroll__swatch i {
+    width: 12px;
+    height: 12px;
+  }
+  .heritage-scroll__swatch:active { color: var(--c); }
 }
 
 @media (prefers-reduced-motion: reduce) {

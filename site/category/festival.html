@@ -7,21 +7,10 @@
   <meta name="theme-color" content="#10100f">
   <meta name="description" content="节日 · 非遗辑录：送王船、苗族姊妹节、罗坊走古事、水族端节、双庙渚蚕花水会。">
   <title>节日 · 非遗辑录</title>
+  <link rel="stylesheet" href="../assets/css/cursor.css">
   <link rel="stylesheet" href="../assets/css/site.css">
   <link rel="stylesheet" href="../assets/css/category.css">
   <link rel="stylesheet" href="../assets/css/category-festival.css">
-  <style>
-    .media-video { position: relative; }
-    .media-video video {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      border-radius: 6px;
-      background: #10100f;
-    }
-    .media-video video:focus-visible { outline: 3px solid var(--cat-accent); outline-offset: 5px; }
-    .media-video figcaption { margin-top: 8px; font-size: 11px; letter-spacing: .06em; line-height: 1.8; color: var(--cat-muted); }
-  </style>
   <link rel="stylesheet" href="../assets/css/artisan-diary.css">
 </head>
 <body>
@@ -36,12 +25,14 @@
       <a href="../index.html">首页</a>
       <a href="../heritage.html" class="is-current" aria-current="true">非遗辑录</a>
       <a href="../revival.html">古艺新生</a>
-      <a href="../games/spectrum.html">濒危光谱</a>
+      <a href="../games/spectrum.html">存续有数</a>
       <div class="nav-more">
         <button class="nav-more-btn" type="button" aria-expanded="false" aria-controls="more-panel">更多</button>
         <div class="nav-more-panel" id="more-panel">
           <p class="nav-more-group">小游戏</p>
           <a href="../games/kaisu/index.html">开酥 · 荆门酥饼</a>
+          <p class="nav-more-group">小玩意</p>
+          <a href="../games/cursor.html">换一支指针</a>
           <a class="nav-more-about" href="../about.html">关于我们</a>
         </div>
       </div>
@@ -55,7 +46,7 @@
           <div>
             <p class="cat-eyebrow">叁 · 四时有节</p>
             <h1>节日</h1>
-            <p class="cat-sub">岁时有节，万人同欢。一起把日子过成仪式。</p>
+            <p class="cat-sub"><span class="cat-line"><span>一年三百多天，</span><span>总有一天是留给全村的。</span></span><span class="cat-line"><span>那天，</span><span>在外打工的人会赶回来，</span><span>老人把压箱底的衣裳翻出来。</span></span></p>
             <ul class="cat-facts" aria-label="本辑代表项目">
               <li>送王船</li>
               <li>姊妹节</li>
@@ -75,7 +66,7 @@
     <section class="category-intro reveal" aria-label="分类介绍">
       <div class="category-shell">
         <p>
-          民俗节庆源于人们顺应时序、组织生产、祭祀祖先与联结乡里的共同生活，并在不同地域和族群中形成特色传统。它以特定节日和社区为依托，将礼仪、饮食、服饰、歌舞、游艺及器物制作融为一体，强调集体参与和代际传承。人们通过巡游、聚餐、竞渡与祈福等活动，表达对自然的敬意、对亲人的牵挂和对美好生活的期盼。
+          节庆从田垄和海岸长出来。人们跟着时令播种、收割、出海，也在固定的日子里祭祖、聚亲、迎神，日子久了，一方水土便攒下了自己的节。到了那几天，礼俗、饮食、服饰、歌舞和手工活计一齐涌上街：快船劈开河面，鼓点踩响山坡，一桌饭从晌午摆到夜里。老人领着孩子走一遍，孩子长大了，再领着自己的孩子走；敬天地、念亲人、盼来年，都藏在这一来一回里。
         </p>
       </div>
     </section>
@@ -92,9 +83,14 @@
               <h2>送王船</h2>
               <p class="project-meta">福建 · 厦门｜国家级 · 2011 年｜人类非遗 · 2020 年｜依各地传统择期举行</p>
               <div class="project-body">
-                <p>
-                  送王船是流传于福建闽南沿海及马来西亚马六甲等地的祈安习俗，与沿海居民长期航海、渔业生产和跨海迁徙的经历密切相关。当地社区依传统工序制作木质或纸质王船，结合彩绘、装饰和船帆制作，举行迎王、巡境与送行等仪式。精细的船体、鲜明的旗帜和沿街行进的队伍，共同构成富有海洋特色的节庆景观。它寄托着人们敬畏海洋、悼念海上遇难者及祈愿平安的心意，也通过共同筹备与参与，延续地方知识、邻里互助及跨地域的文化联系。
-                </p>
+                <p class="pb-lead">一艘船从开斧那天造起，最后在海滩上被一把火送走。</p>
+                <h3 class="pb-h">为什么送船</h3>
+                <p>闽南沿海的人世代讨海、行船、远渡重洋。送王船里有对大海的敬畏，有对海上遇难者的悼念，也有对平安的祈愿。</p>
+                <h3 class="pb-h">仪式三段</h3>
+                <ol class="pb-steps"><li>迎王</li><li>巡境</li><li>送王</li></ol>
+                <p>社区按老工序造出木质或纸质的王船，彩绘、装饰、缝帆。巡境时，船帆和旗帜跟着队伍走过街巷；送王那天，王船在海边化吉。</p>
+                <h3 class="pb-h">跨海的节</h3>
+                <p>这门习俗也随着下南洋的人到了马来西亚马六甲。2020 年，中国与马来西亚联合申报，送王船列入联合国教科文组织人类非遗代表作名录。一起造船、一起送船，邻里情分和两岸之间的联系也跟着延续下来。</p>
               </div>
               <p class="project-meta">存续 · 濒危指数 54（编辑性评估，非官方认定）· 造船与仪式知识集中在少数村落 · 2020 年与马来西亚联合列入 UNESCO 代表作名录</p>
             </article>
@@ -102,10 +98,6 @@
               <figure class="media-wide">
                 <img src="festival/songwangchuan/photo-01.jpg" alt="海边化吉，王船与风帆在暮色中" data-lightbox loading="lazy" decoding="async">
                 <figcaption>海边化吉 · 摄影：王莹／福建日报</figcaption>
-              </figure>
-              <figure class="media-video">
-                <video src="festival/songwangchuan/clip.mp4" muted loop playsinline preload="metadata" poster="festival/songwangchuan/photo-02.jpg" aria-label="王船巡境动图"></video>
-                <figcaption>巡境队伍与王船风帆 · 动图，来源：中国新闻网</figcaption>
               </figure>
               <div class="media-grid">
                 <figure>
@@ -131,9 +123,14 @@
               <h2>苗族姊妹节</h2>
               <p class="project-meta">贵州 · 台江｜2006 年 · 民俗｜农历三月</p>
               <div class="project-body">
-                <p>
-                  苗族姊妹节是贵州台江老屯、施洞一带苗族群众传承的传统节日，通常在农历三月举行，与当地青年交往、亲友相聚的生活习俗紧密相连。节日期间，人们制作彩色姊妹饭、穿戴刺绣盛装与银饰，开展游方对歌、踩鼓和交换信物等活动。饭中的信物承载含蓄的情感表达，服饰与歌舞展示世代积累的审美和技艺。姊妹节既为青年表达心意提供空间，也让家庭记忆、女性经验与社区关系在共同准备和欢聚中得到延续。
-                </p>
+                <p class="pb-lead">一碗五颜六色的米饭里，藏着一句不好意思说出口的话。</p>
+                <h3 class="pb-h">什么时候</h3>
+                <p>每年农历三月，贵州台江老屯、施洞一带的苗族人过姊妹节。</p>
+                <h3 class="pb-h">节里做什么</h3>
+                <ul class="pb-cards"><li><b>姊妹饭</b><span>用植物染出彩色糯米，饭里藏着信物</span></li><li><b>盛装银饰</b><span>刺绣盛装配上银冠银饰</span></li><li><b>游方对歌</b><span>青年男女以歌传情</span></li><li><b>踩鼓</b><span>围着鼓踏步起舞</span></li></ul>
+                <p>姑娘把信物藏进姊妹饭里送给心仪的人，心意不必说破。服饰和歌舞里，是一代代苗家女子积攒下来的手艺与审美。</p>
+                <h3 class="pb-h">今天的姊妹节</h3>
+                <p>2025 年 4 月 12 日，台江的活动现场来了万余名苗族群众。</p>
               </div>
               <p class="project-meta">存续 · 2025 年 4 月 12 日台江活动现场有万余名苗族群众参与（据新华社 2025 年报道）· 2006 年列入第一批国家级非遗名录</p>
             </article>
@@ -141,10 +138,6 @@
               <figure class="media-wide">
                 <img src="festival/miao-zimeijie/photo-01.jpg" alt="整理银饰，盛装之前的细节" data-lightbox loading="lazy" decoding="async">
                 <figcaption>整理银饰 · 摄影：刘续／新华社</figcaption>
-              </figure>
-              <figure class="media-video">
-                <video src="festival/miao-zimeijie/clip.mp4" muted loop playsinline preload="metadata" poster="festival/miao-zimeijie/photo-04.jpg" aria-label="苗族姊妹节盛装巡游动图"></video>
-                <figcaption>盛装巡游中的银饰与步伐 · 动图，来源：央视新闻</figcaption>
               </figure>
               <div class="media-grid">
                 <figure>
@@ -170,10 +163,13 @@
               <h2>罗坊走古事</h2>
               <p class="project-meta">福建 · 连城｜「元宵节（闽西客家元宵节庆）」组成活动 · 2008 年｜农历正月十四、十五</p>
               <div class="project-body">
-                <p>
-                  罗坊走古事是福建连城罗坊乡的客家元宵习俗，源于当地宗族社会对先祖迁徙与创业经历的纪念。村民制作古事棚，选取孩童扮作戏曲人物，以脸谱、戏袍和装饰呈现忠义故事，再合力抬棚穿行村巷、竞跑涉水。棚架的制作、人物装扮和队伍的协同抬行，共同形成这一节庆独特的技艺体系。高处静立的孩童与下方奋力前行的人群相映，构成鲜明景观。活动寄托着祈福迎祥、敬祖睦族的愿望，也以集体行动传递团结互助、奋勇争先的精神。
-                </p>
-                <p>罗坊走古事是国家级项目「元宵节（闽西客家元宵节庆）」中的代表性活动，并非以此名称单列的国家级项目。</p>
+                <p class="pb-lead">孩子扮成戏里的人物，稳稳立在两百公斤的古事棚上；棚下的村民抬着它奔跑、涉水。</p>
+                <h3 class="pb-h">来处</h3>
+                <p>这是福建连城罗坊乡的客家元宵习俗，在正月十四、十五举行，用来纪念先祖迁徙和创业的经历，已经传了二十八代。</p>
+                <h3 class="pb-h">一棚古事的诞生</h3>
+                <ol class="pb-steps"><li>扎古事棚</li><li>孩童扮戏曲人物</li><li>抬棚穿村竞跑</li><li>涉水过河</li></ol>
+                <p>孩子画上脸谱、穿上戏袍，扮演忠义故事里的人物。高处的孩子一动不动，下面的人群拼尽全力往前冲，一静一动，敬祖睦族的心愿和争先的劲头都在里面。</p>
+                <p class="pb-note">罗坊走古事是国家级项目「元宵节（闽西客家元宵节庆）」中的代表性活动，并非以此名称单列的国家级项目。</p>
               </div>
               <p class="project-meta">存续 · 已传二十八代，古事棚重约 200 公斤（据中国非物质文化遗产网项目页）· 保护单位为连城县文化馆</p>
             </article>
@@ -181,10 +177,6 @@
               <figure class="media-wide">
                 <img src="festival/luofang-zougushi/photo-01.jpg" alt="抬棚竞走，人群合力穿行村巷" data-lightbox loading="lazy" decoding="async">
                 <figcaption>抬棚竞走 · 摄影：张斌／中新社</figcaption>
-              </figure>
-              <figure class="media-video">
-                <video src="festival/luofang-zougushi/clip.mp4" muted loop playsinline preload="metadata" poster="festival/luofang-zougushi/photo-04.jpg" aria-label="罗坊走古事抬棚涉水动图"></video>
-                <figcaption>抬棚涉水 · 动图，来源：福建省住房和城乡建设厅／《村庄里的中国》</figcaption>
               </figure>
               <div class="media-grid">
                 <figure>
@@ -210,9 +202,13 @@
               <h2>水族端节</h2>
               <p class="project-meta">贵州 · 三都｜2006 年 · 民俗｜按水历分批过端，约延续五十天</p>
               <div class="project-body">
-                <p>
-                  水族端节主要流传于贵州三都等水族聚居地区，是依据水书、水历，在谷物成熟之际分批举行的传统年节。各地按亥日推算节期，先后延续约五十天，表达庆贺丰收、辞旧迎新的共同心愿。节日期间，人们祭祖、聚餐、敲击铜鼓并相聚端坡，赛马尤为引人注目。骑手与马匹配合，在山地赛道上竞逐，展现水族独特的养马、驭马经验。礼仪、饮食和歌舞共同构成年节的文化空间，使家族记忆、乡邻情谊与对来年平安丰收的期盼得以延续。
-                </p>
+                <p class="pb-lead">按水书推算日子，一个年节分七批过，从第一批到最后一批，前后要五十天。</p>
+                <h3 class="pb-h">怎么定日子</h3>
+                <p>贵州三都一带的水族依据水书、水历，在谷物成熟时过端节。各地按亥日推算节期，一批接一批，庆丰收，也辞旧迎新。</p>
+                <h3 class="pb-h">节里的几件事</h3>
+                <ul class="pb-chips"><li>祭祖</li><li>聚餐</li><li>敲铜鼓</li><li>端坡赛马</li></ul>
+                <h3 class="pb-h">端坡上的赛马</h3>
+                <p>最热闹的是赛马。骑手和马在山地赛道上竞逐，比的是速度，也是水族世代积累的养马、驭马经验。</p>
               </div>
               <p class="project-meta">存续 · 今分 7 批过节，首尾间隔约五十天（据中国非物质文化遗产网项目页）· 保护单位为三都水族自治县非物质文化遗产保护中心</p>
             </article>
@@ -220,10 +216,6 @@
               <figure class="media-wide">
                 <img src="festival/shuizu-duanjie/photo-01.jpg" alt="水族民众盛装巡游" data-lightbox loading="lazy" decoding="async">
                 <figcaption>盛装巡游 · 摄影：刘美伶／中国新闻网</figcaption>
-              </figure>
-              <figure class="media-video">
-                <video src="festival/shuizu-duanjie/clip.mp4" muted loop playsinline preload="metadata" poster="festival/shuizu-duanjie/photo-05.jpg" aria-label="水族端节赛马动图"></video>
-                <figcaption>骑手策马绕弯、奔向端坡 · 动图，来源：中国新闻网</figcaption>
               </figure>
               <div class="media-grid">
                 <figure>
@@ -249,10 +241,13 @@
               <h2>双庙渚蚕花水会</h2>
               <p class="project-meta">浙江 · 桐乡｜浙江省级 · 2009 年 · 民俗｜清明时节</p>
               <div class="project-body">
-                <p>
-                  双庙渚蚕花水会流传于浙江桐乡洲泉镇清河村，是当地蚕桑生产与清明时令相结合的民俗活动。乡民在开阔水面相聚，以祭祀蚕神、祈愿蚕桑丰收为核心，开展摇快船、龙舟竞渡和高杆船技等活动。高杆船技以船上竖竹、攀杆翻转为特色，借人体姿态表现蚕的活动，兼具力量、平衡与协作之美。水上竞技、陆上巡游及蚕乡礼俗交织，形成水陆相连的节庆空间。它承载江南蚕乡的生产记忆，也在师徒传习和村民共同参与中延续邻里情谊与乡土认同。
-                </p>
-                <p>蚕花水会是省级非遗；水会中的「高杆船技」另为国家级非遗项目，两者不混称。</p>
+                <p class="pb-lead">清明前后，桐乡清河村的河面比集市还热闹。</p>
+                <h3 class="pb-h">为蚕而聚</h3>
+                <p>江南蚕乡靠蚕桑过日子。每到清明，乡民聚到开阔水面上祭祀蚕神，祈愿这一年蚕桑丰收。</p>
+                <h3 class="pb-h">水上三样</h3>
+                <ul class="pb-cards"><li><b>摇快船</b><span>船工合力摇橹竞速</span></li><li><b>龙舟竞渡</b><span>划桨击浪，你追我赶</span></li><li><b>高杆船技</b><span>船上竖一根竹竿，艺人攀上杆顶翻转，模仿蚕的动作</span></li></ul>
+                <p>水上竞技、岸上巡游和蚕乡礼俗连成一片。师傅带着徒弟同台，村里人一起出力，这份乡情就这样年年接续。</p>
+                <p class="pb-note">蚕花水会是省级非遗；水会中的「高杆船技」另为国家级非遗项目，两者不混称。</p>
               </div>
               <p class="project-meta">存续 · 2025 年 4 月举办第十八届（据潮新闻 2025 年报道）· 高杆船技省级传承人屠松根带 3 名徒弟同台</p>
             </article>
@@ -260,10 +255,6 @@
               <figure class="media-wide">
                 <img src="festival/canhua-shuihui/photo-01.jpg" alt="高杆船技，人在杆上翻，船在水中行" data-lightbox loading="lazy" decoding="async">
                 <figcaption>高杆船技 · 来源：潮新闻／共享联盟·桐乡</figcaption>
-              </figure>
-              <figure class="media-video">
-                <video src="festival/canhua-shuihui/clip.mp4" muted loop playsinline preload="metadata" poster="festival/canhua-shuihui/photo-04.jpg" aria-label="龙舟竞渡动图"></video>
-                <figcaption>龙舟竞渡，划桨与浪花 · 动图，来源：潮新闻／共享联盟·桐乡</figcaption>
               </figure>
               <div class="media-grid">
                 <figure>
@@ -280,6 +271,16 @@
         </li>
       </ol>
 
+      <section class="cat-revival" aria-labelledby="revival-title">
+        <h2 id="revival-title">它今天长什么样</h2>
+        <p>节庆不太能被做成商品，它的新生常发生在别处：一场表演被搬进游戏，一套扎作被做成网页里的互动。《古艺新生》里与这一辑相近的案例，是下面这两件。</p>
+        <ul>
+          <li><a href="../revival.html?case=23"><b>彩扎（佛山狮头）→ 《醒狮之旅》互动 H5</b><span>节庆里的狮头，被拆成可以点开的关卡。</span></a></li>
+          <li><a href="../revival.html?case=22"><b>孟连神鸟舞 → 游戏内数字舞蹈</b><span>节庆场合的舞蹈，在游戏里重排了一遍动作。</span></a></li>
+        </ul>
+        <a class="cat-revival__all" href="../revival.html">看全部三十个焕新案例 →</a>
+      </section>
+
       <nav class="category-nav" aria-label="分类切换">
         <a href="opera.html">
           <span>上一辑</span>
@@ -293,7 +294,7 @@
 
       <details class="category-credits">
         <summary>图片、动图与出处</summary>
-        <p>照片与动图来自队友整理的新闻报道与官方发布，署名与链接见 <a href="../../docs/festival.md">docs/festival.md</a>。页面仅使用 mp4 动图，避免 GIF 带来的首屏压力。</p>
+        <p>照片与动图来自队友整理的新闻报道与官方发布，查不到出处的图注统一记为「图片来源于网络」，其余署名与链接见 <a href="../../docs/festival.md">docs/festival.md</a>。页面仅使用 mp4 动图，避免 GIF 带来的首屏压力。</p>
       </details>
     </section>
   </main>
@@ -301,7 +302,7 @@
   <dialog class="cat-lightbox" aria-labelledby="cat-lightbox-title">
     <img id="cat-lightbox-image" src="" alt="">
     <p id="cat-lightbox-title"></p>
-    <button type="button">关闭</button>
+    <button type="button" aria-label="关闭大图">×</button>
   </dialog>
 
   <footer class="site-footer">
