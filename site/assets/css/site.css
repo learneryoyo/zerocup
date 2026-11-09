@@ -9,13 +9,28 @@
   --line: rgba(16, 16, 15, 0.18);
   --header-height: 74px;
   --page-gutter: clamp(20px, 4vw, 64px);
-  --serif: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+  --serif: "DingLie SongKe", "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+  --xingshu: "HongLei XingShu", "Kaiti SC", "STKaiti", "KaiTi", var(--serif);
   --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
   /* 角标与键：赭红 / 墨绿，30×20 的键带不规则纹样 */
   --mark-red: #9e3b26;
   --mark-green: #24422f;
   --mark-pattern-red: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='20' viewBox='0 0 30 20'%3E%3Cg fill='none' stroke='%23dda490' stroke-opacity='.40' stroke-width='.85' stroke-linecap='round'%3E%3Cpath d='M-3 16c4.6-3.9 7.3 1.5 11.7-2.5 3.4-3.1 6.7-.4 10.3-3.3 2.4-1.9 4.7-1.2 6.9.5'/%3E%3Cpath d='M-3 11.3c4.9-3.5 7.1 1 11.3-2.9 3.2-2.8 6.5.2 9.9-2.5 2.7-1.9 5.3-1.4 7.8.3'/%3E%3Cpath d='M1.6 6.9c2.9-2.3 5.3.2 8.2-1.9 2.4-1.7 4.7.6 7.1-1.1'/%3E%3C/g%3E%3Cg fill='none' stroke='%23dda490' stroke-opacity='.30' stroke-width='.85'%3E%3Cpath d='M6.2 17.8c-2-1.2-1.4-4 1.3-4.5 2.5-.5 4.4 1.5 3.6 3.3-.6 1.7-3.3 2.1-4.9 1.2z'/%3E%3Cpath d='M8.6 16.6c-.9-.6-.5-2 .6-2.2 1.2-.2 2 .7 1.6 1.6-.3.7-1.5.9-2.2.6z'/%3E%3C/g%3E%3C/svg%3E");
   --mark-pattern-green: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='20' viewBox='0 0 30 20'%3E%3Cg fill='none' stroke='%2393b29d' stroke-opacity='.42' stroke-width='.85'%3E%3Cpath d='M3.6 16.6c-3.5-2.3-2.7-7.6 1.7-9.4 5.5-2.4 11.3-.4 12.1 3.9.8 4.5-3.3 7.8-8.2 8-2.3.1-4.2-.9-5.6-2.5z'/%3E%3Cpath d='M6.4 15c-2.5-1.8-1.9-5.5 1.2-6.8 4-1.6 8.1-.2 8.6 2.8.5 3.1-2.5 5.4-5.9 5.5-1.6.1-2.8-.5-3.9-1.5z'/%3E%3Cpath d='M9.1 13.3c-1.5-1.1-1.1-3.3.7-4.1 2.4-1 4.7-.1 5 1.7.3 1.8-1.5 3.3-3.5 3.4-1 0-1.7-.3-2.2-1z'/%3E%3Cpath d='M11.8 11.8c-.8-.7-.5-1.9.5-2.3 1.3-.5 2.6 0 2.8 1 .2 1-.9 1.8-2 1.9-.6 0-1-.2-1.3-.6z'/%3E%3Cpath d='M22 5.2c1.6-1.2 3.6-.6 4.1 1.1.5 1.7-.6 3.2-2.2 3.4-1.6.2-3-1-3-2.5 0-.8.4-1.5 1.1-2z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@font-face {
+  font-family: "DingLie SongKe";
+  src: url("../fonts/dinglie-songke.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HongLei XingShu";
+  src: url("../fonts/honglei-xingshu.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -45,13 +60,13 @@ img { display: block; max-width: 100%; }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 /* 页眉标志预留：正式标志以 <img class="brand-logo"> 放入 .brand，位于站名之前。 */
 .brand-logo { display: block; height: 34px; width: auto; }
-.brand-name { font: 700 18px/1 var(--serif); letter-spacing: .14em; }
+.brand-name { font: 700 28px/1 var(--serif); letter-spacing: .14em; }
 .primary-nav { display: flex; align-items: center; align-self: stretch; gap: clamp(24px,3vw,48px); }
-.primary-nav a, .nav-more-btn { position: relative; padding: 27px 0 23px; font-size: 14px; text-decoration: none; letter-spacing: .1em; }
+.primary-nav a, .nav-more-btn { position: relative; padding: 27px 0 23px; font-family: var(--serif); font-size: 18px; font-weight: 600; text-decoration: none; letter-spacing: .1em; }
 .primary-nav a::after, .nav-more-btn::before { content: ""; position: absolute; right: 0; bottom: 18px; left: 0; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
 .primary-nav a:hover::after, .primary-nav a:focus-visible::after, .primary-nav a.is-current::after,
 .nav-more-btn:hover::before, .nav-more-btn:focus-visible::before, .nav-more.is-open .nav-more-btn::before, .nav-more-btn.is-current::before { transform: scaleX(1); transform-origin: left; }
-.nav-toggle { display: none; border: 0; background: transparent; cursor: pointer; }
+.nav-toggle { display: none; border: 0; background: transparent; font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .1em; cursor: pointer; }
 
 /* 首页专属样式见 home-classic.css。 */
 .site-footer { min-height: 190px; padding: 48px var(--page-gutter); display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,.14); }
