@@ -652,13 +652,7 @@ body.is-story-open .tl-hints { display: none; }
   .tl-layer.is-art .tl-layer__item--plain .tl-layer__intro { font-size: 13px; }
   .tl-layer.is-art .tl-layer__foot { bottom: 3px; }
 }
-/* 手机竖屏：固定在中线、0.3 透明度的环带在窄栏里一定会压住正文，
-   两端竖排的「展开时间轴」小字也只能浮在页边。这里把图层和提示一起收起，
-   时间轴留给 701px 以上的屏幕（触屏平板仍可轻点展开）。 */
-@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
-  .tl-layer,
-  .tl-hints { display: none; }
-}
+/* 手机端保留时间轴长卷与轻点展开提示，沿用触屏交互。 */
 @media (prefers-reduced-motion: reduce) {
   .tl-layer,
   .tl-layer__dot,

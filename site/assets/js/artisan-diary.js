@@ -55,7 +55,7 @@ const LAYOUTS={
  c:['#efe0c2','#3a1d12','#a82c1c','#e0ae4a'],
  decor:`<path d="M0 362H1120" stroke="var(--accent)" stroke-width="12"/><path d="M540 270V362M812 310V362M1010 310V362M200 362V408" stroke="var(--accent)" stroke-width="8"/>${pearls(8,362,1112,362,70,2.6,'var(--paper)')}`,
  k:[['satin',-20,-22,396,-.6]],
- head:[46,30,322],a:[390,392,310],b:[736,392,340],note:[46,262,300],
+ head:[46,30,322],a:[390,392,310],b:[736,392,340],note:[46,262,322],
  p:[[0,380,60,320,'w'],[1,716,30,192,'w'],[3,918,30,187,'w'],[2,56,410,296,'w']]},
 6:{ // 中轴对称、两侧通高立柱——垂幔即戏台帷幕，土红地
  c:WALL.tuhong,
@@ -91,19 +91,19 @@ const LAYOUTS={
  c:['#efe2c9','#33160c','#a8391c','#e7bd84'],
  decor:`<rect y="228" width="1120" height="244" fill="#6b2415"/>${pearls(8,240,1112,240,56,3.4,'#ecc477')}${pearls(8,460,1112,460,56,3.4,'#ecc477')}`,
  k:[['nianhua',776,6,322,1.2]],
- head:[48,36,680,'row'],a:[56,496,480],b:[578,496,486],note:[152,192,580],
+ head:[48,36,680,'row'],a:[56,496,480],b:[578,496,486],note:[728,128,380],
  p:[[0,46,254,267,''],[1,337,254,135,''],[2,496,254,130,''],[3,650,254,267,''],[4,941,254,131,'']]},
 12:{ // 色底、右侧经卷式文字栏
  c:['#cfdcc9','#14322c','#1f6657','#aec6ab'],
  decor:`<rect x="700" y="30" width="390" height="640" fill="#f3ecd9"/><rect x="708" y="38" width="374" height="624" fill="none" stroke="var(--accent)" stroke-width="1"/><path d="M0 354H470V700H0Z" fill="var(--soft)"/>`,
  k:[['indigo-bird',-18,566,492,-1]],
- head:[46,388,410,'big'],a:[726,56,338],b:[726,296,338],note:[726,572,338],
+ head:[46,388,410,'big'],a:[726,56,338],b:[726,296,338],note:[710,580,380],
  p:[[0,34,30,430,''],[1,474,30,210,''],[2,474,190,210,''],[3,474,350,210,''],[4,474,510,210,'']]},
 13:{ // 波浪页眉与点线水路——河面
  c:WALL.qing,
  decor:`<path d="M0 0H1120V200C960 250 820 170 640 212S300 250 0 196Z" fill="var(--soft)"/><path d="M0 245C120 225 300 300 430 335S640 300 730 340 760 450 768 520 860 600 1120 590" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="1 10" stroke-linecap="round"/>`,
  k:[['indigo-jiaxing',440,614,300,-1.2]],
- head:[48,30,600,'row'],a:[446,414,308],b:[800,244,286],note:[800,640,286],
+ head:[48,30,600,'row'],a:[446,414,308],b:[800,244,286],note:[730,588,380],
  p:[[0,838,16,240,'w'],[1,56,250,360,'w'],[2,450,234,276,'w'],[3,56,470,300,'w']]},
 14:{ // 藻井与卷草竖带，土黄地——一碗面的热气
  c:WALL.tuhuang,
@@ -115,7 +115,7 @@ const LAYOUTS={
  c:['#efe3cb','#33231b','#8f5a17','#163f4c'],
  decor:'<path d="M0 0H404V700H0Z" fill="var(--soft)"/><text x="36" y="168" font-size="136" font-family="Georgia,serif" fill="#e6c177">4:00</text><circle cx="344" cy="62" r="24" fill="#e6c177"/><circle cx="356" cy="54" r="22" fill="var(--soft)"/>',
  k:[['box',118,428,156,-3]],
- head:[44,236,330,'inv'],a:[436,270,306],b:[776,270,306],note:[44,600,320,'inv'],
+ head:[44,236,330,'inv'],a:[436,270,306],b:[776,270,306],note:[24,592,380,'inv'],
  p:[[0,436,28,312,'w'],[1,778,28,300,'w'],[2,436,514,210,''],[3,660,514,210,''],[4,884,514,196,'']]},
 16:{ // 横带贯穿、四角分布——黄顶白身的鱼糕
  c:['#f0e6d0','#3d2a14','#845510','#e3c476'],
@@ -406,7 +406,7 @@ function render(d){const P=PAGES[d.id],L=P?{c:WALL[P.c],k:P.k}:LAYOUTS[d.id],s=s
  page.innerHTML=`<div class="dp-canvas dp-l${d.id}"><svg class="dp-decor" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">${L.decor}</svg><i class="dp-tex" aria-hidden="true"></i>${(L.k||[]).map(clip).join('')}`+
   `<header class="dp-slot dp-head${cls(L.head)}" style="${slot(L.head)}">${plaque(d.person)}<div class="dp-lead"><p class="dp-title">${esc(d.title)}</p><p class="dp-project">${esc(d.project)}<span>${esc(d.place)}</span></p><p class="dp-identity">${esc(d.identity)}</p></div></header>`+
   photo(d,first)+block(d,0,L.a)+rest.slice(0,split).map(q=>photo(d,q)).join('')+block(d,1,L.b)+rest.slice(split).map(q=>photo(d,q)).join('')+
-  (L.note?`<p class="dp-slot dp-note${cls(L.note)}" style="${slot(L.note)}">${esc(s[1])}</p>`:'')+`</div>`;}
+  (L.note?`<p class="dp-slot dp-note${cls(L.note)}" style="${slot(L.note)}"><span class="dp-note-t">${s[1].split(/(?<=，)/).map(x=>`<span>${esc(x)}</span>`).join('')}</span></p>`:'')+`</div>`;}
  const used=[...new Set(photos)].map(i=>d.photos[i]);
  const clips=[...new Set([...(L.k||[]).map(c=>c[0]),'tex-plaster'])].map(id=>window.ARTISAN_COLLAGE?.[id]).filter(Boolean).concat(P?.scene?[{cap:P.scene.cap,credit:'自本站首页时间轴长卷裁切'}]:[]),credit=m=>`${m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener noreferrer">${esc(m.credit)} ↗</a>`:esc(m.credit)}`;
  info.innerHTML=`<h3>图片</h3><ol>${used.map(p=>`<li>${esc(p.cap)}${p.person?'（人物照片）':''}<span>${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.credit)} ↗</a>`:esc(p.credit)}</span></li>`).join('')}</ol>${clips.length?`<h3>拼贴素材</h3><ol>${clips.map(m=>`<li>${esc(m.cap)}<span>${credit(m)}</span></li>`).join('')}</ol>`:''}<h3>文字来源</h3><ol>${d.sources.map(q=>`<li><a href="${esc(q[3])}" target="_blank" rel="noopener noreferrer">${esc(q[2])} ↗</a><span>${esc(q[0])} · ${esc(q[1])}</span></li>`).join('')}</ol><p>文字按报道归纳改写，章节名为编辑拟定；人物身份与经历以对应报道时点为准。未注明“人物照片”的均为项目资料图，并非传主本人；拼贴素材经裁切、抠图或撕边处理，是馆藏或公开资料，并非传主作品。整理于 2026 年 11 月。</p>`;
