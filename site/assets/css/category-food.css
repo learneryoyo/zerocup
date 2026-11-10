@@ -5,7 +5,6 @@
 .food-image-open { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
 .food-image-open:focus-visible { outline: 2px solid #c79c51; outline-offset: 4px; }
 .project__media figcaption a { color: inherit; text-underline-offset: 3px; }
-.project__media .media-grid > figure:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
 /* ── 首屏糖画：整幅放在标题与照片之间的留白里，偏下，左缘略压「物」字 ──
    --fs 同 category.css 的 h1 字号：左缘按字号定位，底边与标题下沿对齐（图片下方自带约 9% 空白），不碰副标题。

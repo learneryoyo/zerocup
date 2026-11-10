@@ -75,7 +75,7 @@
 .rv-card:hover .rv-card-hook, .rv-card:focus-visible .rv-card-hook { padding-top: 6px; }
 
 /* 详情弹窗 */
-.rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: min(86vh, 760px); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--rv-cream); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
+.rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: var(--rv-dialog-h, min(86vh, 760px)); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--rv-cream); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
 .rv-dialog::backdrop { background: rgba(58, 18, 18, .55); backdrop-filter: blur(3px); }
 .rv-dialog[open] { animation: rv-pop 280ms cubic-bezier(.22, 1, .36, 1); }
 /* 第三页弹窗用普通叉号，覆盖 site.css 里全站退出键的纹样小方块 */
@@ -92,7 +92,7 @@
   .rv-dialog-body { scrollbar-width: thin; scrollbar-color: rgba(138, 75, 58, .4) transparent; }
 }
 .rv-detail { display: grid; grid-template-columns: 38% 1fr; }
-.rv-detail-media { position: sticky; top: 0; align-self: start; height: min(86vh, 760px); background: var(--rv-holder); }
+.rv-detail-media { position: sticky; top: 0; align-self: start; height: var(--rv-dialog-h, min(86vh, 760px)); background: var(--rv-holder); }
 .rv-detail-media .rv-holder { padding-bottom: 0; }
 .rv-detail-text { padding: 34px clamp(22px, 3vw, 40px) 28px; }
 .rv-detail-meta { margin: 0 0 10px; color: var(--rv-brown); font-size: 12px; letter-spacing: .16em; }
@@ -319,5 +319,36 @@
   .rv-tab, .rv-tab .rv-badge { transition: none; }
 }
 
-/* 档案里的「接到手里」 */
-.rv-hand { margin: 18px 0 6px; }
+
+/* 详情图按形状排版；手机端沿用原有单列与 contain。 */
+@media (min-width: 721px) {
+  .rv-dialog { --rv-dialog-h: min(86vh, 760px); }
+  .rv-detail[data-shape="tall"] {
+    grid-template-columns: clamp(38%, calc(var(--rv-dialog-h) * var(--rv-ratio)), 54%) minmax(0, 1fr);
+  }
+  .rv-detail[data-shape="tall"] .rv-detail-media { container-type: inline-size; }
+  .rv-detail[data-shape="tall"] .rv-detail-media > img,
+  .rv-detail[data-shape="tall"] .rv-detail-media > .rv-cropped-image {
+    inset: 50% 0 auto;
+    width: 100%;
+    height: min(100%, calc(100cqw / (var(--rv-ratio) * .8)));
+    padding: 0;
+    transform: translateY(-50%);
+    object-fit: cover;
+  }
+  .rv-dialog[data-shape="wide"] { width: min(720px, calc(100vw - 40px)); }
+  .rv-detail[data-shape="wide"] { grid-template-columns: minmax(0, 1fr); }
+  .rv-detail[data-shape="wide"] .rv-detail-media {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: clamp(1.6, var(--rv-ratio), 2.2);
+    max-height: calc(var(--rv-dialog-h) * .56);
+  }
+  .rv-detail[data-shape="wide"] .rv-detail-media > img,
+  .rv-detail[data-shape="wide"] .rv-detail-media > .rv-cropped-image {
+    inset: 0; width: 100%; height: 100%; padding: 0; object-fit: cover;
+  }
+  .rv-dialog[data-shape="wide"] .rv-close { background: rgba(246, 239, 228, .92); }
+  .rv-dialog[data-shape="wide"] .rv-close:hover { background: var(--rv-brown); }
+}

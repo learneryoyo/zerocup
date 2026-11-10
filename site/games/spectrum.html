@@ -1121,7 +1121,6 @@ function openDrawer(d){
     <div class="d-lv">${l.name}</div>
     <h2>${d.n}</h2>
     <div class="d-meta">${d.c} · ${d.r}</div>
-    <div class="d-hand" id="dHand"></div>
     <div class="d-score"><b>${d.s}</b><span>濒危指数 / 100</span></div>
     <div class="d-sec">
       <h4>它排在哪儿</h4>
@@ -1285,7 +1284,7 @@ $('sort').addEventListener('change', e=>{ sortMode = e.target.value; resetPage()
 /* ====== 启动 ====== */
 $('totalCount').textContent = DATA.length;
 sync();
-/* 外部入口：spectrum.html?item=项目名 直接打开那一项的详情。。
+/* 外部入口：spectrum.html?item=项目名 直接打开那一项的详情。
    等 load 之后再开，保证后面几个脚本（保护单位数据）已经就位。 */
 window.addEventListener('load', ()=>{
   const wanted = new URLSearchParams(location.search).get('item');

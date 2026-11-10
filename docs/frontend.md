@@ -3,6 +3,7 @@
 > 2026-11-08 更新：六色块备选首页（`home-mosaic.html`）连同 `home.css`、`home.js`、
 > `assets/images/home/` 已整体删除，本文下面关于它的表格行和调试参数只作历史记录。
 > 六色块方案的完整工程说明仍在 `docs/mosaic-design.md`。
+>
 
 ## 当前页面与留存方案
 

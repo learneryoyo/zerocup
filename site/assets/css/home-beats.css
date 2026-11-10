@@ -1,4 +1,4 @@
-/* 首页版面：首屏 + 四拍（壹 看见它 / 贰 它还在用 / 叁 它在变细 / 肆 接一手）。
+/* 首页版面：首屏 + 四拍（壹 看见它 / 贰 它还在用 / 叁 它在变细 / 肆 薪火相传）。
    时间轴图层见 home-classic.css；导航、页脚、子页弹层见 site.css。
 
    三条规矩：
@@ -194,7 +194,7 @@ main { position: relative; }
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, .82fr) minmax(0, 1fr);
   gap: clamp(16px, 2vw, 32px);
-  align-items: end;
+  align-items: start;
 }
 .story-card {
   position: relative;
@@ -206,9 +206,9 @@ main { position: relative; }
   isolation: isolate;
 }
 .story-card--lead { aspect-ratio: 5 / 6; }
-.story-card--paper { aspect-ratio: 3 / 4; background: #e9d3a6; }
-/* 三张不齐头：年画靠上，绒花靠下，中间留出一步的错落 */
-.story-card--print { aspect-ratio: 4 / 4.4; align-self: start; background: #d9c8ab; }
+/* 三张错落：左边最高从头起，右边次之，中间那张压得最低（底边越过左边那张） */
+.story-card--paper { aspect-ratio: 3 / 4; margin-top: clamp(90px, 21.9vw, 315px); background: #e9d3a6; }
+.story-card--print { aspect-ratio: 4 / 4.4; margin-top: clamp(40px, 9.4vw, 136px); background: #d9c8ab; }
 .story-card > img {
   position: absolute;
   z-index: -2;
@@ -537,7 +537,9 @@ html.is-on-hero .tl-hints { display: none; }
 @media (max-width: 1000px) {
   .beat__head { grid-template-columns: auto minmax(0, 1fr); }
   .beat__head p { grid-column: 1 / -1; max-width: 36em; }
-  .story-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  /* 两栏时取消错落：左边大图跨两行，右边两张各自贴住所在行的底边 */
+  .story-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: end; }
+  .story-card--paper, .story-card--print { margin-top: 0; }
   .story-card--lead { grid-row: span 2; align-self: stretch; aspect-ratio: auto; }
   .story-card--print { aspect-ratio: 4 / 3.4; }
   .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; }

@@ -38,7 +38,7 @@
 - 基准分辨率：**1440px**
 - 自适应：**是**（另适配 1920px、720px 两档；移动端 390px 另做响应式）
 - 目标运行环境：**Chrome 129**
-- 无需构建，双击 HTML 即可打开；未使用 `fetch`、ES Module，不受 `file://` 跨域限制
+- 无需构建，双击 HTML 即可打开；静态浏览不依赖后端服务。
 
 ### 项目说明
 
@@ -71,7 +71,7 @@
 | 3 | 古艺新生 | `site/revival.html` |
 | 4 | 关于我们 | `site/about.html` |
 
-导航栏四项：**首页 / 非遗辑录 / 古艺新生 / 关于我们**。
+导航栏四项：**首页 / 非遗辑录 / 古艺新生 / 存续有数**，另有「更多」下拉。
 每个页面顶部、底部各有一份导航，内容一样。要改导航，所有页面一起改。
 
 `site/category/objects.html` 里先放了三个子项（剪纸、陶瓷、木板年画），
@@ -223,7 +223,7 @@ dist/零杯零组-队伍名-队长姓名.zip
 
 | 步骤 | 说明 |
 |---|---|
-| 排除 | `.git`、`git-manual.md`、`prototypes/`、模板页；下划线开头的本地探针脚本（`_*.js`）；`docs/timeline-guide/`（22 MB 生成工具）；以及三张无入链的设计参考图（`docs/heritage-ref-class.jpg` 是他人网站截图，两张 `*-reference.png` 是他人作品参考）——参考图进包只会给「抄袭」判定添材料 |
+| 排除 | `.git`、`git-manual.md`、`prototypes/`、模板页；下划线开头的本地探针脚本（`_*.js`、`_chrome_profile*/`）；`docs/timeline-guide/`（22 MB 生成工具）；以及三张无入链的设计参考图（`docs/heritage-ref-class.jpg` 是他人网站截图，两张 `*-reference.png` 是他人作品参考）——参考图进包只会给「抄袭」判定添材料 |
 | 剥 EXIF | 所有图片去掉相机型号 / GPS / 作者字段 |
 | 匿名化 | 删掉 README 里的 `<!-- BEGIN-MEMBERS -->` 到 `<!-- END-MEMBERS -->` 整段 |
 | 回扫 | 打包后在包内搜成员姓名、邮箱、手机号，命中姓名就报错中止 |

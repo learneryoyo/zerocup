@@ -950,7 +950,19 @@
    show(+card.dataset.i);returnTo=card;
    opener.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:e.detail}));
   });
-  const all=document.createElement('a');all.className='roster-jump';all.href='#roster-title';all.textContent='看全部十位';
+  /* 「看全部十位」：跳到页面下方的名册。距离约 4500px，跳完要让标题闪一下、
+     并把焦点交给它，否则用户只会觉得"页面动了一下"。 */
+  const all=document.createElement('a');
+  all.className='roster-jump';all.href='#roster-title';
+  all.innerHTML='看全部十位<i aria-hidden="true">↓</i>';
+  const rosterTitle=document.getElementById('roster-title');
+  all.addEventListener('click',()=>{
+   if(!rosterTitle)return;
+   rosterTitle.setAttribute('tabindex','-1');
+   rosterTitle.focus({preventScroll:true});
+   const head=rosterTitle.closest('.roster-head');
+   if(head){head.classList.remove('is-arrived');void head.offsetWidth;head.classList.add('is-arrived');}
+  });
   q('.creator-controls').prepend(all);
  }
 })();

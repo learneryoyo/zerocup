@@ -84,7 +84,7 @@
 }
 .category-hero__media figcaption {
   margin-top: 9px;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .06em;
   color: var(--cat-muted);
 }
@@ -135,17 +135,18 @@
   border: 1px solid color-mix(in srgb, var(--cat-accent) 55%, transparent);
   border-radius: 999px;
   color: var(--cat-accent);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .12em;
 }
 .project h2 {
+  text-wrap: balance;
   margin: 18px 0 0;
   font: 700 clamp(32px, 9.2cqw, 54px)/1.22 var(--serif);
   letter-spacing: .04em;
 }
 .project-meta {
   margin: 14px 0 0;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: .08em;
   line-height: 1.9;
   color: var(--cat-muted);
@@ -214,36 +215,23 @@
 }
 .project-body .pb-note { margin-top: 22px; font-size: 13px; line-height: 1.85; color: var(--cat-muted); }
 
-.project__media {
-  display: grid;
-  gap: 20px;
-  align-content: start;
+/* 原比例分行：行间保持 24px，多余高度留在图片栏底部，不拉开照片。 */
+.project__media { display: grid; gap: 24px; align-content: start; min-width: 0; }
+.shelf-row { display: grid; grid-template-columns: var(--cols); grid-template-rows: auto auto; column-gap: 20px; position: relative; }
+.shelf-row > figure { margin: 0; min-width: 0; display: grid; grid-template-rows: subgrid; grid-row: 1 / 3; }
+.shelf-row > figure:nth-child(1) { grid-column: 1; }
+.shelf-row > figure:nth-child(2) { grid-column: 2; }
+.shelf-row > figure:nth-child(3) { grid-column: 3; }
+.project__media img { display: block; width: 100%; height: auto; border-radius: 0; cursor: default; filter: saturate(.9) sepia(.05); }
+.shelf-row > figure > :first-child { align-self: end; }
+.project__media img[data-lightbox], .project__media .food-image-open, .project__media .food-image-open img { cursor: zoom-in; }
+.project__media img[data-lightbox], .project__media .food-image-open img { transition: transform .2s ease, filter .2s ease; }
+@media (hover: hover) {
+  .project__media img[data-lightbox]:hover, .project__media .food-image-open:hover img { transform: translateY(-8px); filter: none; }
 }
-.project__media figure { margin: 0; }
-.project__media img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 6px;
-  cursor: zoom-in;
-}
-.project__media figcaption {
-  margin-top: 8px;
-  font-size: 11px;
-  letter-spacing: .06em;
-  line-height: 1.8;
-  color: var(--cat-muted);
-}
-.project__media .media-wide img { aspect-ratio: 16 / 11; object-fit: cover; }
-.project__media .media-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-.project__media .media-grid img { aspect-ratio: 1 / 1; object-fit: cover; }
-/* 戏曲页两张竖图：改方形并上移取景，主体才完整（窄屏也保持方形） */
-#peking-opera .media-wide img { aspect-ratio: 1; object-position: 50% 17%; }
-#lion-dance img[src*="lion-04"] { aspect-ratio: 1; object-position: 50% 17%; }
+.project__media figcaption { margin: 0; padding-top: 10px; font-size: 12px; letter-spacing: .06em; line-height: 1.8; color: var(--cat-muted); }
+.project__text > .project-meta:last-child { margin-bottom: clamp(28px, 3vw, 44px); }
+.category-page .artisan-title-row { flex-direction: column; align-items: flex-start; }
 
 /* ── 通往「古艺新生」的交叉入口 ─────────────────────────────
    分类页读完手艺，顺手给出同类手艺今天的样子；
@@ -417,34 +405,18 @@
 }
 
 @media (max-width: 699px) {
-  .project__media .media-grid { grid-template-columns: 1fr; }
-  .project__media .media-grid img { aspect-ratio: 4 / 3; }
+  .shelf-row { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: none; gap: 24px; }
+  .project__media { align-content: start; }
+  .shelf-row > figure:nth-child(n), .shelf-row--offset > figure:first-child { display: block; grid-column: auto; grid-row: auto; }
+  .project__media img { max-height: 70vh; width: auto; max-width: 100%; margin-inline: auto; }
+  .project__media figcaption { padding-top: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* 皮影人物并排展示，保留完整轮廓。 */
-#shadow-puppet .media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-#shadow-puppet .media-grid img[src*="shadow-02-"],
-#shadow-puppet .media-grid img[src*="shadow-03-"] { object-fit: contain; background: #f2e9e0; }
-#shadow-puppet .puppet-figure-frame {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 6px;
-  background: #f2e9e0;
+
+@media (prefers-reduced-motion: reduce) {
+  .project__media img[data-lightbox], .project__media .food-image-open img { transition: none; transform: none; }
 }
-#shadow-puppet .puppet-figure-frame img {
-  height: auto;
-  aspect-ratio: auto;
-  border-radius: 0;
-  background: #f2e9e0;
-}
-#shadow-puppet .puppet-figure-frame img[src*="shadow-02-"] {
-  clip-path: inset(0 0 2px 0);
-}
-/* 铁枝木偶图为竖幅，按原比例显示，木偶和操偶师的手都不被裁切 */
-#puppetry .media-wide img[src*="iron-rod-puppet"] { aspect-ratio: auto; height: auto; }

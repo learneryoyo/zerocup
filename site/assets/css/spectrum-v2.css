@@ -210,10 +210,39 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 .roster-card:hover img, .roster-card:focus-visible img { filter: none; transform: scale(1.03); }
 .roster-card:hover strong, .roster-card:focus-visible strong { color: var(--red); }
 .roster-card:focus-visible { outline: 2px solid var(--red); outline-offset: 5px; }
-/* 页头轮播里的「看全部十位」 */
-#creatorCarousel .creator-controls { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.roster-jump { font: 700 14px/1.4 var(--serif); letter-spacing: .12em; color: var(--ink); text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: 6px; }
-.roster-jump:hover { color: var(--red); }
+/* 页头轮播里的「看全部十位」：一个明确的入口，不是正文里的一行小字。
+   它要跳 4500px，所以①做成带边框的控件，②点击后把焦点交给名册标题，
+   ③标题闪一下，作为"你到了"的反馈。 */
+#creatorCarousel .creator-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.roster-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 13px 7px;
+  border: 1px solid var(--line);
+  font: 600 12px/1 var(--serif);
+  letter-spacing: .14em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color .2s ease, color .2s ease, background-color .2s ease;
+}
+.roster-jump i { font-style: normal; font-size: 13px; line-height: 1; color: var(--red); transition: transform .2s ease; }
+.roster-jump:hover { border-color: var(--red); color: var(--red); }
+.roster-jump:hover i { transform: translateY(2px); }
+.roster-jump:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+/* 到达反馈：标题底下划一道赭红，1.2s 内褪掉。
+   不用底色块——大字标题铺一层浅色会被读成"文字被选中了"。 */
+.roster-head.is-arrived h2 { animation: rosterArrive 1.2s ease-out; }
+@keyframes rosterArrive {
+  from { box-shadow: inset 0 -.13em 0 rgba(166, 40, 31, .22); }
+  to { box-shadow: inset 0 -.13em 0 rgba(166, 40, 31, 0); }
+}
+#roster-title:focus { outline: none; }
+#roster-title:focus-visible { outline: 2px solid var(--red); outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  .roster-jump i { transition: none; }
+  .roster-head.is-arrived h2 { animation: none; }
+}
 @media (max-width: 1000px) { .roster-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 720px) {
   .roster-head { grid-template-columns: 1fr; }
@@ -269,7 +298,3 @@ button.atlas-tile:focus-visible { outline: 2px solid var(--red); outline-offset:
   .atlas-read { min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .atlas-tile, .atlas-cells i { transition: none; } }
-
-/* 详情抽屉里的「接到手里」 */
-.d-hand { margin: -8px 0 22px; }
-.d-hand:empty { display: none; }

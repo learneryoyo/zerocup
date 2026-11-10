@@ -527,6 +527,7 @@ window.CASES = [
     ],
     "image": "assets/images/revival/14.webp",
     "imageMeta": {
+      "focus": "65% 50%",
       "alt": "唐圣丽介绍竹编暖水壶套（同工艺参考，非竹包或落地灯）",
       "source": "https://www.jpchinapress.com/static/content/WH/2023-05-25/1111351071894683648.html",
       "reference": true,
@@ -1001,6 +1002,7 @@ window.CASES = [
     ],
     "image": "assets/images/revival/25.jpg",
     "imageMeta": {
+      "focus": "45% 50%",
       "alt": "苏州博物馆「万象更新」木刻年画套装及其木版、刻刀、颜料",
       "source": "",
       "reference": false,
@@ -1112,6 +1114,7 @@ window.CASES = [
     ],
     "image": "assets/images/revival/28.webp",
     "imageMeta": {
+      "focus": "50% 25%",
       "alt": "惩恶扬善小哪吒多媒体皮影剧演出画面",
       "source": "https://sn.cri.cn/n/20230701/7db6310c-ab98-479d-bad3-b7485349fc04.html",
       "reference": false,

@@ -61,7 +61,7 @@ SKIP_DIRS = {
     "docs/timeline-guide",        # 时间轴长卷的生成工具与中间产物，22 MB，与作品无关
 }
 
-# 匿名单里允许出现的第三方联系方式（赛事官方收件邮箱）
+# 匿名包内允许出现的赛事官方收件邮箱。
 WHITELIST_CONTACTS = {"2402065071@qq.com"}
 
 MEMBERS_RE = re.compile(r"<!--\s*BEGIN-MEMBERS\s*-->.*?<!--\s*END-MEMBERS\s*-->", re.S)
@@ -89,7 +89,9 @@ def collect_files():
         parts = rel.parts
         if parts[0] in SKIP_TOP:
             continue
-        # 下划线开头的是本地探针 / 截图脚本（与 .gitignore 的 _* 规则一致），不进提交包
+        if "__pycache__" in parts:
+            continue
+        # 下划线开头的是本地探针 / 截图脚本（与 .gitignore 的 _* 规则一致），不进提交包。
         if any(part.startswith("_") for part in parts):
             continue
         if rel.as_posix() in SKIP_FILES:

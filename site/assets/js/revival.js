@@ -42,6 +42,8 @@
   if (!tabList || !grid) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const ratios = new Map();
+  const desktopDetail = window.matchMedia('(min-width: 721px)');
   let firstSelection = true;
   let current = 0;
   let open = null;      // 当前弹窗里的案例
@@ -56,8 +58,35 @@
   const icon = index => `<span class="rv-badge"><img src="assets/images/revival/icons/${ICONS[index]}.webp" alt="" width="92" height="92"></span>`;
   const inPath = index => cases.filter(item => item.category === index);
 
+  function applyShape(item, body) {
+    const ratio = ratios.get(item.id);
+    if (!body) return;
+    if (!Number.isFinite(ratio) || ratio <= 0) {
+      delete body.dataset.shape;
+      delete dialog.dataset.shape;
+      body.style.removeProperty('--rv-ratio');
+      return;
+    }
+    const shape = ratio >= 1.3 ? 'wide' : 'tall';
+    body.dataset.shape = dialog.dataset.shape = shape;
+    body.style.setProperty('--rv-ratio', ratio);
+  }
+
+  desktopDetail.addEventListener('change', () => {
+    if (!dialog.open) return;
+    const img = dialogBody.querySelector('.rv-detail-media > img');
+    if (img) img.style.objectPosition = desktopDetail.matches && !open?.imageMeta?.crop
+      ? open?.imageMeta?.focus || '' : '';
+    dialogBody.querySelector('.rv-detail-media > svg')?.setAttribute(
+      'preserveAspectRatio', desktopDetail.matches ? 'xMidYMid slice' : 'xMidYMid meet'
+    );
+  });
+
   function cover(item, cls) {
     const box = el('div', cls);
+    const detail = cls === 'rv-detail-media';
+    const crop = item.imageMeta?.crop;
+    if (item.image && crop) ratios.set(item.id, crop[2] / crop[3]);
     const holder = el('div', 'rv-holder');
     holder.innerHTML = icon(item.category);
     holder.append(el('small', '', '图片加载中…'));
@@ -67,18 +96,28 @@
       img.alt = item.imageMeta?.alt || item.title;
       img.loading = cls === 'rv-detail-media' ? 'eager' : 'lazy';
       img.decoding = 'async';
-      img.addEventListener('load', () => { holder.hidden = true; });
+      img.addEventListener('load', () => {
+        holder.hidden = true;
+        ratios.set(item.id, crop ? crop[2] / crop[3] : img.naturalWidth / img.naturalHeight);
+        const body = box.closest('.rv-detail');
+        if (detail && open === item && body === dialogBody.firstElementChild) applyShape(item, body);
+      });
       holder.querySelector('small').textContent = '图片加载中…';
-      img.addEventListener('error', () => { holder.hidden = false; holder.querySelector('small').textContent = '图片暂未加载，仍可查看介绍'; img.remove(); });
+      img.addEventListener('error', () => { holder.hidden = false; holder.querySelector('small').textContent = '图片暂未加载，仍可查看介绍'; img.remove();
+        const body = box.closest('.rv-detail');
+        if (detail && open === item && body === dialogBody.firstElementChild) {
+          ratios.delete(item.id);
+          applyShape(item, body);
+        }
+      });
       img.src = item.image;
       // 用内联 SVG 的视口裁去截图边框，原始照片保持完整。
-      const crop = item.imageMeta?.crop;
       if (crop) {
         const ns = 'http://www.w3.org/2000/svg';
         const viewport = document.createElementNS(ns, 'svg');
         viewport.classList.add('rv-cropped-image');
         viewport.setAttribute('viewBox', crop.join(' '));
-        viewport.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        viewport.setAttribute('preserveAspectRatio', detail && desktopDetail.matches ? 'xMidYMid slice' : 'xMidYMid meet');
         viewport.setAttribute('role', 'img');
         viewport.setAttribute('aria-label', img.alt);
         const photo = document.createElementNS(ns, 'image');
@@ -99,6 +138,7 @@
         img.setAttribute('aria-hidden', 'true');
         box.append(img, viewport);
       } else {
+        if (detail && desktopDetail.matches && item.imageMeta?.focus) img.style.objectPosition = item.imageMeta.focus;
         box.append(img);
       }
       if (item.imageMeta?.reference && cls === 'rv-card-media') {
@@ -290,6 +330,7 @@
     text.append(nav);
 
     body.append(text);
+    applyShape(item, body);
     dialogBody.replaceChildren(body);
     dialogBody.scrollTop = 0;
   }
