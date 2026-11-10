@@ -423,6 +423,7 @@
       <div><b>3056</b><span>国家级代表性传承人</span></div>
       <div><b>45</b><span>列入 UNESCO 名录名册</span></div>
     </div>
+    <p class="hero-note"><b>分数不是评级。</b>它从传承梯队、从业人数、日常使用、技艺完整性、文献记录五处读出来，只回答一件事：还剩多少人在做。<a href="#method">这五项怎么算的</a></p>
     </div>
     <aside id="creatorCarousel" class="creator-carousel" aria-label="非遗创作者" aria-roledescription="轮播"></aside>
   </div>
@@ -467,7 +468,7 @@
 
   <section class="atlas" aria-labelledby="atlas-title">
     <div class="atlas-text">
-      <h2 id="atlas-title">线从哪里来</h2>
+      <h2 id="atlas-title">这些线，落在哪里</h2>
       <p class="atlas-lede">同样这些项目，换成按属地摆。一个方块是一个省级地区，方块里一小格是一项，颜色是它的濒危档。点一个方块，下面只看这里的项目。</p>
       <div class="atlas-read" id="atlasRead" aria-live="polite"></div>
       <p class="atlas-note">示意方格，只表示大致方位，不代表实际疆域的形状与面积。跨省项目在每个属地各记一次。<span id="atlasGap"></span></p>
@@ -509,7 +510,7 @@
   <section class="roster" aria-labelledby="roster-title">
     <div class="roster-head">
       <h2 id="roster-title">镜头里的守艺人</h2>
-      <p>名录之外，也有人用镜头把手艺接下去：拜师、上手、拍下来。点开一位，看他们怎么学、怎么做。</p>
+      <p>名录之外，也有人拿起镜头，把拜师、上手的过程拍下来。点开一位，看他们怎么学、怎么做。</p>
     </div>
     <ul class="roster-list" id="creatorRoster"></ul>
   </section>
@@ -522,7 +523,7 @@
     </div>
   </section>
 
-  <section class="notes">
+  <section class="notes" id="method">
     <div>
       <h3>评分依据</h3>
       <p>参考公开资料，从传承梯队、从业人数、日常使用、技艺完整性和文献记录五方面评估。分数越高，表示我们判断其传承风险越大，不代表官方评级。</p>
@@ -549,7 +550,7 @@
 <footer class="site-footer">
   <div>
     <p class="site-footer__brand">遗脉相承</p>
-    <p class="site-footer__line">见物，见人，见一门手艺的时间。</p>
+    <p class="site-footer__line">见人，见物，见风俗节庆，见烟火相承。</p>
   </div>
   <nav aria-label="页脚导航">
     <a href="../index.html">首页</a>
@@ -835,9 +836,10 @@ let sortMode = 'score';
 let query = '';
 let dragging = null;
 /* 默认只铺三行，其余收在「展开」里：一次铺一百多张卡片，页尾的说明要滚过近万像素才看得到。
-   行数固定，每行几张跟着版面走，所以不会出现半截的一行。 */
+   行数固定，每行几张跟着版面走，所以不会出现半截的一行。
+   展开时一次只放三行出来，看多少放多少，不会一下铺满整页。 */
 const ROWS = 3;
-let expanded = false;
+let shownRows = ROWS;
 
 const $ = id => document.getElementById(id);
 const grid = $('grid'), emptyEl = $('empty');
@@ -1037,6 +1039,8 @@ function colCount(){
   return Math.max(1, tracks);
 }
 function foldSize(){ return colCount() * ROWS; }
+/* 当前该放出来的张数：已展开的行数 × 每行张数，多一截也按整行算 */
+function shownSize(){ return colCount() * shownRows; }
 
 /* animateFrom：从第几张起才播入场动画。展开时前面已有的卡片不重播，收起和改版面时全部不播。 */
 function render(animateFrom = 0){
@@ -1057,7 +1061,7 @@ function render(animateFrom = 0){
   }
   emptyEl.style.display = 'none';
   const fold = foldSize();
-  const visible = expanded ? list : list.slice(0, fold);
+  const visible = list.slice(0, shownSize());
   grid.innerHTML = visible.map((d,i)=>{
     const l = levelOf(d.s);
     const motion = i < animateFrom ? 'animation:none' : `animation-delay:${Math.min((i - animateFrom)*14,340)}ms`;
@@ -1077,7 +1081,7 @@ function render(animateFrom = 0){
   const rest = list.length - visible.length;
   moreWrap.hidden = list.length <= fold;
   moreBtn.textContent = rest > 0 ? '展开其余 ' + rest + ' 项' : '收起，只看前 ' + ROWS + ' 行';
-  moreBtn.setAttribute('aria-expanded', String(expanded));
+  moreBtn.setAttribute('aria-expanded', String(rest === 0));
   moreNote.textContent = rest > 0
     ? '已显示 ' + visible.length + ' / ' + list.length + ' 项'
     : '共 ' + list.length + ' 项，已全部展开';
@@ -1085,25 +1089,28 @@ function render(animateFrom = 0){
 
 /* 换筛选条件时回到三行，避免「展开过一百多张后切门类」直接见底 */
 function resetPage(){
-  expanded = false;
+  shownRows = ROWS;
   render(Infinity);
 }
 
+/* 每点一次只多放三行；已经铺到全部时，按钮才变成「收起」 */
 moreBtn.addEventListener('click', event=>{
   const had = grid.children.length;
-  expanded = !expanded;
-  render(expanded && event.detail !== 0 ? had : Infinity);
+  const full = had >= currentList().length;
+  if(full) shownRows = ROWS;
+  else shownRows += ROWS;
+  render(full || event.detail === 0 ? Infinity : had);
   /* 收起后页面一下短了几千像素：把按钮留在视野里，别让人落到不相干的段落 */
-  if(!expanded) moreWrap.scrollIntoView({ block: 'center', behavior: 'instant' });
+  if(full) moreWrap.scrollIntoView({ block: 'center', behavior: 'instant' });
 });
 
-/* 窗口宽度变了、一行的张数跟着变时，收起状态下重排成完整的三行 */
+/* 窗口宽度变了、一行的张数跟着变时，按当前展开的行数重排 */
 let lastCols = colCount();
 window.addEventListener('resize', ()=>{
   const cols = colCount();
   if(cols === lastCols) return;
   lastCols = cols;
-  if(!expanded) render(Infinity);
+  render(Infinity);
 });
 
 grid.addEventListener('click', e=>{

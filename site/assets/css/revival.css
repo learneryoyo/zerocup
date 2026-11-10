@@ -33,13 +33,13 @@
 
 /* 左侧标签 */
 .rv-tabs { grid-area: tabs; display: flex; flex-direction: column; gap: clamp(18px, 3.2vh, 34px); align-self: start; }
-.rv-tab { --tab-bg: var(--rv-brown); position: relative; display: flex; align-items: center; gap: 12px; width: 72%; min-height: 66px; padding: 7px 18px 7px clamp(16px, 2vw, 34px); border: 0; border-radius: 0 3px 3px 0; color: var(--rv-cream); background: var(--tab-bg); font: 17px/1.2 var(--serif); letter-spacing: .14em; text-align: left; cursor: pointer; filter: drop-shadow(0 2px 0 rgba(96, 32, 32, .14)); transition: width 300ms cubic-bezier(.22, 1, .36, 1), min-height 300ms ease, filter 200ms ease, font-size 300ms ease; }
+.rv-tab { --tab-bg: var(--rv-brown); position: relative; display: flex; align-items: center; gap: 12px; width: 72%; min-height: 66px; padding: 7px 18px 7px clamp(16px, 2vw, 34px); border: 0; border-radius: 0 3px 3px 0; color: var(--rv-cream); background: var(--tab-bg); font: 19px/1.2 var(--serif); letter-spacing: .14em; text-align: left; cursor: pointer; filter: drop-shadow(0 2px 0 rgba(96, 32, 32, .14)); transition: width 340ms cubic-bezier(.4, 0, .2, 1), min-height 340ms cubic-bezier(.4, 0, .2, 1), font-size 340ms cubic-bezier(.4, 0, .2, 1), filter 200ms ease; }
 /* 底色与该类图标的背景色一致，顺序见 revival.js 的 ICONS。 */
 .rv-tab:nth-child(even) { --tab-bg: var(--rv-apricot); color: var(--rv-brown-deep); }
 .rv-tab:hover { filter: brightness(.96) drop-shadow(0 2px 0 rgba(96, 32, 32, .14)); }
 .rv-tab:focus-visible { outline: 2px solid var(--rv-gold); outline-offset: 3px; }
-.rv-tab.is-active { width: 100%; min-height: 78px; font-size: clamp(21px, 1.9vw, 26px); font-weight: 700; }
-.rv-badge { position: relative; flex: none; display: block; width: 40px; height: 40px; transition: width 300ms ease, height 300ms ease; }
+.rv-tab.is-active { width: 100%; min-height: 78px; font-size: clamp(23px, 1.7vw, 26px); font-weight: 700; }
+.rv-badge { position: relative; flex: none; display: block; width: 40px; height: 40px; transition: width 340ms cubic-bezier(.4, 0, .2, 1), height 340ms cubic-bezier(.4, 0, .2, 1); }
 .rv-tab.is-active .rv-badge { width: 50px; height: 50px; }
 .rv-badge img { display: block; width: 100%; height: 100%; }
 
@@ -138,8 +138,8 @@
 @keyframes rv-pop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 1100px) {
-  .rv-tab { width: 92%; gap: 8px; padding-inline: 14px; font-size: 15px; }
-  .rv-tab.is-active { font-size: 20px; }
+  .rv-tab { width: 92%; gap: 8px; padding-inline: 14px; font-size: 17px; }
+  .rv-tab.is-active { font-size: 21px; }
 }
 
 @media (max-width: 720px) {
@@ -150,7 +150,7 @@
   .rv-tabs { flex-direction: row; flex-wrap: nowrap; min-width: 0; width: 100%; gap: 8px; margin-bottom: 18px; padding: 4px 16px 8px; overflow-x: auto; overscroll-behavior-x: contain; touch-action: pan-x pan-y pinch-zoom; scroll-snap-type: x proximity; scroll-padding-inline: 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .rv-tabs .rv-tab { flex-shrink: 0; white-space: nowrap; scroll-snap-align: start; }
   .rv-tabs::-webkit-scrollbar { display: none; }
-  .rv-tab, .rv-tab.is-active { flex: none; width: auto; min-height: 50px; padding: 4px 14px 4px 10px; border-radius: 3px; font-size: 15px; }
+  .rv-tab, .rv-tab.is-active { flex: none; width: auto; min-height: 50px; padding: 4px 14px 4px 10px; border-radius: 3px; font-size: 16px; }
   .rv-tab.is-active { font-weight: 700; filter: drop-shadow(0 3px 0 var(--rv-brown-deep)); }
   .rv-badge, .rv-tab.is-active .rv-badge { width: 34px; height: 34px; }
   .rv-panel { padding-inline: 16px; }
@@ -356,13 +356,8 @@
   .rv-dialog[data-shape="wide"] .rv-close:hover { background: var(--rv-brown); }
 }
 
-/* Stable tab geometry: only the background extends on selection. */
-@media (min-width: 721px) {
-  .rv-tabs .rv-tab, .rv-tabs .rv-tab.is-active { isolation: isolate; width: 100%; min-height: 78px; background: transparent; font-size: 17px; font-weight: 700; transition: none; }
-  .rv-tab::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--tab-bg); transform: scaleX(.86); transform-origin: left; transition: transform 200ms cubic-bezier(.23,1,.32,1); }
-  .rv-tab.is-active::before { transform: scaleX(1); }
-  .rv-tabs .rv-badge, .rv-tabs .rv-tab.is-active .rv-badge { width: 40px; height: 40px; transition: none; }
-}
+/* 标签切换：未选中收窄、选中撑满并放大，动效写在上面 .rv-tab / .rv-tab.is-active 里。
+   曾经用「几何固定 + 背景 scaleX 延伸」压掉过这套过渡，结果是切换几乎看不出变化，已撤掉。 */
 .rv-card-media { transition: transform 160ms ease; }
 .rv-card-bar { transition: grid-template-rows 160ms ease, background-color 160ms ease; }
 @media (hover: none), (pointer: coarse) {
@@ -373,7 +368,7 @@
 .rv-switch-thumb { transition: transform 200ms cubic-bezier(.23,1,.32,1); }
 .rv-switch.is-dragging .rv-switch-thumb { transition: none; scale: 1; }
 .rv-counter { animation: none; }
-html[data-motion-input="keyboard"] .rv-tab::before,
+html[data-motion-input="keyboard"] .rv-tab,
 html[data-motion-input="keyboard"] .rv-switch-thumb { transition: none; }
 html[data-motion-input="keyboard"] .rv-dialog[open],
 html[data-motion-input="keyboard"] .miao-postcard[open] { animation: none; }

@@ -85,9 +85,12 @@
 }
 
 @media (max-width: 900px) {
-  /* 单栏：靠右放在「器物」旁，底边停在副标题之上 */
-  .category-hero { --qd-size: 220px; }
-  .category-hero__inner > div::before { bottom: auto; top: -130px; }
+  /* 单栏：靠右放在「器物」旁，底边停在副标题之上。
+     尺寸跟视口走（和节日页、戏曲页的纹样同一做法）：原来写死 220px，
+     到 320px 宽的机器上左缘会压到「器物」两个字和上面的眉题。
+     上移量按尺寸比例算，保证各宽度下都挂在标题右上方、不压字。 */
+  .category-hero { --qd-size: min(48vw, 220px); }
+  .category-hero__inner > div::before { bottom: auto; top: calc(var(--qd-size) * -.59); }
   .project { --ms: 300px; }
 }
 

@@ -98,6 +98,21 @@
   line-height: 2;
   color: #403b33;
 }
+/* 选样说明：与正文同栏，但降一档字号与颜色，读起来是脚注而不是正文。 */
+.category-intro .cat-sampling {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.95;
+  color: var(--cat-muted);
+}
+.category-intro .cat-sampling a {
+  color: inherit;
+  text-underline-offset: 4px;
+}
+.category-intro .cat-sampling a:hover,
+.category-intro .cat-sampling a:focus-visible {
+  color: var(--cat-accent);
+}
 
 /* ── 项目章节 ─────────────────────────────────────────────── */
 .project-list { list-style: none; margin: 0; padding: 0; }

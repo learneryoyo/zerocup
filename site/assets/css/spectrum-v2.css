@@ -12,12 +12,19 @@
 .wrap { max-width: calc(1360px + var(--page-gutter) * 2); padding: 0 var(--page-gutter); }
 
 /* ── 页头 ───────────────────────────────────────────────── */
-.hero { padding: clamp(44px, 5vw, 76px) 0 clamp(44px, 5vw, 72px); }
-.hero h1 { margin: 0; font-size: clamp(52px, 8.4vw, 128px); line-height: 1.04; letter-spacing: .02em; }
-.hero-sub { margin: 14px 0 0; font: 400 clamp(20px, 2.1vw, 30px)/1.5 var(--xingshu); color: var(--red); }
-.hero .lede { margin-top: 22px; max-width: 30em; }
-.stats { margin-top: 34px; border-top: 2px solid var(--ink); max-width: 620px; }
+.hero { padding: clamp(40px, 4.4vw, 68px) 0 clamp(20px, 2.2vw, 30px); }
+.hero h1 { margin: 0; font-size: clamp(46px, 5.8vw, 84px); line-height: 1.08; letter-spacing: .04em; }
+.hero-sub { margin: 12px 0 0; font: 400 clamp(18px, 1.8vw, 26px)/1.5 var(--xingshu); color: var(--red); }
+.hero .lede { margin-top: 18px; max-width: 30em; }
+.stats { margin-top: 28px; border-top: 2px solid var(--ink); max-width: 620px; }
 .stats b, .creator-copy .stats b { font: 400 clamp(26px, 2.6vw, 38px)/1.1 var(--num); font-variant-numeric: lining-nums; }
+/* 标题下的「读法」：把分数是什么、不是什么先说清楚，也把标题与下一屏之间的空处接住 */
+.hero-note { margin: 24px 0 0; max-width: 33em; font-size: 14px; line-height: 1.95; letter-spacing: .02em; color: var(--ink-2); }
+.hero-note b { font-weight: 600; color: var(--ink); }
+.hero-note a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+/* 轮播原先用 520px 的 min-height 给胶片留位，实际内容比它矮一截，多出来的空白把整条页头撑高。
+   胶片本身是绝对定位、且容器 overflow:clip，按内容高度收即可。 */
+#creatorCarousel { min-height: 0; }
 
 /* ── 光谱：夜色通栏 ─────────────────────────────────────── */
 .panel {
@@ -110,7 +117,9 @@
 /* ── 筛选 ───────────────────────────────────────────────── */
 .toolbar { margin-top: clamp(30px, 3vw, 44px); gap: 12px 28px; align-items: end; }
 .search input, select { padding-top: 12px; padding-bottom: 12px; font-size: 16px; color: var(--ink); background-color: transparent; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0; }
-.search input { padding-left: 30px; }
+.search input { padding-left: 30px; text-overflow: ellipsis; }
+/* 占位文字比窄屏的输入框长，默认会把最后一个字切一半；加省略号收尾 */
+.search input::placeholder { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 .search svg { left: 2px; opacity: .8; }
 .search input:focus { background: transparent; border-color: var(--red); box-shadow: none; }
 select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
@@ -174,7 +183,7 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 
 @media (max-width: 720px) {
   .wrap { padding: 0 var(--page-gutter); }
-  .hero h1 { font-size: clamp(48px, 15vw, 72px); }
+  .hero h1 { font-size: clamp(38px, 10vw, 54px); }
   .panel { padding: 48px 0 36px; }
   .panel .hint { font-size: 13px; }
   .band { font-size: 12px; letter-spacing: 0; }
