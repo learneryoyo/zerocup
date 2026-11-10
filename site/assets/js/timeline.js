@@ -3,15 +3,15 @@
 
   - 固定在视口正中，高度固定、不折叠；默认压在页面内容下面，只在空白处透出来；
   - 页面滚动时，轨道按页面滚动进度做横向位移，两者线性对应；
-  - 桌面端：鼠标停在左右两端浮起，点击这一带保持，再点一次落回底层；
-  - 触屏（没有悬停）：轻点这一带浮起，再轻点一次落回底层；
-  - 浮起后「再点一次」只负责收起，不会点到底下的图片或链接；
+  - 唤出只认右上角那一枚标签（.tl-toggle）：点一下浮起，再点一下落回底层。
+    桌面端和触屏同一套操作，不再有「悬停两端」这种只有鼠标才懂的手势；
+  - 浮起后，点图层这一带任意位置也能收起，但不会点到底下的图片或链接；
   - 长卷图下载中先空着（is-art-pending），下完切到长卷，下载失败才退回线条版；
-  - 开屏动画（intro 类）时同样浮起；
-  - 图层 pointer-events: none，不挡页面点击；悬停位置用坐标判断。
+  - 开屏动画（intro 类）时自动浮起，动画结束自行落下；
+  - 图层 pointer-events: none，不挡页面点击；收起时靠坐标判断点没点在带上。
 
-  保守约束：故事子页或任何 dialog 打开时不响应悬停；点击链接、按钮、
-  或拖选文字后的 click 都不算「点击这一带」。
+  保守约束：故事子页或任何 dialog 打开时不响应标签；点链接、按钮、
+  或拖选文字后的 click 都不算「点在这一带上」。
 */
 (function () {
   "use strict";
@@ -29,7 +29,8 @@
   if (items.length < 3) return;
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var noHover = window.matchMedia("(hover: none)");
+  var toggle = document.querySelector(".tl-toggle");
+  var toggleText = toggle ? toggle.querySelector("[data-tl-toggle-text]") : null;
   var centers = [];
   var travel = 0;
   var artWidth = 0;
@@ -37,11 +38,8 @@
   var active = -1;
   var scrollFrame = 0;
   var moveFrame = 0;
-  var END_ZONE = 180;
-  var pointer = { x: 0, y: -1 };
   var introActive = false;
   var pinned = false;
-  var suppressed = false;
   var layerTop = 0;
   var layerBottom = 0;
   var artFailed = false;
@@ -125,13 +123,7 @@
     }
   }
 
-  function overImage(x, y) {
-    var element = document.elementFromPoint(x, y);
-    if (!element || !element.closest) return false;
-    return !!element.closest(".story-card, img");
-  }
-
-  // 故事子页、灯箱、档案弹窗打开时，不去抢悬停
+  // 故事子页、灯箱、档案弹窗打开时，不响应标签
   function blocked() {
     if (document.body.classList.contains("is-story-open")) return true;
     return !!document.querySelector("dialog[open]");
@@ -141,28 +133,26 @@
     return y >= layerTop - 6 && y <= layerBottom + 6;
   }
 
+  // 标签上的字跟着展开态走，读屏读的是 aria-expanded
+  function syncToggle(open) {
+    if (!toggle) return;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (toggleText) toggleText.textContent = open ? "收起时间长卷" : "展开时间长卷";
+  }
+
   function evaluate() {
     moveFrame = 0;
 
-    if (blocked()) {
-      // 上层有内容时不改变状态：hover 抬起的先放下去，手动固定的保持
-      if (!introActive && !pinned && layer.classList.contains("is-raised")) {
-        layer.classList.remove("is-raised");
-      }
-      return;
-    }
+    // 上层有内容时保持现状：用户点开的时间轴，不会因为弹窗出现就自己收起
+    if (blocked()) return;
 
-    var inside = inBand(pointer.y);
-
-    var nearEnd = inside &&
-      (pointer.x <= END_ZONE || pointer.x >= window.innerWidth - END_ZONE);
-
-    var raised = introActive || (!suppressed && (pinned || nearEnd));
+    var raised = introActive || pinned;
 
     if (raised !== layer.classList.contains("is-raised")) {
       layer.classList.toggle("is-raised", raised);
     }
     layer.classList.toggle("is-pinned", pinned && raised);
+    syncToggle(raised);
   }
 
   function requestEvaluate() {
@@ -191,58 +181,27 @@
   window.addEventListener("resize", onResize);
   window.addEventListener("orientationchange", onResize);
 
-  window.addEventListener("mousemove", function (event) {
-    // 触屏点按也会补发 mousemove，不能当成悬停
-    if (noHover.matches) return;
-    pointer.x = event.clientX;
-    pointer.y = event.clientY;
-    // 只有指针真的离开这一带，才解除退出后的压制
-    if (!inBand(event.clientY)) suppressed = false;
-    requestEvaluate();
-  }, { passive: true });
+  // 唯一的唤出入口：右上角那枚标签。桌面和触屏同一套操作。
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      if (blocked()) return;
+      pinned = !pinned;
+      evaluate();
+    });
+  }
 
-  document.addEventListener("mouseleave", function () {
-    pointer.y = -1;
-    suppressed = false;
-    requestEvaluate();
-  });
-
-  window.addEventListener("blur", function () {
-    pointer.y = -1;
-    suppressed = false;
-    requestEvaluate();
-  });
-
-
-  var INTERACTIVE = "a, button, input, select, textarea, label, summary, [role='button']";
-
-  // 浮起并固定后，在这一带再点一下就落回去（桌面和触屏都一样）。
-  // 用捕获阶段拦下，免得同时点开底下的图片或链接
+  // 浮起之后，点这一带任意位置也能收起。用捕获阶段拦下，免得同时点开底下的图片或链接；
+  // 标签自己那一小块要让过去，否则它的点击先被这里吃掉。
   window.addEventListener("click", function (event) {
     if (!pinned || blocked()) return;
+    var target = event.target;
+    if (target && target.closest && target.closest(".tl-toggle")) return;
     if (!inBand(event.clientY)) return;
     event.preventDefault();
     event.stopPropagation();
     pinned = false;
-    suppressed = true;
     evaluate();
   }, true);
-
-  window.addEventListener("click", function (event) {
-    var target = event.target;
-    if (target && target.closest) {
-      if (target.closest(".tl-layer")) return;
-      if (target.closest(INTERACTIVE)) return;
-    }
-    if (blocked()) return;
-    if (!inBand(event.clientY)) return;
-    if (overImage(event.clientX, event.clientY)) return;
-    var selection = window.getSelection ? String(window.getSelection()) : "";
-    if (selection.length) return;
-    pinned = true;
-    suppressed = false;
-    requestEvaluate();
-  });
 
   if (window.MutationObserver) {
     var observer = new MutationObserver(readIntro);

@@ -151,42 +151,63 @@ body { background: transparent; }
   color: #6c675f;
 }
 
-/* 两端的小字说明：落在悬停区里，贴着页边竖排，不压正文。
-   桌面端只在图层暗着时出现；触屏上展开后改成「轻点收起」。 */
-.tl-hint {
+/* 时间轴的开关：落在图层右上角，一枚纸色小标签。
+   放在 .tl-layer 外面，因为它要在图层暗着（opacity .3、z-index -1）时照样清楚可点。
+   --tl-half 跟着 .tl-layer 的半高走（440px / 360px），标签才咬得住右上角。
+   只在「长卷露出来」（.is-window）或「已经展开」（.is-raised）时出现：
+   常驻的话，它会压在正文上（叁那一拍的引言就被盖过一行），而这枚标签只对
+   露出来的长卷有意义，藏在版面底下的部分不需要它。 */
+.tl-toggle {
+  --tl-half: 220px;
   position: fixed;
   z-index: 31;
-  top: 50%;
-  writing-mode: vertical-rl;
-  font-size: 11px;
-  line-height: 1;
-  letter-spacing: .32em;
-  color: rgba(16, 16, 15, .46);
-  white-space: nowrap;
+  top: max(10px, calc(50% - var(--tl-half) + 14px));
+  right: clamp(14px, 2vw, 30px);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 13px 7px 15px;
+  border: 1px solid rgba(16, 16, 15, .18);
+  border-radius: 999px;
+  background: rgba(246, 239, 228, .9);
+  -webkit-backdrop-filter: blur(8px) saturate(1.04);
+  backdrop-filter: blur(8px) saturate(1.04);
+  box-shadow: 0 2px 10px rgba(43, 29, 22, .1);
+  color: #3a352f;
+  font: 400 12px/1 var(--serif);
+  letter-spacing: .16em;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transform: translateY(-50%);
-  transition: opacity .3s ease;
+  transition: color .25s ease, border-color .25s ease, background-color .25s ease,
+              opacity .28s ease, visibility 0s linear .28s;
 }
-.tl-hint--start { left: clamp(4px, 1.2vw, 18px); }
-.tl-hint--end { right: clamp(4px, 1.2vw, 18px); }
-.tl-hint__unpin,
-.tl-hint__tap,
-.tl-hint__close { display: none; }
-.tl-layer.is-raised + .tl-hints .tl-hint { opacity: 0; }
-/* 桌面端点击固定后，两端提示改成「点击收起」 */
-.tl-layer.is-pinned + .tl-hints .tl-hint { opacity: 1; }
-.tl-layer.is-pinned + .tl-hints .tl-hint__hover { display: none; }
-.tl-layer.is-pinned + .tl-hints .tl-hint__unpin { display: inline; }
-html.intro .tl-hints,
-body.is-story-open .tl-hints { display: none; }
-@media (hover: none) {
-  .tl-hint__hover { display: none; }
-  .tl-hint__tap { display: inline; }
-  .tl-layer.is-raised + .tl-hints .tl-hint { opacity: 1; }
-  .tl-layer.is-raised + .tl-hints .tl-hint__tap { display: none; }
-  .tl-layer.is-raised + .tl-hints .tl-hint__close { display: inline; }
-  .tl-layer.is-pinned + .tl-hints .tl-hint__unpin { display: none; }
+.tl-layer.is-window + .tl-toggle,
+.tl-layer.is-raised + .tl-toggle {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
 }
+.tl-toggle:hover,
+.tl-toggle:focus-visible { color: var(--red); border-color: currentColor; background: rgba(246, 239, 228, .95); }
+.tl-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.tl-toggle__caret {
+  width: 11px;
+  height: 8px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .3s ease;
+}
+/* 展开后箭头翻过来朝下，示意「收起」 */
+.tl-toggle[aria-expanded="true"] .tl-toggle__caret { transform: rotate(180deg); }
+html.is-on-hero .tl-toggle,
+html.intro .tl-toggle,
+body.is-story-open .tl-toggle { display: none; }
 
 
 /* 环带：两条弧线夹出一条带，中间 36px、两端收薄，延伸到视口外 */
@@ -397,6 +418,7 @@ body.is-story-open .tl-hints { display: none; }
 
 @media (max-width: 900px) {
   .tl-layer { height: 360px; }
+  .tl-toggle { --tl-half: 180px; top: max(8px, calc(50% - var(--tl-half) + 10px)); right: 12px; }
   .tl-layer__item { width: 152px; }
   .tl-layer__item--pending { width: 118px; }
   .tl-layer__item--blank { width: 88px; }

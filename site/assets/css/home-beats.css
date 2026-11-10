@@ -4,7 +4,7 @@
    三条规矩：
    1. 每一拍都有不透明的底（纸色或夜色）。固定在视口正中的时间长卷只从 .tl-window 这道「缝」里露出来。
    2. 左侧朱线 .pulse 是全页唯一的贯穿元素，别再加第二条装饰线。
-   3. 大字只用宋刻，行书只在拍号（壹贰叁）和收尾一句出现。 */
+   3. 大字只用宋刻，行书只在拍号（壹贰叁）出现。 */
 
 main { position: relative; }
 
@@ -128,7 +128,7 @@ main { position: relative; }
   transform: scaleY(var(--pulse-progress, 1));
   transform-origin: top;
 }
-/* 线头：停在页尾那句话旁边，留一个没系死的结 */
+/* 线头：停在页尾那段统计旁边，留一个没系死的结 */
 .pulse__knot {
   position: absolute;
   left: 50%;
@@ -179,7 +179,6 @@ main { position: relative; }
 }
 .beat__more { max-width: 1360px; margin: clamp(36px, 4vw, 56px) auto 0; text-align: right; }
 .beat__more a,
-.doors__head a,
 .thin-foot__go {
   font: 700 clamp(16px, 1.3vw, 19px)/1.4 var(--serif);
   letter-spacing: .12em;
@@ -282,7 +281,15 @@ main { position: relative; }
   gap: 12px 24px;
   padding-bottom: 18px;
 }
+/* 「非遗辑录」既是这一组的标题，也是进长卷的入口：字号沿用原来的 h3，
+   下划线保留，让「可以点」这件事仍然看得出来。 */
 .doors__head h3 { margin: 0; font: 700 clamp(24px, 2.5vw, 38px)/1.2 var(--serif); letter-spacing: .04em; }
+.doors__head h3 a {
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 10px;
+}
 .doors__row {
   margin: 0;
   padding: 0;
@@ -343,21 +350,8 @@ main { position: relative; }
   padding: 18px var(--page-gutter);
   box-shadow: inset 0 14px 18px -18px rgba(43, 29, 22, .5), inset 0 -14px 18px -18px rgba(43, 29, 22, .5);
 }
-.tl-window p {
-  margin: 0;
-  font: 400 clamp(13px, 1.1vw, 16px)/1.6 var(--serif);
-  letter-spacing: .28em;
-  color: #6c675f;
-  text-align: center;
-}
 /* 缝对到视口中间时，长卷从水印提到正常浓度 */
 .tl-layer.is-window:not(.is-raised) { opacity: .92; }
-html.is-on-hero .tl-hints { display: none; }
-/* 两端的竖排提示往外让一步，别压着朱线 */
-@media (min-width: 701px) {
-  .tl-hint--start { left: 5px; }
-  .tl-hint--end { right: 5px; }
-}
 
 /* ── 贰：柜台上的四件 ───────────────────────────────────── */
 .beat--use { background: var(--paper-deep); }
@@ -501,10 +495,6 @@ html.is-on-hero .tl-hints { display: none; }
 .thin-foot__go { text-decoration-color: #e0553f; white-space: nowrap; }
 .beat--thin .thin-foot__go:hover { color: #ff9c88; }
 
-.manifesto { max-width: 1360px; margin: clamp(96px, 12vw, 190px) auto 0; }
-.manifesto p { margin: 0; font: 700 clamp(28px, 4.5vw, 72px)/1.4 var(--serif); text-wrap: pretty; }
-.manifesto p + p { color: #8f877b; }
-
 /* ── 断点 ───────────────────────────────────────────────── */
 @media (max-width: 1000px) {
   .beat__head { grid-template-columns: auto minmax(0, 1fr); }
@@ -534,8 +524,6 @@ html.is-on-hero .tl-hints { display: none; }
   .hero__beats small { font-size: 11px; letter-spacing: .06em; }
 
   .pulse { left: 9px; }
-  /* 窄屏左边只留朱线，时间轴的提示只在右边出现 */
-  .tl-hint--start { display: none; }
   .beat { padding-top: 72px; padding-bottom: 76px; }
   .beat__head { grid-template-columns: 1fr; gap: 10px; margin-bottom: 32px; }
   .beat__head h2 { font-size: clamp(28px, 9vw, 44px); }
@@ -559,7 +547,6 @@ html.is-on-hero .tl-hints { display: none; }
   .door > span:last-child { font-size: 12px; }
 
   .tl-window { min-height: 400px; }
-  .tl-window p { letter-spacing: .14em; }
 
   .shelf { gap: 40px 14px; }
   .shelf__pic { height: 52vw; }

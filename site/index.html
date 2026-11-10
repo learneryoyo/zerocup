@@ -138,8 +138,7 @@
 
       <div class="doors">
         <div class="doors__head">
-          <h3>四个门类，各有一册</h3>
-          <a href="heritage.html">去非遗辑录</a>
+          <h3><a href="heritage.html">非遗辑录</a></h3>
         </div>
         <ul class="doors__row">
           <li>
@@ -174,15 +173,13 @@
       </div>
     </section>
 
-    <div class="tl-window">
-      <p>七千年前的一处榫卯，到今天，是同一条线。</p>
-    </div>
+    <div class="tl-window"></div>
 
     <section class="beat beat--use" id="beat-use" aria-labelledby="today-title">
       <header class="beat__head">
         <span class="beat__no" aria-hidden="true">贰</span>
         <h2 id="today-title">今天它长这样</h2>
-        <p>从传统纹样到现代服饰，从老年画到文创产品。熟悉的图案和技艺，经过新的设计，有了不一样的呈现方式。</p>
+        <p>从传统纹样到现代服饰，从老年画到文创产品。熟悉的图案和技艺被重新设计过，换了一种样子回到日常里。</p>
       </header>
       <ul class="shelf">
         <li>
@@ -225,16 +222,13 @@
       <p class="beat__more"><a href="revival.html">三十件都在古艺新生</a></p>
     </section>
 
-    <div class="tl-window">
-      <p>有的手艺传了几百年，有的名录才写了二十年。</p>
-    </div>
+    <div class="tl-window"></div>
 
     <!--
       时间轴图层：固定在视口正中的一条环带，默认压在页面内容下面（z-index: -1）。
-      桌面端：鼠标停在左右两端会升到内容之上，点击这一带则保持，再点一次落回底层。
-      触屏：轻点这一带展开，再轻点一次落回底层。开屏动画（intro 类）时同样升起。
+      唤出只认右上角那枚标签（.tl-toggle）：点一下升到内容之上，再点一下落回底层。
+      浮起后点这一带任意位置也能收起。开屏动画（intro 类）时自动升起。
       长卷图还没下载完时整条先空着，下完淡入；下载失败才退回线条版。
-      图层后面的 .tl-hints 是两端的小字说明，按设备显示「悬停」或「轻点」。
       页面往下滚，轨道按滚动进度横向移动，二者线性对应。始终不折叠、不变高。
     -->
     <section class="tl-layer" id="timeline" aria-labelledby="timeline-title">
@@ -383,14 +377,12 @@
       </div>
     </section>
 
-    <div class="tl-hints" aria-hidden="true">
-      <span class="tl-hint tl-hint--start">
-        <span class="tl-hint__hover">悬停在此处显示时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
-      </span>
-      <span class="tl-hint tl-hint--end">
-        <span class="tl-hint__hover">悬停在此处显示时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
-      </span>
-    </div>
+    <!-- 时间长卷的开关。原来靠悬停左右两端唤出，现在只认这一个标签：点开、再点收起。
+         标签放在图层外面，因为它要在图层暗着（opacity .3）的时候依然清楚可点。 -->
+    <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="timeline">
+      <span class="tl-toggle__text" data-tl-toggle-text>展开时间长卷</span>
+      <svg class="tl-toggle__caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 6.5 6 1.5l5 5"/></svg>
+    </button>
 
     <section class="beat beat--thin" id="beat-thin" aria-labelledby="thin-title">
       <header class="beat__head">
@@ -409,15 +401,10 @@
         </div>
       </div>
 
-      <div class="thin-foot">
+      <div class="thin-foot" data-pulse-end>
         <p class="thin-foot__count"><b data-threads-high>57</b> 项在六十分以上，是我们判断的高度或极度濒危。</p>
         <p class="thin-foot__note">分数是编辑判断，依据传承梯队、从业人数、日常使用、技艺完整性和文献记录，不代表官方评级。</p>
         <a class="thin-foot__go" href="games/spectrum.html">去存续有数，拖一拖这条光谱</a>
-      </div>
-
-      <div class="manifesto" aria-label="项目理念">
-        <p>传统不是一件被时间封存的旧物。</p>
-        <p data-pulse-end>它在人的手里，被一遍遍做成新的今天。</p>
       </div>
     </section>
   </main>
@@ -425,7 +412,7 @@
   <footer class="site-footer">
     <div>
       <p class="site-footer__brand">遗脉相承</p>
-      <p class="site-footer__line">见物，见人，见一门手艺的时间。</p>
+      <p class="site-footer__line">见人，见物，见风俗节庆，见烟火相承。</p>
     </div>
     <nav aria-label="页脚导航">
       <a href="index.html">首页</a>
