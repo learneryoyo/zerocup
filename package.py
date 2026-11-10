@@ -10,8 +10,8 @@
         └── 2026-零杯零组-<队伍名>-<队长姓名>-匿名版本.zip
 
 用法：
-    python package.py --team 海底小纵队 --captain 屈乐瑶
-    python package.py --team 海底小纵队 --captain 屈乐瑶 --names 屈乐瑶,张三,李四
+    python package.py --team 海底小纵队 --captain 队长姓名
+    python package.py --team 海底小纵队 --captain 队长姓名 --names 姓名1,姓名2,姓名3,姓名4
 
 做了四件事：
     1. 排除 .git / 开发脚本 / 模板页 / 无入链的试验页
