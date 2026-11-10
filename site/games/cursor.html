@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#10100f">
   <title>换一支指针 · 非遗辑录</title>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="../assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/dinglie-songke-games-cursor.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/cursor.css">
   <link rel="stylesheet" href="../assets/css/site.css">
   <style>
@@ -47,6 +47,20 @@
     @media (prefers-reduced-motion: reduce) { .cur-hammer-big.is-strike { animation: none; } }
     @media (max-width: 900px) { .cur-grid { grid-template-columns: 1fr; } }
   </style>
+<!-- page-font:begin -->
+<style>
+/* 本页专用字体子集：只含这一页会用到的字，比整包小一个量级。
+   由 _font_page.py 生成，别手改。 */
+@font-face{font-family:"DingLie SongKe";src:url("../assets/fonts/dinglie-songke-games-cursor.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:block}
+@font-face{font-family:"DingLie SongKe Page";src:url("../assets/fonts/dinglie-songke-games-cursor.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:block}
+@font-face{font-family:"HongLei XingShu";src:url("../assets/fonts/honglei-xingshu-games-cursor.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:block}
+@font-face{font-family:"HongLei XingShu Page";src:url("../assets/fonts/honglei-xingshu-games-cursor.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:block}
+/* 兜底链里刻意不放整包字体：一旦有漏字，宁可回落系统宋体 / 楷体，
+   也不该为几个字再下一遍几百 KB 的整包。 */
+:root{--serif:"DingLie SongKe Page","Songti SC","STSong","Noto Serif SC",Georgia,serif;
+      --xingshu:"HongLei XingShu Page","Kaiti SC","STKaiti","KaiTi",var(--serif)}
+</style>
+<!-- page-font:end -->
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到主要内容</a>

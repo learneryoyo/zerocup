@@ -1,4 +1,6 @@
-@font-face { font-family: "DingLie SongKe"; src: url("../assets/fonts/dinglie-songke.woff2") format("woff2"); font-weight: 400 700; font-display: block; }
+/* 字体 @font-face 不在这里声明：各页 <head> 里有本页专用子集（_font_page.py 生成），
+   族名仍是 "DingLie SongKe" / "HongLei XingShu"，直接引用这些族名的规则一样命中。
+   同一族名声明两张脸时 Chrome 会把两张都下载，所以整包这份必须让位。 */
 /* 站内导航：游戏页共用。游戏页有自己的配色变量、不引 site.css，故单列一份。
    尺寸必须与 site.css 的 .site-header / .primary-nav 逐项一致（74px 高、
    clamp(20px,4vw,64px) 内边距、28px 站名、27/23 导航内边距），否则从这页点导航
