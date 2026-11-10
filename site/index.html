@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="遗脉相承：从器物、戏曲、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
   <meta name="theme-color" content="#10100f">
-  <title>遗脉相承 · 见物，见人，见一门手艺的时间</title>
+  <title>遗脉相承·首页</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/dinglie-songke-index.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/cursor.css">
@@ -74,9 +74,9 @@
 
   <main id="main-content" tabindex="-1">
     <!--
-      首页按「四拍」排：壹 看见它 → 贰 它还在用 → 叁 它在变细 → 肆 薪火相传。
+      首页按「三拍」排：壹 百工有章 → 贰 古艺入常 → 叁 遗脉寻踪。
       左侧一根朱线（.pulse，「脉」）从首屏底一直牵到页尾，随滚动走到哪画到哪。
-      四拍之间的 .tl-window 是透明的「缝」，固定在视口正中的时间长卷只从这里露出来；
+      拍与拍之间的 .tl-window 是透明的「缝」，固定在视口正中的时间长卷只从这里露出来；
       其余版面都有纸色或夜色底，长卷不会再从标题、图片背后透出。
     -->
     <section class="hero" aria-labelledby="intro-title">
@@ -87,11 +87,10 @@
         <p class="hero__eyebrow" lang="en">CHINA · LIVING HERITAGE</p>
         <h1 id="intro-title"><span>岁月中走来，</span><span>人间中回响</span></h1>
       </div>
-      <ol class="hero__beats" aria-label="本页四段">
-        <li><a href="#beat-see"><b>壹</b><span>看见它</span><small>手中有万象</small></a></li>
-        <li><a href="#beat-use"><b>贰</b><span>它还在用</span><small>今天它长这样</small></a></li>
-        <li><a href="#beat-thin"><b>叁</b><span>它在变细</span><small>一百一十四根线</small></a></li>
-        <li><a href="#beat-hand"><b>肆</b><span>薪火相传</span><small>从小事开始</small></a></li>
+      <ol class="hero__beats" aria-label="本页三段">
+        <li><a href="#beat-see"><b>壹</b><span>百工有章</span><small>一器一物，皆有来处</small></a></li>
+        <li><a href="#beat-use"><b>贰</b><span>古艺入常</span><small>旧时手艺，今日生活</small></a></li>
+        <li><a href="#beat-thin"><b>叁</b><span>遗脉寻踪</span><small>循其来路，察其存续</small></a></li>
       </ol>
       <span class="hero__credit">摄影：Tuan Nguyen</span>
     </section>
@@ -139,8 +138,8 @@
 
       <div class="doors">
         <div class="doors__head">
-          <h3>再往里走，是四组日常</h3>
-          <a href="heritage.html">进长卷里找路</a>
+          <h3>四个门类，各有一册</h3>
+          <a href="heritage.html">去非遗辑录</a>
         </div>
         <ul class="doors__row">
           <li>
@@ -193,7 +192,6 @@
             <strong>年画丝巾与杯垫</strong>
             <span class="shelf__from">桃花坞木版年画</span>
             <span class="shelf__where">微店「刻桃印花」</span>
-            <span class="shelf__price">¥120 起</span>
           </a>
         </li>
         <li>
@@ -203,7 +201,6 @@
             <strong>「万象更新」木刻套装</strong>
             <span class="shelf__from">桃花坞木版年画</span>
             <span class="shelf__where">苏州博物馆艺术品商店</span>
-            <span class="shelf__price">¥199</span>
           </a>
         </li>
         <li>
@@ -213,7 +210,6 @@
             <strong>联名白纸扇</strong>
             <span class="shelf__from">王星记制扇技艺</span>
             <span class="shelf__where">王星记官网定制页</span>
-            <span class="shelf__price">未公开标价</span>
           </a>
         </li>
         <li>
@@ -223,7 +219,6 @@
             <strong>皮影剧《惩恶扬善小哪吒》</strong>
             <span class="shelf__from">华县皮影戏</span>
             <span class="shelf__where">少华山国际皮影博览园</span>
-            <span class="shelf__price">演出票，查当期场次</span>
           </a>
         </li>
       </ul>
@@ -422,21 +417,8 @@
 
       <div class="manifesto" aria-label="项目理念">
         <p>传统不是一件被时间封存的旧物。</p>
-        <p>它在人的手里，被一遍遍做成新的今天。</p>
+        <p data-pulse-end>它在人的手里，被一遍遍做成新的今天。</p>
       </div>
-    </section>
-
-    <section class="beat beat--hand" id="beat-hand" aria-labelledby="hand-title">
-      <!-- 这一拍不设视觉标题：下面四个条目（买一件 / 学一手 / 看一场 / 玩一把）自己说清了做什么。
-           保留一个视觉隐藏的 h2，供 aria-labelledby 和文档标题大纲使用。 -->
-      <h2 id="hand-title" class="visually-hidden">薪火相传</h2>
-      <ul class="hands">
-        <li><a href="revival.html"><strong>买一件</strong><span>能买、能定制的新作，都标了去处和价格。</span><em>看三十件新作</em></a></li>
-        <li><a href="games/spectrum.html#do-title"><strong>学一手</strong><span>查属地保护单位，留意工坊、传习所和研培计划的招生。</span><em>查参与入口</em></a></li>
-        <li><a href="category/festival.html"><strong>看一场</strong><span>一场演出、一次庙会，就是它在当地的日常。</span><em>看节日与戏台</em></a></li>
-        <li><a href="games/kaisu/index.html"><strong>玩一把</strong><span>先在屏幕上，给荆门酥饼开一次酥。</span><em>玩开酥小游戏</em></a></li>
-      </ul>
-      <p class="hands__end" data-pulse-end>下次路过一家老字号时，多停一会儿。</p>
     </section>
   </main>
 

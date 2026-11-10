@@ -1,10 +1,10 @@
-/* 首页版面：首屏 + 四拍（壹 百工有章 / 贰 古艺入常 / 叁 遗脉寻踪 / 肆 传薪有我）。
+/* 首页版面：首屏 + 三拍（壹 百工有章 / 贰 古艺入常 / 叁 遗脉寻踪）。
    时间轴图层见 home-classic.css；导航、页脚、子页弹层见 site.css。
 
    三条规矩：
    1. 每一拍都有不透明的底（纸色或夜色）。固定在视口正中的时间长卷只从 .tl-window 这道「缝」里露出来。
    2. 左侧朱线 .pulse 是全页唯一的贯穿元素，别再加第二条装饰线。
-   3. 大字只用宋刻，行书只在拍号（壹贰叁肆）和收尾一句出现。 */
+   3. 大字只用宋刻，行书只在拍号（壹贰叁）和收尾一句出现。 */
 
 main { position: relative; }
 
@@ -66,7 +66,7 @@ main { position: relative; }
   padding: 0 var(--page-gutter);
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-top: 1px solid rgba(246, 239, 228, .26);
 }
 .hero__beats li + li { border-left: 1px solid rgba(246, 239, 228, .16); }
@@ -99,7 +99,7 @@ main { position: relative; }
   color: rgba(246, 239, 228, .7);
 }
 
-/* 首屏只有这一次入场：大字和四拍依次落定 */
+/* 首屏只有这一次入场：大字和三拍依次落定 */
 @media (prefers-reduced-motion: no-preference) {
   .hero__heading, .hero__side, .hero__beats { animation: hero-settle .9s cubic-bezier(.2, .7, .2, 1) both; }
   .hero__side { animation-delay: .25s; }
@@ -400,7 +400,6 @@ html.is-on-hero .tl-hints { display: none; }
 .shelf__item strong { margin-top: 12px; font: 700 clamp(19px, 1.7vw, 25px)/1.35 var(--serif); letter-spacing: .02em; }
 .shelf__from { margin-top: 4px; font-size: 13px; letter-spacing: .06em; color: #6c675f; }
 .shelf__where { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.7; }
-.shelf__price { margin-top: 2px; font: 700 17px/1.6 Georgia, var(--serif); letter-spacing: .04em; color: var(--red); }
 .shelf__item:hover strong, .shelf__item:focus-visible strong { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
 
 /* ── 叁：一排线 ───────────────────────────────────── */
@@ -506,37 +505,6 @@ html.is-on-hero .tl-hints { display: none; }
 .manifesto p { margin: 0; font: 700 clamp(28px, 4.5vw, 72px)/1.4 var(--serif); text-wrap: pretty; }
 .manifesto p + p { color: #8f877b; }
 
-/* ── 肆：四件小事 ───────────────────────────────────────── */
-.hands { max-width: 1360px; margin: 0 auto; padding: 0; list-style: none; border-top: 2px solid var(--ink); }
-.hands li { border-bottom: 1px solid var(--line); }
-.hands a {
-  display: grid;
-  grid-template-columns: minmax(0, .5fr) minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: 8px clamp(20px, 3vw, 48px);
-  padding: clamp(22px, 2.8vw, 40px) 0;
-  text-decoration: none;
-  transition: padding-left .35s cubic-bezier(.2, .7, .2, 1), color .2s ease;
-}
-.hands strong { font: 700 clamp(34px, 4.6vw, 74px)/1.05 var(--serif); letter-spacing: .02em; }
-.hands span { font-size: clamp(14px, 1.15vw, 17px); line-height: 1.9; color: #55504a; }
-.hands em {
-  font: 700 clamp(15px, 1.2vw, 18px)/1.4 var(--serif);
-  font-style: normal;
-  letter-spacing: .12em;
-  text-decoration: underline;
-  text-decoration-color: var(--red);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 8px;
-}
-.hands a:hover, .hands a:focus-visible { padding-left: clamp(10px, 1.6vw, 26px); color: var(--red); }
-.hands__end {
-  max-width: 1360px;
-  margin: clamp(64px, 8vw, 120px) auto 0;
-  font: 400 clamp(26px, 3.4vw, 52px)/1.5 var(--xingshu);
-  color: #35312b;
-}
-
 /* ── 断点 ───────────────────────────────────────────────── */
 @media (max-width: 1000px) {
   .beat__head { grid-template-columns: auto minmax(0, 1fr); }
@@ -550,15 +518,8 @@ html.is-on-hero .tl-hints { display: none; }
   .thin-foot { grid-template-columns: 1fr 1fr; }
   .thin-foot__go { grid-column: 1 / -1; justify-self: start; }
 }
-/* 四拍：701–940px 这一档若仍排四列，每格留给小字的宽度只有 100–150px，
-   两句九到十字的题眼会断成一个字的孤行（「……续一程薪/火」）。这一档先折成两行两列，
-   941px 以上再回到四条并排（实测四列时小字需要 138px，941px 起余量 20px）。 */
-@media (max-width: 940px) {
-  .hero__beats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero__beats li:nth-child(3) { border-left: 0; }
-  .hero__beats li:nth-child(n+3) { border-top: 1px solid rgba(246, 239, 228, .16); }
-  .hero__beats li:nth-child(odd) a { padding-left: 0; }
-}
+/* 三拍：比原先少一格，每格宽度多出三成，941px 以下不必折行，仍保持三列。
+   窄到 560px 以下才改成一列，那时每格已不足 180px。 */
 @media (max-width: 700px) {
   .hero { padding-top: 22px; }
   .hero h1 { font-size: clamp(28px, 9.4vw, 56px); line-height: 1.42; letter-spacing: .1em; }
@@ -566,11 +527,10 @@ html.is-on-hero .tl-hints { display: none; }
   .hero__photo { object-position: 56% 40%; }
   .hero__side { font-size: 13px; line-height: 2.1; }
   .hero__credit { top: 12px; }
-  .hero__beats { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
-  .hero__beats li:nth-child(3) { border-left: 0; }
-  .hero__beats li:nth-child(n+3) { border-top: 1px solid rgba(246, 239, 228, .16); }
-  .hero__beats a { padding: 14px 10px 16px; gap: 0 10px; min-height: 64px; }
-  .hero__beats li:nth-child(odd) a { padding-left: 0; }
+  /* 三拍在手机上竖排成一条：两列会剩下一项孤零零占半行 */
+  .hero__beats { grid-template-columns: 1fr; margin-top: 24px; }
+  .hero__beats li + li { border-left: 0; border-top: 1px solid rgba(246, 239, 228, .16); }
+  .hero__beats a { padding: 13px 0 15px; gap: 0 12px; min-height: 0; }
   .hero__beats small { font-size: 11px; letter-spacing: .06em; }
 
   .pulse { left: 9px; }
@@ -605,7 +565,6 @@ html.is-on-hero .tl-hints { display: none; }
   .shelf__pic { height: 52vw; }
   .shelf__item strong { font-size: 17px; }
   .shelf__where, .shelf__from { font-size: 12px; }
-  .shelf__price { font-size: 15px; }
   .beat__more { text-align: left; }
 
   .threads__field { height: 230px; }
@@ -616,11 +575,8 @@ html.is-on-hero .tl-hints { display: none; }
   .threads__score { grid-column: 1; grid-row: auto; margin-top: 10px; }
   .thin-foot { grid-template-columns: 1fr; }
 
-  .hands a { grid-template-columns: 1fr; gap: 6px; padding: 22px 0 24px; }
-  .hands em { margin-top: 8px; justify-self: start; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .story-card > img, .door__fig, .shelf__pic img, .hands a { transition: none; }
 }
 
 
