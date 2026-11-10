@@ -155,7 +155,7 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 .act-list li { display: grid; grid-template-columns: minmax(0, .4fr) minmax(0, 1fr); align-items: baseline; gap: 6px clamp(20px, 3vw, 48px); padding: clamp(18px, 2.2vw, 30px) 0; border-bottom: 1px solid var(--line); }
 .act-list b { font: 700 clamp(28px, 3.4vw, 52px)/1.1 var(--serif); letter-spacing: .02em; }
 .act-list p { margin: 0; max-width: 40em; font-size: 16px; line-height: 1.95; color: var(--ink-2); }
-.act-aside { margin: clamp(28px, 3vw, 44px) 0 0 auto; max-width: 720px; padding-left: clamp(18px, 2vw, 28px); border-left: 3px solid var(--red); }
+.act-aside { margin: clamp(28px, 3vw, 44px) 0 0; max-width: 720px; padding-left: clamp(18px, 2vw, 28px); border-left: 3px solid var(--red); }
 .act-aside h3 { margin: 0 0 10px; font: 700 clamp(20px, 1.9vw, 26px)/1.4 var(--serif); letter-spacing: .04em; }
 .act-aside p { margin: 0 0 8px; font-size: 15px; line-height: 1.95; color: var(--ink-2); }
 .act-aside .dim { font-size: 14px; color: var(--ink-3); }
@@ -186,7 +186,6 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
   .card { padding: 22px 0 20px; box-shadow: 0 1px 0 var(--line); }
   .card:hover { box-shadow: 0 1px 0 var(--line); }
   .act-list li { grid-template-columns: 1fr; }
-  .act-aside { margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .card { animation: none; }
@@ -224,6 +223,9 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
   letter-spacing: .14em;
   color: var(--ink);
   text-decoration: none;
+  /* 外层 .ribbon-copy 关掉了指针事件，只给 button 放行；这是个链接，要单独放行才点得到。 */
+  pointer-events: auto;
+  cursor: pointer;
   transition: border-color .2s ease, color .2s ease, background-color .2s ease;
 }
 .roster-jump i { font-style: normal; font-size: 13px; line-height: 1; color: var(--red); transition: transform .2s ease; }
@@ -298,3 +300,11 @@ button.atlas-tile:focus-visible { outline: 2px solid var(--red); outline-offset:
   .atlas-read { min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .atlas-tile, .atlas-cells i { transition: none; } }
+
+/* Keep detail panels available without a sideways slide in reduced motion. */
+html[data-motion-input="keyboard"] .drawer,
+html[data-motion-input="keyboard"] .scrim { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .drawer { transform: none; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 100ms ease, visibility 100ms; }
+  .drawer.on { opacity: 1; visibility: visible; pointer-events: auto; }
+}

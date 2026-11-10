@@ -2,6 +2,30 @@
 (function () {
   "use strict";
 
+  // Share input modality and dialog exits across the main pages.
+  document.addEventListener('keydown', function () { document.documentElement.dataset.motionInput = 'keyboard'; }, true);
+  document.addEventListener('pointerdown', function () { document.documentElement.dataset.motionInput = 'pointer'; }, true);
+  var dialogExits = new WeakMap();
+  window.zeroCupCloseDialog = function (dialog, instant) {
+    if (!dialog.open) return;
+    var previous = dialogExits.get(dialog);
+    if (instant || !dialog.animate) { dialog.close(); return; }
+    if (previous) return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var style = getComputedStyle(dialog);
+    var from = { opacity: style.opacity, transform: style.transform };
+    dialog.getAnimations().forEach(function (motion) { motion.cancel(); });
+    dialog.classList.add('is-motion-closing');
+    var motion = dialog.animate([from, { opacity: 0, transform: reduced ? 'none' : 'translateY(8px) scale(.98)' }], {
+      duration: reduced ? 100 : 160, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'forwards'
+    });
+    dialogExits.set(dialog, motion);
+    dialog.addEventListener('close', function cleanup() {
+      motion.cancel(); dialogExits.delete(dialog); dialog.classList.remove('is-motion-closing');
+    }, { once: true });
+    motion.finished.then(function () { if (dialog.open) dialog.close(); }).catch(function () {});
+  };
+
   /* 有指针皮肤时，按 site.js 的位置加载 cursor.js */
   (function () {
     var me = document.currentScript;

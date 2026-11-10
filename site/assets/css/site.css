@@ -160,8 +160,8 @@ img { display: block; max-width: 100%; }
   .site-header { padding-inline: 18px; }
   .brand-name { font-size: 16px; }
   .nav-toggle { display: block; padding: 12px 0 12px 16px; }
-  .primary-nav { position: absolute; top: 100%; right: 0; left: 0; padding: 12px 20px 24px; display: grid; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); transform: scaleY(0); transform-origin: top; opacity: 0; visibility: hidden; transition: transform 180ms ease,opacity 180ms ease,visibility 180ms; }
-  .primary-nav.is-open { transform: scaleY(1); opacity: 1; visibility: visible; }
+  .primary-nav { position: absolute; top: 100%; right: 0; left: 0; padding: 12px 20px 24px; display: grid; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); transform: translateY(-6px); transform-origin: top; opacity: 0; visibility: hidden; transition: transform 180ms ease,opacity 180ms ease,visibility 180ms; }
+  .primary-nav.is-open { transform: translateY(0); opacity: 1; visibility: visible; }
   .primary-nav a, .nav-more-btn { padding: 14px 0; font-size: 15px; }
   .primary-nav a::after, .nav-more-btn::before { content: none; }
   .primary-nav a.is-current, .nav-more.is-open .nav-more-btn, .nav-more-btn.is-current { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
@@ -216,4 +216,14 @@ img { display: block; max-width: 100%; }
   }
   .nav-more-group { color: #8a7560; }
   .nav-more-panel a.nav-more-about { border-top-color: rgba(43, 29, 22, .14); }
+}
+
+/* Menus keep their text shape; keyboard navigation is immediate. */
+@media (max-width: 700px) {
+  .site-header .primary-nav { transition: transform 180ms cubic-bezier(.23,1,.32,1), opacity 180ms cubic-bezier(.23,1,.32,1), visibility 180ms; }
+}
+html[data-motion-input="keyboard"] .site-header .primary-nav,
+html[data-motion-input="keyboard"] .nav-more-panel { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .site-header .primary-nav, .site-header .primary-nav.is-open { transform: none; transition: opacity 100ms ease, visibility 100ms; }
 }

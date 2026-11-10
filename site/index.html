@@ -69,7 +69,10 @@
       <img class="hero__photo" src="category/objects/jingdezhen-porcelain/images/porcelain-03-wheel-hands-tuan-nguyen.jpg" alt="匠人双手在陶轮上塑造瓷坯" width="1920" height="1280" fetchpriority="high" decoding="async">
       <div class="hero__veil" aria-hidden="true"></div>
       <p class="hero__side">循着非遗的脉络，<br>走近仍在延续的传统。</p>
-      <h1 id="intro-title">岁月中走来，<br>人间中回响。</h1>
+      <div class="hero__heading">
+        <p class="hero__eyebrow" lang="en">CHINA · LIVING HERITAGE</p>
+        <h1 id="intro-title"><span>岁月中走来，</span><span>人间中回响</span></h1>
+      </div>
       <ol class="hero__beats" aria-label="本页四段">
         <li><a href="#beat-see"><b>壹</b><span>看见它</span><small>手中有万象</small></a></li>
         <li><a href="#beat-use"><b>贰</b><span>它还在用</span><small>今天它长这样</small></a></li>
@@ -410,11 +413,9 @@
     </section>
 
     <section class="beat beat--hand" id="beat-hand" aria-labelledby="hand-title">
-      <header class="beat__head">
-        <span class="beat__no" aria-hidden="true">肆</span>
-        <h2 id="hand-title">薪火相传</h2>
-        <p>传承不只是传承人的事。买一件、学一手、看一场，都算。</p>
-      </header>
+      <!-- 这一拍不设视觉标题：下面四个条目（买一件 / 学一手 / 看一场 / 玩一把）自己说清了做什么。
+           保留一个视觉隐藏的 h2，供 aria-labelledby 和文档标题大纲使用。 -->
+      <h2 id="hand-title" class="visually-hidden">薪火相传</h2>
       <ul class="hands">
         <li><a href="revival.html"><strong>买一件</strong><span>能买、能定制的新作，都标了去处和价格。</span><em>看三十件新作</em></a></li>
         <li><a href="games/spectrum.html#do-title"><strong>学一手</strong><span>查属地保护单位，留意工坊、传习所和研培计划的招生。</span><em>查参与入口</em></a></li>

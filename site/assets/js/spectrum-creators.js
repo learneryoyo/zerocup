@@ -950,18 +950,48 @@
    show(+card.dataset.i);returnTo=card;
    opener.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:e.detail}));
   });
-  /* 「看全部十位」：跳到页面下方的名册。距离约 4500px，跳完要让标题闪一下、
-     并把焦点交给它，否则用户只会觉得"页面动了一下"。 */
+  /* 「看全部十位」：滑到页面下方的名册。距离有三四千像素，锚点默认是一下子切过去，
+     看不出页面往哪儿去了；这里带着页面滑下去：慢起、中段快、到站前收住。
+     到站后标题闪一下并接过焦点。中途用户自己滚轮、触摸、按键或点按，就把页面交还给用户。 */
   const all=document.createElement('a');
   all.className='roster-jump';all.href='#roster-title';
   all.innerHTML='看全部十位<i aria-hidden="true">↓</i>';
   const rosterTitle=document.getElementById('roster-title');
-  all.addEventListener('click',()=>{
-   if(!rosterTitle)return;
+  const giveUp=['wheel','touchstart','keydown','pointerdown'];
+  let glide=0;
+  function stopGlide(){
+   if(!glide)return;
+   cancelAnimationFrame(glide);glide=0;
+   giveUp.forEach(t=>window.removeEventListener(t,stopGlide));
+  }
+  function arrive(){
    rosterTitle.setAttribute('tabindex','-1');
    rosterTitle.focus({preventScroll:true});
    const head=rosterTitle.closest('.roster-head');
    if(head){head.classList.remove('is-arrived');void head.offsetWidth;head.classList.add('is-arrived');}
+  }
+  all.addEventListener('click',e=>{
+   // 新标签页打开等浏览器操作照常；其余由下面接管，不走锚点的瞬间跳转。
+   if(!rosterTitle||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+   e.preventDefault();stopGlide();
+   const margin=parseFloat(getComputedStyle(rosterTitle).scrollMarginTop)||0;
+   // 每一帧重算落点：途中有图片撑开版面时，终点跟着走，不会停偏。
+   const goal=()=>Math.max(0,Math.min(window.scrollY+rosterTitle.getBoundingClientRect().top-margin,document.documentElement.scrollHeight-window.innerHeight));
+   const from=window.scrollY,dist=goal()-from;
+   if(reduced.matches||Math.abs(dist)<4){window.scrollTo({top:goal(),behavior:'instant'});arrive();return;}
+   // 时长跟着距离走，但两头收住：近了不拖沓，远了也不让人等。
+   const dur=Math.min(1400,Math.max(700,Math.abs(dist)*.34));
+   const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+   let start=0;
+   const step=now=>{
+    if(!start)start=now;
+    const t=Math.min(1,(now-start)/dur);
+    window.scrollTo({top:from+(goal()-from)*ease(t),behavior:'instant'});
+    if(t<1){glide=requestAnimationFrame(step);return;}
+    stopGlide();arrive();
+   };
+   giveUp.forEach(t=>window.addEventListener(t,stopGlide,{passive:true}));
+   glide=requestAnimationFrame(step);
   });
   q('.creator-controls').prepend(all);
  }

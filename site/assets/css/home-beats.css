@@ -51,12 +51,16 @@ main { position: relative; }
 }
 .hero h1 {
   margin: 0;
-  font: 400 clamp(44px, 8.7vw, 138px)/1.08 var(--serif);
-  /* 首屏主标题跟正文同一套无衬线（--sans），字重 400，不跟随 --serif 的宋刻 webfont。 */
-  font-family: var(--sans);
-  letter-spacing: -.01em;
+  font: 700 clamp(38px, 7.4vw, 118px)/1.38 var(--serif);
+  /* 字体沿用前 10 次提交里首页大标题那套：宋刻 DingLie SongKe、字重 700
+     （见 a7a8f3a 的 .intro h1）。字距与两行阶梯是后来加的，保留。 */
+  font-family: var(--serif);
+  letter-spacing: .12em;
   text-shadow: 0 2px 40px rgba(0, 0, 0, .35);
 }
+.hero h1 span { display: block; }
+/* 阶梯：第二行右移一格半字，落款式错落。缩进用 em，跟着字号一起缩放。 */
+.hero h1 span + span { padding-left: 1.5em; }
 .hero__beats {
   margin: clamp(28px, 3.6vw, 56px) calc(var(--page-gutter) * -1) 0;
   padding: 0 var(--page-gutter);
@@ -97,7 +101,7 @@ main { position: relative; }
 
 /* 首屏只有这一次入场：大字和四拍依次落定 */
 @media (prefers-reduced-motion: no-preference) {
-  .hero h1, .hero__side, .hero__beats { animation: hero-settle .9s cubic-bezier(.2, .7, .2, 1) both; }
+  .hero__heading, .hero__side, .hero__beats { animation: hero-settle .9s cubic-bezier(.2, .7, .2, 1) both; }
   .hero__side { animation-delay: .25s; }
   .hero__beats { animation-delay: .4s; }
   .hero__photo { animation: hero-open 1.6s cubic-bezier(.2, .7, .2, 1) both; }
@@ -548,7 +552,8 @@ html.is-on-hero .tl-hints { display: none; }
 }
 @media (max-width: 700px) {
   .hero { padding-top: 22px; }
-  .hero h1 { font-size: clamp(30px, 10.6vw, 64px); line-height: 1.16; }
+  .hero h1 { font-size: clamp(28px, 9.4vw, 56px); line-height: 1.42; letter-spacing: .1em; }
+  .hero h1 span + span { padding-left: 1.2em; }
   .hero__photo { object-position: 56% 40%; }
   .hero__side { font-size: 13px; line-height: 2.1; }
   .hero__credit { top: 12px; }
@@ -609,3 +614,6 @@ html.is-on-hero .tl-hints { display: none; }
   .story-card > img, .door__fig, .shelf__pic img, .hands a { transition: none; }
 }
 
+
+/* 英文眉题与中文标题共用左边线，保留旧版疏字距。 */
+.hero__eyebrow { margin: 0 0 20px; padding: 0; text-align: left; font: 700 clamp(13px, 1.1vw, 16px)/1.6 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: rgba(246,239,228,.88); text-shadow: 0 1px 14px rgba(0,0,0,.5); }

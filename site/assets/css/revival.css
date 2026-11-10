@@ -49,7 +49,7 @@
 .rv-card { position: relative; display: block; aspect-ratio: 1; padding: 0; overflow: hidden; border: 0; color: var(--rv-cream); background: var(--rv-holder); text-align: left; cursor: pointer; box-shadow: 0 1px 0 rgba(96, 32, 32, .1);  }
 .rv-card:focus-visible { outline: 2px solid var(--rv-brown); outline-offset: 3px; }
 .rv-card-media { position: absolute; inset: 0; transition: transform 400ms ease; }
-.rv-card:hover .rv-card-media, .rv-card:focus-visible .rv-card-media { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) { .rv-card:hover .rv-card-media { transform: scale(1.03); } }
 .rv-card-media > img, .rv-detail-media > img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .rv-holder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; padding-bottom: 18%; color: color-mix(in srgb, var(--rv-brown) 55%, var(--rv-cream)); }
 .rv-holder .rv-badge { width: clamp(56px, 6vw, 76px); height: clamp(56px, 6vw, 76px); padding: 14%; border-radius: 50%; background: var(--rv-apricot); }
@@ -65,14 +65,17 @@
 .rv-image-caption a { color: var(--rv-brown); text-underline-offset: 3px; }
 .rv-star { position: absolute; z-index: 2; top: 10px; right: 10px; padding: 3px 8px; border: 1px solid var(--rv-gold); color: var(--rv-cream); background: rgba(144, 64, 56, .82); font-size: 11px; letter-spacing: .1em; }
 .rv-card-bar { position: absolute; z-index: 2; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 0fr; align-items: center; column-gap: 8px; padding: 9px 10px 9px 12px; background: rgba(144, 64, 56, .86); transition: grid-template-rows 300ms ease, background-color 300ms ease; }
-.rv-card:hover .rv-card-bar, .rv-card:focus-visible .rv-card-bar { grid-template-rows: auto 1fr; background: rgba(96, 32, 32, .92); }
+@media (hover: hover) and (pointer: fine) { .rv-card:hover .rv-card-bar { grid-template-rows: auto 1fr; background: rgba(96, 32, 32, .92); } }
+.rv-card:focus-visible .rv-card-bar { grid-template-rows: auto 1fr; transition: none; }
 .rv-card-name { min-width: 0; overflow: hidden; font-size: clamp(12px, 1vw, 14px); line-height: 1.4; letter-spacing: .04em; white-space: nowrap; text-overflow: ellipsis; }
 .rv-card-name b { margin-right: 6px; color: var(--rv-apricot); font-weight: 400; font-family: var(--serif); }
 .rv-plus { grid-row: 1; grid-column: 2; position: relative; width: 20px; height: 20px; border: 1.5px solid currentColor; border-radius: 50%; }
 .rv-plus::before, .rv-plus::after { content: ""; position: absolute; top: 50%; left: 50%; width: 10px; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); }
 .rv-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
 .rv-card-hook { grid-column: 1 / -1; align-self: stretch; min-height: 0; overflow: hidden; color: rgba(232, 226, 214, .86); font-size: 12px; line-height: 1.55; }
-.rv-card:hover .rv-card-hook, .rv-card:focus-visible .rv-card-hook { padding-top: 6px; }
+.rv-card-hook { padding-top: 0; }
+@media (hover: hover) and (pointer: fine) { .rv-card:hover .rv-card-hook { padding-top: 6px; } }
+.rv-card:focus-visible .rv-card-hook { padding-top: 6px; }
 
 /* 详情弹窗 */
 .rv-dialog { width: min(980px, calc(100vw - 40px)); max-height: var(--rv-dialog-h, min(86vh, 760px)); padding: 0; overflow: hidden; border: 1px solid var(--rv-gold); color: var(--rv-ink); background: var(--rv-cream); box-shadow: 0 30px 90px rgba(58, 18, 18, .35); }
@@ -351,4 +354,32 @@
   }
   .rv-dialog[data-shape="wide"] .rv-close { background: rgba(246, 239, 228, .92); }
   .rv-dialog[data-shape="wide"] .rv-close:hover { background: var(--rv-brown); }
+}
+
+/* Stable tab geometry: only the background extends on selection. */
+@media (min-width: 721px) {
+  .rv-tabs .rv-tab, .rv-tabs .rv-tab.is-active { isolation: isolate; width: 100%; min-height: 78px; background: transparent; font-size: 17px; font-weight: 700; transition: none; }
+  .rv-tab::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--tab-bg); transform: scaleX(.86); transform-origin: left; transition: transform 200ms cubic-bezier(.23,1,.32,1); }
+  .rv-tab.is-active::before { transform: scaleX(1); }
+  .rv-tabs .rv-badge, .rv-tabs .rv-tab.is-active .rv-badge { width: 40px; height: 40px; transition: none; }
+}
+.rv-card-media { transition: transform 160ms ease; }
+.rv-card-bar { transition: grid-template-rows 160ms ease, background-color 160ms ease; }
+@media (hover: none), (pointer: coarse) {
+  .rv-card-bar { grid-template-rows: auto 1fr; transition: none; }
+  .rv-card-hook { padding-top: 6px; }
+  .rv-card-media { transform: none; transition: none; }
+}
+.rv-switch-thumb { transition: transform 200ms cubic-bezier(.23,1,.32,1); }
+.rv-switch.is-dragging .rv-switch-thumb { transition: none; scale: 1; }
+.rv-counter { animation: none; }
+html[data-motion-input="keyboard"] .rv-tab::before,
+html[data-motion-input="keyboard"] .rv-switch-thumb { transition: none; }
+html[data-motion-input="keyboard"] .rv-dialog[open],
+html[data-motion-input="keyboard"] .miao-postcard[open] { animation: none; }
+.rv-dialog::backdrop, .miao-postcard::backdrop { opacity: 1; transition: opacity 160ms ease; }
+.rv-dialog.is-motion-closing::backdrop, .miao-postcard.is-motion-closing::backdrop { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .rv-tab::before, .rv-switch-thumb { transition: none; }
+  .rv-card:hover .rv-card-media { transform: none; }
 }

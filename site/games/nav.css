@@ -42,8 +42,8 @@
   .site-header { height: 64px; padding: 0 18px; }
   .site-header .brand-name { font-size: 16px; letter-spacing: .14em; }
   .site-header .nav-toggle { display: block; }
-  .site-header .primary-nav { position: absolute; top: 100%; right: 0; left: 0; padding: 12px 20px 24px; display: grid; gap: 0; background: #f6efe4; border-bottom: 1px solid rgba(16,16,15,.18); transform: scaleY(0); transform-origin: top; opacity: 0; visibility: hidden; transition: transform 180ms ease, opacity 180ms ease, visibility 180ms; }
-  .site-header .primary-nav.is-open { transform: scaleY(1); opacity: 1; visibility: visible; }
+  .site-header .primary-nav { position: absolute; top: 100%; right: 0; left: 0; padding: 12px 20px 24px; display: grid; gap: 0; background: #f6efe4; border-bottom: 1px solid rgba(16,16,15,.18); transform: translateY(-6px); transform-origin: top; opacity: 0; visibility: hidden; transition: transform 180ms ease, opacity 180ms ease, visibility 180ms; }
+  .site-header .primary-nav.is-open { transform: translateY(0); opacity: 1; visibility: visible; }
   .site-header .primary-nav > a { padding: 14px 0; font-size: 15px; }
   .site-header .primary-nav > a::after { content: none; }
   .site-header .nav-more { display: block; align-self: auto; }
@@ -94,4 +94,14 @@
 @media (max-width: 700px) {
   .site-footer { grid-template-columns: 1fr; align-items: start; }
   .site-footer a { padding: 10px 0; font-size: 15px; }
+}
+
+/* Menus keep their text shape; keyboard navigation is immediate. */
+@media (max-width: 700px) {
+  .site-header .primary-nav { transition: transform 180ms cubic-bezier(.23,1,.32,1), opacity 180ms cubic-bezier(.23,1,.32,1), visibility 180ms; }
+}
+html[data-motion-input="keyboard"] .site-header .primary-nav,
+html[data-motion-input="keyboard"] .nav-more-panel { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .site-header .primary-nav, .site-header .primary-nav.is-open { transform: none; transition: opacity 100ms ease, visibility 100ms; }
 }

@@ -64,7 +64,7 @@
     postcardOpener = cab.button;
     if (!postcard.open) postcard.showModal();
   }
-  postcard.addEventListener('click', event => { if (event.target === postcard || event.target.closest('.miao-close')) postcard.close(); });
+  postcard.addEventListener('click', event => { if (event.target === postcard || event.target.closest('.miao-close')) window.zeroCupCloseDialog(postcard, event.detail === 0); });
   postcard.addEventListener('close', () => { if (postcardOpener?.isConnected) postcardOpener.focus({ preventScroll: true }); });
   // 叠层画布 330×392 与 vitrine.webp 同比例；PANE 是展柜正面玻璃的范围。
   const PANE = { l: 34, t: 32, r: 296, b: 336 };

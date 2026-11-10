@@ -342,8 +342,8 @@
     dialog.querySelector('.rv-close').focus();
   }
 
-  dialog.querySelector('.rv-close').addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.querySelector('.rv-close').addEventListener('click', event => window.zeroCupCloseDialog(dialog, event.detail === 0));
+  dialog.addEventListener('click', event => { if (event.target === dialog) window.zeroCupCloseDialog(dialog, event.detail === 0); });
   dialog.addEventListener('close', () => {
     // 弹窗里翻到别的案例时，焦点回到对应卡片。
     const match = open && [...grid.children].find(node => node.getAttribute('aria-label').startsWith(SHORT[open.id] || open.title));
@@ -381,38 +381,74 @@
     setView(page.dataset.view === 'counter' ? 'paths' : 'counter', true);
   });
 
-  // 按住滑块拖动，松手吸附到近的一边；只是点一下时走上面的 click。
-  let drag = null;
+  // Sample release velocity, resist overscroll, and continue from interrupted motion.
+  const thumb = viewSwitch.querySelector('.rv-switch-thumb');
+  let drag = null, springFrame = 0, springVelocity = 0, suppressClick = false;
+  const thumbX = () => new DOMMatrixReadOnly(getComputedStyle(thumb).transform).m41;
+  const stopSpring = () => { cancelAnimationFrame(springFrame); springFrame = 0; };
+  function settle(target, velocity) {
+    stopSpring();
+    let x = thumbX(), last = performance.now(), elapsed = 0;
+    springVelocity = velocity * 1000;
+    if (reducedMotion.matches) { thumb.style.transform = ''; viewSwitch.classList.remove('is-dragging'); return; }
+    // mass 1 / stiffness 100 / damping 10; small physical overshoot only on drag release.
+    function step(now) {
+      const dt = Math.min((now - last) / 1000, .032); last = now; elapsed += dt;
+      springVelocity += (-100 * (x - target) - 10 * springVelocity) * dt;
+      x += springVelocity * dt;
+      thumb.style.transform = `translateX(${x}px)`;
+      if ((Math.abs(x - target) < .2 && Math.abs(springVelocity) < 2) || elapsed > 1.5) {
+        thumb.style.transform = ''; viewSwitch.classList.remove('is-dragging'); springFrame = 0; springVelocity = 0; return;
+      }
+      springFrame = requestAnimationFrame(step);
+    }
+    springFrame = requestAnimationFrame(step);
+  }
+  viewSwitch.addEventListener('click', event => {
+    if (!suppressClick) return;
+    suppressClick = false; event.preventDefault(); event.stopImmediatePropagation();
+  }, true);
   viewSwitch.addEventListener('pointerdown', event => {
-    if (event.button !== 0) return;
-    const onPaths = page.dataset.view === 'paths';
-    const range = viewSwitch.querySelector('.rv-switch-thumb').offsetWidth;
-    drag = { id: event.pointerId, startX: event.clientX, origin: onPaths ? range : 0, range, moved: false };
+    if (event.button !== 0 || !event.isPrimary) return;
+    const origin = thumbX(); stopSpring();
+    viewSwitch.classList.add('is-dragging');
+    thumb.style.transform = `translateX(${origin}px)`;
+    suppressClick = false;
+    drag = { id: event.pointerId, startX: event.clientX, origin, range: thumb.offsetWidth,
+      moved: false, x: origin, lastX: event.clientX, lastTime: event.timeStamp, velocity: 0 };
   });
-  // 手指或鼠标滑出开关时仍要跟随，所以移动和松手都挂在 window 上。
   window.addEventListener('pointermove', event => {
     if (!drag || event.pointerId !== drag.id) return;
     const delta = event.clientX - drag.startX;
     if (!drag.moved && Math.abs(delta) < 4) return;
-    if (!drag.moved) {
-      drag.moved = true;
-      viewSwitch.classList.add('is-dragging');
-    }
-    drag.x = Math.min(drag.range, Math.max(0, drag.origin + delta));
-    viewSwitch.style.setProperty('--thumb-x', `${drag.x}px`);
+    drag.moved = true;
+    const dt = event.timeStamp - drag.lastTime;
+    if (dt > 0) drag.velocity = (event.clientX - drag.lastX) / dt;
+    drag.lastX = event.clientX; drag.lastTime = event.timeStamp;
+    const raw = drag.origin + delta;
+    const resist = value => 12 * (1 - Math.exp(-value / 36));
+    drag.x = raw < 0 ? -resist(-raw) : raw > drag.range ? drag.range + resist(raw - drag.range) : raw;
+    thumb.style.transform = `translateX(${drag.x}px)`;
   });
   const endDrag = event => {
     if (!drag || event.pointerId !== drag.id) return;
-    const { moved, x, range } = drag;
-    drag = null;
-    if (!moved) return;
-    viewSwitch.classList.remove('is-dragging');
-    viewSwitch.style.removeProperty('--thumb-x');
-    const view = x > range / 2 ? 'paths' : 'counter';
-    if (view !== page.dataset.view) setView(view);
+    const state = drag; drag = null;
+    const cancelled = event.type === 'pointercancel';
+    if (!state.moved) { thumb.style.transform = ''; viewSwitch.classList.remove('is-dragging'); return; }
+    suppressClick = !cancelled;
+    const velocity = cancelled || event.timeStamp - state.lastTime > 100 ? 0 : Math.max(-.8, Math.min(.8, state.velocity));
+    const onPaths = cancelled ? page.dataset.view === 'paths' : Math.abs(velocity) > .11 ? velocity > 0 : state.x > state.range / 2;
+    setView(onPaths ? 'paths' : 'counter');
+    settle(onPaths ? state.range : 0, velocity);
   };
   window.addEventListener('pointerup', endDrag);
   window.addEventListener('pointercancel', endDrag);
+  viewSwitch.addEventListener('keydown', () => {
+    suppressClick = false; stopSpring(); drag = null; thumb.style.transform = ''; viewSwitch.classList.remove('is-dragging');
+  }, true);
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) { stopSpring(); drag = null; thumb.style.transform = ''; viewSwitch.classList.remove('is-dragging'); }
+  });
 
   select(0);
   setView('counter');
