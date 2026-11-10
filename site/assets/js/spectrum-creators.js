@@ -937,6 +937,20 @@
  dialog.addEventListener('cancel',event=>{event.preventDefault();closeCreator(true);});
  dialog.addEventListener('pointerdown',e=>onBackdrop=e.target===dialog);
  dialog.addEventListener('click',e=>{if(onBackdrop&&e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeCreator();}});
- dialog.addEventListener('close',()=>{stopDialogMotion();dialogClosing=false;onBackdrop=false;dialog.classList.remove('is-closing','is-instant');document.body.style.overflow=oldOverflow;opener.focus({preventScroll:true});schedule();});
+ dialog.addEventListener('close',()=>{stopDialogMotion();dialogClosing=false;onBackdrop=false;dialog.classList.remove('is-closing','is-instant');document.body.style.overflow=oldOverflow;(returnTo&&returnTo.isConnected?returnTo:opener).focus({preventScroll:true});returnTo=null;schedule();});
  pauseLabel();show(0);
+ /* 人物名册：页面下方把十位一次排开，点哪位就开哪位的影集（复用上面的弹层）。
+    关掉后焦点回到名册里刚才那一格，而不是跳回页头。 */
+ let returnTo=null;
+ const roster=document.getElementById('creatorRoster');
+ if(roster){
+  roster.innerHTML=people.map((p,i)=>`<li><button type="button" class="roster-card" data-i="${i}" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="roster-pic"><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}" loading="lazy" decoding="async"></span><strong>${esc(p.name)}</strong><span class="roster-field">${esc(p.field)}</span><span class="roster-title">${esc(p.title)}</span></button></li>`).join('');
+  roster.addEventListener('click',e=>{
+   const card=e.target.closest('.roster-card');if(!card||dialog.open)return;
+   show(+card.dataset.i);returnTo=card;
+   opener.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:e.detail}));
+  });
+  const all=document.createElement('a');all.className='roster-jump';all.href='#roster-title';all.textContent='看全部十位';
+  q('.creator-controls').prepend(all);
+ }
 })();

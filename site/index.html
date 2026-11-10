@@ -20,14 +20,15 @@
     }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="非遗辑录：从器物、戏曲、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
+  <meta name="description" content="遗脉相承：从器物、戏曲、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
   <meta name="theme-color" content="#10100f">
-  <title>首页 · 非遗辑录</title>
+  <title>遗脉相承 · 见物，见人，见一门手艺的时间</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/cursor.css">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/home-classic.css">
+  <link rel="stylesheet" href="assets/css/home-beats.css">
   <link rel="stylesheet" href="assets/css/heritage-story.css">
 </head>
 <body>
@@ -58,72 +59,163 @@
   </header>
 
   <main id="main-content" tabindex="-1">
-    <section class="intro" aria-labelledby="intro-title">
-      <p class="eyebrow">CHINA · LIVING HERITAGE</p>
+    <!--
+      首页按「四拍」排：壹 看见它 → 贰 它还在用 → 叁 它在变细 → 肆 接一手。
+      左侧一根朱线（.pulse，「脉」）从首屏底一直牵到页尾，随滚动走到哪画到哪。
+      四拍之间的 .tl-window 是透明的「缝」，固定在视口正中的时间长卷只从这里露出来；
+      其余版面都有纸色或夜色底，长卷不会再从标题、图片背后透出。
+    -->
+    <section class="hero" aria-labelledby="intro-title">
+      <img class="hero__photo" src="category/objects/jingdezhen-porcelain/images/porcelain-03-wheel-hands-tuan-nguyen.jpg" alt="匠人双手在陶轮上塑造瓷坯" width="1920" height="1280" fetchpriority="high" decoding="async">
+      <div class="hero__veil" aria-hidden="true"></div>
+      <p class="hero__side">从一抔瓷土到一束蚕丝，<br>沿着手艺人的双手，<br>重新认识那些仍在生长的传统。</p>
       <h1 id="intro-title">见物，见人，<br>见一门手艺的时间</h1>
-      <p class="intro-copy">从一抔瓷土到一束蚕丝，沿着手艺人的双手，重新认识那些仍在生长的传统。</p>
-      <a class="scroll-cue" href="#feature-title">向下探索 <span aria-hidden="true">↓</span></a>
+      <ol class="hero__beats" aria-label="本页四段">
+        <li><a href="#beat-see"><b>壹</b><span>看见它</span><small>手中有万象</small></a></li>
+        <li><a href="#beat-use"><b>贰</b><span>它还在用</span><small>今天它长这样</small></a></li>
+        <li><a href="#beat-thin"><b>叁</b><span>它在变细</span><small>一百一十四根线</small></a></li>
+        <li><a href="#beat-hand"><b>肆</b><span>接一手</span><small>从小事开始</small></a></li>
+      </ol>
+      <span class="hero__credit">摄影：Tuan Nguyen</span>
     </section>
 
-    <section class="feature-section" aria-labelledby="feature-title">
-      <div class="section-heading">
-        <p class="eyebrow">本期辑录 · 01</p>
+    <div class="pulse" aria-hidden="true"><span class="pulse__fill"></span><i class="pulse__knot"></i></div>
+
+    <section class="beat beat--see" id="beat-see" aria-labelledby="feature-title">
+      <header class="beat__head">
+        <span class="beat__no" aria-hidden="true">壹</span>
         <h2 id="feature-title">手中有万象</h2>
-        <p>点击图片，展开一项非遗的独立篇章。</p>
-      </div>
+        <p>三门手艺，三双手。点开图片，展开一项非遗的独立篇章。</p>
+      </header>
       <div class="story-grid">
-        <a class="story-card story-card--hero" href="heritage/ceramics.html" data-story-url="heritage/ceramics.html" data-story-title="陶瓷" aria-haspopup="dialog">
-          <img src="category/objects/jingdezhen-porcelain/images/porcelain-03-wheel-hands-tuan-nguyen.jpg" alt="匠人双手在陶轮上塑造瓷坯" width="1920" height="1280" fetchpriority="high" decoding="async">
+        <a class="story-card story-card--lead" href="heritage/ceramics.html" data-story-url="heritage/ceramics.html" data-story-title="陶瓷" aria-haspopup="dialog">
+          <img src="category/objects/jingdezhen-porcelain/images/porcelain-01-wheel-painting-aedrian-salazar.jpg" alt="匠人握着修坯刀，在转盘上修整一只泥坯" width="1280" height="1920" loading="lazy" decoding="async">
           <span class="story-card-shade" aria-hidden="true"></span>
-          <span class="story-card-index">01</span>
-          <span class="image-credit">摄影：Tuan Nguyen</span>
+          <span class="image-credit">摄影：Aedrian Salazar</span>
           <span class="story-card-content">
             <span class="story-card-kicker">泥与火的相遇</span>
             <strong>陶瓷</strong>
-            <span class="story-card-action">展开辑录 <span aria-hidden="true">↗</span></span>
+            <span class="story-card-action">展开这一篇</span>
           </span>
         </a>
-        <a class="story-card story-card--secondary" href="heritage/ronghua.html" data-story-url="heritage/ronghua.html" data-story-title="南京绒花" aria-haspopup="dialog">
+        <a class="story-card story-card--paper" href="heritage/ronghua.html" data-story-url="heritage/ronghua.html" data-story-title="南京绒花" aria-haspopup="dialog">
           <img src="assets/images/ronghua/ronghua-hands-source.jpg" alt="双手用剪刀修整绒花花瓣" width="1179" height="2556" loading="lazy" decoding="async">
           <span class="story-card-shade" aria-hidden="true"></span>
-          <span class="story-card-index">02</span>
           <span class="image-credit">用户供图</span>
           <span class="story-card-content">
             <span class="story-card-kicker">一束蚕丝，开成一朵花</span>
             <strong>南京绒花</strong>
-            <span class="story-card-action">展开辑录 <span aria-hidden="true">↗</span></span>
+            <span class="story-card-action">展开这一篇</span>
+          </span>
+        </a>
+        <a class="story-card story-card--paper story-card--print" href="heritage/woodblock-print.html" data-story-url="heritage/woodblock-print.html" data-story-title="木版年画" aria-haspopup="dialog">
+          <img src="assets/images/woodblock/woodblock-workshop-489.jpg" alt="装框陈列的一团和气木版年画" width="1080" height="810" loading="lazy" decoding="async">
+          <span class="story-card-shade" aria-hidden="true"></span>
+          <span class="image-credit">图片来源：江苏女性</span>
+          <span class="story-card-content">
+            <span class="story-card-kicker">一版一色</span>
+            <strong>木版年画</strong>
+            <span class="story-card-action">展开这一篇</span>
           </span>
         </a>
       </div>
+
+      <div class="doors">
+        <div class="doors__head">
+          <h3>再往里走，是四组日常</h3>
+          <a href="heritage.html">进长卷里找路</a>
+        </div>
+        <ul class="doors__row">
+          <li>
+            <a class="door" href="category/objects.html" style="--door: #304b5a">
+              <span class="door__fig" style="--x: 2.1; --y: 66.7; --w: 17.3; --h: 26.4"><img src="assets/images/heritage/cutouts/objects.png" alt="" loading="lazy" decoding="async"></span>
+              <strong>天工开物</strong>
+              <span>制瓷、苏绣、油纸伞、木构营造</span>
+            </a>
+          </li>
+          <li>
+            <a class="door" href="category/opera.html" style="--door: #a84e49">
+              <span class="door__fig" style="--x: 48; --y: 65.7; --w: 16.1; --h: 26.7"><img src="assets/images/heritage/cutouts/opera.webp" alt="" loading="lazy" decoding="async"></span>
+              <strong>瓦舍勾栏</strong>
+              <span>狮舞、京剧、皮影戏、木偶戏、英歌舞</span>
+            </a>
+          </li>
+          <li>
+            <a class="door" href="category/food.html" style="--door: #a87a2c">
+              <span class="door__fig" style="--x: 29.7; --y: 67.5; --w: 17.9; --h: 25.8"><img src="assets/images/heritage/cutouts/food.png" alt="" loading="lazy" decoding="async"></span>
+              <strong>寻味山河</strong>
+              <span>热干面、矮子馅饼、荆州鱼糕、恩施玉露、闻喜花馍</span>
+            </a>
+          </li>
+          <li>
+            <a class="door" href="category/festival.html" style="--door: #66755a">
+              <span class="door__fig" style="--x: 18.7; --y: 58; --w: 10.9; --h: 34.8"><img src="assets/images/heritage/cutouts/festival.png" alt="" loading="lazy" decoding="async"></span>
+              <strong>四时有节</strong>
+              <span>送王船、姊妹节、走古事、端节、蚕花水会、舞火龙</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section class="feature-section" aria-labelledby="today-title">
-      <div class="section-heading">
-        <p class="eyebrow">古艺新生 · 日常可用</p>
+    <div class="tl-window">
+      <p>七千年前的一处榫卯，到今天，是同一条线。</p>
+    </div>
+
+    <section class="beat beat--use" id="beat-use" aria-labelledby="today-title">
+      <header class="beat__head">
+        <span class="beat__no" aria-hidden="true">贰</span>
         <h2 id="today-title">今天它长这样</h2>
-        <p>从过节的一张画，到随身、案头的小物。<br><a href="revival.html">走近古艺新生</a></p>
-      </div>
-      <div class="section-heading today-row">
-        <div>
-          <a class="story-card story-card--secondary" href="revival.html?case=05" aria-label="桃花坞年画衍生丝绸文创系列">
-            <img src="assets/images/revival/05.jpg" alt="桃花坞年画衍生丝绸文创系列" loading="lazy" decoding="async">
+        <p>三十件新作里先看四件。每一件都写清三样：今天在谁手里，去哪能摸到，花多少钱能带回家。</p>
+      </header>
+      <ul class="shelf">
+        <li>
+          <a class="shelf__item" href="revival.html?case=05">
+            <span class="shelf__pic"><img src="assets/images/revival/05.jpg" alt="桃花坞年画衍生丝绸文创系列" width="1080" height="1619" loading="lazy" decoding="async"></span>
+            <span class="shelf__tag">可购买</span>
+            <strong>年画丝巾与杯垫</strong>
+            <span class="shelf__from">桃花坞木版年画</span>
+            <span class="shelf__where">微店「刻桃印花」</span>
+            <span class="shelf__price">¥120 起</span>
           </a>
-          <p>年画丝巾，把吉祥纹样穿进日常。</p>
-        </div>
-        <div>
-          <a class="story-card story-card--secondary" href="revival.html?case=25" aria-label="万象更新木刻年画套装及其木版、刻刀、颜料">
-            <img src="assets/images/revival/25.jpg" alt="万象更新木刻年画套装及其木版、刻刀、颜料" loading="lazy" decoding="async">
+        </li>
+        <li>
+          <a class="shelf__item" href="revival.html?case=25">
+            <span class="shelf__pic"><img src="assets/images/revival/25.jpg" alt="万象更新木刻年画套装及其木版、刻刀、颜料" width="800" height="800" loading="lazy" decoding="async"></span>
+            <span class="shelf__tag">可购买</span>
+            <strong>「万象更新」木刻套装</strong>
+            <span class="shelf__from">桃花坞木版年画</span>
+            <span class="shelf__where">苏州博物馆艺术品商店</span>
+            <span class="shelf__price">¥199</span>
           </a>
-          <p>木刻套装，在家印一张自己的年画。</p>
-        </div>
-        <div>
-          <a class="story-card story-card--secondary" href="revival.html?case=10" aria-label="印有动漫角色的王星记联名白纸扇">
-            <img src="assets/images/revival/10.webp" alt="印有动漫角色的王星记联名白纸扇" loading="lazy" decoding="async">
+        </li>
+        <li>
+          <a class="shelf__item" href="revival.html?case=10">
+            <span class="shelf__pic"><img src="assets/images/revival/10.webp" alt="印有动漫角色的王星记联名白纸扇" loading="lazy" decoding="async"></span>
+            <span class="shelf__tag">可定制</span>
+            <strong>联名白纸扇</strong>
+            <span class="shelf__from">王星记制扇技艺</span>
+            <span class="shelf__where">王星记官网定制页</span>
+            <span class="shelf__price">未公开标价</span>
           </a>
-          <p>联名纸扇，把老手艺带在手边。</p>
-        </div>
-      </div>
+        </li>
+        <li>
+          <a class="shelf__item" href="revival.html?case=28">
+            <span class="shelf__pic"><img src="assets/images/revival/28.webp" alt="多媒体皮影剧《惩恶扬善小哪吒》演出画面" loading="lazy" decoding="async"></span>
+            <span class="shelf__tag">看演出</span>
+            <strong>皮影剧《惩恶扬善小哪吒》</strong>
+            <span class="shelf__from">华县皮影戏</span>
+            <span class="shelf__where">少华山国际皮影博览园</span>
+            <span class="shelf__price">演出票，查当期场次</span>
+          </a>
+        </li>
+      </ul>
+      <p class="beat__more"><a href="revival.html">三十件都在古艺新生</a></p>
     </section>
+
+    <div class="tl-window">
+      <p>有的手艺传了几百年，有的名录才写了二十年。</p>
+    </div>
 
     <!--
       时间轴图层：固定在视口正中的一条环带，默认压在页面内容下面（z-index: -1）。
@@ -288,18 +380,65 @@
       </span>
     </div>
 
-    <section class="manifesto" aria-label="项目理念">
-      <p>传统不是一件被时间封存的旧物。</p>
-      <p>它在人的手里，被一遍遍做成新的今天。</p>
-      <span aria-hidden="true">未完待续</span>
+    <section class="beat beat--thin" id="beat-thin" aria-labelledby="thin-title">
+      <header class="beat__head">
+        <span class="beat__no" aria-hidden="true">叁</span>
+        <h2 id="thin-title">有些线，已经很细了</h2>
+        <p>我们把 114 项国家级及以上的非遗排成一行，一项一根线。越往右，线越短、越细，表示我们判断它离断代越近。</p>
+      </header>
+
+      <div class="threads" data-threads>
+        <div class="threads__field" tabindex="0" role="slider" aria-label="114 项非遗的存续状况，按左右方向键逐项查看" aria-valuemin="1" aria-valuemax="114" aria-valuenow="114"></div>
+        <div class="threads__axis" aria-hidden="true"><span>日常仍在实践</span><span>随时可能断代</span></div>
+        <div class="threads__read" aria-live="polite">
+          <p class="threads__name">中国木活字印刷术</p>
+          <p class="threads__meta">传统技艺，浙江瑞安</p>
+          <p class="threads__score"><b>96</b><span>极度濒危</span></p>
+        </div>
+      </div>
+
+      <div class="thin-foot">
+        <p class="thin-foot__count"><b data-threads-high>57</b> 项在六十分以上，是我们判断的高度或极度濒危。</p>
+        <p class="thin-foot__note">分数是编辑判断，依据传承梯队、从业人数、日常使用、技艺完整性和文献记录，不代表官方评级。</p>
+        <a class="thin-foot__go" href="games/spectrum.html">去存续有数，拖一拖这条光谱</a>
+      </div>
+
+      <div class="manifesto" aria-label="项目理念">
+        <p>传统不是一件被时间封存的旧物。</p>
+        <p>它在人的手里，被一遍遍做成新的今天。</p>
+      </div>
+    </section>
+
+    <section class="beat beat--hand" id="beat-hand" aria-labelledby="hand-title">
+      <header class="beat__head">
+        <span class="beat__no" aria-hidden="true">肆</span>
+        <h2 id="hand-title">接一手，从小事开始</h2>
+        <p>传承不只是传承人的事。买一件、学一手、看一场，都算。</p>
+      </header>
+      <ul class="hands">
+        <li><a href="revival.html"><strong>买一件</strong><span>能买、能定制的新作，都标了去处和价格。</span><em>看三十件新作</em></a></li>
+        <li><a href="games/spectrum.html#do-title"><strong>学一手</strong><span>查属地保护单位，留意工坊、传习所和研培计划的招生。</span><em>查参与入口</em></a></li>
+        <li><a href="category/festival.html"><strong>看一场</strong><span>一场演出、一次庙会，就是它在当地的日常。</span><em>看节日与戏台</em></a></li>
+        <li><a href="games/kaisu/index.html"><strong>玩一把</strong><span>先在屏幕上，给荆门酥饼开一次酥。</span><em>玩开酥小游戏</em></a></li>
+      </ul>
+      <p class="hands__end" data-pulse-end>下次路过一家老字号时，多停一会儿。</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
+    <div>
+      <p class="site-footer__brand">遗脉相承</p>
+      <p class="site-footer__line">见物，见人，见一门手艺的时间。</p>
+    </div>
     <nav aria-label="页脚导航">
-      <a href="index.html">首页</a><a href="heritage.html">非遗辑录</a><a href="revival.html">古艺新生</a><a href="about.html">关于我们</a>
+      <a href="index.html">首页</a>
+      <a href="games/spectrum.html">存续有数</a>
+      <a href="heritage.html">非遗辑录</a>
+      <a href="games/kaisu/index.html">开酥小游戏</a>
+      <a href="revival.html">古艺新生</a>
+      <a href="about.html">关于我们</a>
     </nav>
+    <p class="site-footer__note">2026 零杯网页设计大赛参赛作品。存续评分是编辑判断，不代表官方评级；图片与资料出处见「关于我们」。</p>
   </footer>
 
   <div class="story-overlay story-overlay--editorial" role="dialog" aria-modal="true" aria-labelledby="story-dialog-title" aria-hidden="true">
@@ -319,5 +458,7 @@
   </div>
   <script src="assets/js/site.js"></script>
   <script src="assets/js/timeline.js"></script>
+  <script src="assets/js/home-threads-data.js"></script>
+  <script src="assets/js/home-beats.js"></script>
 </body>
 </html>

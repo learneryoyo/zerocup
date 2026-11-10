@@ -20,8 +20,8 @@
     }
   </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>存续有数 · 中国非遗濒危光谱</title>
-<meta name="description" content="存续有数：收录 101 项国家级与人类非遗代表作，按存续状况排在一条光谱上。拖一拖，看哪些项目随时可能断代，以及可以怎么参与。">
+<title>存续有数 · 遗脉相承</title>
+<meta name="description" content="存续有数：收录 114 项国家级与人类非遗代表作，按存续状况排在一条光谱上。拖一拖，看哪些项目随时可能断代，以及可以怎么参与。">
 <style>
   :root{
     --paper:#f3efe4;
@@ -370,6 +370,7 @@
 
 <link rel="stylesheet" href="../assets/css/spectrum-creators.css">
 <link rel="stylesheet" href="../assets/css/spectrum-typography.css">
+<link rel="stylesheet" href="../assets/css/spectrum-v2.css">
 <link rel="stylesheet" href="../assets/css/cursor.css">
 </head>
 <body>
@@ -398,8 +399,8 @@
 <header class="hero">
   <div class="wrap">
     <div class="creator-copy">
-    <div class="kicker"><span class="dot"></span>存续有数 · 国家级与人类非遗代表作 · 存续力观察</div>
-    <h1>中国非遗<br><em>濒危光谱</em></h1>
+    <h1>存续有数</h1>
+    <p class="hero-sub">一百一十四项非遗的濒危光谱</p>
     <p class="lede">这里收录了 <b id="totalCount">—</b> 项有代表性的国家级及以上非遗，按存续状况排列。拖动下方滑块，可以查看不同区间的项目。</p>
     <div class="stats">
       <div><b>1557</b><span>国家级代表性项目</span></div>
@@ -411,15 +412,18 @@
   </div>
 </header>
 
-<main class="wrap">
-  <section class="panel">
+<main>
+  <section class="panel" aria-labelledby="panel-title">
+  <div class="wrap">
     <div class="panel-head">
-      <h2>存续力光谱</h2>
-      <div class="hint">左端＝日常仍在实践，右端＝随时可能断代</div>
+      <h2 id="panel-title">存续力光谱</h2>
+      <div class="hint">一格是一项。拖两端的圆钮划定范围，点任意一格看它的处境。</div>
     </div>
 
     <div class="slider">
       <div class="bands" id="bands"></div>
+      <!-- 分布图：各项按指数落在 0–100 上，同分的往上摞。由脚本生成，键盘用户走下面的卡片。 -->
+      <div class="plot" id="plot" aria-hidden="true"><div class="plot-tip" id="plotTip"></div></div>
       <div class="rail-wrap" id="railWrap">
         <div class="rail"></div>
         <div class="rail-active" id="railActive"></div>
@@ -433,21 +437,36 @@
           <span class="val" id="valHi">100</span>
         </div>
       </div>
+      <div class="ends" aria-hidden="true"><span>日常仍在实践</span><span>随时可能断代</span></div>
       <div class="readout">
         <div class="range" id="rangeText">0 — 100</div>
         <div class="count"><b id="countNum">0</b>项</div>
         <div class="desc" id="rangeDesc">全部光谱</div>
       </div>
     </div>
+  </div>
+  </section>
+
+  <div class="wrap">
+
+  <section class="atlas" aria-labelledby="atlas-title">
+    <div class="atlas-text">
+      <h2 id="atlas-title">线从哪里来</h2>
+      <p class="atlas-lede">同样这些项目，换成按属地摆。一个方块是一个省级地区，方块里一小格是一项，颜色是它的濒危档。点一个方块，下面只看这里的项目。</p>
+      <div class="atlas-read" id="atlasRead" aria-live="polite"></div>
+      <p class="atlas-note">示意方格，只表示大致方位，不代表实际疆域的形状与面积。跨省项目在每个属地各记一次。<span id="atlasGap"></span></p>
+    </div>
+    <div class="atlas-map" id="atlasMap" role="group" aria-label="按省级地区筛选项目"></div>
   </section>
 
   <p class="panel-cta">
     <b>看完现状，还能做点什么？</b>
     点开任意一项，能看到它的属地保护单位与查询入口；想学一门手艺，也可以顺着这条路找到门路。
-    <a href="#do-title">看怎么参与 ↓</a>
+    <a href="#do-title">看怎么参与</a>
   </p>
 
   <div class="toolbar">
+    <button type="button" class="prov-chip" id="provChip" hidden></button>
     <label class="search">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.4" stroke="#5c5449" stroke-width="1.4"/><path d="M9.4 9.4L12.5 12.5" stroke="#5c5449" stroke-width="1.4" stroke-linecap="round"/></svg>
       <input type="search" id="q" placeholder="搜项目名、门类或地区，例如「皮影」「泉州」「年画」">
@@ -468,14 +487,37 @@
   </div>
   <div class="empty" id="empty" style="display:none">
     <b>这一段光谱是空的</b>
-    把拉条放宽一点，或清空搜索词试试。
+    把拉条放宽一点，或清空搜索词、取消地域筛选试试。
   </div>
+
+  <section class="roster" aria-labelledby="roster-title">
+    <div class="roster-head">
+      <h2 id="roster-title">镜头里的守艺人</h2>
+      <p>名录之外，也有人用镜头把手艺接下去：拜师、上手、拍下来。点开一位，看他们怎么学、怎么做。</p>
+    </div>
+    <ul class="roster-list" id="creatorRoster"></ul>
+  </section>
+
+  <section class="act" aria-labelledby="do-title">
+    <h2 id="do-title">想参与，从这里开始</h2>
+    <ul class="act-list">
+      <li><b>查一查</b><p>点开项目详情，可查询属地保护单位，咨询学习、活动或合作事宜。</p></li>
+      <li><b>学一手</b><p>想学技艺，可留意非遗工坊、传习所、研培计划或剧团学员班的招生信息，具体安排以主办方通知为准。</p></li>
+      <li><b>看一场</b><p>也可以去看一场演出，参加一次节庆或庙会，了解它在当地的日常。</p></li>
+    </ul>
+    <div class="act-aside">
+      <h3>有些项目，想学也难找到门路</h3>
+      <p>部分高风险项目靠家族、村寨或庙宇传承，缺少院校、剧团或工坊等公开学习渠道。联系当地保护单位、确认是否有传习活动，再把可靠的报名信息分享出去，能让想学的人少走些弯路。</p>
+      <p class="dim">为保护个人隐私，页面只提供机构查询入口，不收录匠人的私人联系方式。</p>
+    </div>
+  </section>
 
   <section class="notes">
     <div>
       <h3>评分依据</h3>
       <p>参考公开资料，从传承梯队、从业人数、日常使用、技艺完整性和文献记录五方面评估。分数越高，表示我们判断其传承风险越大，不代表官方评级。</p>
       <p>依赖口传与手上功夫、缺少接班人的项目，风险通常更高；有稳定市场和教学渠道的，传承条件相对较好。</p>
+      <p>入选非遗名录，并不能说明一门技艺如今还有多少人在做。这些分数是编辑判断，也难免有偏差，供大家比较和讨论各项目的传承处境。</p>
       <p class="dim">入选名录或转入代表作名录后，仍需关注实际传承情况。</p>
     </div>
     <div>
@@ -490,31 +532,25 @@
     </div>
   </section>
 
-  <section class="notes" aria-labelledby="do-title">
-    <div>
-      <h3 id="do-title">想参与，从这里开始</h3>
-      <p>点开项目详情，可查询属地保护单位，咨询学习、活动或合作事宜。</p>
-      <p>想学技艺，可留意非遗工坊、传习所、研培计划或剧团学员班的招生信息，具体安排以主办方通知为准。</p>
-      <p>也可以去看一场演出，参加一次节庆或庙会，了解它在当地的日常。</p>
-      <p class="dim">为保护个人隐私，页面只提供机构查询入口，不收录匠人的私人联系方式。</p>
-    </div>
-    <div>
-      <h3>有些项目，想学也难找到门路</h3>
-      <p>部分高风险项目靠家族、村寨或庙宇传承，缺少院校、剧团或工坊等公开学习渠道。</p>
-      <p>联系当地保护单位、确认是否有传习活动，再把可靠的报名信息分享出去，能让想学的人少走些弯路。</p>
-    </div>
-  </section>
-
-  <aside class="score-note" aria-label="关于评分">
-    <h3>关于评分</h3>
-    <p>入选非遗名录，并不能说明一门技艺如今还有多少人在做。我们参考传承人的代际分布、从业人数，以及日常生活中还有哪些使用场景，为各项目评分。这些分数是编辑判断，不代表官方评级，也难免有偏差，供大家比较和讨论各项目的传承处境。</p>
-  </aside>
-
-  <footer>
-    <div>资料来源：文化和旅游部、中国非物质文化遗产网、UNESCO</div>
-    <div>评分为编辑判断，非官方评级 · 2026</div>
-  </footer>
+  <p class="page-source">资料来源：文化和旅游部、中国非物质文化遗产网、UNESCO。评分为编辑判断，非官方评级。</p>
+  </div>
 </main>
+
+<footer class="site-footer">
+  <div>
+    <p class="site-footer__brand">遗脉相承</p>
+    <p class="site-footer__line">见物，见人，见一门手艺的时间。</p>
+  </div>
+  <nav aria-label="页脚导航">
+    <a href="../index.html">首页</a>
+    <a href="spectrum.html">存续有数</a>
+    <a href="../heritage.html">非遗辑录</a>
+    <a href="kaisu/index.html">开酥小游戏</a>
+    <a href="../revival.html">古艺新生</a>
+    <a href="../about.html">关于我们</a>
+  </nav>
+  <p class="site-footer__note">2026 零杯网页设计大赛参赛作品。存续评分是编辑判断，不代表官方评级；图片与资料出处见「关于我们」。</p>
+</footer>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-hidden="true">
@@ -625,7 +661,21 @@ const DATA = [
 {n:"中医针灸",c:"传统医药",r:"全国",s:16,u:"UNESCO 代表作名录",d:"以针刺、艾灸调经络，一根针能治百病。",w:"国际需求大，但传统手法流派减少。"},
 {n:"相声",c:"曲艺",r:"北京·天津",s:15,d:"两个人、一张桌子，说学逗唱里全是世情。",w:"小剧场繁荣，传统长篇八大棍少有人说。"},
 {n:"中国传统制茶技艺及其相关习俗",c:"传统技艺",r:"全国",s:13,u:"UNESCO 代表作名录",d:"绿茶炒青、乌龙做青、红茶发酵、黑茶渥堆，一片叶子有六种命运。",w:"产业化程度高，手工技艺在名优茶中保留。"},
-{n:"春节",c:"民俗",r:"全国",s:10,u:"UNESCO 代表作名录",d:"贴春联、吃年夜饭、守岁、拜年，是中国人最重的一场团圆。",w:"核心仪式稳定，城市形态在变化。"}
+{n:"春节",c:"民俗",r:"全国",s:10,u:"UNESCO 代表作名录",d:"贴春联、吃年夜饭、守岁、拜年，是中国人最重的一场团圆。",w:"核心仪式稳定，城市形态在变化。"},
+/* 以下 13 项为 2026-11 补充，出处见 docs/sources.md「存续有数补充项目」 */
+{n:"邵阳布袋戏",c:"传统戏剧",r:"湖南邵阳",s:86,d:"当地叫被窝戏、扁担戏：一个艺人挑一副戏担，钻进布帐里，手上耍木偶，嘴里包下全部唱念。",w:"一个人就是一个剧团，手艺靠家传；国家级传承人刘永安生于 1946 年，如今在县里的传习课堂带学员。"},
+{n:"鄂伦春族摩苏昆",c:"曲艺",r:"黑龙江大小兴安岭",s:85,d:"鄂伦春语的说唱故事，清末成形，一个人徒口表演，不用任何乐器伴奏。",w:"曾是族人主要的娱乐和教化方式，如今受现代生活冲击，官方项目介绍称其生存出现危机、亟需保护。"},
+{n:"黎族树皮布制作技艺",c:"传统技艺",r:"海南",s:84,d:"采剥树皮，经浸泡、脱胶、反复敲打，做成可以裁衣的布。",w:"早已退出日常穿用，一位国家级传承人已于 2013 年去世。"},
+{n:"鄂温克驯鹿习俗",c:"民俗",r:"内蒙古根河",s:82,d:"敖鲁古雅的鄂温克人养着中国唯一的驯鹿种群，繁育、鹿奶加工、鞍具制作都在这套习俗里。",w:"使鹿的族人据 2014 年报道仅两百余人，有文化工作者形容这套传统已在「悬崖的边缘」。"},
+{n:"女书习俗",c:"民俗",r:"湖南江永",s:80,d:"江永妇女专用的文字，写在扇面、手帕和布帕上，读给姊妹听，也唱给姊妹听。",w:"过去靠家传和姊妹相教，又有人死书焚的旧俗，自然传承一度中断，如今主要靠认定的传承人延续。"},
+{n:"水书习俗",c:"民俗",r:"贵州三都·荔波",s:79,d:"水族的古文字和用它写成的书，由水书先生掌管，口传心授；被认为是仍在使用的象形文字之一。",w:"规矩严，合适的传人难找；年长的水书先生相继离世，口传的部分随人而去，年轻人又多外出求学务工。"},
+{n:"达斡尔族乌钦",c:"曲艺",r:"黑龙江齐齐哈尔·内蒙古莫力达瓦",s:78,d:"达斡尔语的民间叙事诗，也叫乌春，连说带唱，流传在嫩江流域的达斡尔村屯。",w:"靠口头传承，老一辈艺人相继去世；文化部门已为 13 位传承人录下 39 首存档。"},
+{n:"赫哲族鱼皮制作技艺",c:"传统技艺",r:"黑龙江同江",s:77,d:"把鱼皮剥下、晾干、反复揉软，再缝成衣裤，是赫哲人渔猎生活留下的衣料。",w:"据 2025 年报道，掌握这门技艺的手艺人已减至个位数，国家级传承人只有一位。"},
+{n:"川江号子",c:"传统音乐",r:"重庆·四川",s:72,d:"川江船工拉纤、推船时喊的劳动号子，一人领，众人和。",w:"机动船普及后，人力木船退出航道，号子失去了劳动现场；如今靠老船工的号子队和研学课堂延续。"},
+{n:"黎族原始制陶技艺",c:"传统技艺",r:"海南昌江",s:70,d:"不用转轮，泥条一圈圈盘筑成型，历来由黎族妇女相传。",w:"曾几近失传；国家级传承人羊拜亮 1998 年起授徒，带出的制陶能手只有数人。"},
+{n:"纳西族手工造纸技艺",c:"传统技艺",r:"云南丽江·香格里拉",s:68,d:"纳西人造的东巴纸，是抄写东巴经书的用纸。名录全称「傣族、纳西族手工造纸技艺」。",w:"历来只在家族男性中传授，「文革」时期一度中断，1993 年才恢复，如今靠少数家庭作坊维持。"},
+{n:"南京白局",c:"曲艺",r:"江苏南京",s:66,d:"用南京话说唱的本地曲艺，唱的是街巷里的家长里短。",w:"艺人稀缺、曲目陈旧、拜师的人少，国家级传承人黄玲玲已年过八十；近年有新剧目和校园课程在接续。"},
+{n:"川北大木偶戏",c:"传统戏剧",r:"四川南充",s:56,d:"木偶和真人差不多高，演员举着它表演，在川北流传三百余年。",w:"主要靠南充的一家大木偶剧院传承，演员演出之外还要兼做教练。"}
 ];
 
 /* ====== 每项一段散文：是什么 + 为什么吃紧，合并成一段 ====== */
@@ -731,6 +781,19 @@ const COPY = {
 "相声": ["两个人一张桌","说学逗唱里全是世情","小剧场繁荣","传统长篇的「八大棍」，少有人说"],
 "中国传统制茶技艺及其相关习俗": ["炒青、做青、发酵、渥堆","一片叶子，六种命运","产业化程度高","手工技艺留在名优茶里"],
 "春节": ["贴春联、吃年夜饭、守岁、拜年","中国人最重的一场团圆","核心仪式稳","城市的形态在变"],
+"邵阳布袋戏": ["一副扁担，挑着整座戏台","一个人钻进布帐，耍偶、唱念全包","人称「一个人的剧团」","国家级传承人生于 1946 年，还在传习课堂上教"],
+"鄂伦春族摩苏昆": ["没有乐器，只有一个人的嗓子","用鄂伦春语，把故事连说带唱讲下来","曾是猎民聚在一起时的娱乐和教化","如今生存出现危机"],
+"黎族树皮布制作技艺": ["从树上剥下一张皮","浸泡、脱胶、一下一下敲软","就成了能裁衣的布","它早已退出日常穿用，一位国家级传承人 2013 年去世"],
+"鄂温克驯鹿习俗": ["大兴安岭里，中国唯一的驯鹿种群","养鹿、挤奶、做鞍具，都是这套习俗","使鹿的族人，据 2014 年报道仅两百余人","有人说它站在悬崖的边缘"],
+"女书习俗": ["只在女人之间流传的字","写在扇面和手帕上，读给姊妹听","旧俗是人死书焚，写下的又随人去了","家传的那条线断过，如今靠认定的传承人接着"],
+"水书习俗": ["水族自己的古文字","书在水书先生手里，读法在他嘴里","规矩严，合适的传人难找","老先生一位位离世，口传的部分跟着走了"],
+"达斡尔族乌钦": ["嫩江边上，达斡尔人的叙事诗","不落在纸上，只在嘴里传","老艺人相继去世","文化部门赶着为 13 位传承人录下了 39 首"],
+"赫哲族鱼皮制作技艺": ["一张鱼皮，剥下、晾干、揉软","再一针一针缝成衣裳","这是渔猎日子留下的衣料","据 2025 年报道，会做的人已是个位数"],
+"川江号子": ["一人领，众人和","那是船工拉纤时用来齐力的声音","机动船来了，纤绳放下了","号子还在唱，只是不在江上"],
+"黎族原始制陶技艺": ["不用转轮，泥条一圈圈盘上去","这门手艺一直在女人手里传","它曾几乎失传","老传承人 1998 年起收徒，带出的能手只有数人"],
+"纳西族手工造纸技艺": ["东巴经书，写在自家造的纸上","手艺过去只传儿子和侄子","中断过多年，1993 年才重新造起来","如今靠少数家庭作坊撑着"],
+"南京白局": ["一口南京话，唱街巷里的家长里短","会唱的人少，老段子多","国家级传承人已年过八十","这两年，它第一次以新剧目登台，也进了课堂"],
+"川北大木偶戏": ["木偶和人差不多高","演员把它举起来，替它走路、转头","三百多年，传到南充的一家剧院里","演员下了台，还得当教练"],
 };
 function copyOf(d){
   const c = COPY[d.n];
@@ -794,6 +857,48 @@ const railActive = $('railActive'), dimL = $('dimL'), dimR = $('dimR');
     ticks.appendChild(t);
   }
 })();
+
+/* ====== 分布图：一格一项 ======
+   每项按指数落在横轴上，同分的往上摞；范围外、或被门类 / 搜索筛掉的变暗。
+   鼠标停上去报名字，点一下开详情。键盘与读屏走下面的卡片，这里整块 aria-hidden。 */
+const plot = $('plot'), plotTip = $('plotTip');
+const plotCells = [];
+(function initPlot(){
+  const stack = {};
+  let tallest = 0;
+  DATA.forEach((d, i)=>{
+    const k = stack[d.s] = (stack[d.s] || 0) + 1;
+    tallest = Math.max(tallest, k);
+    const cell = document.createElement('i');
+    cell.style.left = d.s + '%';
+    cell.style.setProperty('--k', k - 1);
+    cell.dataset.i = i;
+    cell.dataset.level = levelOf(d.s).key;
+    plot.appendChild(cell);
+    plotCells.push(cell);
+  });
+  plot.style.setProperty('--rows', tallest);
+  const show = cell=>{
+    const d = DATA[+cell.dataset.i];
+    plotTip.textContent = d.n + '　' + d.s;
+    plotTip.style.left = d.s + '%';
+    plotTip.dataset.side = d.s > 72 ? 'right' : d.s < 28 ? 'left' : 'mid';
+    plotTip.classList.add('on');
+    plotCells.forEach(c=>c.classList.toggle('is-hot', c === cell));
+  };
+  plot.addEventListener('pointerover', e=>{ if(e.target.dataset && e.target.dataset.i) show(e.target); });
+  plot.addEventListener('pointerleave', ()=>{
+    plotTip.classList.remove('on');
+    plotCells.forEach(c=>c.classList.remove('is-hot'));
+  });
+  plot.addEventListener('click', e=>{
+    if(e.target.dataset && e.target.dataset.i) openDrawer(DATA[+e.target.dataset.i]);
+  });
+})();
+function paintPlot(list){
+  const keep = new Set(list);
+  plotCells.forEach(c=>c.classList.toggle('is-out', !keep.has(DATA[+c.dataset.i])));
+}
 
 /* ====== 门类筛选 ====== */
 (function initCats(){
@@ -896,10 +1001,11 @@ function sync(){
 }
 
 /* ====== 渲染 ====== */
-function currentList(){
+function currentList(ignoreProv){
   const q = query.trim();
   let list = DATA.filter(d=>{
     if(d.s < lo || d.s > hi) return false;
+    if(!ignoreProv && activeProv && !provsOf(d).includes(activeProv)) return false;
     if(activeCat !== '全部' && d.c !== activeCat) return false;
     if(q && !(d.n.includes(q) || d.c.includes(q) || d.r.includes(q) || d.d.includes(q))) return false;
     return true;
@@ -917,6 +1023,8 @@ function currentList(){
 function render(){
   const list = currentList();
   $('countNum').textContent = list.length;
+  paintPlot(list);
+  paintAtlas(activeProv ? currentList(true) : list);
   const lvLo = levelOf(lo), lvHi = levelOf(hi);
   $('rangeDesc').textContent = (lo === 0 && hi === 100)
     ? '全部光谱'
@@ -1001,7 +1109,7 @@ function ctaBar(d){
       <a class="cta" href="${c.find}" target="_blank" rel="noopener noreferrer">
         <span class="cta-main">我要传承</span>
         <span class="cta-sub">查这一项的保护单位</span>
-        <span class="cta-arrow" aria-hidden="true">→</span>
+        
       </a>
     </div>`;
 }
@@ -1013,6 +1121,7 @@ function openDrawer(d){
     <div class="d-lv">${l.name}</div>
     <h2>${d.n}</h2>
     <div class="d-meta">${d.c} · ${d.r}</div>
+    <div class="d-hand" id="dHand"></div>
     <div class="d-score"><b>${d.s}</b><span>濒危指数 / 100</span></div>
     <div class="d-sec">
       <h4>它排在哪儿</h4>
@@ -1056,6 +1165,119 @@ $('closeBtn').addEventListener('click', closeDrawer);
 scrim.addEventListener('click', closeDrawer);
 window.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeDrawer(); });
 
+/* ====== 方格地图：线从哪里来 ======
+   不画真实疆界：34 个省级地区各占一个方块，按大致方位排在 8×8 的格子里，
+   方块里一小格是一项（跨省项目在每个属地各记一次），「全国」单列一块。
+   点方块 = 加一层地域筛选，和拉条、门类、搜索叠加；再点一次取消。 */
+const PROV_GRID = [
+  ['黑龙江',8,1],
+  ['新疆',1,2],['内蒙古',5,2],['北京',6,2],['辽宁',7,2],['吉林',8,2],
+  ['青海',2,3],['甘肃',3,3],['宁夏',4,3],['山西',5,3],['河北',6,3],['天津',7,3],
+  ['西藏',1,4],['四川',3,4],['陕西',4,4],['河南',5,4],['山东',6,4],
+  ['重庆',3,5],['湖北',4,5],['安徽',5,5],['江苏',6,5],['上海',7,5],
+  ['云南',2,6],['贵州',3,6],['湖南',4,6],['江西',5,6],['浙江',6,6],
+  ['广西',3,7],['广东',4,7],['福建',5,7],['台湾',7,7],
+  ['海南',3,8],['澳门',4,8],['香港',5,8]
+];
+const PROV_NAMES = PROV_GRID.map(p=>p[0]);
+const NATION = '全国';
+let activeProv = null;
+const provCache = new Map();
+function provsOf(d){
+  if(provCache.has(d)) return provCache.get(d);
+  const r = d.r.replace('京津冀','北京天津河北');
+  let hit = r.includes(NATION) ? [] : PROV_NAMES.filter(p=>r.includes(p));
+  if(!hit.length) hit = [NATION];
+  provCache.set(d, hit);
+  return hit;
+}
+const atlasMap = $('atlasMap'), atlasRead = $('atlasRead'), provChip = $('provChip');
+const atlasItems = {};
+DATA.forEach(d=>provsOf(d).forEach(p=>(atlasItems[p] = atlasItems[p] || []).push(d)));
+Object.values(atlasItems).forEach(list=>list.sort((a,b)=>b.s - a.s));
+
+(function initAtlas(){
+  const tile = (name, x, y, wide)=>{
+    const items = atlasItems[name] || [];
+    const el = document.createElement(items.length ? 'button' : 'div');
+    el.className = 'atlas-tile' + (items.length ? '' : ' is-empty') + (wide ? ' is-nation' : '');
+    el.style.gridColumn = x + (wide ? ' / span 2' : '');
+    el.style.gridRow = y + (wide ? ' / span 2' : '');
+    el.dataset.prov = name;
+    if(items.length){
+      el.type = 'button';
+      el.setAttribute('aria-pressed','false');
+      el.setAttribute('aria-label', name + '，' + items.length + ' 项');
+    }
+    el.innerHTML = '<span class="atlas-name">' + name + '</span><span class="atlas-cells">' +
+      items.map(d=>'<i data-i="' + DATA.indexOf(d) + '" style="--c:' + levelOf(d.s).color + '"></i>').join('') + '</span>';
+    atlasMap.appendChild(el);
+  };
+  PROV_GRID.forEach(p=>tile(p[0], p[1], p[2]));
+  tile(NATION, 1, 7, true);
+  const gap = PROV_NAMES.filter(p=>!atlasItems[p]);
+  if(gap.length) $('atlasGap').textContent = gap.join('、') + '暂未收录项目，不代表当地没有非遗。';
+
+  atlasMap.addEventListener('click', e=>{
+    const t = e.target.closest('button.atlas-tile');
+    if(!t) return;
+    setProv(activeProv === t.dataset.prov ? null : t.dataset.prov);
+  });
+  const peek = e=>{
+    const t = e.target.closest('.atlas-tile');
+    if(t) readAtlas(t.dataset.prov);
+  };
+  atlasMap.addEventListener('pointerover', peek);
+  atlasMap.addEventListener('focusin', peek);
+  atlasMap.addEventListener('pointerleave', ()=>readAtlas(activeProv));
+  atlasMap.addEventListener('focusout', ()=>readAtlas(activeProv));
+  atlasRead.addEventListener('click', e=>{
+    const b = e.target.closest('[data-i]');
+    if(b) openDrawer(DATA[+b.dataset.i]);
+    else if(e.target.closest('.atlas-clear')) setProv(null);
+  });
+  provChip.addEventListener('click', ()=>setProv(null));
+  readAtlas(null);
+})();
+
+function setProv(name){
+  activeProv = name;
+  [...atlasMap.children].forEach(t=>{
+    const on = t.dataset.prov === name;
+    t.classList.toggle('is-on', on);
+    if(t.tagName === 'BUTTON') t.setAttribute('aria-pressed', String(on));
+  });
+  provChip.hidden = !name;
+  provChip.textContent = name ? '只看 ' + name + '，点此取消' : '';
+  readAtlas(name);
+  resetPage();
+}
+/* 左侧读数：没选地区时报收录最多的三处；停在或选中某个方块时报这一处的情况 */
+function readAtlas(name){
+  if(!name){
+    const top = PROV_NAMES.filter(p=>atlasItems[p]).sort((a,b)=>atlasItems[b].length - atlasItems[a].length).slice(0,3);
+    atlasRead.innerHTML = '<p class="atlas-place">全部地区</p><p class="atlas-sum">收录最多的是' +
+      top.map(p=>p + ' ' + atlasItems[p].length + ' 项').join('、') + '。</p>';
+    return;
+  }
+  const items = atlasItems[name] || [];
+  if(!items.length){
+    atlasRead.innerHTML = '<p class="atlas-place">' + name + '</p><p class="atlas-sum">本站暂未收录这里的项目。</p>';
+    return;
+  }
+  const high = items.filter(d=>d.s >= 60).length;
+  atlasRead.innerHTML = '<p class="atlas-place">' + name + '<b>' + items.length + '</b><span>项</span></p>' +
+    '<p class="atlas-sum">' + (high ? '其中 ' + high + ' 项在六十分以上。' : '没有六十分以上的项目。') + '最需要留意的：</p>' +
+    '<ul class="atlas-top">' + items.slice(0,4).map(d=>'<li><button type="button" data-i="' + DATA.indexOf(d) +
+      '" style="--c:' + levelOf(d.s).color + '"><b>' + d.s + '</b>' + d.n + '</button></li>').join('') + '</ul>' +
+    (activeProv === name ? '<button type="button" class="atlas-clear">取消地域筛选</button>' : '');
+}
+/* 拉条、门类、搜索筛掉的项目，在方块里也变暗 */
+function paintAtlas(list){
+  const keep = new Set(list);
+  atlasMap.querySelectorAll('.atlas-cells i').forEach(c=>c.classList.toggle('is-out', !keep.has(DATA[+c.dataset.i])));
+}
+
 /* ====== 工具栏 ====== */
 $('q').addEventListener('input', e=>{ query = e.target.value; resetPage(); });
 $('sort').addEventListener('change', e=>{ sortMode = e.target.value; resetPage(); });
@@ -1063,6 +1285,13 @@ $('sort').addEventListener('change', e=>{ sortMode = e.target.value; resetPage()
 /* ====== 启动 ====== */
 $('totalCount').textContent = DATA.length;
 sync();
+/* 外部入口：spectrum.html?item=项目名 直接打开那一项的详情。。
+   等 load 之后再开，保证后面几个脚本（保护单位数据）已经就位。 */
+window.addEventListener('load', ()=>{
+  const wanted = new URLSearchParams(location.search).get('item');
+  const hit = wanted && DATA.find(d=>d.n === wanted);
+  if(hit) openDrawer(hit);
+});
 </script>
 <script src="../assets/js/site.js"></script>
 <script src="../assets/js/spectrum-contact.js"></script>

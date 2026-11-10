@@ -95,6 +95,8 @@
 | 用途 | 文件 / 来源 | 状态 |
 |---|---|---|
 | 首页与陶瓷子页封面 | `site/category/objects/jingdezhen-porcelain/images/porcelain-03-wheel-hands-tuan-nguyen.jpg`；署名 Tuan Nguyen，依据仓库 `assets.md` | 复用既有素材，未取得原始链接；来源与许可待素材负责人补全 |
+| 首页「壹」陶瓷篇封面 | `site/category/objects/jingdezhen-porcelain/images/porcelain-01-wheel-painting-aedrian-salazar.jpg`；署名 Aedrian Salazar，依据文件名与仓库 `assets.md` | 复用器物页既有素材，未取得原始链接；来源与许可待素材负责人补全 |
+| 首页「壹」木版年画篇封面 | `site/assets/images/woodblock/woodblock-workshop-489.jpg`；图注「图片来源：江苏女性」，与木版年画子页一致 | 复用子页既有素材 |
 | 首页与木版年画子页封面 | `site/assets/images/woodblock-new-year.svg` | 本次原创 SVG 示意占位图，非历史实物图片，待替换为正式年画素材 |
 
 首页引言为本项目创作文案；当前两个独立子页正文均留白，未新增非遗史实。
@@ -166,3 +168,25 @@
 | `brocade.webp` | 金色中式织物肌理 | Wikimedia Commons · CC0 | 待补原页 |
 | `satin.webp` | 绉缎肌理（Crepe satin） | Poly Haven · CC0 | 待补原页 |
 | `tex-plaster.webp` | 粉刷墙面肌理（全页底纹） | Amal Kumar / Poly Haven · CC0 | [原页](https://commons.wikimedia.org/wiki/File%3APainted_plaster_wall_diff_16k_%28Amal_Kumar_via_Poly_Haven%29.png) |
+
+## 存续有数补充项目（2026-11-10 补 13 项）
+
+说明：以下 13 项的简介与濒危原因依据联网检索到的官方条目与媒体报道摘要写成，**尚未逐篇打开原文人工复核**；评分为编辑判断，不代表官方评级。年份、人数一律写明「据某年报道」，没有查到的数字不写。提交前建议按下表链接复核一遍。
+
+| 项目 | 门类 · 地区 | 本站评分 | 依据 |
+| --- | --- | --- | --- |
+| 邵阳布袋戏 | 传统戏剧 · 湖南邵阳 | 86 | [光明网 2025-06-12](https://m.gmw.cn/2025-06/12/content_38085907.htm)；[中国非遗网项目条目](https://www.ihchina.cn/project_details/25628.html)。名录名称为「木偶戏（邵阳布袋戏）」 |
+| 鄂伦春族摩苏昆 | 曲艺 · 黑龙江 | 85 | [中国非遗网传承人条目](https://www.ihchina.cn/ccr_detail/2364.html)及项目介绍（「生存出现危机，亟需加以保护」） |
+| 黎族树皮布制作技艺 | 传统技艺 · 海南 | 84 | [中国非遗网项目条目](https://www.ihchina.cn/project_details/14264.html)、传承人条目（黄运英 2013 年去世） |
+| 鄂温克驯鹿习俗 | 民俗 · 内蒙古根河 | 82 | [中国非遗网项目条目](https://www.ihchina.cn/project_details/15228.html)；[中新网 2014-01-08](https://www.chinanews.com.cn/sh/2014/01-08/5713199.shtml)（「仅存 200 余人」「悬崖的边缘」） |
+| 女书习俗 | 民俗 · 湖南江永 | 80 | [中国非遗网项目条目](https://www.ihchina.cn/project_details/15067.html)；[新湖南 2024-08](https://www.hunantoday.cn/news/xhn/202408/20567747.html)；[腾讯新闻 2023-04-12](https://news.qq.com/rain/a/20230412A030RG00) |
+| 水书习俗 | 民俗 · 贵州三都、荔波 | 79 | [中国日报网 2023-01-16](https://cn.chinadaily.com.cn/a/202301/16/WS63c4f21ca3102ada8b22b7eb.html)；[人民网《中国城市报》2017-05-08](https://paper.people.com.cn/zgcsb/html/2017-05/08/content_1772881.htm) |
+| 达斡尔族乌钦 | 曲艺 · 黑龙江齐齐哈尔、内蒙古莫力达瓦 | 78 | [中国非遗网 2018 年文章](https://www.ihchina.cn/news2_details/630.html)（13 位传承人、39 首录音）；[人民政协网 2025-12-25](https://www.rmzxw.com.cn/c/2025-12-25/3839893.shtml)。申报地区与批次待复核 |
+| 赫哲族鱼皮制作技艺 | 传统技艺 · 黑龙江同江 | 77 | [中国非遗网传承人条目](https://www.ihchina.cn/character_detail/18204.html)；[中国日报网 2025-01-23](https://cn.chinadaily.com.cn/a/202501/23/WS6792033da310be53ce3f32b5.html)（「锐减至个位数」） |
+| 川江号子 | 传统音乐 · 重庆、四川 | 72 | [中国非遗网项目条目](https://www.ihchina.cn/project_details/12451.html)；[新华网 2025-01-22](https://www.news.cn/local/20250122/b90ce79919be47ad8bfd4f988beafd41/c.html) |
+| 黎族原始制陶技艺 | 传统技艺 · 海南昌江 | 70 | [中国非遗网传承人条目](https://www.ihchina.cn/ccr_detail/3089.html)（羊拜亮 1998 年起授徒）；人民日报客户端报道 |
+| 纳西族手工造纸技艺 | 传统技艺 · 云南 | 68 | [中国非遗网传承人条目](https://www.ihchina.cn/ccr_detail/3035.html)（和志本，1993 年恢复）；名录全称「傣族、纳西族手工造纸技艺」 |
+| 南京白局 | 曲艺 · 江苏南京 | 66 | [中国非遗网项目条目](https://www.ihchina.cn/project_details/17013.html)；[扬子晚报网 2025-07-07](https://www.yzwb.net/news/wy/202507/t20250707_232530.html) |
+| 川北大木偶戏 | 传统戏剧 · 四川南充 | 56 | [川观新闻](https://cbgc.scol.com.cn/news/4799839)；[中国非遗网传承人条目](https://www.ihchina.cn/ccr_detail/1815.html) |
+
+这 13 项在详情抽屉里的「想学，从哪进门」沿用既有规则（按门类给路径、按省份给保护中心），没有收录任何个人联系方式。

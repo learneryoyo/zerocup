@@ -70,3 +70,28 @@
   .site-header .nav-more-group { color: #8a7560; }
   .site-header .nav-more-panel a.nav-more-about { border-top-color: rgba(43, 29, 22, .14); }
 }
+
+/* ── 页眉朱线与全站页脚 ─────────────────────────────────────
+   与 site.css 同一份。games/ 下的独立页不引 site.css，所以在这里照抄一遍；
+   site.css 改了页脚或朱线，这里要跟着改。 */
+.site-header::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: #a6281f; transform: scaleX(0); transform-origin: left; pointer-events: none; }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header::after { animation: header-thread linear both; animation-timeline: scroll(root block); }
+    @keyframes header-thread { to { transform: scaleX(1); } }
+  }
+}
+.site-footer { --fg: clamp(20px,4vw,64px); position: relative; box-sizing: border-box; padding: clamp(56px,7vw,104px) var(--fg) 30px; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 40px clamp(32px,6vw,96px); background: #16120e; color: #f6efe4; font-family: "PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif; line-height: normal; }
+.site-footer::before { content: ""; position: absolute; top: 0; left: var(--fg); width: clamp(64px,9vw,132px); height: 3px; background: #a6281f; }
+.site-footer p { margin: 0; }
+.site-footer__brand { font: 700 clamp(44px,7vw,112px)/1 "DingLie SongKe","Songti SC","STSong","Noto Serif SC",Georgia,serif; letter-spacing: .08em; }
+.site-footer__line { margin-top: 18px !important; font: 400 clamp(17px,1.7vw,25px)/1.5 "HongLei XingShu","Kaiti SC","STKaiti","KaiTi",serif; color: rgba(246,239,228,.72); }
+.site-footer nav { display: grid; grid-template-columns: repeat(2,auto); gap: 4px clamp(28px,4vw,64px); }
+.site-footer a { padding: 7px 0; font: 600 16px/1.4 "DingLie SongKe","Songti SC","STSong","Noto Serif SC",Georgia,serif; letter-spacing: .12em; text-decoration: none; color: inherit; }
+.site-footer a:hover, .site-footer a:focus-visible { text-decoration: underline; text-decoration-color: #a6281f; text-decoration-thickness: 2px; text-underline-offset: 7px; }
+.site-footer a:focus-visible { outline: 2px solid #f6efe4; outline-offset: 4px; }
+.site-footer__note { grid-column: 1 / -1; padding-top: 20px; border-top: 1px solid rgba(246,239,228,.16); font-size: 12px; line-height: 1.9; letter-spacing: .06em; color: rgba(246,239,228,.56); }
+@media (max-width: 700px) {
+  .site-footer { grid-template-columns: 1fr; align-items: start; }
+  .site-footer a { padding: 10px 0; font-size: 15px; }
+}

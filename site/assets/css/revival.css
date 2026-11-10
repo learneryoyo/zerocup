@@ -318,3 +318,6 @@
 @media (prefers-reduced-motion: reduce) {
   .rv-tab, .rv-tab .rv-badge { transition: none; }
 }
+
+/* 档案里的「接到手里」 */
+.rv-hand { margin: 18px 0 6px; }

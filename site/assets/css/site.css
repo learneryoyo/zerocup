@@ -6,6 +6,9 @@
   --paper: #f6efe4;
   --accent: #f3c623;
   --red: #a6281f;
+  /* 夜色：带褐的漆黑，用在整段深色版面（首页「叁」、页脚）；旧纸：比纸色深一层，用来隔开相邻的浅色版面 */
+  --night: #16120e;
+  --paper-deep: #ece1cf;
   --line: rgba(16, 16, 15, 0.18);
   --header-height: 74px;
   --page-gutter: clamp(20px, 4vw, 64px);
@@ -62,6 +65,14 @@ img { display: block; max-width: 100%; }
   display: flex; align-items: center; justify-content: space-between;
   background: rgba(246,239,228,.94); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px);
 }
+/* 页眉底边的朱线：页面读到哪，线就走到哪（纯 CSS 滚动驱动；不支持或页面不滚动时不出现） */
+.site-header::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; pointer-events: none; }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header::after { animation: header-thread linear both; animation-timeline: scroll(root block); }
+    @keyframes header-thread { to { transform: scaleX(1); } }
+  }
+}
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 /* 页眉标志预留：正式标志以 <img class="brand-logo"> 放入 .brand，位于站名之前。 */
 .brand-logo { display: block; height: 34px; width: auto; }
@@ -74,11 +85,18 @@ img { display: block; max-width: 100%; }
 .nav-toggle { display: none; border: 0; background: transparent; font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .1em; cursor: pointer; }
 
 /* 首页专属样式见 home-classic.css。 */
-.site-footer { min-height: 190px; padding: 48px var(--page-gutter); display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,.14); }
-.site-footer p { margin: 0; font: 700 17px/1 var(--serif); letter-spacing: .12em; }
-.site-footer nav { display: flex; flex-wrap: wrap; gap: 24px; }
-.site-footer a { font-size: 12px; text-decoration: none; letter-spacing: .1em; }
-.site-footer a:hover, .site-footer a:focus-visible { text-decoration: underline; text-underline-offset: 5px; }
+/* 页脚：夜色底。左边站名与题眼，右边全站入口，底下一行口径说明。全站各页同一份。 */
+.site-footer { position: relative; padding: clamp(56px,7vw,104px) var(--page-gutter) 30px; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 40px clamp(32px,6vw,96px); background: var(--night); color: var(--paper); }
+/* 顶边一根朱线：首页那条「脉」在每一页的落点 */
+.site-footer::before { content: ""; position: absolute; top: 0; left: var(--page-gutter); width: clamp(64px,9vw,132px); height: 3px; background: var(--red); }
+.site-footer p { margin: 0; }
+.site-footer__brand { font: 700 clamp(44px,7vw,112px)/1 var(--serif); letter-spacing: .08em; }
+.site-footer__line { margin-top: 18px !important; font: 400 clamp(17px,1.7vw,25px)/1.5 var(--xingshu); color: rgba(246,239,228,.72); }
+.site-footer nav { display: grid; grid-template-columns: repeat(2,auto); gap: 4px clamp(28px,4vw,64px); }
+.site-footer a { padding: 7px 0; font: 600 16px/1.4 var(--serif); letter-spacing: .12em; text-decoration: none; }
+.site-footer a:hover, .site-footer a:focus-visible { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: 7px; }
+.site-footer a:focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
+.site-footer__note { grid-column: 1 / -1; padding-top: 20px; border-top: 1px solid rgba(246,239,228,.16); font-size: 12px; line-height: 1.9; letter-spacing: .06em; color: rgba(246,239,228,.56); }
 
 .story-overlay { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; visibility: hidden; pointer-events: none; }
 .story-overlay[aria-hidden="false"] { visibility: visible; pointer-events: auto; }
@@ -147,7 +165,8 @@ img { display: block; max-width: 100%; }
   .primary-nav a, .nav-more-btn { padding: 14px 0; font-size: 15px; }
   .primary-nav a::after, .nav-more-btn::before { content: none; }
   .primary-nav a.is-current, .nav-more.is-open .nav-more-btn, .nav-more-btn.is-current { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
-  .site-footer { align-items: flex-start; flex-direction: column; }
+  .site-footer { grid-template-columns: 1fr; align-items: start; }
+  .site-footer a { padding: 10px 0; font-size: 15px; }
   .story-shell { width: 100vw; height: 100vh; height: 100dvh; }
 }
 @media (prefers-reduced-motion: reduce) {
