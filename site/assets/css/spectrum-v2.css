@@ -147,18 +147,17 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 .more:hover { background: none; color: var(--red); }
 .more-note { font-family: var(--sans); font-size: 13px; }
 
-/* ── 想参与 ─────────────────────────────────────────────── */
-.act { margin: clamp(88px, 10vw, 150px) 0 0; scroll-margin-top: 96px; }
-.act h2 { margin: 0 0 clamp(28px, 3.4vw, 48px); font: 700 clamp(34px, 5vw, 78px)/1.08 var(--serif); letter-spacing: .01em; }
-#do-title { scroll-margin-top: 110px; }
-.act-list { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--ink); }
-.act-list li { display: grid; grid-template-columns: minmax(0, .4fr) minmax(0, 1fr); align-items: baseline; gap: 6px clamp(20px, 3vw, 48px); padding: clamp(18px, 2.2vw, 30px) 0; border-bottom: 1px solid var(--line); }
-.act-list b { font: 700 clamp(28px, 3.4vw, 52px)/1.1 var(--serif); letter-spacing: .02em; }
-.act-list p { margin: 0; max-width: 40em; font-size: 16px; line-height: 1.95; color: var(--ink-2); }
-.act-aside { margin: clamp(28px, 3vw, 44px) 0 0; max-width: 720px; padding-left: clamp(18px, 2vw, 28px); border-left: 3px solid var(--red); }
-.act-aside h3 { margin: 0 0 10px; font: 700 clamp(20px, 1.9vw, 26px)/1.4 var(--serif); letter-spacing: .04em; }
-.act-aside p { margin: 0 0 8px; font-size: 15px; line-height: 1.95; color: var(--ink-2); }
-.act-aside .dim { font-size: 14px; color: var(--ink-3); }
+/* ── 想参与（无标题，降级为一段说明） ───────────────────── */
+.act { margin: clamp(88px, 10vw, 150px) 0 0; scroll-margin-top: 110px; }
+.act-note {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.6vw, 44px) clamp(28px, 4vw, 72px);
+  padding-top: clamp(22px, 2.4vw, 34px);
+  border-top: 2px solid var(--ink);
+}
+.act-note p { margin: 0; font-size: 15px; line-height: 1.95; color: var(--ink-2); }
+.act-note .dim { grid-column: 1 / -1; font-size: 14px; color: var(--ink-3); }
 
 /* ── 口径 ───────────────────────────────────────────────── */
 .notes { margin-top: clamp(72px, 8vw, 120px); padding-top: 34px; gap: clamp(32px, 5vw, 88px); }
@@ -185,7 +184,7 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
   .cat { font-size: 15px; }
   .card { padding: 22px 0 20px; box-shadow: 0 1px 0 var(--line); }
   .card:hover { box-shadow: 0 1px 0 var(--line); }
-  .act-list li { grid-template-columns: 1fr; }
+  .act-note { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   .card { animation: none; }
