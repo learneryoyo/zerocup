@@ -394,8 +394,13 @@ const cls=s=>s[3]?' '+s[3]:'';
 function photo(d,spec){const[i,x,y,w,c,pos,forced]=spec,p=d.photos[i],h=forced||(/\bc\b/.test(c||'')?w:w/p.r);return `<figure class="dp-photo ${c||''}" tabindex="0" style="left:${pct(x,1120)};top:${pct(y,700)};width:${pct(w,1120)};height:${pct(h,700)};--ar:${(w/h).toFixed(3)}"><span class="dp-frame"><img src="${esc(p.src)}" alt="${esc(p.cap)}" style="object-position:${pos||'50% 50%'}"></span><figcaption>${esc(p.cap)}</figcaption></figure>`}
 const clip=c=>{const[id,x,y,w,r]=c,m=window.ARTISAN_COLLAGE?.[id];return m?`<img class="dp-clip" src="${esc(m.src)}" alt="" style="left:${pct(x,1120)};top:${pct(y,700)};width:${pct(w,1120)};transform:rotate(${r||0}deg)">`:''};
 function block(d,i,s){const[when,what]=String(d.dates[i]).split(' · ');return `<section class="dp-slot dp-block${cls(s)}" style="${slot(s)}"><time>${esc(when)}${what?`<i>${esc(what)}</i>`:''}</time><h3>${esc(d.headings[i])}</h3><p>${esc(d.paragraphs[i])}</p></section>`}
+// 宋刻字库只有 6767 个常用汉字，下面这几个字它没有，会掉到系统宋体。
+// 一个字掉出去，在一个 36px 的牌匾上就是笔画突然重一截（「王珮瑜」的「珮」）。
+// 所以这类姓名整块换系统宋体：一致比好看重要。
+// 这份名单来自 node _font_platform.js 的实测，字体换了要重新对一遍。
+const NO_GLYPH=/[〇囍昇澥爺珮絣]/;
 // 榜题：人名竖排。多人时按“、”和“与”分列，每列一组。
-function plaque(name){const parts=name.split(/(?<=、)|(?=与)/);return `<h2 class="dp-name${parts.length>1?' many':''}" id="diary-name">${parts.map(n=>`<span>${esc(n)}</span>`).join('')}</h2>`}
+function plaque(name){const parts=name.split(/(?<=、)|(?=与)/);const sys=NO_GLYPH.test(name)?' is-sys':'';return `<h2 class="dp-name${parts.length>1?' many':''}${sys}" id="diary-name">${parts.map(n=>`<span>${esc(n)}</span>`).join('')}</h2>`}
 function render(d){const P=PAGES[d.id],L=P?{c:WALL[P.c],k:P.k}:LAYOUTS[d.id],s=styles[d.group],[paper,ink,accent,soft]=L.c,photos=P?d.photos.map((p,i)=>i):L.p.map(q=>q[0]);
  const st=dialog.style;st.setProperty('--paper',paper);st.setProperty('--ink',ink);st.setProperty('--accent',accent);st.setProperty('--soft',soft);
  // 深色色地：全部文字改用壁面浅色（判定依据是壁面亮度，而不是逐页写死）

@@ -42,6 +42,10 @@
  font:700 2.05em/1.1 var(--title);letter-spacing:.06em;writing-mode:vertical-rl;text-orientation:upright;transform-origin:50% 0}
 .dp-name span{display:block;white-space:nowrap}
 .dp-name.many{font-size:1.5em;min-height:0;flex-direction:column;gap:.1em;padding:.6em .5em;letter-spacing:.1em}
+/* 姓名里有宋刻缺的字（见 artisan-diary.js 的 NO_GLYPH）时整块换系统宋体。
+   宁可整块换字体，也不要三个字里跳出来一个笔画不一样的。
+   字体栈就是 --title 去掉宋刻那一档，别再加别的。 */
+.dp-name.is-sys{font-family:"STZhongsong","Songti SC","STSong","Noto Serif SC","SimSun",serif}
 .dp-lead{padding-top:.1em}
 .dp-lead>*{margin:0}
 .dp-title{font:700 1.5em/1.28 var(--title);color:var(--ink);letter-spacing:.015em;text-wrap:balance}
