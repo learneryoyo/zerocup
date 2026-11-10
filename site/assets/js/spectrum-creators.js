@@ -197,6 +197,10 @@
     "photoSource": "https://www.thepaper.cn/newsDetail_forward_26074240",
     "photoLabel": "挑担行走",
     "position": "50% 50%",
+    // 名册卡片是 16:10 横框，挑担那张只到膝上；这一张同组照片人物全身在画内。
+    "rosterImage": "../assets/img/creators/creator-03-roster.webp",
+    "rosterLabel": "院中制作竹器",
+    "rosterPos": "50% 50%",
     "title": "在院子里，慢慢做出来",
     "noteTitle": "手边的生活，也是材料",
     "note": "石磨、案桌、院落与茶叶，把手艺串回具体的日常。看他的作品，不妨多留意工具怎样被使用，以及那些看起来重复、却决定成品的细小动作。",
@@ -573,7 +577,7 @@
     "name": "朱铁雄",
     "field": "国风变装、川剧元素与传统文化叙事",
     "role": "国风短视频与非遗文化传播者",
-    "story": "朱铁雄把小时候对英雄的想象，拍成了今天的国风短片。普通人的生活片段常常是故事的开头，随后借助表演、服装和视觉特效，转入戏曲与传统人物的世界。川剧变脸、吐火、舞狮等元素，在他的作品里参与叙事，而不只是一个漂亮背景。他用年轻人熟悉的短视频语言，让传统文化与当下的情感相遇。",
+    "story": "朱铁雄把小时候对英雄的想象，拍成了今天的国风短片。普通人的生活片段常常是故事的开头，随后借助表演、服装和视觉特效，转入戏曲与传统人物的世界。川剧变脸、吐火、舞狮等元素，在他的作品里参与叙事，而不只是一个漂亮背景。他用的还是年轻人熟悉的短视频语言，讲的却是老戏里的人物。",
     "achievements": [
       "以国风剧情与特效呈现川剧、舞狮等元素",
       "2022年获中国网络视频学院奖“最新锐网络达人”"
@@ -944,7 +948,7 @@
  let returnTo=null;
  const roster=document.getElementById('creatorRoster');
  if(roster){
-  roster.innerHTML=people.map((p,i)=>`<li><button type="button" class="roster-card" data-i="${i}" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="roster-pic"><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}" loading="lazy" decoding="async" style="object-position:${esc(p.position||'50% 30%')}"></span><strong>${esc(p.name)}</strong><span class="roster-field">${esc(p.field)}</span><span class="roster-title">${esc(p.title)}</span></button></li>`).join('');
+  roster.innerHTML=people.map((p,i)=>`<li><button type="button" class="roster-card" data-i="${i}" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="roster-pic"><img src="${esc(p.rosterImage||p.image)}" alt="${esc(p.name+' · '+(p.rosterLabel||p.photoLabel))}" loading="lazy" decoding="async" style="object-position:${esc(p.rosterPos||p.position||'50% 30%')}"></span><strong>${esc(p.name)}</strong><span class="roster-field">${esc(p.field)}</span><span class="roster-title">${esc(p.title)}</span></button></li>`).join('');
   roster.addEventListener('click',e=>{
    const card=e.target.closest('.roster-card');if(!card||dialog.open)return;
    show(+card.dataset.i);returnTo=card;

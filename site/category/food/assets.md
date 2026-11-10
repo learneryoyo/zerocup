@@ -140,23 +140,33 @@ site/category/food/
 | 文件 | 画面 | 作者／来源 | 原页面 | 许可 |
 |---|---|---|---|---|
 | `images/hero-huamo-wenxi.jpg` | 首屏总括图 | 新华网山西频道（作者未查明） | https://www.sx.news.cn/20250110/d6160a3492e7485e9ff4c31b51f5318e/c.html | 需核实 |
-| `cailinji-hotdry-noodles/images/hotdry-16-tossing-zhihu.jpg` | 师傅抖散出锅的面条，一旁蒸汽升腾 | 知乎专栏文章（作者未查明） | https://zhuanlan.zhihu.com/p/42522913 | 需核实 |
+| `cailinji-hotdry-noodles/images/hotdry-16-tossing-zhihu.jpg` | 师傅抖散出锅的面条，一旁蒸汽升腾 | 知乎专栏（作者待查；页面拒绝抓取，只保留原链接） | https://zhuanlan.zhihu.com/p/42522913 | 需核实 |
 | `cailinji-hotdry-noodles/images/hotdry-12-bowl-nature42.jpg` | 热干面配萝卜丁与牛肉 | Nature42 | https://commons.wikimedia.org/wiki/File:%E7%83%AD%E5%B9%B2%E9%9D%A2.jpg | CC0 1.0 |
 | `cailinji-hotdry-noodles/images/hotdry-13-stirred-zhengzhou.jpg` | 拌匀后挂满芝麻酱的面条 | ZhengZhou | https://commons.wikimedia.org/wiki/File:Hot_Dry_Noodles_stirred.jpg | CC BY-SA 4.0 |
 | `cailinji-hotdry-noodles/images/hotdry-14-closeup-hans.jpg` | 浇上酱料、撒好葱花的一碗 | 宽子／HANS汉声 | https://www.thepaper.cn/newsDetail_forward_25128597 | 需核实 |
 | `cailinji-hotdry-noodles/images/hotdry-15-eggwine-hans.jpg` | 拌好的热干面配一碗蛋酒 | 宽子／HANS汉声 | https://www.thepaper.cn/newsDetail_forward_25128597 | 需核实 |
-| `jingmen-aizi-pastry/images/aizi-11-tray-sohu.jpg` | 门店托盘里的矮子馅饼 | 搜狐文章（作者未查明） | https://www.sohu.com/a/814074901_333962 | 需核实 |
-| `jingmen-aizi-pastry/images/aizi-12-kitchen-sohu.jpg` | 师傅们围桌包馅，身后是饼铛 | 搜狐文章（作者未查明） | https://www.sohu.com/a/814074901_333962 | 需核实 |
-| `jingmen-aizi-pastry/images/aizi-13-section-sohu.jpg` | 掰开的馅饼，酥皮层层可见 | 搜狐文章（作者未查明） | https://www.sohu.com/a/220994499_669362 | 需核实 |
-| `jingmen-aizi-pastry/images/aizi-14-filling-sohu.jpg` | 切开的馅饼露出深色馅心 | 搜狐文章（作者未查明） | https://www.sohu.com/a/220994499_669362 | 需核实 |
-| `jingmen-aizi-pastry/images/aizi-15-queue-sohu.jpg` | 门店柜台前排队的顾客 | 搜狐文章（作者未查明） | https://www.sohu.com/a/814074901_333962 | 需核实 |
-| `jingzhou-fish-cake/images/fishcake-11-fan-thepaper.jpg` | 切片围成一圈的鱼糕 | 澎湃号媒体发布（作者未查明） | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实 |
-| `jingzhou-fish-cake/images/fishcake-12-dish-thepaper.jpg` | 青花大盘里的鱼糕 | 荆州发布转载（作者未查明） | https://www.thepaper.cn/newsDetail_forward_21685735 | 需核实 |
-| `jingzhou-fish-cake/images/fishcake-13-pot-thepaper.jpg` | 铜锅里的鱼糕与鱼丸 | 澎湃号媒体发布（作者未查明） | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实 |
-| `jingzhou-fish-cake/images/fishcake-14-slices-thepaper.jpg` | 切片的鱼糕，黄白分明 | 澎湃号媒体发布（作者未查明） | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实 |
+| `jingmen-aizi-pastry/images/aizi-11-tray-sohu.jpg` | 门店托盘里的矮子馅饼 | 山城拍客／搜狐号《荆门非遗小吃“矮子馅饼”飘香重庆》，2024-10-05（编辑：范永根） | https://www.sohu.com/a/814074901_333962 | 需核实；搜狐图床加密，未做像素比对 |
+| `jingmen-aizi-pastry/images/aizi-12-kitchen-sohu.jpg` | 师傅们围桌包馅，身后是饼铛 | 山城拍客／搜狐号《荆门非遗小吃“矮子馅饼”飘香重庆》，2024-10-05（编辑：范永根） | https://www.sohu.com/a/814074901_333962 | 需核实；搜狐图床加密，未做像素比对 |
+| `jingmen-aizi-pastry/images/aizi-13-section-sohu.jpg` | 掰开的馅饼，酥皮层层可见 | 每日宜昌／搜狐号《屹立宜昌多年，听说吃过它才是真正的宜昌人！》，2018-02-05，摄影：叮当猫 | https://www.sohu.com/a/220994499_669362 | 需核实；2026-11-11 已在原文比对到同图（645×435） |
+| `jingmen-aizi-pastry/images/aizi-14-filling-sohu.jpg` | 切开的馅饼露出深色馅心 | 每日宜昌／搜狐号《屹立宜昌多年，听说吃过它才是真正的宜昌人！》，2018-02-05，摄影：叮当猫 | https://www.sohu.com/a/220994499_669362 | 需核实；2026-11-11 已在原文比对到同图（640×427） |
+| `jingmen-aizi-pastry/images/aizi-15-queue-sohu.jpg` | 门店柜台前排队的顾客 | 山城拍客／搜狐号《荆门非遗小吃“矮子馅饼”飘香重庆》，2024-10-05（编辑：范永根） | https://www.sohu.com/a/814074901_333962 | 需核实；搜狐图床加密，未做像素比对 |
+| `jingzhou-fish-cake/images/fishcake-11-fan-thepaper.jpg` | 切片围成一圈的鱼糕 | 澎湃号·媒体《舌尖上的非遗｜鱼糕飘香千年——荆州鱼糕》，2021-02-24 | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实；2026-11-11 已在原文比对到同图（1280×888） |
+| `jingzhou-fish-cake/images/fishcake-12-dish-thepaper.jpg` | 青花大盘里的鱼糕 | 澎湃号·政务《荆州的“烟火气”都藏在这里！》，2023-01-25 | https://www.thepaper.cn/newsDetail_forward_21685735 | 需核实；2026-11-11 已在原文比对到同图（950×630） |
+| `jingzhou-fish-cake/images/fishcake-13-pot-thepaper.jpg` | 铜锅里的鱼糕与鱼丸 | 澎湃号·媒体《舌尖上的非遗｜鱼糕飘香千年——荆州鱼糕》，2021-02-24 | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实；2026-11-11 已在原文比对到同图（800×531） |
+| `jingzhou-fish-cake/images/fishcake-14-slices-thepaper.jpg` | 切片的鱼糕，黄白分明 | 澎湃号·媒体《舌尖上的非遗｜鱼糕飘香千年——荆州鱼糕》，2021-02-24 | https://www.thepaper.cn/newsDetail_forward_11444698 | 需核实；2026-11-11 已在原文比对到同图（700×467） |
 | `jingzhou-fish-cake/images/fishcake-15-section-jimu.jpg` | 筷子夹起鱼糕片，看得见切面 | 黄志刚／极目新闻 | https://news.cnhubei.com/content/2023-01/16/content_15388578.html | 需核实 |
 | `enshi-yulu/images/yulu-11-dry-leaves-cnhubei.jpg` | 白瓷盘里的恩施玉露干茶 | 荆楚网／湖北省知识产权局专题 | http://www.cnhubei.com/xwzt/2022/hbdlbzxszg/cy/202207/t4440905.shtml | 需核实 |
 | `enshi-yulu/images/yulu-12-garden-cnhubei.jpg` | 恩施茶园，茶农在采茶 | 荆楚网／湖北省知识产权局专题 | http://www.cnhubei.com/xwzt/2022/hbdlbzxszg/cy/202207/t4440905.shtml | 需核实 |
 | `enshi-yulu/images/yulu-13-steam-xinhua.jpg` | 蒸汽杀青 | 伍功勋／新华网 | https://www.xinhuanet.com/2021-04/16/c_1127334425.htm | 需核实 |
 | `enshi-yulu/images/yulu-14-shaping-xinhua.jpg` | 手工整形 | 伍功勋／新华网 | https://www.xinhuanet.com/2021-04/16/c_1127334425.htm | 需核实 |
 | `enshi-yulu/images/yulu-15-sorting-xinhua.jpg` | 用竹夹拣选干茶 | 伍功勋／新华网 | https://www.xinhuanet.com/2021-04/16/c_1127334425.htm | 需核实 |
+
+### 2026-11-11 图片溯源
+
+页面原先统一写作「图片来源于网络」的 10 张图，这次逐条回到原页面核对，结果见上表：
+
+- **6 张比对到同图**（把原页面图下载下来做感知哈希比对，距离为 0，尺寸完全一致）：`aizi-13`、`aizi-14`、`fishcake-11`、`fishcake-12`、`fishcake-13`、`fishcake-14`。这 6 张可以确定「出自哪篇、谁发的、哪天发」，页面图注已改为媒体＋日期。
+- **3 张保留原页面记录**：`aizi-11`、`aizi-12`、`aizi-15` 指向搜狐 2024-10-05 那篇，但搜狐正文图走加密 `data-src`，抓不到原图做比对，只能按此前记录的链接署名。
+- **1 张只有平台**：`hotdry-16` 指向知乎专栏 p/42522913，知乎对抓取返回 403，标题与作者都无法核实，页面暂写「知乎专栏（作者待查）」。
+
+以上改动只写**能证实的信息**：作者查不到就写媒体名，日期查不到就不写日期，没有把「疑似」写成「确认」。

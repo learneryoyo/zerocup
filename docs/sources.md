@@ -190,3 +190,43 @@
 | 川北大木偶戏 | 传统戏剧 · 四川南充 | 56 | [川观新闻](https://cbgc.scol.com.cn/news/4799839)；[中国非遗网传承人条目](https://www.ihchina.cn/ccr_detail/1815.html) |
 
 这 13 项在详情抽屉里的「想学，从哪进门」沿用既有规则（按门类给路径、按省份给保护中心），没有收录任何个人联系方式。
+
+## 图片溯源：原「图片来源于网络」的 11 处（2026-11-11）
+
+做法：把原页面上的图逐张下载，与仓库里的图做感知哈希（dHash）比对，距离为 0 且尺寸一致才算「比对到同图」；
+没有比对上的，只写原页面记录的媒体与日期，不推断摄影者。页面图注已按「媒体／作者 + 日期」改写。
+
+### 食物页 · 可比对到同图（6 张）
+
+| 仓库文件 | 原页面 | 发布者 / 日期 | 比对结果 |
+|---|---|---|---|
+| ood/jingzhou-fish-cake/images/fishcake-11-fan-thepaper.jpg | [澎湃新闻《舌尖上的非遗｜鱼糕飘香千年——荆州鱼糕》](https://www.thepaper.cn/newsDetail_forward_11444698) | 澎湃号·媒体 / 2021-02-24 | 1280×888，距离 0 |
+| ood/jingzhou-fish-cake/images/fishcake-12-dish-thepaper.jpg | [澎湃新闻《荆州的「烟火气」都藏在这里！》](https://www.thepaper.cn/newsDetail_forward_21685735) | 澎湃号·政务 / 2023-01-25 | 950×630，距离 0 |
+| ood/jingzhou-fish-cake/images/fishcake-13-pot-thepaper.jpg | [澎湃新闻《舌尖上的非遗｜鱼糕飘香千年——荆州鱼糕》](https://www.thepaper.cn/newsDetail_forward_11444698) | 澎湃号·媒体 / 2021-02-24 | 800×531，距离 0 |
+| ood/jingzhou-fish-cake/images/fishcake-14-slices-thepaper.jpg | [澎湃新闻《舌尖上的非遗｜鱼糕飘香千年——荆州鱼糕》](https://www.thepaper.cn/newsDetail_forward_11444698) | 澎湃号·媒体 / 2021-02-24 | 700×467，距离 0 |
+| ood/jingmen-aizi-pastry/images/aizi-13-section-sohu.jpg | [搜狐《屹立宜昌多年，听说吃过它才是真正的宜昌人！》](https://www.sohu.com/a/220994499_669362) | 每日宜昌 / 2018-02-05，文末注「图片：叮当猫摄」 | 645×435，距离 0 |
+| ood/jingmen-aizi-pastry/images/aizi-14-filling-sohu.jpg | 同上 | 同上 | 640×427，距离 0 |
+
+### 食物页 · 只有原页面记录（4 张）
+
+| 仓库文件 | 原页面 | 发布者 / 日期 | 状态 |
+|---|---|---|---|
+| ood/jingmen-aizi-pastry/images/aizi-11-tray-sohu.jpg | [搜狐《荆门非遗小吃「矮子馅饼」飘香重庆 酥软不沾牙轻轻一咬即化》](https://www.sohu.com/a/814074901_333962) | 山城拍客 / 2024-10-05（编辑：范永根） | 搜狐正文图走加密 data-src，取不到原图，未比对 |
+| ood/jingmen-aizi-pastry/images/aizi-12-kitchen-sohu.jpg | 同上 | 同上 | 同上 |
+| ood/jingmen-aizi-pastry/images/aizi-15-queue-sohu.jpg | 同上 | 同上 | 同上 |
+| ood/cailinji-hotdry-noodles/images/hotdry-16-tossing-zhihu.jpg | https://zhuanlan.zhihu.com/p/42522913 | 知乎专栏，作者待查 | 知乎对抓取返回 403，标题与作者都核不到，页面只写「知乎专栏（作者待查）」 |
+
+### 陶瓷工序图（3 处，未定）
+
+porcelain-process-01/02/03/06.jpg 这一组图在 heritage/ceramics.html 与匠人日记里都只写「图片来源于网络」。本次用 Bing 图片检索反查：
+
+- porcelain-process-06.jpg 比对到新浪图床的一张同图：https://n.sinaimg.cn/sinacn15/67/w1000h667/20181027/82bd-hnaivxp3460549.jpg（2018-10-27，dHash 距离 5）。
+- 该图所属的新浪文章 rticle_6434323630_p17f83fcae02700b409 **已下线**（打开显示「该文章已不存在」），标题、作者、授权都无从核实。
+- 同组另外 3 张在本轮检索中没有找到同图，保留原图注。
+
+结论：这一组暂不写具体署名——把一条「新浪 2018 年图集、原文已删」写进图注，对读者没有增量，也撑不起授权说明。等找到仍在线的原页或摄影者再补。
+
+### 复现方法
+
+\_trace 下的脚本（仓库外，未提交）：etch_pages.py 抓原页 → match.py 下载候选图并做 dHash 比对 → ing2.py 用 Bing 图片检索反查来源页。比对阈值取 0–8，超过就当没找到。
+
