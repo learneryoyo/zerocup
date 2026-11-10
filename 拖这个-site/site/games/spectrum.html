@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+  <style id="page-navigation-transition">
+    html { background: #f6efe4; scrollbar-gutter: stable; }
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+      .site-header { view-transition-name: site-navigation; }
+      ::view-transition-group(root),
+      ::view-transition-group(site-navigation) { animation: none; }
+      ::view-transition-old(root) { animation: none; opacity: 1; }
+      ::view-transition-new(root) {
+        animation: page-arrive 150ms linear both;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(site-navigation) { animation: none; opacity: 0; }
+      ::view-transition-new(site-navigation) { animation: none; opacity: 1; }
+      @keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>存续有数 · 中国非遗濒危光谱</title>
+<meta name="description" content="存续有数：收录 101 项国家级与人类非遗代表作，按存续状况排在一条光谱上。拖一拖，看哪些项目随时可能断代，以及可以怎么参与。">
+<style>
+  :root{
+    --paper:#f3efe4;
+    --paper-2:#fbf8f0;
+    --card:#fffdf7;
+    --ink:#211d18;
+    --ink-2:#5c5449;
+    --ink-3:#8d8477;
+    --line:rgba(33,29,24,.13);
+    --line-soft:rgba(33,29,24,.07);
+    --accent:#a8352b;
+    --serif:"Songti SC","Source Han Serif SC","Noto Serif SC","STSong","SimSun",serif;
+    --sans:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Noto Sans SC",system-ui,-apple-system,sans-serif;
+    --mono:"JetBrains Mono","SF Mono",Consolas,"Courier New",monospace;
+    --shadow:0 1px 2px rgba(33,29,24,.04),0 8px 24px -12px rgba(33,29,24,.18);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    /* 大背景与全站一致：纸色 #f6efe4，不加横纹 */
+    background:radial-gradient(circle at 16% 10%, rgba(255,255,255,.8), transparent 32%), #f6efe4;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 40px;position:relative;overflow:hidden}
+  .kicker{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12px;letter-spacing:.18em;color:var(--ink-3);
+    margin-bottom:22px;
+  }
+  .kicker .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(168,53,43,.12)}
+  h1{
+    font-family:var(--serif);
+    font-size:clamp(42px,7vw,76px);
+    line-height:1.08;letter-spacing:.04em;margin:0 0 8px;font-weight:600;
+  }
+  h1 em{font-style:normal;color:var(--accent);position:relative;display:inline-block}
+  h1 em::after{
+    content:"";position:absolute;left:-2%;right:-2%;bottom:.06em;height:.16em;
+    background:linear-gradient(90deg,rgba(168,53,43,.22),rgba(168,53,43,.05));z-index:-1;
+  }
+  .lede{max-width:620px;color:var(--ink-2);font-size:16px;margin:18px 0 0}
+  .lede b{color:var(--ink);font-weight:600}
+  .seal{
+    position:absolute;right:24px;top:74px;width:82px;height:82px;
+    border:2px solid var(--accent);border-radius:3px;color:var(--accent);
+    display:grid;place-items:center;transform:rotate(-4deg);
+    font-family:var(--serif);font-size:26px;letter-spacing:.1em;
+    line-height:1;opacity:.85;writing-mode:vertical-rl;
+    box-shadow:inset 0 0 0 3px rgba(168,53,43,.08);
+  }
+  @media(max-width:860px){.seal{display:none}}
+
+  .stats{display:flex;gap:0;margin:38px 0 0;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;max-width:760px}
+  .stats>div{padding-right:34px;margin-right:34px;border-right:1px solid var(--line-soft)}
+  .stats>div:last-child{border-right:0;margin-right:0;padding-right:0}
+  .stats b{display:block;font-family:var(--serif);font-size:34px;font-weight:600;line-height:1.1;letter-spacing:.02em}
+  .stats span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px;letter-spacing:.04em}
+
+  /* ---------- spectrum ---------- */
+  .panel{
+    background:linear-gradient(180deg,#fffdf8,#fbf7ec);
+    border:1px solid var(--line);border-radius:6px;
+    padding:28px 28px 22px;box-shadow:var(--shadow);
+    margin-top:8px;position:relative;
+  }
+  .panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+  .panel-head h2{
+    font-family:var(--serif);font-size:19px;font-weight:600;margin:0;letter-spacing:.08em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .panel-head h2::before{content:"";width:3px;height:16px;background:var(--accent);display:block;border-radius:2px}
+  .hint{font-size:12.5px;color:var(--ink-3);letter-spacing:.02em}
+
+  .slider{padding:6px 0 0;position:relative;margin-bottom:6px}
+  .bands{display:flex;margin-bottom:9px}
+  .band{
+    flex:1;font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);
+    text-align:center;cursor:pointer;padding:4px 0;border-radius:3px;transition:.18s;
+    border-bottom:2px solid transparent;
+  }
+  .band:hover{color:var(--ink);background:rgba(33,29,24,.035)}
+  .band.on{color:var(--ink);font-weight:600;border-bottom-color:var(--ink)}
+
+  .rail-wrap{position:relative;height:44px;margin:0 2px}
+  .rail{
+    position:absolute;left:0;right:0;top:17px;height:12px;border-radius:8px;
+    background:linear-gradient(90deg,#3f6f52 0%,#4e7d5c 10%,#6f8f6a 30%,#bf9530 50%,#c46a2c 70%,#b23a2e 90%,#8a2118 100%);
+    opacity:.30;
+  }
+  .rail-active{
+    position:absolute;top:17px;height:12px;border-radius:8px;
+    background:linear-gradient(90deg,#3f6f52 0%,#4e7d5c 10%,#6f8f6a 30%,#bf9530 50%,#c46a2c 70%,#b23a2e 90%,#8a2118 100%);
+    background-repeat:no-repeat;
+    box-shadow:0 1px 3px rgba(33,29,24,.16);
+  }
+  .rail-dim{
+    position:absolute;top:17px;height:12px;background:rgba(243,239,228,.74);border-radius:8px;
+  }
+  .ticks{position:absolute;left:0;right:0;top:34px;height:8px;pointer-events:none}
+  .ticks i{position:absolute;width:1px;height:4px;background:rgba(33,29,24,.18);top:0}
+  .thumb{
+    position:absolute;top:8px;width:26px;height:26px;margin-left:-13px;
+    background:var(--card);border:2px solid var(--ink);border-radius:50%;
+    cursor:grab;touch-action:none;z-index:3;
+    box-shadow:0 2px 8px rgba(33,29,24,.22);
+    transition:transform .15s,box-shadow .15s;
+  }
+  .thumb::after{content:"";position:absolute;inset:5px;border-radius:50%;background:currentColor;opacity:.9}
+  .thumb:hover{transform:scale(1.1)}
+  .thumb:active{cursor:grabbing;transform:scale(1.06);box-shadow:0 4px 14px rgba(33,29,24,.3)}
+  .thumb:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .thumb .val{
+    position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+    font-family:var(--mono);font-size:11px;letter-spacing:.02em;
+    background:var(--ink);color:#fbf8f0;padding:1px 6px;border-radius:3px;white-space:nowrap;
+    opacity:0;transition:opacity .15s;pointer-events:none;
+  }
+  .thumb:hover .val,.thumb:focus-visible .val,.thumb.dragging .val{opacity:1}
+
+  .readout{
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    margin-top:14px;padding-top:16px;border-top:1px dashed var(--line);
+  }
+  .readout .range{font-family:var(--mono);font-size:13px;color:var(--ink-2);letter-spacing:.02em}
+  .readout .count{font-family:var(--serif);font-size:15px;color:var(--ink)}
+  .readout .count b{font-size:24px;font-weight:600;margin-right:2px}
+  .readout .desc{font-size:12.5px;color:var(--ink-3);margin-left:auto}
+
+  /* ---------- toolbar ---------- */
+  .toolbar{display:flex;gap:12px;align-items:center;margin:34px 0 0;flex-wrap:wrap}
+  .search{flex:1;min-width:200px;position:relative;display:block}
+  .search input{
+    width:100%;padding:10px 12px 10px 34px;font-family:var(--sans);font-size:14px;
+    color:var(--ink);background:rgba(255,253,247,.7);border:1px solid var(--line);border-radius:4px;
+    outline:none;transition:.18s;
+  }
+  .search input:focus{border-color:var(--ink-3);background:#fffdf7;box-shadow:0 0 0 3px rgba(168,53,43,.07)}
+  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.45}
+  select{
+    padding:10px 30px 10px 12px;font-family:var(--sans);font-size:13.5px;color:var(--ink-2);
+    background:rgba(255,253,247,.7);border:1px solid var(--line);border-radius:4px;outline:none;
+    appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235c5449' fill='none' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 11px center;
+  }
+  .cats{display:flex;gap:7px;overflow-x:auto;padding:14px 0 4px;margin-bottom:6px;scrollbar-width:thin}
+  .cats::-webkit-scrollbar{height:4px}
+  .cats::-webkit-scrollbar-thumb{background:rgba(33,29,24,.16);border-radius:4px}
+  .cat{
+    flex:0 0 auto;padding:5px 12px;border-radius:20px;border:1px solid var(--line);
+    background:transparent;font-size:12.5px;color:var(--ink-2);cursor:pointer;
+    font-family:var(--sans);transition:.16s;white-space:nowrap;
+  }
+  .cat:hover{border-color:var(--ink-3);color:var(--ink)}
+  .cat.on{background:var(--ink);border-color:var(--ink);color:#fbf8f0}
+
+  /* ---------- grid ---------- */
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));
+    gap:16px;margin:18px 0 0;
+  }
+  .card{
+    background:var(--card);border:1px solid var(--line-soft);border-radius:5px;
+    padding:18px 18px 15px;position:relative;cursor:pointer;overflow:hidden;
+    transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s,border-color .2s;
+    animation:rise .42s cubic-bezier(.2,.7,.3,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+  .card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);
+    opacity:.85;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 10px 26px -14px rgba(33,29,24,.35);border-color:rgba(33,29,24,.14)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:9px}
+  .lv{
+    display:inline-flex;align-items:center;gap:5px;font-size:11.5px;letter-spacing:.05em;
+    color:var(--c);font-weight:600;
+  }
+  .lv::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c);display:block}
+  .score{font-family:var(--serif);font-size:25px;line-height:1;font-weight:600;color:var(--c);letter-spacing:.01em}
+  .card h3{
+    font-family:var(--serif);font-size:17.5px;font-weight:600;margin:0 0 3px;
+    letter-spacing:.03em;line-height:1.4;
+  }
+  .meta{font-size:12px;color:var(--ink-3);letter-spacing:.03em;margin-bottom:9px}
+  .intro{font-size:13.5px;color:var(--ink-2);line-height:1.72;margin:0 0 12px;min-height:3.4em}
+  .bar{height:3px;background:rgba(33,29,24,.07);border-radius:2px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--c);border-radius:2px;opacity:.75}
+  .utag{
+    margin-top:9px;font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
+    display:inline-flex;align-items:center;gap:5px;min-height:15px;
+  }
+  .utag::before{content:"";width:4px;height:4px;border:1px solid var(--ink-3);display:block;transform:rotate(45deg)}
+  .utag.is-empty{visibility:hidden}
+  .empty{text-align:center;padding:70px 20px;color:var(--ink-3);font-size:14px}
+  .empty b{display:block;font-family:var(--serif);font-size:18px;color:var(--ink-2);margin-bottom:6px}
+
+  /* ---------- notes ---------- */
+  /* 筛选区下方的行动提示：不打断「筛选 → 结果」的动线，只用一行把人引到页尾 */
+  /* 与页面其余正文（.lede / .ribbon-summary / .card p / .notes p）保持同一套无衬线，
+     原来硬编码 SimSun，是页面上唯一一处系统宋体。 */
+  .panel-cta{font-family:var(--sans);font-weight:400;letter-spacing:normal;
+    display:flex;align-items:baseline;gap:8px 10px;flex-wrap:wrap;
+    margin:16px 0 0;padding:12px 16px;border:1px solid var(--line-soft);border-radius:4px;
+    background:rgba(255,253,247,.55);font-size:13px;color:var(--ink-2);line-height:1.75;
+  }
+  /* 导语保留加粗做视觉锚点，字体跟正文同一套无衬线 */
+  .panel-cta b{font-family:inherit;font-weight:600;color:inherit;letter-spacing:inherit}
+  .panel-cta a{
+    margin-left:auto;color:var(--accent);text-decoration:none;white-space:nowrap;
+    border-bottom:1px solid rgba(168,53,43,.3);padding-bottom:1px;
+  }
+  .panel-cta a:hover{border-bottom-color:var(--accent)}
+  .panel-cta a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  /* 从上方跳下来时别被固定页眉挡住 */
+  #do-title{scroll-margin-top:96px}
+  /* 分批展开：101 张卡片一次铺开会把页尾的说明推到近万像素之外 */
+  .more-wrap{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:28px 0 0}
+  .more{
+    padding:11px 26px;border-radius:3px;border:1px solid var(--ink);background:transparent;
+    font-family:var(--serif);font-size:14.5px;letter-spacing:.12em;color:var(--ink);
+    cursor:pointer;transition:background .18s,color .18s;
+  }
+  .more:hover{background:var(--ink);color:#fbf8f0}
+  .more:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .more-note{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.03em}
+  .notes{
+    margin:64px 0 0;padding:30px 0 0;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:1.1fr 1fr;gap:44px;
+  }
+  .notes h3{font-family:var(--serif);font-size:16px;margin:0 0 12px;letter-spacing:.06em}
+  .notes p{font-size:13px;color:var(--ink-2);line-height:1.85;margin:0 0 10px}
+  .notes .dim{color:var(--ink-3);font-size:12.5px}
+  .grad{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+  .grad li{
+    display:flex;gap:10px;align-items:baseline;font-size:13px;color:var(--ink-2);
+    padding-bottom:9px;border-bottom:1px dotted var(--line);
+  }
+  .grad li b{font-family:var(--serif);font-weight:600;color:var(--ink);white-space:nowrap}
+  .grad li span{color:var(--ink-3);font-size:12px;margin-left:auto;white-space:nowrap;font-family:var(--mono)}
+  /* 页底评分说明：从首屏挪下来，作为读完光谱后的注脚 */
+  .score-note{margin:56px 0 0;padding-top:24px;border-top:1px solid var(--line);max-width:760px}
+  .score-note h3{margin:0 0 8px;font:600 13px var(--serif);letter-spacing:.08em;color:var(--ink-2)}
+  .score-note p{margin:0;font-size:13px;line-height:1.95;color:var(--ink-3)}
+  footer{padding:46px 0 60px;color:var(--ink-3);font-size:12px;letter-spacing:.04em;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  /* ---------- drawer ---------- */
+  .scrim{
+    position:fixed;inset:0;background:rgba(33,29,24,.34);
+    opacity:0;pointer-events:none;transition:opacity .26s;z-index:95;
+  }
+  .scrim.on{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--paper-2);
+    z-index:100;transform:translateX(102%);transition:transform .34s cubic-bezier(.2,.75,.25,1);
+    box-shadow:-20px 0 60px -20px rgba(33,29,24,.4);overflow-y:auto;padding:30px 30px 40px;
+    border-left:1px solid var(--line);
+  }
+  .drawer.on{transform:none}
+  #drawerBody{display:flex;flex-direction:column;min-height:100%}
+  /* 关闭按钮与「日用新生」档案弹层一致：无边框的大号红褐 ×，悬停时填成圆 */
+  .drawer .close{
+    position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;border-radius:50%;padding:0 0 3px;
+    border:0;background:transparent;cursor:pointer;color:#904038;
+    font:400 30px/1 var(--sans);display:grid;place-items:center;transition:background .15s,color .15s;
+  }
+  .drawer .close:hover{background:#904038;color:#fffdf7}
+  .drawer .close:focus-visible{outline:2px solid #b8894d;outline-offset:2px}
+  .d-lv{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.08em;color:var(--c);font-weight:600;margin-bottom:10px}
+  .d-lv::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+  .drawer h2{font-family:var(--serif);font-size:28px;line-height:1.32;margin:0 0 8px;letter-spacing:.03em;font-weight:600}
+  .d-meta{font-size:12.5px;color:var(--ink-3);letter-spacing:.04em;margin-bottom:22px}
+  .d-score{display:flex;align-items:flex-end;gap:12px;margin-bottom:20px}
+  .d-score b{font-family:var(--serif);font-size:56px;line-height:.9;color:var(--c);font-weight:600;letter-spacing:-.01em}
+  .d-score span{font-size:12px;color:var(--ink-3);padding-bottom:6px}
+  .d-gauge{height:5px;background:rgba(33,29,24,.08);border-radius:3px;overflow:hidden;margin-bottom:26px}
+  .d-gauge i{display:block;height:100%;background:var(--c);border-radius:3px}
+  .d-sec{margin-bottom:20px}
+  .d-sec h4{
+    font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);margin:0 0 7px;font-weight:600;
+  }
+  .d-sec p{font-size:14px;color:var(--ink);line-height:1.85;margin:0}
+  .d-sec p.muted{color:var(--ink-2);font-size:13px}
+  .tagrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px}  .tag{font-size:11.5px;padding:2px 8px;border:1px solid var(--line);border-radius:2px;color:var(--ink-2);background:rgba(255,255,255,.5)}
+  .tag.acc{color:var(--accent);border-color:rgba(168,53,43,.35);background:rgba(168,53,43,.05)}
+  /* 「想学怎么找」收口：把唯一的外链做成常驻抽屉底部的大按钮 */
+  .drawer-cta{
+    position:sticky;bottom:-40px;z-index:2;
+    margin:auto -30px -40px;padding:12px 30px 16px;
+    background:var(--paper-2);border-top:1px solid var(--line);
+    box-shadow:0 -16px 24px -22px rgba(33,29,24,.6);
+  }
+  .cta{
+    display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px;
+    padding:12px 16px 13px;border-radius:3px;
+    background:var(--accent);color:#fff;text-decoration:none;
+    box-shadow:0 10px 22px -16px rgba(168,53,43,.95);
+    transition:background .18s,transform .18s,box-shadow .18s;
+  }
+  .cta:hover{background:#8d2a22;transform:translateY(-1px);box-shadow:0 14px 26px -16px rgba(168,53,43,.95)}
+  .cta:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .cta-main{font-family:var(--serif);font-size:18px;font-weight:600;letter-spacing:.1em;line-height:1.35}
+  .cta-sub{grid-column:1;font-size:11.5px;letter-spacing:.04em;line-height:1.5;color:rgba(255,255,255,.8)}
+  .cta-arrow{grid-column:2;grid-row:1/3;font-size:19px;line-height:1;transition:transform .18s}
+  .cta:hover .cta-arrow{transform:translateX(4px)}
+  .mini{position:relative;height:30px;margin:8px 0 2px}
+  .mini-rail{
+    position:absolute;left:0;right:0;top:9px;height:7px;border-radius:4px;
+    background:linear-gradient(90deg,#3f6f52 0%,#4e7d5c 10%,#6f8f6a 30%,#bf9530 50%,#c46a2c 70%,#b23a2e 90%,#8a2118 100%);
+  }
+  .mini-mark{position:absolute;top:3px;width:2px;height:19px;background:var(--ink);border-radius:2px;transform:translateX(-1px)}
+  .mini-mark::before{
+    content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);
+    border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ink);
+  }
+  .mini-lab{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-3);letter-spacing:.06em}
+
+  @media(max-width:720px){
+    .hero{padding:44px 0 28px}
+    .wrap{padding:0 18px}
+    .panel{padding:22px 18px 18px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr)}
+    .stats>div{padding:0 10px 0 0;margin:0;border-right:1px solid var(--line-soft)}
+    .stats>div:last-child{border-right:0;padding-right:0}
+    .stats b{font-size:23px}
+    .stats span{font-size:10.5px;line-height:1.5;letter-spacing:0}
+    .notes{grid-template-columns:1fr;gap:26px}
+    .readout .desc{display:none}
+    .panel-cta{padding:11px 14px}
+    .panel-cta a{margin-left:0}
+    .drawer{padding:26px 22px 34px}
+    .drawer-cta{margin:auto -22px -34px;padding:10px 22px 14px;bottom:-34px}
+    .cta-main{font-size:17px}
+  }
+</style>
+<link rel="preload" href="../assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="nav.css">
+
+<link rel="stylesheet" href="../assets/css/spectrum-creators.css">
+<link rel="stylesheet" href="../assets/css/spectrum-typography.css">
+<link rel="stylesheet" href="../assets/css/cursor.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="../index.html"><span class="brand-name">遗脉相承</span></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>菜单</span></button>
+  <nav class="primary-nav" id="primary-nav" aria-label="主导航">
+    <a href="../index.html">首页</a>
+    <a href="../heritage.html">非遗辑录</a>
+    <a href="../revival.html">古艺新生</a>
+    <a href="spectrum.html" class="is-current" aria-current="page">存续有数</a>
+    <div class="nav-more">
+      <button class="nav-more-btn" type="button" aria-expanded="false" aria-controls="more-panel">更多</button>
+      <div class="nav-more-panel" id="more-panel">
+        <p class="nav-more-group">小游戏</p>
+        <a href="kaisu/index.html">开酥 · 荆门酥饼</a>
+        <p class="nav-more-group">小玩意</p>
+        <a href="cursor.html">换一支指针</a>
+        <a class="nav-more-about" href="../about.html">关于我们</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<header class="hero">
+  <div class="wrap">
+    <div class="creator-copy">
+    <div class="kicker"><span class="dot"></span>存续有数 · 国家级与人类非遗代表作 · 存续力观察</div>
+    <h1>中国非遗<br><em>濒危光谱</em></h1>
+    <p class="lede">这里收录了 <b id="totalCount">—</b> 项有代表性的国家级及以上非遗，按存续状况排列。拖动下方滑块，可以查看不同区间的项目。</p>
+    <div class="stats">
+      <div><b>1557</b><span>国家级代表性项目</span></div>
+      <div><b>3056</b><span>国家级代表性传承人</span></div>
+      <div><b>45</b><span>列入 UNESCO 名录名册</span></div>
+    </div>
+    </div>
+    <aside id="creatorCarousel" class="creator-carousel" aria-label="非遗创作者" aria-roledescription="轮播"></aside>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel">
+    <div class="panel-head">
+      <h2>存续力光谱</h2>
+      <div class="hint">左端＝日常仍在实践，右端＝随时可能断代</div>
+    </div>
+
+    <div class="slider">
+      <div class="bands" id="bands"></div>
+      <div class="rail-wrap" id="railWrap">
+        <div class="rail"></div>
+        <div class="rail-active" id="railActive"></div>
+        <div class="rail-dim" id="dimL"></div>
+        <div class="rail-dim" id="dimR"></div>
+        <div class="ticks" id="ticks"></div>
+        <div class="thumb" id="thLo" tabindex="0" role="slider" aria-label="濒危指数下限" aria-valuemin="0" aria-valuemax="100">
+          <span class="val" id="valLo">0</span>
+        </div>
+        <div class="thumb" id="thHi" tabindex="0" role="slider" aria-label="濒危指数上限" aria-valuemin="0" aria-valuemax="100">
+          <span class="val" id="valHi">100</span>
+        </div>
+      </div>
+      <div class="readout">
+        <div class="range" id="rangeText">0 — 100</div>
+        <div class="count"><b id="countNum">0</b>项</div>
+        <div class="desc" id="rangeDesc">全部光谱</div>
+      </div>
+    </div>
+  </section>
+
+  <p class="panel-cta">
+    <b>看完现状，还能做点什么？</b>
+    点开任意一项，能看到它的属地保护单位与查询入口；想学一门手艺，也可以顺着这条路找到门路。
+    <a href="#do-title">看怎么参与 ↓</a>
+  </p>
+
+  <div class="toolbar">
+    <label class="search">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.4" stroke="#5c5449" stroke-width="1.4"/><path d="M9.4 9.4L12.5 12.5" stroke="#5c5449" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input type="search" id="q" placeholder="搜项目名、门类或地区，例如「皮影」「泉州」「年画」">
+    </label>
+    <select id="sort">
+      <option value="score">按濒危程度（高→低）</option>
+      <option value="scoreAsc">按濒危程度（低→高）</option>
+      <option value="cat">按门类归并</option>
+      <option value="name">按名称排序</option>
+    </select>
+  </div>
+  <div class="cats" id="cats"></div>
+
+  <section class="grid" id="grid"></section>
+  <div class="more-wrap" id="moreWrap" hidden>
+    <button class="more" id="moreBtn" type="button">继续展开</button>
+    <span class="more-note" id="moreNote"></span>
+  </div>
+  <div class="empty" id="empty" style="display:none">
+    <b>这一段光谱是空的</b>
+    把拉条放宽一点，或清空搜索词试试。
+  </div>
+
+  <section class="notes">
+    <div>
+      <h3>评分依据</h3>
+      <p>参考公开资料，从传承梯队、从业人数、日常使用、技艺完整性和文献记录五方面评估。分数越高，表示我们判断其传承风险越大，不代表官方评级。</p>
+      <p>依赖口传与手上功夫、缺少接班人的项目，风险通常更高；有稳定市场和教学渠道的，传承条件相对较好。</p>
+      <p class="dim">入选名录或转入代表作名录后，仍需关注实际传承情况。</p>
+    </div>
+    <div>
+      <h3>四项转入代表作名录</h3>
+      <ul class="grad">
+        <li><b>羌年</b><span>2009 急需 → 2024 代表作</span></li>
+        <li><b>黎族传统纺染织绣技艺</b><span>2009 急需 → 2024 代表作</span></li>
+        <li><b>中国木拱桥传统营造技艺</b><span>2009 急需 → 2024 代表作</span></li>
+        <li><b>赫哲族伊玛堪</b><span>2011 急需 → 2025 代表作</span></li>
+      </ul>
+      <p class="dim" style="margin-top:14px">这四项于 2024、2025 年从 UNESCO 急需保护名录转入代表作名录。本页评分分别为 55、48、58、64，仍需持续关注。</p>
+    </div>
+  </section>
+
+  <section class="notes" aria-labelledby="do-title">
+    <div>
+      <h3 id="do-title">想参与，从这里开始</h3>
+      <p>点开项目详情，可查询属地保护单位，咨询学习、活动或合作事宜。</p>
+      <p>想学技艺，可留意非遗工坊、传习所、研培计划或剧团学员班的招生信息，具体安排以主办方通知为准。</p>
+      <p>也可以去看一场演出，参加一次节庆或庙会，了解它在当地的日常。</p>
+      <p class="dim">为保护个人隐私，页面只提供机构查询入口，不收录匠人的私人联系方式。</p>
+    </div>
+    <div>
+      <h3>有些项目，想学也难找到门路</h3>
+      <p>部分高风险项目靠家族、村寨或庙宇传承，缺少院校、剧团或工坊等公开学习渠道。</p>
+      <p>联系当地保护单位、确认是否有传习活动，再把可靠的报名信息分享出去，能让想学的人少走些弯路。</p>
+    </div>
+  </section>
+
+  <aside class="score-note" aria-label="关于评分">
+    <h3>关于评分</h3>
+    <p>入选非遗名录，并不能说明一门技艺如今还有多少人在做。我们参考传承人的代际分布、从业人数，以及日常生活中还有哪些使用场景，为各项目评分。这些分数是编辑判断，不代表官方评级，也难免有偏差，供大家比较和讨论各项目的传承处境。</p>
+  </aside>
+
+  <footer>
+    <div>资料来源：文化和旅游部、中国非物质文化遗产网、UNESCO</div>
+    <div>评分为编辑判断，非官方评级 · 2026</div>
+  </footer>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <button type="button" class="close" id="closeBtn" aria-label="关闭详情">×</button>
+  <div id="drawerBody"></div>
+</aside>
+
+<script>
+/* ====== 数据：n 名称 / c 门类 / r 地区 / s 濒危指数 / u 名录状态 / d 一句话简介 / w 为什么濒危 ====== */
+const DATA = [
+{n:"中国木活字印刷术",c:"传统技艺",r:"浙江瑞安",s:96,u:"UNESCO 急需保护名录",d:"用梨木刻出数万枚反字，以水墨在宣纸上刷印家谱，是活字印刷术唯一还在民间活态使用的形态。",w:"完整工序只剩瑞安一带，修谱需求萎缩，刻字师傅不足二十人。"},
+{n:"中国水密隔舱福船制造技艺",c:"传统技艺",r:"福建泉州·宁德",s:94,u:"UNESCO 急需保护名录",d:"用隔舱板把船体分成十余个独立水密舱，一舱触礁进水也不会沉，撑起了宋元的海上丝路。",w:"木帆船被钢壳船取代，能主持放样与安龙骨的老匠人不足十人。"},
+{n:"维吾尔族桑皮纸制作技艺",c:"传统技艺",r:"新疆和田",s:92,d:"以桑树皮为唯一原料，经浸泡、锅煮、捶捣、抄纸，做出韧性极强、千年不脆的纸。",w:"全疆仅剩一处家庭作坊，原料与销路两头都窄。"},
+{n:"土家族梯玛歌",c:"民间文学",r:"湖南湘西",s:92,d:"梯玛（土家祭司）在还愿仪式上唱诵的长篇古歌，一部完整唱本要唱三天三夜。",w:"仪式场景消失，能完整唱诵的梯玛屈指可数。"},
+{n:"蒙古族勒勒车制作技艺",c:"传统技艺",r:"内蒙古",s:91,d:"用桦木弯成车轮、整车不用一根铁钉，曾是草原迁徙时载着整个家的那辆大轱辘车。",w:"摩托与皮卡替代了迁徙方式，会做全套的匠人几乎绝迹。"},
+{n:"鄂伦春族桦树皮制作技艺",c:"传统技艺",r:"内蒙古·黑龙江",s:90,d:"剥下桦树皮缝成船、桶、摇篮和撮罗子的围子，是一整套长在树皮上的生活。",w:"狩猎生活退出山林，桦皮器皿失去日常用途。"},
+{n:"满族说部",c:"民间文学",r:"吉林·黑龙江",s:90,d:"满族家族内部口耳相传的长篇英雄叙事，一部《乌布西奔妈妈》就有数万行。",w:"满语传承断裂，说部只能用汉语转述，韵律与原味大量流失。"},
+{n:"广昌孟戏",c:"传统戏剧",r:"江西广昌",s:89,d:"专唱孟姜女故事的宗族戏，分曾家、刘家两路唱腔，只在正月里演给祖先看。",w:"两个宗族戏班，演员年龄偏大，年轻人不愿接班。"},
+{n:"青阳腔",c:"传统戏剧",r:"安徽青阳·江西湖口",s:88,d:"明代徽池雅调的活化石，用滚调把唱词念白化，直接催生了后来的京剧唱腔。",w:"仅湖口一县还有业余班社，专业演出几近于无。"},
+{n:"畲族小说歌",c:"民间文学",r:"福建霞浦",s:87,d:"畲族人把汉族的章回小说改成七言歌，抄在歌本上，一代代唱下去。",w:"歌本随畲语一起消失，会唱全本的老人越来越少。"},
+{n:"苗族古歌",c:"民间文学",r:"贵州台江",s:86,d:"苗族没有文字，创世、迁徙、开亲的历史全靠这组歌记着，唱完要几天几夜。",w:"能唱全本的歌师稀少，年轻人多只会片段。"},
+{n:"北京料器",c:"传统美术",r:"北京",s:85,d:"用低温玻璃料棒在灯火上捏出花鸟虫鱼，被叫作火里的雕塑。",w:"料棒一度停产，能独立完成全套的传承人不足五人。"},
+{n:"羌族多声部民歌",c:"传统音乐",r:"四川阿坝",s:84,d:"羌寨里两人以上同时唱不同声部，没有指挥、没有伴奏，全靠耳朵互相咬合。",w:"汶川地震后村寨重组，集体歌唱的场合大幅减少。"},
+{n:"维吾尔族麦西热甫",c:"民俗",r:"新疆",s:83,u:"UNESCO 急需保护名录",d:"一群人围坐弹唱、跳舞、讲笑话、讲故事，一办就是一整夜，是绿洲社会的公共客厅。",w:"现代娱乐替代了它，仪式性与即兴性都在减弱。"},
+{n:"滩头木版年画",c:"传统美术",r:"湖南隆回",s:82,d:"用本地竹纸和矿物植物颜料套印，门神的脸要印七遍，才有那股土气。",w:"作坊从百余家减到一两家，刻版师傅断档。"},
+{n:"热巴舞",c:"传统舞蹈",r:"西藏",s:81,d:"鼓、铃、舞、技融为一体，男执铜铃女执鼓，跳到激烈处还要表演杂技动作。",w:"寺院与民间班社减少，完整会跳的艺人集中在少数乡。"},
+{n:"傩戏",c:"传统戏剧",r:"江西南丰·贵州德江",s:80,d:"戴面具、跳傩舞、驱疫逐鬼，被称为中国戏剧的活化石。",w:"依附的祭祀场景消失，面具雕刻与傩舞两门功夫同时缺人。"},
+{n:"泉州提线木偶戏",c:"传统戏剧",r:"福建泉州",s:78,d:"三十余根细线控制木偶的每个关节，能连演《目连救母》七天七夜。",w:"观众老龄化，剧团主要靠政府购买演出维持。"},
+{n:"梨园戏",c:"传统戏剧",r:"福建泉州",s:77,d:"被称为古南戏活化石，十八步科母严格到手指的角度。",w:"全国仅一个专业团，行当不全。"},
+{n:"智化寺京音乐",c:"传统音乐",r:"北京",s:76,d:"明代宫廷礼仪音乐流入寺庙，五百多年口传心授，一个音符都没改。",w:"乐僧断代，如今靠乐社与研究者共同维系。"},
+{n:"梁平木版年画",c:"传统美术",r:"重庆梁平",s:76,d:"人物开脸要抹一道腮红，粗犷得像乡下的社火。",w:"作坊停业多年，近年才恢复少量生产。"},
+{n:"皮影戏",c:"传统戏剧",r:"陕西·河北等",s:76,d:"驴皮刻出人物，隔着亮布借灯光演戏，一口道尽千古事。",w:"演出市场萎缩，刻皮与操签两项技艺同时缺人。"},
+{n:"金陵刻经印刷技艺",c:"传统技艺",r:"江苏南京",s:75,d:"写样、刻版、印刷、装订全手工，一笔一划都是字的建筑。",w:"雕版师全国不足十人，最年轻的也已中年。"},
+{n:"北京雕漆技艺",c:"传统技艺",r:"北京",s:75,d:"在胎体上刷漆上百层，再一刀刀剔出花纹，一件要一两年。",w:"周期长、成本高，漆工断档。"},
+{n:"福州评话",c:"曲艺",r:"福建福州",s:74,d:"一人、一铙钹、一醒木，用福州话说尽江湖恩怨。",w:"方言受众萎缩，书场几乎消失。"},
+{n:"芜湖铁画锻制技艺",c:"传统美术",r:"安徽芜湖",s:74,d:"以锤代笔、以铁为墨，把山水锻成黑白分明的铁片。",w:"高温锻打辛苦，学徒难招。"},
+{n:"朱仙镇木版年画",c:"传统美术",r:"河南开封",s:73,d:"线条粗犷、色彩浓重，用古法熬制的颜料，贴一年都不褪。",w:"老版流失严重，恢复生产靠几位老人。"},
+{n:"弋阳腔",c:"传统戏剧",r:"江西弋阳",s:72,d:"中国最古老的声腔之一，一人唱、众人帮腔，不用丝竹只用锣鼓。",w:"职业班社消失，靠文化馆与业余团维持。"},
+{n:"蜀锦织造技艺",c:"传统技艺",r:"四川成都",s:72,d:"两千年前锦官城的名字就来自它，小花楼木织机要两人配合才能织。",w:"木机效率低难以量产，织工老化。"},
+{n:"莆仙戏",c:"传统戏剧",r:"福建莆田",s:71,d:"宋元南戏的活标本，走一步要退三步，身段里藏着傀儡介。",w:"方言与古剧目双重门槛，青年演员难培养。"},
+{n:"五台山佛乐",c:"传统音乐",r:"山西五台",s:71,d:"汉传与藏传两套佛乐在同一座山并存，用笙管笛和打击乐唱赞。",w:"乐僧减少，曲谱靠少数人记忆。"},
+{n:"花丝镶嵌制作技艺",c:"传统美术",r:"北京·河北大厂",s:70,d:"把金丝掐成纹样、再镶上宝石，明代皇冠上的那套工艺。",w:"学徒期长达十年，高端定制市场窄。"},
+{n:"维吾尔族模制法土陶烧制技艺",c:"传统技艺",r:"新疆喀什",s:70,d:"不用轮盘、不用窑，把泥条盘成坯，在土坑里焖烧出釉色。",w:"塑料与金属器皿替代了它的日常用途。"},
+{n:"回族重刀武术",c:"传统体育、游艺与杂技",r:"天津",s:70,d:"舞动数十斤重的铁刀，讲究刀走缠头裹脑，是清真寺里的尚武传统。",w:"习练者集中在少数家族，公开传习面窄。"},
+{n:"泽雅屏纸制作技艺",c:"传统技艺",r:"浙江温州",s:69,d:"用水碓捣竹、一帘帘抄纸，温州山区的纸山曾供应整个浙南。",w:"水碓停转，造纸户从万余减到数十。"},
+{n:"西安鼓乐",c:"传统音乐",r:"陕西西安",s:68,d:"唐代燕乐的遗响，用笛、笙、鼓与双云锣奏出上千年前的结构。",w:"乐社成员老化，俗字谱识读困难。"},
+{n:"维吾尔族达瓦孜",c:"传统体育、游艺与杂技",r:"新疆",s:68,d:"在高空绳索上行走、跳舞、蒙眼，几米高的麻绳就是舞台。",w:"训练危险、周期长，传习者少。"},
+{n:"黎族船型屋营造技艺",c:"传统技艺",r:"海南",s:67,d:"用竹木扎架、茅草覆顶，房子做成倒扣的船形，纪念渡海而来的祖先。",w:"茅草材料难寻，年轻人多改建砖房。"},
+{n:"桃花坞木版年画",c:"传统美术",r:"江苏苏州",s:66,d:"曾经姑苏版远销日本，影响了浮世绘的配色。",w:"画师与刻工两支队伍都在萎缩。"},
+{n:"侗族木构建筑营造技艺",c:"传统技艺",r:"贵州·广西",s:65,d:"不用一张图纸、不用一根铁钉，墨师用香杆记尺寸，建起鼓楼与风雨桥。",w:"掌墨师老龄化，钢混结构替代木构。"},
+{n:"赫哲族伊玛堪",c:"曲艺",r:"黑龙江",s:64,u:"UNESCO 2025 转入代表作",d:"用赫哲语说唱莫日根英雄故事，没有乐器，全凭一副嗓子。",w:"赫哲语使用者已不足百人，说唱多靠汉语转写记录。"},
+{n:"苏州缂丝织造技艺",c:"传统技艺",r:"江苏苏州",s:62,d:"通经断纬，纬线不贯穿全幅，正反两面图案一样，一寸缂丝一寸金。",w:"一件作品耗时数月，靠订单与展览维持。"},
+{n:"扬州评话",c:"曲艺",r:"江苏扬州",s:62,d:"王少堂一部《武松》能说三个月，细节密到一根针落地都听得见。",w:"长篇书目后继乏人。"},
+{n:"内画鼻烟壶",c:"传统美术",r:"河北衡水",s:61,d:"用弯头细笔在壶内壁反手作画，方寸之间画出山水人物。",w:"伤眼耗神，习艺者少。"},
+{n:"京东大鼓",c:"曲艺",r:"京津冀",s:60,d:"一人击鼓打板，用京东方言说唱长篇故事。",w:"书场消失，演员多在晚会上唱小段。"},
+{n:"新疆维吾尔木卡姆艺术",c:"传统音乐",r:"新疆",s:58,u:"UNESCO 代表作名录",d:"十二套大曲，每套含歌曲、歌舞、器乐，全部唱完要二十多个小时。",w:"能完整演唱全套的人稀少，多数只演片段。"},
+{n:"中国木拱桥传统营造技艺",c:"传统技艺",r:"浙江·福建",s:58,u:"UNESCO 2024 转入代表作",d:"用编木拱把圆木交叉成拱，不用一钉一铆，廊桥能站三百年。",w:"能独立主持造桥的匠师只剩几位。"},
+{n:"晋剧",c:"传统戏剧",r:"山西",s:58,d:"梆子腔里的中路梆子，须生的咳咳腔一开口就能听出山西。",w:"基层剧团减少，靠惠民演出维持。"},
+{n:"福州脱胎漆器髹饰技艺",c:"传统技艺",r:"福建福州",s:58,d:"用泥胎或木胎做模，裱夏布、刮漆灰，最后把胎掏空，轻得像纸。",w:"工序长、生漆过敏，学徒流失。"},
+{n:"陕北说书",c:"曲艺",r:"陕西",s:58,d:"艺人抱着三弦、腿绑甩板，一个人演完千军万马。",w:"盲艺人传统断裂，书场消失。"},
+{n:"惠山泥人",c:"传统美术",r:"江苏无锡",s:57,d:"用惠山脚下的磁泥捏出的阿福，一笑就是四百年。",w:"手捏细货产量低，学徒少。"},
+{n:"藏戏",c:"传统戏剧",r:"西藏",s:56,u:"UNESCO 代表作名录",d:"戴面具、广场演出，唱腔高亢，一部《文成公主》能演一整天。",w:"专业剧团有限，民间戏班多为季节性活动。"},
+{n:"宣纸制作技艺",c:"传统技艺",r:"安徽泾县",s:56,u:"UNESCO 代表作名录",d:"青檀皮加沙田稻草，一百多道工序，纸寿千年说的就是它。",w:"原料与工序成本高，熟练工老化。"},
+{n:"羌年",c:"民俗",r:"四川阿坝",s:55,u:"UNESCO 2024 转入代表作",d:"羌历十月初一，祭山、还愿、跳萨朗，是整个羌寨的年度大事。",w:"地震后村寨搬迁，仪式主持者减少。"},
+{n:"蒙古族长调民歌",c:"传统音乐",r:"内蒙古",s:55,u:"UNESCO 代表作名录",d:"字少腔长，一句歌词能拖出几十秒的草原。",w:"牧区生活方式变化，年轻歌手多唱短调。"},
+{n:"苗族银饰锻制技艺",c:"传统技艺",r:"贵州",s:54,d:"把银拉成细丝、錾出纹样，一套盛装银饰重达十余斤。",w:"錾刻功夫需十年以上，年轻人多转行。"},
+{n:"潮州木雕",c:"传统美术",r:"广东潮州",s:54,d:"多层镂空、贴金装饰，祠堂梁架上的人物能一层层看进去。",w:"大件订单减少，师傅转做小件。"},
+{n:"傣族孔雀舞",c:"传统舞蹈",r:"云南",s:54,d:"模仿孔雀吸水、抖翅、开屏，象脚鼓一响就是整个寨子的节日。",w:"男性传统跳法传承者少，舞台版取代了民间版。"},
+{n:"送王船",c:"民俗",r:"福建·马来西亚",s:54,u:"UNESCO 代表作名录",d:"造一艘木船送代天巡狩的王爺出海，烧船送神，沿海村落三年一办。",w:"造船与仪式知识集中在少数村落。"},
+{n:"江南丝竹",c:"传统音乐",r:"江苏·浙江·上海",s:53,d:"二胡、笛、琵琶、扬琴凑在一起，你繁我简地互相让路。",w:"雅集减少，票友老龄化。"},
+{n:"泉州南音",c:"传统音乐",r:"福建泉州",s:52,u:"UNESCO 代表作名录",d:"琵琶横抱、洞箫竖吹，唱的是唐宋音，被称为中国音乐活化石。",w:"馆阁减少，年轻人多学器乐不学唱。"},
+{n:"潮剧",c:"传统戏剧",r:"广东潮汕",s:52,d:"用潮州话演唱，老丑念白诙谐，东南亚潮人至今在演。",w:"本地观众老龄化。"},
+{n:"藏医药浴法",c:"传统医药",r:"西藏",s:52,u:"UNESCO 代表作名录",d:"用五味甘露药汤浸泡全身，配合放血与脉诊，是藏医外治的核心。",w:"药材采集与师承都依赖寺院与家族。"},
+{n:"花儿",c:"传统音乐",r:"甘肃·青海·宁夏",s:50,u:"UNESCO 代表作名录",d:"在田野山间放开嗓子对唱，少年与花儿互称，是西北人的情歌。",w:"会唱的老人多，年轻人少。"},
+{n:"壮族织锦技艺",c:"传统技艺",r:"广西",s:50,d:"用竹笼机提花，棉线里织进五色丝，壮锦的几何纹样几百年不变。",w:"织机与织工都在减少。"},
+{n:"黎族传统纺染织绣技艺",c:"传统技艺",r:"海南",s:48,u:"UNESCO 2024 转入代表作",d:"纺、染、织、绣四步全用手工，絣染的纹样在织之前就已染好。",w:"掌握絣染的妇女不足百人。"},
+{n:"景泰蓝制作技艺",c:"传统技艺",r:"北京",s:48,d:"铜胎上掐丝、点蓝、烧蓝、磨光，一件要烧七八次。",w:"工序长，年轻人多只掌握其中一环。"},
+{n:"苏州评弹",c:"曲艺",r:"江苏",s:46,d:"一人琵琶一人三弦，说噱弹唱，一部《珍珠塔》能说几个月。",w:"书场萎缩，长篇传承难。"},
+{n:"热贡艺术",c:"传统美术",r:"青海同仁",s:46,u:"UNESCO 代表作名录",d:"唐卡、堆绣、壁画、雕塑同出一村，画师按造像量度经起稿。",w:"市场化后流水线作业增多，精品画师少。"},
+{n:"南京云锦织造技艺",c:"传统技艺",r:"江苏南京",s:44,u:"UNESCO 代表作名录",d:"大花楼木织机要两人配合，一天只能织五六厘米，寸锦寸金。",w:"织机与织工数量有限，靠定制与文创维持。"},
+{n:"吴桥杂技",c:"传统体育、游艺与杂技",r:"河北吴桥",s:44,d:"上至九十九、下至刚会走，吴桥耍杂技人人有一手。",w:"学员多流向专业院团与旅游演出。"},
+{n:"武当武术",c:"传统体育、游艺与杂技",r:"湖北十堰",s:42,d:"以柔克刚、后发先至，太极拳、形意、八卦都能在武当找到根。",w:"拳谱与师承分散，标准不一。"},
+{n:"蒙古族呼麦",c:"传统音乐",r:"内蒙古",s:42,u:"UNESCO 代表作名录",d:"一个人同时唱出低音持续音与上方旋律，像喉咙里有一支乐队。",w:"真正掌握多种技法的人不多。"},
+{n:"侗族大歌",c:"传统音乐",r:"贵州·广西",s:40,u:"UNESCO 代表作名录",d:"无指挥、无伴奏，多声部自然和声，模仿蝉鸣与流水。",w:"外出务工使歌队难以常年聚齐。"},
+{n:"粤剧",c:"传统戏剧",r:"广东",s:40,u:"UNESCO 代表作名录",d:"用粤语演唱，文武生、花旦、丑生行当齐全，粤港澳与海外粤人共唱。",w:"本地年轻观众增长慢。"},
+{n:"龙泉青瓷烧制技艺",c:"传统技艺",r:"浙江龙泉",s:38,u:"UNESCO 代表作名录",d:"粉青、梅子青的釉色，要靠窑温与还原气氛一点点养出来。",w:"大师工作室繁荣，日用瓷市场受压。"},
+{n:"中国剪纸",c:"传统美术",r:"全国",s:38,u:"UNESCO 代表作名录",d:"一把剪刀一张纸，窗花、鞋样、喜字，是最普及的民间美术。",w:"机器刻纸冲击手工剪纸。"},
+{n:"景德镇手工制瓷技艺",c:"传统技艺",r:"江西景德镇",s:36,d:"拉坯、利坯、施釉、画坯、烧窑，七十二道工序各有一手。",w:"工序细分后，全能型匠人减少。"},
+{n:"妈祖信俗",c:"民俗",r:"福建湄洲",s:36,u:"UNESCO 代表作名录",d:"以妈祖庙为圆心，祭祀、进香、绕境，沿海与海外华人共同实践。",w:"仪式规模大，但年轻参与者比例下降。"},
+{n:"昆曲",c:"传统戏剧",r:"江苏",s:34,u:"UNESCO 代表作名录",d:"水磨腔一字三叹，被称为百戏之祖。",w:"专业院团有限，观众仍偏小众。"},
+{n:"中国篆刻",c:"传统美术",r:"全国",s:34,u:"UNESCO 代表作名录",d:"以刀代笔在石上刻字，方寸之间见章法、刀法与篆法。",w:"实用场景减少，转向纯艺术创作。"},
+{n:"安塞腰鼓",c:"传统舞蹈",r:"陕西",s:33,d:"黄土高原上几十人一起擂鼓跳跃，尘土飞扬像一场小地震。",w:"表演化程度高，原生态打法减少。"},
+{n:"宜兴紫砂陶制作技艺",c:"传统技艺",r:"江苏宜兴",s:32,d:"用宜兴独有的紫砂泥，全手工拍打成壶，透气不透水。",w:"职称与炒作推高价格，学徒结构分化。"},
+{n:"豫剧",c:"传统戏剧",r:"河南",s:31,d:"用河南话唱，一开口就是刘大哥讲话理太偏。",w:"基层院团多，但原创剧目与青年观众不足。"},
+{n:"京剧",c:"传统戏剧",r:"北京",s:30,u:"UNESCO 代表作名录",d:"西皮二黄、生旦净丑，两百年的国剧。",w:"进校园成效明显，常态观众仍偏中老年。"},
+{n:"二十四节气",c:"民俗",r:"全国",s:30,u:"UNESCO 代表作名录",d:"以太阳周年运动划分农时，七十二候各有物候。",w:"农业指导功能弱化，转为文化符号。"},
+{n:"古琴艺术",c:"传统音乐",r:"全国",s:30,u:"UNESCO 代表作名录",d:"七弦十三徽，减字谱只记指法不记节奏，一曲千人千面。",w:"琴馆增多，但传统师承与打谱能力有限。"},
+{n:"少林功夫",c:"传统体育、游艺与杂技",r:"河南",s:28,d:"拳、棍与七十二绝技，禅武合一。",w:"表演与培训繁荣，传统套路完整性受损。"},
+{n:"同仁堂中医药文化",c:"传统医药",r:"北京",s:28,d:"炮制虽繁必不敢省人工，品味虽贵必不敢减物力。",w:"老药工手艺与现代制药标准需要磨合。"},
+{n:"越剧",c:"传统戏剧",r:"浙江",s:26,d:"女子越剧，唱腔柔婉，梁祝一唱就是百年。",w:"观众结构老化。"},
+{n:"中国书法",c:"传统美术",r:"全国",s:25,u:"UNESCO 代表作名录",d:"毛笔、宣纸、墨与汉字，是中国人最日常的抽象艺术。",w:"日常书写场景消失，转向艺术教育。"},
+{n:"黄梅戏",c:"传统戏剧",r:"安徽",s:24,d:"从采茶调长成大戏，树上的鸟儿成双对唱遍全国。",w:"经典剧目撑场，新编戏留存率低。"},
+{n:"太极拳",c:"传统体育、游艺与杂技",r:"河南·河北",s:22,u:"UNESCO 代表作名录",d:"以意导气、以气运身，慢练出真功夫。",w:"普及极广，但传统技击与师承体系弱化。"},
+{n:"端午节",c:"民俗",r:"全国",s:21,u:"UNESCO 代表作名录",d:"包粽子、赛龙舟、挂艾草，纪念与驱疫混在一起。",w:"城市中仪式简化。"},
+{n:"中秋节",c:"民俗",r:"全国",s:19,d:"赏月、吃月饼、团圆，是中国人关于圆的节日。",w:"商业化重，家庭仪式简化。"},
+{n:"秦淮灯会",c:"民俗",r:"江苏南京",s:18,d:"夫子庙一带扎灯、赏灯，从春节一直亮到元宵。",w:"规模稳定，灯彩工艺仍需持续投入。"},
+{n:"围棋",c:"传统体育、游艺与杂技",r:"全国",s:17,d:"黑白三百六十一点，一局棋里有一整部兵法。",w:"竞技化成功，传统棋道文化传承偏弱。"},
+{n:"中医针灸",c:"传统医药",r:"全国",s:16,u:"UNESCO 代表作名录",d:"以针刺、艾灸调经络，一根针能治百病。",w:"国际需求大，但传统手法流派减少。"},
+{n:"相声",c:"曲艺",r:"北京·天津",s:15,d:"两个人、一张桌子，说学逗唱里全是世情。",w:"小剧场繁荣，传统长篇八大棍少有人说。"},
+{n:"中国传统制茶技艺及其相关习俗",c:"传统技艺",r:"全国",s:13,u:"UNESCO 代表作名录",d:"绿茶炒青、乌龙做青、红茶发酵、黑茶渥堆，一片叶子有六种命运。",w:"产业化程度高，手工技艺在名优茶中保留。"},
+{n:"春节",c:"民俗",r:"全国",s:10,u:"UNESCO 代表作名录",d:"贴春联、吃年夜饭、守岁、拜年，是中国人最重的一场团圆。",w:"核心仪式稳定，城市形态在变化。"}
+];
+
+/* ====== 每项一段散文：是什么 + 为什么吃紧，合并成一段 ====== */
+const COPY = {
+"中国木活字印刷术": ["梨木上刻反字，一枚一枚","刻到几万枚，才凑得齐一部家谱","如今修谱的人少了，会刻的师傅不足二十人"],
+"中国水密隔舱福船制造技艺": ["隔舱板把船分成十几间","一舱进水，船还浮着","宋元的海上丝路，靠的就是这副骨架","换成钢壳之后，能主持放样、安龙骨的人不足十位"],
+"维吾尔族桑皮纸制作技艺": ["桑树皮泡软、下锅、捶成浆","一帘抄起来，晾干能存千年","全疆只剩一处家庭作坊","原料和销路，两头都窄"],
+"土家族梯玛歌": ["土家的祭司叫梯玛","还愿那天，他从开天唱到迁徙，一部唱本要三天三夜","仪式散了，歌就没处落","能把一部从头唱到尾的，屈指可数"],
+"蒙古族勒勒车制作技艺": ["桦木弯成轮，整车不用一根铁钉","迁徙时把整个家都装上去","摩托和皮卡来了，车就停在院子里","会做全套的，几乎绝迹"],
+"鄂伦春族桦树皮制作技艺": ["剥一张桦皮，能缝成船、桶、摇篮","连撮罗子的围子也是它","狩猎退出山林，这些器皿就没了日常用途"],
+"满族说部": ["火炕上，老人讲《乌布西奔妈妈》","一讲几万行","满语断了，故事只能用汉语转述","韵脚和味道一起漏掉"],
+"广昌孟戏": ["曾家、刘家两路唱腔","正月里唱给祖先听，唱的是孟姜女","两个宗族戏班，演员都上了年纪","年轻人不肯接"],
+"青阳腔": ["它把唱词念白化，滚调一路滚下去","后来的京剧唱腔，从这里长出来","如今只剩湖口一县的业余班社","专业演出近乎没有"],
+"畲族小说歌": ["把汉族的章回小说改成七言","抄在歌本上，一代代唱","畲语退了，歌本就没人念得动","会唱全本的老人越来越少"],
+"苗族古歌": ["苗族没有文字","创世、迁徙、开亲，全在这组歌里","唱完要几天几夜","能唱全本的歌师稀少，年轻人只会几句片段"],
+"北京料器": ["低温玻璃料棒在灯火上转","一捏就是一只鸟","料棒一度停产","能独立做完一整套的，不足五人"],
+"羌族多声部民歌": ["没有指挥，没有伴奏","两个人以上各唱各的声部，靠耳朵互相咬住","汶川地震后村寨重组","一起开口的场合少了"],
+"维吾尔族麦西热甫": ["围坐一圈，弹唱、跳舞、讲笑话","一办一整夜，是绿洲的客厅","现代娱乐进来","它先丢了仪式，又丢了即兴"],
+"滩头木版年画": ["竹纸、矿物颜料","门神的脸要套七遍色，才有那股土气","作坊从一百多家减到一两家","刻版的师傅断了档"],
+"热巴舞": ["男执铜铃，女执鼓","跳到最急处还要翻跟头","寺院和民间班社都在减","会跳全套的人，集中在少数几个乡"],
+"傩戏": ["戴上面具，跳傩舞，驱疫逐鬼","祭祀的场子没了","面具雕刻和傩舞，两门功夫同时缺人"],
+"泉州提线木偶戏": ["三十几根细线管一个关节","《目连救母》能连演七天七夜","台下坐的多是老人","剧团靠政府买演出撑着"],
+"梨园戏": ["十八步科母","手指抬到哪个角度，都有定数","全国只剩一个专业团，行当凑不齐"],
+"智化寺京音乐": ["明代宫廷的礼仪音乐流进寺庙","五百多年口传心授，一个音符没改","乐僧断了代","如今靠乐社和研究者一起守"],
+"梁平木版年画": ["开脸要抹一道腮红","粗得像乡下的社火","作坊停了很多年，近年才恢复一点点生产"],
+"皮影戏": ["驴皮刻出人物，隔着亮布借灯","一口道尽千古事","市场缩了，刻皮的和操签的","两头同时缺人"],
+"金陵刻经印刷技艺": ["写样、刻版、印刷、装订，全是手工","一笔一划，是字的建筑","全国雕版师不足十人","最年轻的也已中年"],
+"北京雕漆技艺": ["在胎上刷上百层漆","再一刀一刀剔出花纹，一件要一两年","周期长，成本高","漆工断了档"],
+"福州评话": ["一人、一铙钹、一醒木","福州话说尽江湖","方言的听众在缩，书场几乎没了"],
+"芜湖铁画锻制技艺": ["以锤代笔，以铁为墨","把山水锻成黑白分明的铁片","炉火烤人，学徒难招"],
+"朱仙镇木版年画": ["线条粗，颜色重","古法熬的颜料，贴一年不褪","老版流失得厉害","复产靠几位老人撑着"],
+"弋阳腔": ["一人唱，众人帮腔","不用丝竹，只用锣鼓","职业班社散了","如今靠文化馆和业余团维持"],
+"蜀锦织造技艺": ["锦官城的名字，就从它来","小花楼木机，要两个人配合才织得动","木机效率低，织工在老"],
+"莆仙戏": ["走一步要退三步","身段里藏着傀儡的架子","方言和古剧目两道门槛","青年演员难培养"],
+"五台山佛乐": ["汉传与藏传两套佛乐，在同一座山并存","笙管笛加打击乐唱赞","乐僧在减，曲谱靠少数人记着"],
+"花丝镶嵌制作技艺": ["金丝掐成纹样，再镶上宝石","明代皇冠上，就是这套手艺","学徒要熬十年","高端定制的盘子又窄"],
+"维吾尔族模制法土陶烧制技艺": ["不用轮盘，不用窑","泥条盘成坯，在土坑里焖出釉色","塑料和金属器皿","把日常用途顶掉了"],
+"回族重刀武术": ["几十斤的铁刀舞起来","刀走缠头裹脑","习练者集中在几个家族，公开传习的面很窄"],
+"泽雅屏纸制作技艺": ["水碓捣竹，一帘一帘抄","温州山里的纸，曾供整个浙南","水碓停了","造纸户从一万多，减到几十"],
+"西安鼓乐": ["唐代燕乐的遗响","笛、笙、鼓和双云锣，结构还是一千年前的","乐社在老","俗字谱认得的人不多"],
+"维吾尔族达瓦孜": ["几米高的麻绳，就是舞台","走、跳、蒙眼","训练危险，周期又长","肯学的人少"],
+"黎族船型屋营造技艺": ["竹木扎架，茅草覆顶","房子做成倒扣的船，纪念渡海来的祖先","茅草难找","年轻人多改砖房"],
+"桃花坞木版年画": ["姑苏版曾远销日本","浮世绘的配色，受过它影响","画师和刻工两支队伍，都在萎缩"],
+"侗族木构建筑营造技艺": ["不用图纸，不用铁钉","墨师用一根香杆记尺寸，起鼓楼、架风雨桥","掌墨师老了","钢混顶了木构"],
+"赫哲族伊玛堪": ["没有乐器，一副嗓子","说唱莫日根的英雄故事","赫哲语的使用者不足百人","说唱多靠汉语转写留下来"],
+"苏州缂丝织造技艺": ["通经断纬，纬线不贯穿全幅","正反两面一样","一件要几个月，靠订单和展览养着"],
+"扬州评话": ["王少堂一部《武松》能说三个月","细到一根针落地都听得见","长篇书目，后继乏人"],
+"内画鼻烟壶": ["弯头细笔伸进壶口","反手在壁上画山水","伤眼，耗神","学的人少"],
+"京东大鼓": ["一人击鼓打板","京东方言说长篇","书场没了","演员多在晚会上唱小段"],
+"新疆维吾尔木卡姆艺术": ["十二套大曲，歌、舞、器乐都在里面","全部唱完要二十多个小时","能唱全套的人稀少","多数只演片段"],
+"中国木拱桥传统营造技艺": ["圆木交叉成拱，不用一钉一铆","廊桥能站三百年","能独立主持造桥的匠师","只剩几位"],
+"晋剧": ["梆子腔里的中路梆子","须生一开口，就听得出山西","基层剧团在减，靠惠民演出维持"],
+"福州脱胎漆器髹饰技艺": ["泥胎裱布、刮灰","最后把胎掏空，轻得像纸","工序长，生漆过敏","学徒留不住"],
+"陕北说书": ["三弦抱在怀里，甩板绑在腿上","一个人演完千军万马","盲艺人的传统断了","书场也没了"],
+"惠山泥人": ["惠山脚下的磁泥，捏成阿福","一笑四百年","手捏细货产量低，学徒少"],
+"藏戏": ["戴面具，在广场上演","一部《文成公主》能演一整天","专业剧团有限","民间戏班多是季节性的"],
+"宣纸制作技艺": ["青檀皮加沙田稻草","一百多道工序","纸寿千年，说的就是它","原料贵，工序长，熟练工在老"],
+"羌年": ["十月初一，祭山、还愿、跳萨朗","是整个羌寨的大事","地震后村寨搬迁","主持仪式的人少了"],
+"蒙古族长调民歌": ["字少，腔长","一句词能拖出几十秒的草原","牧区的生活变了","年轻歌手多唱短调"],
+"苗族银饰锻制技艺": ["银拉成细丝，錾出纹样","一套盛装银饰，十几斤","錾刻要十年以上","年轻人多转行"],
+"潮州木雕": ["多层镂空，贴金","祠堂梁架上的人物，能一层层看进去","大件订单少了","师傅转做小件"],
+"傣族孔雀舞": ["孔雀吸水、抖翅、开屏","象脚鼓一响，就是全寨的节日","男性传统跳法传不下去","舞台版顶了民间版"],
+"送王船": ["造一艘木船，送代天巡狩的王爷出海","烧船送神，沿海村落三年一办","造船和仪式的知识","集中在少数几个村"],
+"江南丝竹": ["二胡、笛、琵琶、扬琴凑一处","你繁我简，互相让路","雅集少了，票友在老"],
+"泉州南音": ["琵琶横抱，洞箫竖吹","唱的是唐宋音","馆阁在减","年轻人学器乐的多，学唱的少"],
+"潮剧": ["潮州话唱，老丑念白诙谐","东南亚的潮人，还在演","本地观众在老"],
+"藏医药浴法": ["五味甘露的药汤，泡全身","配合放血与脉诊","药材采集和师承","都还系在寺院与家族上"],
+"花儿": ["田野山间，放开嗓子对唱","少年与花儿互称","会唱的老人多，年轻人少"],
+"壮族织锦技艺": ["竹笼机提花","棉线里织进五色丝，几何纹样几百年不变","织机和织工，都在减少"],
+"黎族传统纺染织绣技艺": ["纺、染、织、绣，四步全用手","絣染的纹样，在织之前就染好了","会絣染的妇女不足百人"],
+"景泰蓝制作技艺": ["掐丝、点蓝、烧蓝、磨光","一件要烧七八次","工序长","年轻人多只守其中一环"],
+"苏州评弹": ["一人琵琶，一人三弦","说噱弹唱，《珍珠塔》能说几个月","书场在缩，长篇难传"],
+"热贡艺术": ["唐卡、堆绣、壁画、雕塑，同出一村","画师照造像量度经起稿","市场大了，流水线也多了","精品画师少"],
+"南京云锦织造技艺": ["大花楼织机，两人配合","一天只织五六厘米","织机和织工都有限","靠定制与文创维持"],
+"吴桥杂技": ["上至九十九，下至刚会走","吴桥人手里都有一手","学员多流向院团和旅游演出"],
+"武当武术": ["以柔克刚，后发先至","太极、形意、八卦，都能在这里找到根","拳谱与师承分散","标准不一"],
+"蒙古族呼麦": ["一个人同时唱出低音与上方旋律","喉咙里像有一支乐队","真正掌握多种技法的人，不多"],
+"侗族大歌": ["无指挥，无伴奏","多声部和声，像蝉鸣与水声","外出务工","歌队常年凑不齐"],
+"粤剧": ["粤语唱，文武生、花旦、丑生齐全","粤港澳与海外共唱","本地年轻观众，长得慢"],
+"龙泉青瓷烧制技艺": ["粉青、梅子青","靠窑温和还原气氛，一点点养出来","大师工作室热闹","日用瓷的市场在受压"],
+"中国剪纸": ["一把剪刀一张纸","窗花、鞋样、喜字","机器刻纸一压，手工的就薄了"],
+"景德镇手工制瓷技艺": ["拉坯、利坯、施釉、画坯、烧窑","七十二道工序，各有一手","工序越分越细","全能的人越来越少"],
+"妈祖信俗": ["以妈祖庙为圆心","祭祀、进香、绕境","场面还大","年轻人在其中的比例在降"],
+"昆曲": ["水磨腔，一字三叹","院团有限","观众仍偏小众"],
+"中国篆刻": ["以刀代笔，在石上刻字","方寸间见章法、刀法与篆法","实用的场合少了，转向纯创作"],
+"安塞腰鼓": ["几十人一起擂鼓跳跃","黄土扬起来，像一场小地震","表演化程度高了","原生态的打法少了"],
+"宜兴紫砂陶制作技艺": ["宜兴的紫砂泥，全手工拍打成壶","透气不透水","职称和炒作把价格推高","学徒结构跟着分化"],
+"豫剧": ["河南话一开口，就是「刘大哥讲话理太偏」","基层院团不少","原创剧目和青年观众不足"],
+"京剧": ["西皮二黄，生旦净丑","两百年的国剧","进校园有成效","常态观众仍偏中老年"],
+"二十四节气": ["按太阳的周年运动分农时","七十二候，各有物候","指导农事的功能弱了","成了文化符号"],
+"古琴艺术": ["七弦十三徽","减字谱只记指法不记节奏，一曲千人千面","琴馆多了","传统师承与打谱的能力有限"],
+"少林功夫": ["拳、棍、七十二绝技","禅武合一","表演和培训热闹","传统套路的完整性在受损"],
+"同仁堂中医药文化": ["炮制虽繁必不敢省人工","品味虽贵必不敢减物力","老药工的手艺","要和现代制药标准磨合"],
+"越剧": ["女子越剧，唱腔柔婉","梁祝一唱百年","观众结构在老"],
+"中国书法": ["毛笔、宣纸、墨与汉字","中国人最日常的抽象艺术","日常书写没了，转向艺术教育"],
+"黄梅戏": ["从采茶调长成大戏","树上的鸟儿成双对，唱遍全国","经典撑场","新编剧留存率低"],
+"太极拳": ["以意导气，以气运身","慢练出真功夫","普及极广","传统的技击与师承体系在弱化"],
+"端午节": ["包粽子、赛龙舟、挂艾草","纪念和驱疫，混在一处","城市里的仪式在简化"],
+"中秋节": ["赏月、吃月饼、团圆","中国人关于圆的节日","商业化重了，家里的仪式简化了"],
+"秦淮灯会": ["夫子庙一带扎灯、赏灯","从春节亮到元宵","规模稳定","灯彩工艺还要持续投入"],
+"围棋": ["黑白三百六十一点","一局棋里有一部兵法","竞技化成功","棋道的文化传承偏弱"],
+"中医针灸": ["一根针调经络，配合艾灸","国际需求大","传统手法的流派在减少"],
+"相声": ["两个人一张桌","说学逗唱里全是世情","小剧场繁荣","传统长篇的「八大棍」，少有人说"],
+"中国传统制茶技艺及其相关习俗": ["炒青、做青、发酵、渥堆","一片叶子，六种命运","产业化程度高","手工技艺留在名优茶里"],
+"春节": ["贴春联、吃年夜饭、守岁、拜年","中国人最重的一场团圆","核心仪式稳","城市的形态在变"],
+};
+function copyOf(d){
+  const c = COPY[d.n];
+  return c ? c.join('<br>') : d.d + d.w;
+}
+
+/* ====== 等级定义 ====== */
+const LEVELS = [
+  {key:'critical', name:'极度濒危', min:80, max:100, color:'#b23a2e', note:'核心技艺只剩最后几个人'},
+  {key:'high',     name:'高度濒危', min:60, max:79,  color:'#c46a2c', note:'依赖少数传承人，场景在快速流失'},
+  {key:'mid',      name:'中度濒危', min:40, max:59,  color:'#bf9530', note:'队伍还在，但代际接续吃紧'},
+  {key:'fragile',  name:'脆弱',     min:20, max:39,  color:'#6f8f6a', note:'体系完整，抗风险能力弱'},
+  {key:'stable',   name:'活力良好', min:0,  max:19,  color:'#3f6f52', note:'日常仍在实践，传承有序'}
+];
+const CATS = ['民间文学','传统音乐','传统舞蹈','传统戏剧','曲艺','传统体育、游艺与杂技','传统美术','传统技艺','传统医药','民俗'];
+
+function levelOf(s){
+  for(const l of LEVELS){ if(s >= l.min && s <= l.max) return l; }
+  return LEVELS[LEVELS.length-1];
+}
+function catShort(c){
+  return c.replace('传统体育、游艺与杂技','传统体育');
+}
+
+/* ====== 状态 ====== */
+let lo = 0, hi = 100;
+let activeCat = '全部';
+let sortMode = 'score';
+let query = '';
+let dragging = null;
+/* 分批展示：一次铺 101 张卡片，页尾的说明要滚过近万像素才看得到 */
+const PAGE = 24;
+let shown = PAGE;
+
+const $ = id => document.getElementById(id);
+const grid = $('grid'), emptyEl = $('empty');
+const moreWrap = $('moreWrap'), moreBtn = $('moreBtn'), moreNote = $('moreNote');
+const thLo = $('thLo'), thHi = $('thHi'), railWrap = $('railWrap');
+const railActive = $('railActive'), dimL = $('dimL'), dimR = $('dimR');
+
+/* ====== 初始化光谱刻度 ====== */
+(function initBands(){
+  const bands = $('bands');
+  LEVELS.slice().reverse().forEach(l=>{
+    const b = document.createElement('div');
+    b.className = 'band';
+    b.textContent = l.name;
+    b.dataset.key = l.key;
+    b.title = l.note;
+    b.addEventListener('click', ()=>{
+      if(lo === l.min && hi === l.max){ lo = 0; hi = 100; }
+      else { lo = l.min; hi = l.max; }
+      sync();
+    });
+    bands.appendChild(b);
+  });
+  const ticks = $('ticks');
+  for(let i=0;i<=10;i++){
+    const t = document.createElement('i');
+    t.style.left = (i*10) + '%';
+    ticks.appendChild(t);
+  }
+})();
+
+/* ====== 门类筛选 ====== */
+(function initCats(){
+  const box = $('cats');
+  ['全部', ...CATS].forEach(c=>{
+    const b = document.createElement('button');
+    b.className = 'cat' + (c === '全部' ? ' on' : '');
+    b.textContent = catShort(c);
+    b.dataset.cat = c;
+    b.addEventListener('click', ()=>{
+      activeCat = c;
+      [...box.children].forEach(x=>x.classList.toggle('on', x.dataset.cat === c));
+      resetPage();
+    });
+    box.appendChild(b);
+  });
+})();
+
+/* ====== 拉条 ====== */
+function clamp(v){ return Math.max(0, Math.min(100, Math.round(v))); }
+function pctFromX(clientX){
+  const r = railWrap.getBoundingClientRect();
+  return clamp(((clientX - r.left) / r.width) * 100);
+}
+
+thLo.addEventListener('pointerdown', e=>{
+  e.preventDefault(); dragging = 'lo';
+  thLo.classList.add('dragging');
+  if(thLo.setPointerCapture) thLo.setPointerCapture(e.pointerId);
+});
+thHi.addEventListener('pointerdown', e=>{
+  e.preventDefault(); dragging = 'hi';
+  thHi.classList.add('dragging');
+  if(thHi.setPointerCapture) thHi.setPointerCapture(e.pointerId);
+});
+railWrap.addEventListener('pointerdown', e=>{
+  if(e.target.closest('.thumb')) return;
+  const v = pctFromX(e.clientX);
+  if(Math.abs(v - lo) <= Math.abs(v - hi)){ dragging = 'lo'; lo = Math.min(v, hi - 1); }
+  else { dragging = 'hi'; hi = Math.max(v, lo + 1); }
+  sync();
+});
+window.addEventListener('pointermove', e=>{
+  if(!dragging) return;
+  const v = pctFromX(e.clientX);
+  if(dragging === 'lo') lo = Math.min(v, hi - 1);
+  else hi = Math.max(v, lo + 1);
+  sync();
+});
+window.addEventListener('pointerup', ()=>{
+  if(!dragging) return;
+  dragging = null;
+  thLo.classList.remove('dragging');
+  thHi.classList.remove('dragging');
+});
+[thLo, thHi].forEach((el, idx)=>{
+  el.addEventListener('keydown', e=>{
+    const step = e.shiftKey ? 5 : 1;
+    let d = 0;
+    if(e.key === 'ArrowLeft') d = -step;
+    else if(e.key === 'ArrowRight') d = step;
+    else if(e.key === 'Home'){ if(idx===0) lo = 0; else hi = lo + 1; sync(); return; }
+    else if(e.key === 'End'){ if(idx===0) lo = hi - 1; else hi = 100; sync(); return; }
+    else return;
+    e.preventDefault();
+    if(idx === 0) lo = Math.max(0, Math.min(hi - 1, lo + d));
+    else hi = Math.min(100, Math.max(lo + 1, hi + d));
+    sync();
+  });
+});
+
+/* ====== 同步界面 ====== */
+function sync(){
+  thLo.style.left = lo + '%';
+  thHi.style.left = hi + '%';
+  $('valLo').textContent = lo;
+  $('valHi').textContent = hi;
+  thLo.setAttribute('aria-valuenow', lo);
+  thHi.setAttribute('aria-valuenow', hi);
+  const span = hi - lo;
+  railActive.style.left = lo + '%';
+  railActive.style.width = span + '%';
+  if(span >= 100){
+    railActive.style.backgroundSize = '100% 100%';
+    railActive.style.backgroundPosition = '0% 0';
+  } else {
+    const s = 100 / span;
+    const pos = lo / (100 - span) * 100;
+    railActive.style.backgroundSize = (s * 100) + '% 100%';
+    railActive.style.backgroundPosition = pos + '% 0';
+  }
+  dimL.style.left = '0'; dimL.style.width = lo + '%';
+  dimR.style.left = hi + '%'; dimR.style.right = '0';
+  $('rangeText').textContent = lo + ' — ' + hi;
+  [...$('bands').children].forEach(b=>{
+    const l = LEVELS.find(x=>x.key === b.dataset.key);
+    b.classList.toggle('on', lo === l.min && hi === l.max);
+  });
+  resetPage();
+}
+
+/* ====== 渲染 ====== */
+function currentList(){
+  const q = query.trim();
+  let list = DATA.filter(d=>{
+    if(d.s < lo || d.s > hi) return false;
+    if(activeCat !== '全部' && d.c !== activeCat) return false;
+    if(q && !(d.n.includes(q) || d.c.includes(q) || d.r.includes(q) || d.d.includes(q))) return false;
+    return true;
+  });
+  if(sortMode === 'score') list.sort((a,b)=> b.s - a.s || a.n.localeCompare(b.n,'zh'));
+  else if(sortMode === 'scoreAsc') list.sort((a,b)=> a.s - b.s || a.n.localeCompare(b.n,'zh'));
+  else if(sortMode === 'name') list.sort((a,b)=> a.n.localeCompare(b.n,'zh'));
+  else if(sortMode === 'cat') list.sort((a,b)=>{
+    const ia = CATS.indexOf(a.c), ib = CATS.indexOf(b.c);
+    return ia - ib || b.s - a.s;
+  });
+  return list;
+}
+
+function render(){
+  const list = currentList();
+  $('countNum').textContent = list.length;
+  const lvLo = levelOf(lo), lvHi = levelOf(hi);
+  $('rangeDesc').textContent = (lo === 0 && hi === 100)
+    ? '全部光谱'
+    : lvLo.key === lvHi.key ? lvLo.name : lvLo.name + ' → ' + lvHi.name;
+
+  if(!list.length){
+    grid.innerHTML = '';
+    emptyEl.style.display = 'block';
+    moreWrap.hidden = true;
+    return;
+  }
+  emptyEl.style.display = 'none';
+  const visible = list.slice(0, shown);
+  grid.innerHTML = visible.map((d,i)=>{
+    const l = levelOf(d.s);
+    return `<article class="card" data-i="${DATA.indexOf(d)}" tabindex="0" role="button" aria-label="查看 ${d.n} 的存续详情" style="--c:${l.color};animation-delay:${Math.min(i*14,340)}ms">
+      <div class="card-top">
+        <span class="lv">${l.name}</span>
+        <span class="score">${d.s}</span>
+      </div>
+      <h3>${d.n}</h3>
+      <div class="meta">${catShort(d.c)} · ${d.r}</div>
+      <p class="intro">${d.d}</p>
+      <div class="bar"><i style="width:${d.s}%"></i></div>
+      ${d.u ? `<div class="utag">${d.u}</div>` : `<div class="utag is-empty">·</div>`}
+    </article>`;
+  }).join('');
+  const rest = list.length - visible.length;
+  moreNote.textContent = '已显示 ' + visible.length + ' / ' + list.length + ' 项';
+  moreWrap.hidden = rest <= 0;
+  if(rest > 0) moreBtn.textContent = '继续展开 ' + Math.min(rest, PAGE) + ' 项';
+}
+
+/* 换筛选条件时回到第一批，避免「展开过 96 张后切门类」直接见底 */
+function resetPage(){
+  shown = PAGE;
+  render();
+}
+
+moreBtn.addEventListener('click', ()=>{
+  shown += PAGE;
+  render();
+  if(shown >= currentList().length) moreBtn.blur();
+});
+
+grid.addEventListener('click', e=>{
+  const card = e.target.closest('.card');
+  if(!card) return;
+  openDrawer(DATA[+card.dataset.i]);
+});
+/* 卡片是 role=button，键盘也要能进详情 */
+grid.addEventListener('keydown', e=>{
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.card');
+  if(!card) return;
+  e.preventDefault();
+  openDrawer(DATA[+card.dataset.i]);
+});
+
+/* ====== 详情抽屉 ====== */
+const drawer = $('drawer'), scrim = $('scrim');
+let lastFocus = null;
+/* 「想学怎么找」：数据来自 ../assets/js/spectrum-contact.js，只含属地机构与报名路径，
+   不含任何匠人的手机号/微信。脚本没加载时静默返回空串。 */
+function contactBlock(d){
+  const c = window.SPECTRUM_CONTACT && window.SPECTRUM_CONTACT[d.n];
+  if(!c) return '';
+  const units = (c.units || []).map(u => u.center).join('、');
+  return `
+    <div class="d-sec">
+      <h4>想学，从哪进门</h4>
+      <p class="muted">${c.venue} · ${c.how}</p>
+      ${units ? `<p class="muted">属地保护单位：${units}</p>` : ''}
+    </div>`;
+}
+/* 底部常驻的大按钮：全页唯一「现在就能做」的动作，单独拎出来吸底 */
+function ctaBar(d){
+  const c = window.SPECTRUM_CONTACT && window.SPECTRUM_CONTACT[d.n];
+  if(!c) return '';
+  return `
+    <div class="drawer-cta">
+      <a class="cta" href="${c.find}" target="_blank" rel="noopener noreferrer">
+        <span class="cta-main">我要传承</span>
+        <span class="cta-sub">查这一项的保护单位</span>
+        <span class="cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>`;
+}
+function openDrawer(d){
+  const l = levelOf(d.s);
+  const rank = DATA.filter(x => x.s > d.s).length + 1;
+  drawer.style.setProperty('--c', l.color);
+  $('drawerBody').innerHTML = `
+    <div class="d-lv">${l.name}</div>
+    <h2>${d.n}</h2>
+    <div class="d-meta">${d.c} · ${d.r}</div>
+    <div class="d-score"><b>${d.s}</b><span>濒危指数 / 100</span></div>
+    <div class="d-sec">
+      <h4>它排在哪儿</h4>
+      <div class="mini">
+        <div class="mini-rail"></div>
+        <div class="mini-mark" style="left:${d.s}%"></div>
+      </div>
+      <div class="mini-lab"><span>活力良好</span><span>极度濒危</span></div>
+      <p class="muted" style="margin-top:12px">第 ${rank} 位 · 共 ${DATA.length} 项</p>
+    </div>
+    <div class="d-sec">
+      <p>${copyOf(d)}</p>
+    </div>
+    <div class="d-sec">
+      <h4>名录和属地</h4>
+      <div class="tagrow">
+        <span class="tag">${l.name} · ${l.note}</span>
+        ${d.u ? `<span class="tag acc">${d.u}</span>` : '<span class="tag">国家级代表性项目</span>'}
+      </div>
+    </div>
+    ${contactBlock(d)}
+    ${ctaBar(d)}
+  `;
+  lastFocus = document.activeElement;
+  drawer.classList.add('on');
+  scrim.classList.add('on');
+  drawer.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  $('closeBtn').focus({ preventScroll: true });
+}
+function closeDrawer(){
+  if(!drawer.classList.contains('on')) return;
+  drawer.classList.remove('on');
+  scrim.classList.remove('on');
+  drawer.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  if(lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  lastFocus = null;
+}
+$('closeBtn').addEventListener('click', closeDrawer);
+scrim.addEventListener('click', closeDrawer);
+window.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeDrawer(); });
+
+/* ====== 工具栏 ====== */
+$('q').addEventListener('input', e=>{ query = e.target.value; resetPage(); });
+$('sort').addEventListener('change', e=>{ sortMode = e.target.value; resetPage(); });
+
+/* ====== 启动 ====== */
+$('totalCount').textContent = DATA.length;
+sync();
+</script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/spectrum-contact.js"></script>
+<script src="../assets/js/spectrum-creators.js"></script>
+<script src="../assets/js/cursor.js"></script>
+</body>
+</html>

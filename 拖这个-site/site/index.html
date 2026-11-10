@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <style id="page-navigation-transition">
+    html { background: #f6efe4; scrollbar-gutter: stable; }
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+      .site-header { view-transition-name: site-navigation; }
+      ::view-transition-group(root),
+      ::view-transition-group(site-navigation) { animation: none; }
+      ::view-transition-old(root) { animation: none; opacity: 1; }
+      ::view-transition-new(root) {
+        animation: page-arrive 150ms linear both;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(site-navigation) { animation: none; opacity: 0; }
+      ::view-transition-new(site-navigation) { animation: none; opacity: 1; }
+      @keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="非遗辑录：从器物、戏曲、食物、节日出发，走近仍在当代生活中的中国非物质文化遗产。">
+  <meta name="theme-color" content="#10100f">
+  <title>首页 · 非遗辑录</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/dinglie-songke.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/cursor.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/home-classic.css">
+  <link rel="stylesheet" href="assets/css/heritage-story.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="遗脉相承首页">
+      <!-- 页眉标志预留位：正式标志定稿后放在这里（如 <img class="brand-logo" src="assets/images/logo.svg" alt="">）。 -->
+      <span class="brand-name">遗脉相承</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>菜单</span></button>
+    <nav class="primary-nav" id="primary-nav" aria-label="主导航">
+      <a class="is-current" href="index.html" aria-current="page">首页</a>
+      <a href="heritage.html">非遗辑录</a>
+      <a href="revival.html">古艺新生</a>
+      <a href="games/spectrum.html">存续有数</a>
+      <div class="nav-more">
+        <button class="nav-more-btn" type="button" aria-expanded="false" aria-controls="more-panel">更多</button>
+        <div class="nav-more-panel" id="more-panel">
+          <p class="nav-more-group">小游戏</p>
+          <a href="games/kaisu/index.html">开酥 · 荆门酥饼</a>
+          <p class="nav-more-group">小玩意</p>
+          <a href="games/cursor.html">换一支指针</a>
+          <a class="nav-more-about" href="about.html">关于我们</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="eyebrow">CHINA · LIVING HERITAGE</p>
+      <h1 id="intro-title">见物，见人，<br>见一门手艺的时间</h1>
+      <p class="intro-copy">从一抔瓷土到一束蚕丝，沿着手艺人的双手，重新认识那些仍在生长的传统。</p>
+      <a class="scroll-cue" href="#feature-title">向下探索 <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="feature-section" aria-labelledby="feature-title">
+      <div class="section-heading">
+        <p class="eyebrow">本期辑录 · 01</p>
+        <h2 id="feature-title">手中有万象</h2>
+        <p>点击图片，展开一项非遗的独立篇章。</p>
+      </div>
+      <div class="story-grid">
+        <a class="story-card story-card--hero" href="heritage/ceramics.html" data-story-url="heritage/ceramics.html" data-story-title="陶瓷" aria-haspopup="dialog">
+          <img src="category/objects/jingdezhen-porcelain/images/porcelain-03-wheel-hands-tuan-nguyen.jpg" alt="匠人双手在陶轮上塑造瓷坯" width="1920" height="1280" fetchpriority="high" decoding="async">
+          <span class="story-card-shade" aria-hidden="true"></span>
+          <span class="story-card-index">01</span>
+          <span class="image-credit">摄影：Tuan Nguyen</span>
+          <span class="story-card-content">
+            <span class="story-card-kicker">泥与火的相遇</span>
+            <strong>陶瓷</strong>
+            <span class="story-card-action">展开辑录 <span aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+        <a class="story-card story-card--secondary" href="heritage/ronghua.html" data-story-url="heritage/ronghua.html" data-story-title="南京绒花" aria-haspopup="dialog">
+          <img src="assets/images/ronghua/ronghua-hands-source.jpg" alt="双手用剪刀修整绒花花瓣" width="1179" height="2556" loading="lazy" decoding="async">
+          <span class="story-card-shade" aria-hidden="true"></span>
+          <span class="story-card-index">02</span>
+          <span class="image-credit">用户供图</span>
+          <span class="story-card-content">
+            <span class="story-card-kicker">一束蚕丝，开成一朵花</span>
+            <strong>南京绒花</strong>
+            <span class="story-card-action">展开辑录 <span aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="feature-section" aria-labelledby="today-title">
+      <div class="section-heading">
+        <p class="eyebrow">古艺新生 · 日常可用</p>
+        <h2 id="today-title">今天它长这样</h2>
+        <p>从过节的一张画，到随身、案头的小物。<br><a href="revival.html">走近古艺新生</a></p>
+      </div>
+      <div class="section-heading today-row">
+        <div>
+          <a class="story-card story-card--secondary" href="revival.html?case=05" aria-label="桃花坞年画衍生丝绸文创系列">
+            <img src="assets/images/revival/05.jpg" alt="桃花坞年画衍生丝绸文创系列" loading="lazy" decoding="async">
+          </a>
+          <p>年画丝巾，把吉祥纹样穿进日常。</p>
+        </div>
+        <div>
+          <a class="story-card story-card--secondary" href="revival.html?case=25" aria-label="万象更新木刻年画套装及其木版、刻刀、颜料">
+            <img src="assets/images/revival/25.jpg" alt="万象更新木刻年画套装及其木版、刻刀、颜料" loading="lazy" decoding="async">
+          </a>
+          <p>木刻套装，在家印一张自己的年画。</p>
+        </div>
+        <div>
+          <a class="story-card story-card--secondary" href="revival.html?case=10" aria-label="印有动漫角色的王星记联名白纸扇">
+            <img src="assets/images/revival/10.webp" alt="印有动漫角色的王星记联名白纸扇" loading="lazy" decoding="async">
+          </a>
+          <p>联名纸扇，把老手艺带在手边。</p>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      时间轴图层：固定在视口正中的一条环带，默认压在页面内容下面（z-index: -1）。
+      桌面端：鼠标停在左右两端会升到内容之上，点击这一带则保持，再点一次落回底层。
+      触屏：轻点这一带展开，再轻点一次落回底层。开屏动画（intro 类）时同样升起。
+      长卷图还没下载完时整条先空着，下完淡入；下载失败才退回线条版。
+      图层后面的 .tl-hints 是两端的小字说明，按设备显示「悬停」或「轻点」。
+      页面往下滚，轨道按滚动进度横向移动，二者线性对应。始终不折叠、不变高。
+    -->
+    <section class="tl-layer" id="timeline" aria-labelledby="timeline-title">
+      <h2 class="visually-hidden" id="timeline-title">从榫卯，到今天</h2>
+
+
+
+      <div class="tl-layer__stage">
+        <svg class="tl-layer__axis" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+          <path class="tl-layer__band" d="M-160 110 Q720 74 1600 110 Q720 146 -160 110 Z"></path>
+          <path class="tl-layer__line" d="M-160 110 Q720 74 1600 110"></path>
+          <path class="tl-layer__line" d="M-160 110 Q720 146 1600 110"></path>
+        </svg>
+
+        <!--
+          水墨长卷：透明底，和轨道共用同一个位移量，所以滚动联动照旧。
+          图存在且加载成功才会启用（is-art），否则自动退回上面的环带与文字。
+          下面每个节点的 --x 是它在长卷上的横向位置，由 docs/timeline-guide/build-art.js 算出，
+          换图后要同步改 --x。--plain 表示该节点暂时没有画，只显示文字。
+        -->
+        <div class="tl-layer__art" hidden aria-hidden="true">
+          <!-- 长卷图有几百 KB，不参与首屏：src 由 timeline.js 在页面加载完或开始滚动后再补上。 -->
+          <img class="tl-layer__art-img" data-src="assets/images/timeline/timeline-design.webp" data-srcset="assets/images/timeline/timeline-design-1x.webp 4044w, assets/images/timeline/timeline-design.webp 8088w" data-sizes="(max-width: 900px) 3310px, 4044px" alt="" decoding="async">
+        </div>
+
+        <ol class="tl-layer__track">
+          <li class="tl-layer__item" style="--x:2.23%">
+            <span class="tl-layer__year">约前 5000</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">河姆渡榫卯</span>
+            <span class="tl-layer__intro">七千年前的榫接，今天还在用。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:8.5%">
+            <span class="tl-layer__year">1056</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">应县木塔</span>
+            <span class="tl-layer__intro">五十四种斗拱，不用一钉一胶。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:13.92%">
+            <span class="tl-layer__year">宋</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">皮影戏</span>
+            <span class="tl-layer__intro">最晚在宋代成熟的灯影戏。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:20.44%">
+            <span class="tl-layer__year">南宋</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">黄龙溪火龙灯舞</span>
+            <span class="tl-layer__intro">龙、灯、舞、火，一起烧。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:25.86%">
+            <span class="tl-layer__year">南宋</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">潮州铁枝木偶戏</span>
+            <span class="tl-layer__intro">从南宋皮影演变而来。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:30.85%">
+            <span class="tl-layer__year">元</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">景德镇二元配方</span>
+            <span class="tl-layer__intro">瓷石加高岭土，青花成形。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:37.29%">
+            <span class="tl-layer__year">明末清初</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">泸州油纸伞</span>
+            <span class="tl-layer__intro">九十多道工序撑起一把伞。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:42.18%">
+            <span class="tl-layer__year">清康熙</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">恩施玉露</span>
+            <span class="tl-layer__intro">康熙年间定型的蒸青绿茶。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:46.01%">
+            <span class="tl-layer__year">清</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">普宁英歌</span>
+            <span class="tl-layer__intro">北有安塞腰鼓，南有普宁英歌。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:52.66%">
+            <span class="tl-layer__year">清</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">青田鱼灯舞</span>
+            <span class="tl-layer__intro">以彩灯走阵，清代有载。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:60.04%">
+            <span class="tl-layer__year">1790</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">京剧</span>
+            <span class="tl-layer__intro">四大徽班进京，徽汉合流。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:62.7%">
+            <span class="tl-layer__year">清末</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">荆门矮子馅饼</span>
+            <span class="tl-layer__intro">酥饼手艺，可追到清末。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:69.95%">
+            <span class="tl-layer__year">1915</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">苏绣与沈寿</span>
+            <span class="tl-layer__intro">沈寿仿真绣，1915 年获金奖。</span>
+          </li>
+          <li class="tl-layer__item" style="--x:75.27%">
+            <span class="tl-layer__year">1928</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">蔡林记热干面</span>
+            <span class="tl-layer__intro">1928 年，汉口开「蔡林记」。</span>
+          </li>
+          <li class="tl-layer__item tl-layer__item--record" style="--x:79.33%">
+            <span class="tl-layer__tag">名录</span>
+            <span class="tl-layer__year">2006</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">首批国家级名录</span>
+            <span class="tl-layer__intro">第一批名录，共 518 项。</span>
+          </li>
+          <li class="tl-layer__item tl-layer__item--record" style="--x:87.08%">
+            <span class="tl-layer__tag">名录</span>
+            <span class="tl-layer__year">2009</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">木结构营造入遗</span>
+            <span class="tl-layer__intro">香山帮等四项打包入选。</span>
+          </li>
+          <li class="tl-layer__item tl-layer__item--law" style="--x:91.12%">
+            <span class="tl-layer__tag">法规</span>
+            <span class="tl-layer__year">2011</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">《非遗法》施行</span>
+            <span class="tl-layer__intro">《非遗法》6 月 1 日施行。</span>
+          </li>
+          <li class="tl-layer__item tl-layer__item--record" style="--x:96.64%">
+            <span class="tl-layer__tag">名录</span>
+            <span class="tl-layer__year">2022</span>
+            <span class="tl-layer__dot" aria-hidden="true"></span>
+            <span class="tl-layer__name">制茶技艺入遗</span>
+            <span class="tl-layer__intro">制茶技艺列入代表作名录。</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="tl-layer__foot" aria-hidden="true">
+        <span class="tl-layer__edge">七千年前</span>
+        <div class="tl-layer__rail"><span class="tl-layer__railBar"></span></div>
+        <span class="tl-layer__edge">今天</span>
+      </div>
+    </section>
+
+    <div class="tl-hints" aria-hidden="true">
+      <span class="tl-hint tl-hint--start">
+        <span class="tl-hint__hover">悬停在此处显示时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+      </span>
+      <span class="tl-hint tl-hint--end">
+        <span class="tl-hint__hover">悬停在此处显示时间轴</span><span class="tl-hint__unpin">点击收起</span><span class="tl-hint__tap">轻点展开时间轴</span><span class="tl-hint__close">轻点收起</span>
+      </span>
+    </div>
+
+    <section class="manifesto" aria-label="项目理念">
+      <p>传统不是一件被时间封存的旧物。</p>
+      <p>它在人的手里，被一遍遍做成新的今天。</p>
+      <span aria-hidden="true">未完待续</span>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>非遗辑录 <span aria-hidden="true">×</span> 2026</p>
+    <nav aria-label="页脚导航">
+      <a href="index.html">首页</a><a href="heritage.html">非遗辑录</a><a href="revival.html">古艺新生</a><a href="about.html">关于我们</a>
+    </nav>
+  </footer>
+
+  <div class="story-overlay story-overlay--editorial" role="dialog" aria-modal="true" aria-labelledby="story-dialog-title" aria-hidden="true">
+    <div class="story-backdrop" data-story-close></div>
+    <div class="story-shell">
+      <h2 class="visually-hidden" id="story-dialog-title">非遗子页</h2>
+      <div class="story-controls">
+        <button class="story-control" type="button" data-story-fullscreen aria-label="全屏查看" title="全屏查看" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        </button>
+        <button class="story-control" type="button" data-story-close aria-label="退出子页" title="退出子页">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+        </button>
+      </div>
+      <iframe class="story-frame" title="非遗子页内容"></iframe>
+    </div>
+  </div>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/timeline.js"></script>
+</body>
+</html>
