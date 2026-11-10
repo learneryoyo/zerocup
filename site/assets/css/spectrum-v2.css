@@ -201,8 +201,12 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 .roster-head p { margin: 0 0 6px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.95; color: var(--ink-2); }
 .roster-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(28px, 3vw, 44px) clamp(12px, 1.4vw, 22px); }
 .roster-card { width: 100%; padding: 0; display: grid; text-align: left; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-.roster-pic { display: grid; place-items: center; aspect-ratio: 16 / 10; padding: 7px; background: var(--night); overflow: hidden; }
-.roster-pic img { max-width: 100%; max-height: 100%; width: auto; height: auto; filter: saturate(.86) sepia(.06); transition: filter .3s ease, transform .45s cubic-bezier(.2, .7, .2, 1); }
+/* 竖构图照片必须真裁切。容器高度由 aspect-ratio 决定，里面是 auto 行，
+   百分比高度在这种上下文里会被当成 auto——图片于是按宽度铺开、纵向溢出，
+   被 overflow 上下各切一半，人脸正好落在切掉的那半。
+   改用绝对定位铺满内边距盒，再 object-fit: cover，才真正可控。 */
+.roster-pic { --pad: 7px; position: relative; aspect-ratio: 16 / 10; padding: var(--pad); background: var(--night); overflow: hidden; }
+.roster-pic img { position: absolute; inset: var(--pad); width: calc(100% - 2 * var(--pad)); height: calc(100% - 2 * var(--pad)); object-fit: cover; filter: saturate(.86) sepia(.06); transition: filter .3s ease, transform .45s cubic-bezier(.2, .7, .2, 1); }
 .roster-card strong { margin-top: 14px; font: 700 clamp(19px, 1.7vw, 25px)/1.35 var(--serif); letter-spacing: .04em; }
 .roster-field { margin-top: 3px; font-size: 13px; line-height: 1.7; color: var(--ink-3); }
 .roster-title { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font: 400 clamp(17px, 1.5vw, 21px)/1.5 var(--xingshu); color: var(--ink-2); }
@@ -249,7 +253,7 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 @media (max-width: 720px) {
   .roster-head { grid-template-columns: 1fr; }
   .roster-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 10px; }
-  .roster-pic { padding: 4px; }
+  .roster-pic { --pad: 4px; }
   .roster-card strong { font-size: 17px; }
   .roster-field { font-size: 12px; }
   .roster-title { font-size: 16px; }

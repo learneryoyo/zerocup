@@ -584,7 +584,7 @@
     "image": "../assets/img/creators/creator-08.webp",
     "photoSource": "https://www.thepaper.cn/newsDetail_forward_24635924",
     "photoLabel": "齐天大圣造型",
-    "position": "50% 28%",
+    "position": "50% 12%",
     "title": "镜头前的英雄，镜头后的认真",
     "noteTitle": "变身之前，还有许多准备",
     "note": "戏服、纸扎、面具与幕后的讨论，构成了国风短片的另一面。看完镜头中的角色，再回头看道具和排练，便能发现一个短暂的瞬间如何被共同完成。",
@@ -944,7 +944,7 @@
  let returnTo=null;
  const roster=document.getElementById('creatorRoster');
  if(roster){
-  roster.innerHTML=people.map((p,i)=>`<li><button type="button" class="roster-card" data-i="${i}" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="roster-pic"><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}" loading="lazy" decoding="async"></span><strong>${esc(p.name)}</strong><span class="roster-field">${esc(p.field)}</span><span class="roster-title">${esc(p.title)}</span></button></li>`).join('');
+  roster.innerHTML=people.map((p,i)=>`<li><button type="button" class="roster-card" data-i="${i}" aria-haspopup="dialog" aria-controls="creatorDialog"><span class="roster-pic"><img src="${esc(p.image)}" alt="${esc(p.name+' · '+p.photoLabel)}" loading="lazy" decoding="async" style="object-position:${esc(p.position||'50% 30%')}"></span><strong>${esc(p.name)}</strong><span class="roster-field">${esc(p.field)}</span><span class="roster-title">${esc(p.title)}</span></button></li>`).join('');
   roster.addEventListener('click',e=>{
    const card=e.target.closest('.roster-card');if(!card||dialog.open)return;
    show(+card.dataset.i);returnTo=card;
