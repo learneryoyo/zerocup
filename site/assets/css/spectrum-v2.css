@@ -279,7 +279,10 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 .atlas-place { display: flex; align-items: baseline; gap: 10px; font: 700 clamp(30px, 3.6vw, 54px)/1.1 var(--serif); letter-spacing: .04em; }
 .atlas-place b { margin-left: 8px; font: 400 1.25em/.8 var(--num); font-variant-numeric: lining-nums; color: var(--red); }
 .atlas-place span { font-size: .4em; letter-spacing: .1em; }
-.atlas-sum { margin-top: 12px !important; font-size: 15px; line-height: 1.9; color: var(--ink-2); }
+/* 读数面板内部统一用宋刻：地区名、项目行、取消按钮本来就是 var(--serif)，
+   只有这两句正文在继承 body 的黑体，夹在中间像是另一套字。
+   页面其他地方的说明文字仍走黑体，这里只把面板这一块收齐。 */
+.atlas-sum { margin-top: 12px !important; font-family: var(--serif); font-size: 15px; line-height: 1.9; color: var(--ink-2); }
 .atlas-top { margin: 10px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .atlas-top li { border-bottom: 1px solid var(--line); }
 .atlas-top button { width: 100%; padding: 9px 0; display: flex; align-items: baseline; gap: 14px; text-align: left; font: 700 clamp(16px, 1.4vw, 19px)/1.5 var(--serif); letter-spacing: .04em; color: var(--ink); background: none; border: 0; cursor: pointer; }
@@ -290,7 +293,7 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 .atlas-top button:focus-visible, .atlas-clear:focus-visible, .prov-chip:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 .prov-chip { margin: 0; flex-basis: 100%; text-align: left; }
 .prov-chip[hidden] { display: none; }
-.atlas-note { margin: 22px 0 0; max-width: 34em; font-size: 12.5px; line-height: 1.9; color: var(--ink-3); }
+.atlas-note { margin: 22px 0 0; max-width: 34em; font-family: var(--serif); font-size: 12.5px; line-height: 1.9; color: var(--ink-3); }
 
 /* 方块是按钮，不是文字：长按不该选中省名（微信里会弹出绿色选择柄和放大镜，
    看着像坏了），双击也不该缩放——连着点两个省的时候很碍事。 */
