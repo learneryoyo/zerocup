@@ -1265,13 +1265,18 @@ Object.values(atlasItems).forEach(list=>list.sort((a,b)=>b.s - a.s));
     if(!t) return;
     setProv(activeProv === t.dataset.prov ? null : t.dataset.prov);
   });
+  /* 悬停预览只在真有鼠标的设备上挂。触屏的 pointerover 是「按下」那一刻触发的，
+     松手立刻 pointerleave 收回，结果就是「必须一直按住才看得到」。触屏只认点击：
+     点一下选中，读数就留在那儿。 */
   const peek = e=>{
     const t = e.target.closest('.atlas-tile');
     if(t) readAtlas(t.dataset.prov);
   };
-  atlasMap.addEventListener('pointerover', peek);
+  if(window.matchMedia('(hover: hover)').matches){
+    atlasMap.addEventListener('pointerover', peek);
+    atlasMap.addEventListener('pointerleave', ()=>readAtlas(activeProv));
+  }
   atlasMap.addEventListener('focusin', peek);
-  atlasMap.addEventListener('pointerleave', ()=>readAtlas(activeProv));
   atlasMap.addEventListener('focusout', ()=>readAtlas(activeProv));
   atlasRead.addEventListener('click', e=>{
     const b = e.target.closest('[data-i]');

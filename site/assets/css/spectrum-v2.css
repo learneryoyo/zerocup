@@ -292,7 +292,9 @@ select:focus-visible, .cat:focus-visible { outline: 2px solid var(--red); outlin
 .prov-chip[hidden] { display: none; }
 .atlas-note { margin: 22px 0 0; max-width: 34em; font-size: 12.5px; line-height: 1.9; color: var(--ink-3); }
 
-.atlas-map { --gap: clamp(3px, .5vw, 7px); display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: var(--gap); width: 100%; max-width: 680px; justify-self: end; }
+/* 方块是按钮，不是文字：长按不该选中省名（微信里会弹出绿色选择柄和放大镜，
+   看着像坏了），双击也不该缩放——连着点两个省的时候很碍事。 */
+.atlas-map { --gap: clamp(3px, .5vw, 7px); display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: var(--gap); width: 100%; max-width: 680px; justify-self: end; touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 .atlas-tile { aspect-ratio: 1; min-width: 0; padding: clamp(3px, .5vw, 7px); display: flex; flex-direction: column; gap: clamp(2px, .4vw, 6px); text-align: left; font: inherit; color: var(--ink); background: rgba(255, 253, 247, .62); border: 1px solid rgba(33, 29, 24, .3); border-radius: 0; cursor: pointer; transition: background-color .2s ease; }
 .atlas-tile.is-nation { aspect-ratio: auto; background: none; border-style: double; border-width: 3px; }
 .atlas-tile.is-empty { background: none; border-style: dashed; border-color: rgba(33, 29, 24, .2); cursor: default; }
@@ -307,9 +309,17 @@ button.atlas-tile:focus-visible { outline: 2px solid var(--red); outline-offset:
 .atlas-tile.is-on:hover { background: var(--night); }
 
 @media (max-width: 900px) {
+  /* 手机上是「点方块 → 看读数」，而读数原来排在方块上方：点完得往回滚才看得见，
+     看着就像点了没反应。拆掉 .atlas-text 这层盒子，让标题、引言、方块、读数、备注
+     都成为网格项，用 order 把读数挪到方块下面——手指点哪儿，读数就在哪儿出来。 */
   .atlas { grid-template-columns: 1fr; }
-  .atlas-map { justify-self: start; max-width: 560px; }
-  .atlas-read { min-height: 0; }
+  .atlas-text { display: contents; }
+  .atlas-text > h2, .atlas-text > .atlas-lede { order: 1; }
+  .atlas-map { justify-self: start; max-width: 560px; order: 2; }
+  .atlas-read { min-height: 0; order: 3; }
+  .atlas-note { order: 4; }
+  /* 拆开后子项之间已经有 32px 网格间距，去掉原来叠在里面的外边距，免得双重留白 */
+  .atlas-lede, .atlas-read, .atlas-note { margin-top: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .atlas-tile, .atlas-cells i { transition: none; } }
 
