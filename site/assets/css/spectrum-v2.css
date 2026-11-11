@@ -338,8 +338,9 @@ html[data-motion-input="keyboard"] .scrim { transition: none; }
 
 /* ── 页内长跳转的回头路 ───────────────────────────────────
    三个入口（这五项怎么算的 / 看全部十位 / 看怎么参与）落地都在页底，离出发点
-   三千到四千像素，往上只能手动滚。跳转后页面顶部正中浮出一个圆角胶囊，点一下
-   滑回原处；不是跳下来的（自己滚下来的）就写「回到顶部」。 */
+   三千到四千像素，往上只能手动滚。跳转之后，页面顶部正中浮出一个圆角胶囊，
+   点一下滑回出发点；回到原处或自己滚回去，它就收起来——它不是「回到顶部」，
+   只在真的有「刚才」可回的时候才出现。 */
 .to-top {
   position: fixed;
   left: 50%;
@@ -352,6 +353,9 @@ html[data-motion-input="keyboard"] .scrim { transition: none; }
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--paper);
+  /* 浮在正文之上，需要一点阴影把它和下面的字分开；颜色取墨色的低透明度，
+     不用纯黑，免得在这套暖纸上显脏。 */
+  box-shadow: 0 6px 20px rgba(33, 29, 24, .16), 0 1px 3px rgba(33, 29, 24, .1);
   font: 600 14px/1 var(--serif);
   letter-spacing: .12em;
   color: var(--ink);
@@ -360,18 +364,13 @@ html[data-motion-input="keyboard"] .scrim { transition: none; }
   visibility: hidden;
   transform: translate(-50%, -8px);
   transition: opacity .22s ease, transform .22s ease, visibility .22s,
-              border-color .2s ease, color .2s ease;
+              border-color .2s ease, color .2s ease, box-shadow .2s ease;
 }
 .to-top.is-on { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
-/* 两句文案都在 DOM 里，靠 class 切换显示：字体的「实采」是按文本节点走的，
-   用 JS 改 textContent 的话，只有当时显示的那一句会被采到，另一句的字就漏了。 */
-.to-top__back { display: none; }
-.to-top.is-back .to-top__back { display: inline; }
-.to-top.is-back .to-top__up { display: none; }
 /* 箭头用页头那个 ↓ 转 180°：宋刻里没有 ↑（U+2191 母本就没有），照抄一个向下的
    字再翻过来，既不用另找字体，也不会回落成系统字体的箭头。 */
 .to-top i { font-style: normal; font-size: 16px; line-height: 1; color: var(--red); transform: rotate(180deg); transition: transform .2s ease; }
-.to-top:hover { border-color: var(--red); color: var(--red); }
+.to-top:hover { border-color: var(--red); color: var(--red); box-shadow: 0 10px 26px rgba(33, 29, 24, .2), 0 2px 4px rgba(33, 29, 24, .12); }
 .to-top:hover i { transform: translateY(-2px) rotate(180deg); }
 .to-top:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 @media (max-width: 700px) {

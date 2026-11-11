@@ -565,7 +565,7 @@
 </footer>
 
 <div class="scrim" id="scrim"></div>
-<button type="button" class="to-top" id="toTop"><span class="to-top__back">回到刚才</span><span class="to-top__up">回到顶部</span><i aria-hidden="true">↓</i></button>
+<button type="button" class="to-top" id="toTop">回到刚才<i aria-hidden="true">↓</i></button>
 <aside class="drawer" id="drawer" aria-hidden="true">
   <button type="button" class="close" id="closeBtn" aria-label="关闭详情">×</button>
   <div id="drawerBody"></div>
@@ -1352,7 +1352,8 @@ window.addEventListener('load', ()=>{
    这页有三个往页底跳的入口（这五项怎么算的 / 看全部十位 / 看怎么参与），
    落点离出发点三千到四千像素，跳过去之后只能手动滚回来。这里做两件事：
    ① 跳转改成滑动（名册那条本来就是滑的，另外两条是瞬间切，看不出页面往哪儿去了）；
-   ② 记住出发点，页面顶部正中浮出「回到刚才」，点一下滑回去。自己滚下来的显示「回到顶部」。 */
+   ② 记住出发点，页面顶部正中浮出「回到刚才」，点一下滑回去；回到原处或自己滚回去，
+      它就收起来。它不是「回到顶部」——没有「刚才」可回的时候，它不该出现。 */
 (() => {
   const btn = document.getElementById('toTop');
   if (!btn) return;
@@ -1421,8 +1422,7 @@ window.addEventListener('load', ()=>{
       if (!passed && y > origin + 200) passed = true;
       else if (passed && y <= origin + 60) { origin = null; passed = false; }
     }
-    btn.classList.toggle('is-on', y > window.innerHeight * 1.2);
-    btn.classList.toggle('is-back', origin !== null);
+    btn.classList.toggle('is-on', origin !== null);
   }
   const ask = () => { if (!raf) raf = requestAnimationFrame(sync); };
   window.addEventListener('scroll', ask, { passive: true });
@@ -1430,14 +1430,8 @@ window.addEventListener('load', ()=>{
   sync();
 
   btn.addEventListener('click', () => {
-    if (origin !== null) {
-      glideTo(origin, () => { origin = null; passed = false; sync(); });
-      return;
-    }
-    glideTo(0, () => {
-      const h = document.querySelector('.hero h1');
-      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
-    });
+    if (origin === null) return;          // 收起来之后点不到，兜个底
+    glideTo(origin, () => { origin = null; passed = false; sync(); });
   });
 })();
 </script>
