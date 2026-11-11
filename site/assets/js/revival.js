@@ -148,6 +148,18 @@
     return box;
   }
 
+  // 底栏收起时的高度随字号（clamp）变，照片区得按它让位，否则竖图下沿会被压掉一截。
+  // 收起状态下量一次写进 --rv-bar：悬停中的卡片底栏是展开的，量出来是展开高度，跳过；
+  // 柜台页里网格是 display:none，高度为 0，也跳过。
+  function syncBarHeights() {
+    grid.querySelectorAll('.rv-card').forEach(card => {
+      if (card.matches(':hover')) return;
+      const bar = card.querySelector('.rv-card-bar');
+      const height = bar ? bar.offsetHeight : 0;
+      if (height > 0) card.style.setProperty('--rv-bar', height + 'px');
+    });
+  }
+
   function card(item, order) {
     const button = el('button', 'rv-card');
     button.type = 'button';
@@ -200,6 +212,8 @@
       grid.classList.toggle('is-first-entry', initial && !reducedMotion.matches);
       grid.replaceChildren(...inPath(index).map(card));
     }
+    // 等这一帧排完版再量。柜台页里网格还藏着（display:none），量出来是 0，跳过。
+    if (!panel.hidden) requestAnimationFrame(syncBarHeights);
     if (window.matchMedia('(max-width: 720px)').matches) {
       tabList.children[index].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reducedMotion.matches || focus ? 'instant' : 'smooth' });
     }
@@ -449,6 +463,14 @@
   reducedMotion.addEventListener('change', () => {
     if (reducedMotion.matches) { stopSpring(); drag = null; thumb.style.transform = ''; viewSwitch.classList.remove('is-dragging'); }
   });
+
+  // 字号是 clamp，窗口一变底栏高度就变，得重新量；字体到位后再量一次保险。
+  let barSyncFrame = 0;
+  window.addEventListener('resize', () => {
+    if (barSyncFrame) cancelAnimationFrame(barSyncFrame);
+    barSyncFrame = requestAnimationFrame(() => { barSyncFrame = 0; syncBarHeights(); });
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncBarHeights);
 
   select(0);
   setView('counter');

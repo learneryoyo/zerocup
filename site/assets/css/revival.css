@@ -56,7 +56,10 @@
 .rv-holder small { font-size: 12px; letter-spacing: .2em; }
 .rv-holder[hidden] { display: none; }
 .rv-card-media, .rv-detail-media { background: var(--rv-surface); }
-.rv-card-media { bottom: 40px; }
+/* 照片区要让出底栏的高度。底栏收起时是两行（名字 + 去哪儿遇见它），高度随字号变，
+   写死 40px 会把竖图下沿压掉一截；所以由 revival.js 量出来写进 --rv-bar，
+   这里只留一个兜底值（脚本没跑时退回原来的 40px）。 */
+.rv-card-media { bottom: var(--rv-bar, 40px); }
 .rv-card-media > img { box-sizing: border-box; padding: 12px; object-fit: contain; }
 .rv-detail-media > img { box-sizing: border-box; padding: 18px; object-fit: contain; }
 .rv-image-kind { position: absolute; z-index: 2; top: 8px; left: 8px; padding: 3px 6px; color: var(--rv-ink); background: rgba(232, 226, 214, .94); font-size: 10px; letter-spacing: .04em; }
