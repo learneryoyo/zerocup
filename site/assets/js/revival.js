@@ -311,7 +311,11 @@
       const meta = item.imageMeta;
       const caption = el('div', 'rv-image-caption');
       caption.append(el('p', '', meta.alt));
-      const source = el(meta.source ? 'a' : 'p', '', `图片来源：${meta.credit}`);
+      // 多数条目记的是「摄影：某某」这类具体署名，前面补「图片来源：」才成句；
+      // 找不到出处的统一写「图片来源于网络」，它本身已经是完整句子，再加前缀会读成
+      // 「图片来源：图片来源于网络」，重复一遍。
+      const label = /^图片/.test(meta.credit) ? meta.credit : `图片来源：${meta.credit}`;
+      const source = el(meta.source ? 'a' : 'p', '', label);
       if (meta.source) {
         source.href = meta.source;
         source.target = '_blank';
