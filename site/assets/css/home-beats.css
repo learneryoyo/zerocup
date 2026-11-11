@@ -309,7 +309,8 @@ main { position: relative; }
   text-decoration: none;
   transition: background-color .3s ease;
 }
-/* 人物从长卷的整张图里按热区裁出来：--x --y --w --h 与 heritage.html 的热区同一组数 */
+/* 人物尺寸仍取 --w/--h，与 heritage.html 的热区同一组数；图本身已经按热区从整幅
+   抠像图里裁好了（door-*.webp），所以不再需要 --x/--y 去偏移整幅画。 */
 .door__fig {
   position: relative;
   align-self: end;
@@ -319,19 +320,15 @@ main { position: relative; }
   overflow: hidden;
   transition: transform .45s cubic-bezier(.2, .7, .2, 1);
 }
-/* 高宽都按整幅画的比例算死，不靠图片自己的固有比例：
-   这四张是 loading="lazy"，Safari 要等图片进了视口才发请求，而「进没进视口」
-   是按元素盒子算的。只写 width + height:auto 的话，图没加载就没有固有比例，
-   高度算成 0，盒子面积为 0 → 判定不在视口 → 永远不发请求，死循环。
-   Chrome 对这种 0 高度的盒子宽容一些，所以桌面看着正常，手机上四张全空。
-   heritage.html 的 .heritage-scroll__hotspot img 一直是宽高都写死的，没这问题。 */
+/* 图已按热区裁好（_door_crop.py 生成 door-*.webp），这里只要铺满盒子。
+   img 上写了 width/height，加上这里的 100%/100%，图还没加载时盒子也有面积——
+   loading="lazy" 在 Safari 里是按盒子面积判「有没有进视口」的，面积 0 就永远
+   不发请求（这块以前就是这么在手机上四张全空的，见 15f80b3）。 */
 .door__fig img {
-  position: absolute;
-  left: calc(-100% * var(--x) / var(--w));
-  top: calc(-100% * var(--y) / var(--h));
-  width: calc(10000% / var(--w));
-  height: calc(10000% / var(--h));
-  max-width: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
   filter: saturate(.86) sepia(.06);
 }
 .door strong {
