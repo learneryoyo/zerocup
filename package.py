@@ -13,11 +13,12 @@
     python package.py --team 海底小纵队 --captain 队长姓名
     python package.py --team 海底小纵队 --captain 队长姓名 --names 姓名1,姓名2,姓名3,姓名4
 
-做了四件事：
+做了五件事：
     1. 排除 .git / 开发脚本 / 模板页 / 无入链的试验页
     2. 剥掉所有图片的 EXIF（相机型号、GPS、作者字段）
-    3. 匿名版把 README 的成员表整段删掉
-    4. 打包后回扫一遍，命中成员姓名就报错中止
+    3. 完整版把 _members.local.md 的真实姓名填进 README 成员表
+    4. 匿名版把 README 的成员表整段删掉
+    5. 打包后回扫一遍，命中成员姓名就报错中止
 """
 
 import argparse
@@ -65,6 +66,11 @@ SKIP_DIRS = {
 WHITELIST_CONTACTS = {"2402065071@qq.com"}
 
 MEMBERS_RE = re.compile(r"<!--\s*BEGIN-MEMBERS\s*-->.*?<!--\s*END-MEMBERS\s*-->", re.S)
+
+# 仓库里的 README 只写 GitHub 代号，推上 GitHub 不会留下真名；
+# 真名放在这个本地文件里（下划线开头，已被 .gitignore 与 collect_files 排除），
+# 只在打「完整版本」那一刻拼进 README——手册第四条要求完整版含选手个人信息。
+MEMBERS_LOCAL = REPO / "_members.local.md"
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE_RE = re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")
 # 本机绝对路径会带出系统用户名，匿名版明令要清
@@ -169,6 +175,26 @@ def strip_exif(path: Path) -> bool:
 # ---------------------------------------------------------------- 打包
 
 
+def inject_members(stage: Path) -> None:
+    """完整版：把 _members.local.md 的真实成员表填进 README。
+
+    仓库里的 README 只留 GitHub 代号（公开仓库不留真名），
+    而手册第四条要求完整版本的 README 含选手个人信息，
+    所以真名只在这一步、只在这个临时目录里出现。
+    """
+    readme = stage / "README.md"
+    if not readme.exists():
+        return
+    if not MEMBERS_LOCAL.exists():
+        print("  [注意] 找不到 _members.local.md，完整版 README 仍是代号版")
+        return
+    table = MEMBERS_LOCAL.read_text(encoding="utf-8").strip()
+    text = readme.read_text(encoding="utf-8")
+    text, n = MEMBERS_RE.subn(lambda m: table, text)
+    readme.write_text(text, encoding="utf-8")
+    print("  成员表已填入真实姓名：%d 段" % n)
+
+
 def build(out_dir: Path, files, anon: bool, members: list) -> Path:
     stage = Path(tempfile.mkdtemp(prefix="zerocup-"))
     exif_hits = 0
@@ -192,6 +218,8 @@ def build(out_dir: Path, files, anon: bool, members: list) -> Path:
                 )
                 readme.write_text(text, encoding="utf-8")
                 print("  成员表已移除：%d 段" % n)
+        else:
+            inject_members(stage)
 
         suffix = "匿名版本" if anon else "完整版本"
         # 手册规定的命名：2026-零杯零组-队伍名-队长姓名-完整版本.zip

@@ -38,6 +38,9 @@ dist/
 # 匿名版单独放，别混进来
 匿名版/
 
+# 真实成员姓名：只给打包脚本读，不进仓库
+_members.local.md
+
 # 本地截图 / 复检产物
 _verify/
 _chrome_profile*/
